@@ -1,5 +1,6 @@
 from django.db import models
-from GeOikos.usuarios.models import User
+from usuarios.models import User
+from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class Category(models.Model):
@@ -74,7 +75,7 @@ class Request(models.Model):
 class RequestedItem(models.Model):
 	request = models.ForeignKey(Request,on_delete=models.CASCADE)
 	category = models.ForeignKey(Category,on_delete=models.CASCADE)
-	quantity = models.IntegerField(validators=[MinValueValidator(0)])
+	quantity = models.PositiveIntegerField()
 	specs = models.TextField(blank=True)
 
 class EquipmentLoan(models.Model):
@@ -82,8 +83,8 @@ class EquipmentLoan(models.Model):
 	equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
 	hand_over_date = models.DateField()
 	return_date = models.DateField(null=True)
-	score = models.IntegerField(
-		validators=[MinValueValidator(0),MaxValueValidator(500)] #Esto se dividira entre 100 para tener puntos decimales
+	score = models.PositiveIntegerField(
+		validators=[MaxValueValidator(500)] #Esto se dividira entre 100 para tener puntos decimales
 		)
 	request = models.ForeignKey(Request,on_delete=models.CASCADE,null=True)
 	notes = models.TextField(blank=True)
@@ -115,4 +116,4 @@ class Transaction(models.Model):
 	]
 	user = models.ForeignKey(User,on_delete=models.CASCADE,unique=True)
 	transaction = models.IntegerField()
-	reason = models..CharField(max_length=1,choices=REASON_OPTIONS)
+	reason = models.CharField(max_length=1,choices=REASON_OPTIONS)
