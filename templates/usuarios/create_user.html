@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %} Create User {% endblock %}
+
+{% block content %}
+<!-- MENSAJES  -->
+<div class="row">
+    <div class="col">
+        {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-danger">
+                {{message}}
+                </div>
+            {% else %}
+                <div class="alert alert-{{ message.tags }}">
+                {{message}}
+                </div>
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <form action="" method="POST" class="form-group" >
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Submiteame</button>
+        </form>
+    </div>
+</div>
+{% endblock  %}
