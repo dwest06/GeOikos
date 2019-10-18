@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from .forms import UserCreationForm, UserChangeForm
 from django.contrib import messages
 
+# Home
+#def home(request):
+#  return render(request,'templates/oikos/home.html')
+
 # Authentication
 def login(request):
     pass
@@ -26,7 +30,7 @@ def create_user(request):
 
 def modify_user(request, pk, *args, **kwargs):
     if request.method == "POST":
-
+        pass
     else:
         user = User.objects.get(pk = pk)
         form = UserChangeForm()
