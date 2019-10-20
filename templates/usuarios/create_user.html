@@ -5,13 +5,22 @@
 {% block content %}
 <!-- MENSAJES  -->
 {% include "messages.html" %}
+<style>
+body{
+    background-color: rgba(184, 237, 135, 0.7);
+}
+</style>
 <div class="container-fluid">
-    <div class="row">
-        <form action="" method="POST" class="form-group" >
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit">Submiteame</button>
-        </form>
+    <br>
+    <div class="row" >
+        <div class="offset-md-4 col-md-4 card">
+            <br>
+            <form action="" method="POST" class="form-group" >
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-success">Submiteame</button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock  %}

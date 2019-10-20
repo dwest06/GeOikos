@@ -65,7 +65,7 @@ def modify_user(request, pk, *args, **kwargs):
 
 @login_required
 def delete_user(request, pk, *args, **kwargs):
-    if request.method == "POST":
+    if request.method == "GET":
         user = User.objects.get(pk = pk)
         user.delete()
         messages.error(request,"Usuario Eliminado")

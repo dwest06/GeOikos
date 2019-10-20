@@ -52,8 +52,23 @@
                     <a class="nav-link" href="#">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Iniciar Sesión</a>
+                    <a class="nav-link"href="{% url 'usuarios:create_user' %}">Crear Usuario</a>
                 </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'usuarios:modify_user' user.pk %}">Modificar Usuario</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'usuarios:logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'usuarios:delete_user' user.pk %}">Borrar Usuario</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'usuarios:login' %}">Iniciar Sesión</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </nav>  
