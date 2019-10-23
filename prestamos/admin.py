@@ -11,7 +11,14 @@ from .models import (
     Repair ,
     EquipmentDebt ,
     Balance ,
-    Transaction 
+    Transaction ,
+    IntValue ,
+    LstValue ,
+    SstValue ,
+    BooValue ,
+    FltValue ,
+    DatValue ,
+    ChoValue  
 )
 
 admin.site.register(Category)
@@ -26,3 +33,10 @@ admin.site.register(Repair)
 admin.site.register(EquipmentDebt)
 admin.site.register(Balance)
 admin.site.register(Transaction)
+admin.site.register(IntValue)
+admin.site.register(LstValue)
+admin.site.register(SstValue)
+admin.site.register(BooValue)
+admin.site.register(FltValue)
+admin.site.register(DatValue)
+admin.site.register(ChoValue)
