@@ -24,10 +24,10 @@ def login_user(request):
             return redirect("oikos:home")
         else:
             messages.error(request,"Email o Password Incorrecto")
-        return redirect("usuarios:login")
+        return redirect("Users:login")
     else:
         form = UserLoginForm()
-        return render(request, "usuarios/create_user.html", {"form" : form})
+        return render(request, "Users/create_user.html", {"form" : form})
 
 @login_required
 def logout_user(request):
@@ -46,7 +46,7 @@ def create_user(request):
         return redirect("oikos:home")
     else:
         form = UserCreationForm()
-        return render(request, "usuarios/create_user.html", {"form" : form})
+        return render(request, "Users/create_user.html", {"form" : form})
 
 @login_required
 def modify_user(request, pk, *args, **kwargs):
@@ -57,11 +57,11 @@ def modify_user(request, pk, *args, **kwargs):
             messages.success(request, "Usuario Modificado")
         else:
             messages.error(request,"Datos Inalidos")
-        return redirect("usuarios:modify_user", pk=pk)
+        return redirect("Users:modify_user", pk=pk)
     else:
         user = User.objects.get(pk = pk)
         form = UserChangeForm(instance=user)
-        return render(request, "usuarios/create_user.html", {"form" : form})
+        return render(request, "Users/create_user.html", {"form" : form})
 
 @login_required
 def delete_user(request, pk, *args, **kwargs):

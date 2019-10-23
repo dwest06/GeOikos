@@ -11,12 +11,12 @@
         {% include "messages.html" %}
         <div class="row">
             <ul>
-                <li><a href="{% url 'usuarios:create_user' %}">Crear Usuario</a></li>
+                <li><a href="{% url 'Users:create_user' %}">Crear Usuario</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'usuarios:modify_user' user.pk %}">Modificar Usuario</a></li>
-                <li><a href="{% url 'usuarios:logout' %}">Logout</a></li>
+                <li><a href="{% url 'Users:modify_user' user.pk %}">Modificar Usuario</a></li>
+                <li><a href="{% url 'Users:logout' %}">Logout</a></li>
                 {% else %}
-                <li><a href="{% url 'usuarios:login' %}">Login</a></li>
+                <li><a href="{% url 'Users:login' %}">Login</a></li>
                 {% endif %}
             </ul>
             <h1>Home</h1>

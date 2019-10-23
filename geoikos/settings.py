@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'oikos',                # Pagina principal y cursos 
-    'usuarios',             # Sistema de usuarios, auth y session
-    'prestamos',            # Sistema de prestamos de equipos
+    'Users',                # Sistema de usuarios, auth y session
+    'Inventory',            # Sistema de prestamos de equipos
 ]
 
 MIDDLEWARE = [
@@ -133,4 +133,4 @@ STATICFILES_DIRS = [
 ]
 
 
-AUTH_USER_MODEL = 'usuarios.User'
+AUTH_USER_MODEL = 'Users.User'

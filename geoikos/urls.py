@@ -19,7 +19,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('usuarios/', include("usuarios.urls")),
+    path('Users/', include("Users.urls")),
 
     # path('',views.home),
     path('', include("oikos.urls")),

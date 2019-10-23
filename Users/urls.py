@@ -2,7 +2,7 @@ from django.urls import path
 from .views import login_user, logout_user, create_user, modify_user, delete_user, change_password_user
 from . import views
 
-app_name = "usuarios"
+app_name = "Users"
 
 urlpatterns = [
     path('create-user', create_user, name="create_user"),
