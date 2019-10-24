@@ -20,7 +20,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Users/', include("Users.urls")),
-
-    # path('',views.home),
+    path('Inventory/', include("Inventory.urls")),
     path('', include("oikos.urls")),
 ]
