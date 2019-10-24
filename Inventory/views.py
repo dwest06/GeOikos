@@ -20,4 +20,4 @@ def createCategory(request):
 	else:
 		catForm = CategoryForm()
 		attFormset = AttributeFormset(queryset=Attribute.objects.none())
-		return render(request, "Inventory/create_category.html", {"bookform" : catForm, "formset" : attFormset})
+		return render(request, "Inventory/create_category.html", {"categoryform" : catForm, "formset" : attFormset})
