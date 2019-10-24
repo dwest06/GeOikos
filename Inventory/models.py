@@ -4,7 +4,7 @@ from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class Category(models.Model):
-	name = models.CharField(max_length=60)
+	name = models.CharField(max_length=60, unique=True	)
 
 class Equipment(models.Model):
 	serial = models.IntegerField(unique=True)
