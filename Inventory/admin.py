@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import (
     Category ,
     Equipment ,
-    Atribute ,
-    Atribute_Equipment ,
+    Attribute ,
+    Attribute_Equipment ,
     Choices ,
     Group ,
     Request ,
@@ -16,8 +16,8 @@ from .models import (
 
 admin.site.register(Category)
 admin.site.register(Equipment)
-admin.site.register(Atribute)
-admin.site.register(Atribute_Equipment)
+admin.site.register(Attribute)
+admin.site.register(Attribute_Equipment)
 admin.site.register(Choices)
 admin.site.register(Group)
 admin.site.register(Request)

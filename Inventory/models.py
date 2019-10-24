@@ -19,7 +19,7 @@ class Equipment(models.Model):
 	def __str__(self):
 		return self.name+ ': equipment of ' + self.category
 
-class Atribute(models.Model):
+class Attribute(models.Model):
 	TYPE_CHOICES = [
 		('INT', 'Integer'),
 		('TXT', 'Text'),
@@ -30,7 +30,7 @@ class Atribute(models.Model):
 		('CHO', 'Choice'),
 	]
 	name = models.CharField(max_length=50)
-	atribute_type = models.CharField(max_length=3,choices=TYPE_CHOICES)
+	attribute_type = models.CharField(max_length=3,choices=TYPE_CHOICES)
 	unit = models.CharField(max_length=20)
 	nullity = models.BooleanField()
 	category = models.ForeignKey(Category,on_delete=models.CASCADE)
@@ -40,15 +40,15 @@ class Atribute(models.Model):
 
 # Opciones para un atributo de multiples opciones
 class Choices(models.Model):
-	atribute = models.ForeignKey(Atribute,on_delete=models.CASCADE)
+	attribute = models.ForeignKey(Attribute,on_delete=models.CASCADE)
 	option_name = models.CharField(max_length=100)
 
 	def __str__(self):
 		return self.option_name
 
-class Atribute_Equipment(models.Model):
+class Attribute_Equipment(models.Model):
 	equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
-	atribute = models.ForeignKey(Atribute,on_delete=models.CASCADE)
+	attribute = models.ForeignKey(Attribute,on_delete=models.CASCADE)
 	value_str = models.CharField(max_length=100,null=True)
 	value_txt = models.TextField(null=True)
 	value_int = models.IntegerField(null=True)
