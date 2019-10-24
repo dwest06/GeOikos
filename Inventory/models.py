@@ -6,6 +6,9 @@ from django.core.validators import MaxValueValidator
 class Category(models.Model):
 	name = models.CharField(max_length=60, unique=True	)
 
+	def __str__(self):
+		return self.name	
+
 class Equipment(models.Model):
 	serial = models.IntegerField(unique=True)
 	name = models.CharField(max_length=100)
