@@ -1,24 +1,42 @@
 from django import forms
+from django.forms import modelformset_factory
 from .models import Category, Equipment, Attribute, Group, Request, Request_Category, Loan, Repair, EquipmentDebt, Transaction
 
 class CategoryForm(forms.ModelForm):
 	class Meta:
 		model = Category
 		fields = ['name']
+		labels = {
+			'name' : 'Category Name'
+		}
 
 class EquipmentForm(forms.ModelForm):
 	class Meta:
 		model = Equipment
 		fields = [
 				'serial', 'name', 'entry_date', 
-				'entry_date', 'elaboration_date', 
-				'notes', 'category'
+				'elaboration_date', 'notes', 'category'
 			]
+		labels = {
+			'serial' : 'Serial No.',
+			'name' : 'Equipment Name',
+			'entry_date' : 'Entry Date',
+			'elaboration_date' : 'Elaboration Date',
+			'notes' : 'Notes',
+			'category' : 'Category'
+		}
 
-class AttributeForm(forms.ModelForm):
-	class Meta:
-		model = Attribute
-		fields = ['name', 'attribute_type', 'unit', 'nullity']
+AttributeFormset = modelformset_factory(
+	Attribute,
+	fields = ['name', 'attribute_type', 'unit', 'nullity'],
+	extra = 1,
+	labels = {
+		'name' : 'Attribute Name',
+		'attribute_type' : 'Type',
+		'unit' : 'Unit',
+		'nullity' : 'Not Essential'
+	}
+)
 
 class GroupForm(forms.ModelForm):
 	class Meta:

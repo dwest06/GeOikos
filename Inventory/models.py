@@ -6,6 +6,9 @@ from django.core.validators import MaxValueValidator
 class Category(models.Model):
 	name = models.CharField(max_length=60)
 
+	def __str__(self):
+		return self.name
+
 class Equipment(models.Model):
 	serial = models.IntegerField(unique=True)
 	name = models.CharField(max_length=100)
@@ -31,8 +34,8 @@ class Attribute(models.Model):
 	]
 	name = models.CharField(max_length=50)
 	attribute_type = models.CharField(max_length=3,choices=TYPE_CHOICES)
-	unit = models.CharField(max_length=20)
-	nullity = models.BooleanField()
+	unit = models.CharField(max_length=20, null=True, blank=True)
+	nullity = models.BooleanField(default=False)
 	category = models.ForeignKey(Category,on_delete=models.CASCADE)
 
 	def __str__(self):
@@ -59,6 +62,9 @@ class Attribute_Equipment(models.Model):
 class Group(models.Model):
 	name = models.CharField(max_length=120)
 	equipment = models.ManyToManyField(Equipment)
+
+	def __str__(self):
+		return self.name
 
 class Request(models.Model):
 	date = models.DateTimeField(auto_now_add=True)
