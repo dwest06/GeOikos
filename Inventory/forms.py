@@ -1,7 +1,5 @@
 from django import forms
-from .models import Category, Equipment, Attribute, Group, 
-					Request, Request_Category, Loan, Repair,
-					EquipmentDebt, Transaction
+from .models import Category, Equipment, Attribute, Group, Request, Request_Category, Loan, Repair, EquipmentDebt, Transaction
 
 class CategoryForm(forms.ModelForm):
 	class Meta:
@@ -11,12 +9,16 @@ class CategoryForm(forms.ModelForm):
 class EquipmentForm(forms.ModelForm):
 	class Meta:
 		model = Equipment
-		fields = 
-			[
+		fields = [
 				'serial', 'name', 'entry_date', 
 				'entry_date', 'elaboration_date', 
 				'notes', 'category'
 			]
+
+class AttributeForm(forms.ModelForm):
+	class Meta:
+		model = Attribute
+		fields = ['name', 'attribute_type', 'unit', 'nullity']
 
 class GroupForm(forms.ModelForm):
 	class Meta:
