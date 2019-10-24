@@ -2,6 +2,8 @@ from django import forms
 from .models import Category, Equipment, Attribute, Group, 
 					Request, Request_Category, Loan, Repair,
 					EquipmentDebt, Transaction
+from django.core.validators import MaxValueValidator
+
 
 class CategoryForm(forms.ModelForm):
 	class Meta:
@@ -72,3 +74,25 @@ class TransactionForm(forms.ModelForm):
 	class Meta:
 		model = Transaction
 		fields = ['user', 'transaction', 'reason']
+
+class SearchForm(forms.Form):
+
+	category = forms.ModelChoiceField(queryset=Category.object.all(), to_field_name="Categoria")
+	
+	def __init__(self, *args, **kwargs):
+        super(SearchForm, self).__init__(*args, **kwargs)
+		if category != None:
+			for att in Attribute.objects.filter(category=category):
+				if att.attribute_type == 'INT' || att.attribute_type == 'FLT':
+					self.fields[att.name] = IntegerField(label=att.name, required=nullity)
+				elif att.attribute_type == 'STR':
+					self.fields[att.name] = CharField(max_length=100, label=att.name, required=nullity)
+				elif att.attribute_type == 'TXT':
+					self.fields[att.name] = CharField(label=att.name, required=nullity)
+				elif att.attribute_type == 'BOO':
+					self.fields[att.name] = BooleanField(label=att.name, required=nullity)
+				elif att.attribute_type == 'DAT':
+					self.fields[att.name] = DateField(label=att.name, required=nullity)
+				elif att.attribute_type == 'CHO':
+					CHOICES = Choices.objects.filter(attribute=att).
+					self.fields[att.name] = ChoiceField(choices=CHOICES, label=att.name, required=nullity)
