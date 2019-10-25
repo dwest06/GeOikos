@@ -74,33 +74,29 @@ class TransactionForm(forms.ModelForm):
         model = Transaction
         fields = ['user', 'transaction', 'reason']
 
-class SearchForm(forms.Form):
-    name = forms.CharField()
+class CatQueryForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all())
-    
-    '''def __init__(self, category, *args, **kwargs):
-        super(SearchForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
+
+class AttsQueryForm(forms.Form):
+
+    def __init__(self, category, *args, **kwargs):
+        
+        super(AttsQueryForm, self).__init__(*args, **kwargs)
+        '''for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
-
-        if category != None:
-            for att in Attribute.objects.filter(category=category):
-                if att.attribute_type == 'INT' || att.attribute_type == 'FLT':
-                    self.fields[att.name] = IntegerField(label=att.name, required=nullity)
-                elif att.attribute_type == 'STR':
-                    self.fields[att.name] = CharField(max_length=100, label=att.name, required=nullity)
-                elif att.attribute_type == 'TXT':
-                    self.fields[att.name] = CharField(label=att.name, required=nullity)
-                elif att.attribute_type == 'BOO':
-                    self.fields[att.name] = BooleanField(label=att.name, required=nullity)
-                elif att.attribute_type == 'DAT':
-                    self.fields[att.name] = DateField(label=att.name, required=nullity)
-                elif att.attribute_type == 'CHO':
-                    CHOICES = [dic['option_name'] for dic in Choices.objects.filter(attribute=att).values('option_name')]
-                    self.fields[att.name] = ChoiceField(choices=CHOICES, label=att.name, required=nullity)
         '''
-
-class AttsForm(forms.ModelForm):
-    class Meta:
-        model = Attribute
-        exclude = ['category']
+        for att in Attribute.objects.filter(category=category):
+            if att.attribute_type == 'INT' or att.attribute_type == 'FLT':
+                self.fields[att.name] = forms.IntegerField(label=att.name, required=att.nullity)
+            elif att.attribute_type == 'STR':
+                self.fields[att.name] = forms.CharField(max_length=100, label=att.name, required=att.nullity)
+            elif att.attribute_type == 'TXT':
+                self.fields[att.name] = forms.CharField(label=att.name, required=att.nullity)
+            elif att.attribute_type == 'BOO':
+                self.fields[att.name] = forms.BooleanField(label=att.name, required=att.nullity)
+            elif att.attribute_type == 'DAT':
+                self.fields[att.name] = forms.DateField(label=att.name, required=att.nullity)
+            elif att.attribute_type == 'CHO':
+                CHOICES = [dic['option_name'] for dic in Choices.objects.filter(attribute=att).values('option_name')]
+                self.fields[att.name] = forms.ChoiceField(choices=CHOICES, label=att.name, required=att.nullity)
+    

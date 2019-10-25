@@ -1,24 +1,25 @@
 from django.shortcuts import render, redirect
-from .forms import SearchForm, EquipmentForm
+from .forms import CatQueryForm, AttsQueryForm
 
 # Create your views here.
-def search(request):
+def CatQueryView(request):
     if request.method == "POST":
-        form = SearchForm(request.POST)
-        form1 = AForm(request.POST)
+        form = CatQueryForm(request.POST)
         if form.is_valid():
-            category = form.cleaned_data['category']
-            return redirect("oikos:home", {category:category})
+            category = form.cleaned_data['category'].pk
+            return redirect("inventory:select-atts", category=category)
         else:
-            messages.error(request,"Email o Password Incorrecto")
-        return redirect("Users:login")
+            messages.error(request,"No existe esta categoria.")
+        return redirect("oikos:home")
     else:
-        form = EquipmentForm()
-        print(form)
+        form = CatQueryForm()
         return render(request, "Inventory/search.html", {"form" : form})
 
-# def instance_category(request, category):
-#     if methog get:
-#         form = nuevoforrmcat(categ).__init__(ca)
+def AttsQueryView(request, category):
+    if request.method == "POST":
+        return render(request, "Inventory/search.html", {"form":form})
+    else:
+        form = AttsQueryForm(category)
+        return render(request, "Inventory/search.html", {"form":form})
 
     

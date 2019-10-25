@@ -4,5 +4,6 @@ from . import views
 app_name = "inventory"
 
 urlpatterns = [
-    path('search', views.search , name="search")
+    path('select-cat', views.CatQueryView , name="select-cat"),
+    path('select-atts/<int:category>', views.AttsQueryView, name="select-atts")
 ]
