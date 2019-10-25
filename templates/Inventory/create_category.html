@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
+{% block page-title %}
+    {% if heading %}
+        <h3>{{heading}}</h3>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-{% if heading %}
-<h3>{{heading}}</h3>
-{% endif %}
 <form class="form-horizontal" method="POST" action="">
     {% csrf_token %}
     <div class="row spacer">

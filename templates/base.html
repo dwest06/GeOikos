@@ -13,7 +13,7 @@
         }
     </style>
     {% block custom_css %}{% endblock %}
-    <title>Django Library App</title>
+    <title>GeOikos!</title>
 </head>
 
 <body>
@@ -36,11 +36,16 @@
 
         <div class="col pt-2">
         {% include 'messages.html' %}
+
             <div class="container">
             
                 <div class="row spacer"></div>
                 <div class="row offset-2">
                     <div class="col-12">
+                        <div class="text-center">
+                            <h1>{% block page-title %}{% endblock %}</h1>   
+                        </div>
+                        
                         {% block content %}
                         {% endblock %}
                     </div>

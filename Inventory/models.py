@@ -4,7 +4,10 @@ from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class Category(models.Model):
-	name = models.CharField(max_length=60)
+	name = models.CharField(max_length=60, unique=True	)
+
+	def __str__(self):
+		return self.name	
 
 	def __str__(self):
 		return self.name
