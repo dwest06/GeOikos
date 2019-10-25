@@ -15,6 +15,7 @@
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'Users:modify_user' user.pk %}">Modificar Usuario</a></li>
                 <li><a href="{% url 'Users:logout' %}">Logout</a></li>
+                <li><a href="{% url 'home_inventory' %}">Inventario</a></li>
                 {% else %}
                 <li><a href="{% url 'Users:login' %}">Login</a></li>
                 {% endif %}
