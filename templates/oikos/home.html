@@ -64,6 +64,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'Users:delete_user' user.pk %}">Borrar Usuario</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home_inventory' %}">Inventario</a>
+                </li>
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'Users:login' %}">Iniciar Sesión</a>

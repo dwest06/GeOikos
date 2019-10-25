@@ -1,0 +1,28 @@
+<div class="col-2 collapse d-md-flex bg-light pt-2 min-vh-100" id="sidebar">
+    <ul class="nav flex-column flex-nowrap">
+        <li class="nav-item">
+          <a class="nav-link btn btn-block btn-outline-primary" href="#">Inicio</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link btn btn-block btn-outline-primary" href="#">Categoria</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-block btn-outline-primary" href="#">Equipo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-block btn-outline-primary" href="#">a</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-block btn-outline-primary" href="#">b</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-block btn-outline-primary" href="#">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link btn btn-block btn-outline-primary" href="#">Login</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>

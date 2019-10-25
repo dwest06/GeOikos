@@ -3,6 +3,9 @@ from django.contrib import messages
 from .models import Category, Attribute
 from .forms import CategoryForm, AttributeFormset
 
+def homeInventarioView(request):
+    return render(request, "Inventory/home.html")
+
 def createCategory(request):
 	if request.method == "POST":
 		catForm = CategoryForm(request.POST)
