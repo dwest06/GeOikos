@@ -4,17 +4,30 @@ from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class Category(models.Model):
-	name = models.CharField(max_length=60)
+	name = models.CharField(max_length=60, unique=True	)
+
+	def __str__(self):
+		return self.name	
+
+	def __str__(self):
+		return self.name
+
+class Group(models.Model):
+	name = models.CharField(max_length=120)
+
+	def __str__(self):
+		return self.name
 
 class Equipment(models.Model):
 	serial = models.IntegerField(unique=True)
 	name = models.CharField(max_length=100)
-	entry_date = models.DateField(null=True)
-	elaboration_date = models.DateField(null=True)
+	entry_date = models.DateField(null=True,blank=True)
+	elaboration_date = models.DateField(null=True,blank=True)
 	discontinued = models.BooleanField(default=False)
 	discontinued_date = models.DateField(null=True)
 	notes = models.TextField(blank=True)
 	category = models.ForeignKey(Category,on_delete=models.CASCADE)
+	group = models.ManyToManyField(Group,blank=True)
 
 	def __str__(self):
 		return self.name+ ': equipment of ' + self.category
@@ -31,8 +44,8 @@ class Attribute(models.Model):
 	]
 	name = models.CharField(max_length=50)
 	attribute_type = models.CharField(max_length=3,choices=TYPE_CHOICES)
-	unit = models.CharField(max_length=20)
-	nullity = models.BooleanField()
+	unit = models.CharField(max_length=20, null=True, blank=True)
+	nullity = models.BooleanField(default=False)
 	category = models.ForeignKey(Category,on_delete=models.CASCADE)
 
 	def __str__(self):
@@ -56,9 +69,6 @@ class Attribute_Equipment(models.Model):
 	value_bool = models.BooleanField(null=True)
 	value_cho  = models.ForeignKey(Choices,null=True,on_delete=models.CASCADE)
 
-class Group(models.Model):
-	name = models.CharField(max_length=120)
-	equipment = models.ManyToManyField(Equipment)
 
 class Request(models.Model):
 	date = models.DateTimeField(auto_now_add=True)

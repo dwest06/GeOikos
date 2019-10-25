@@ -2,11 +2,10 @@
 
 {% block title %} Create User {% endblock %}
 
-{% block page-title %}
-Crear Usuario
-{% endblock %}
-
 {% block content %}
+<style>
+
+</style>
 <div class="container-fluid">
     <br>
     <div class="row" >
@@ -15,7 +14,7 @@ Crear Usuario
             <form action="" method="POST" class="form-group" >
                 {% csrf_token %}
                 {{form.as_p}}
-                <button type="submit" class="btn btn-success">Submiteame</button>
+                <button type="submit" class="btn btn-success">Ingresar Equipo de esta Categoria</button>
             </form>
         </div>
     </div>

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %} Create User {% endblock %}
+
+{% block content %}
+<!-- MENSAJES  -->
+{% include "messages.html" %}
+<style>
+body{
+    background-color: rgba(184, 237, 135, 0.7);
+}
+</style>
+<div class="container-fluid">
+    <br>
+    <div class="row" >
+        <div class="offset-md-4 col-md-4 card">
+            <br>
+            <form action="" method="POST" class="form-group" >
+                {% csrf_token %}
+                {{equipform.as_p}}
+                {% for form in attforms %}
+                    <div class="row form-row spacer">
+                        <div class="col-4">
+                            <label>{{form.1}}</label>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                {{form.0}}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">Ingresar Equipo de esta Categoria</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock  %}
