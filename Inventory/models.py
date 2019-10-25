@@ -30,7 +30,7 @@ class Equipment(models.Model):
 	group = models.ManyToManyField(Group,blank=True)
 
 	def __str__(self):
-		return self.name+ ': equipment of ' + self.category
+		return self.name+ ': equipment of ' + self.category.name
 
 class Attribute(models.Model):
 	TYPE_CHOICES = [
@@ -68,6 +68,8 @@ class Attribute_Equipment(models.Model):
 	value_date = models.DateField(null=True)
 	value_bool = models.BooleanField(null=True)
 	value_cho  = models.ForeignKey(Choices,null=True,on_delete=models.CASCADE)
+	def __str__(self):
+		return self.attribute.name + " de " + self.equipment.name
 
 
 class Request(models.Model):
