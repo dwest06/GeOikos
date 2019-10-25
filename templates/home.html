@@ -11,6 +11,7 @@
         {% include "messages.html" %}
         <div class="row">
             <ul>
+                <li><a href="{% url 'inventory:select-cat' %}">Búsqueda de Equipo</a></li>
                 <li><a href="{% url 'Users:create_user' %}">Crear Usuario</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'Users:modify_user' user.pk %}">Modificar Usuario</a></li>

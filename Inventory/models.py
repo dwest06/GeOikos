@@ -20,7 +20,7 @@ class Equipment(models.Model):
 	category = models.ForeignKey(Category,on_delete=models.CASCADE)
 
 	def __str__(self):
-		return self.name+ ': equipment of ' + self.category
+		return self.name+ ': equipment of ' + self.category.name
 
 class Attribute(models.Model):
 	TYPE_CHOICES = [

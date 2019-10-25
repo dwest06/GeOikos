@@ -22,14 +22,30 @@ def AttsQueryView(request, category):
         if form.is_valid():
             user_atts = form.cleaned_data
             query = Equipment.objects.filter(category=category)
-            for dic in Attribute.objects.filter(category=category).values():
-                att_name = dic['name']
+            for att in Attribute.objects.filter(category=category).values():
+                att_id   = att['id']
+                att_name = att['name']
+                att_type = att['attribute_type']
                 try:
                     value = user_atts[att_name]
                 except KeyError:
                     continue
-                query = ...
-            redirect("oikos:home")
+                print(att_id, att_name, att_type, value)
+                print(Attribute_Equipment.objects.filter(attribute=att_id, value_str=value).values())
+                if att_type == 'INT' or att_type == 'FLT':
+                    equipm_ids = [valent['equipment_id'] for val in Attribute_Equipment.objects.filter(attribute=att_id, value_int=value).values()]
+                elif att_type == 'STR':
+                    equipment_ids = [val['equipment_id'] for val in Attribute_Equipment.objects.filter(attribute=att_id, value_str=value).values()]
+                elif att_type == 'TXT':
+                    equipment_ids = [val['equipment_id'] for val in Attribute_Equipment.objects.filter(attribute=att_id, value_txt=value).values()]
+                elif att_type == 'BOO':
+                    equipment_ids = [val['equipment_id'] for val in Attribute_Equipment.objects.filter(attribute=att_id, value_boo=value).values()]
+                elif att_type == 'DAT':
+                    equipment_ids = [val['equipment_id'] for val in Attribute_Equipment.objects.filter(attribute=att_id, value_dat=value).values()]
+                elif att_type == 'CHO':
+                    equipment_ids = [val['equipment_id'] for val in Attribute_Equipment.objects.filter(attribute=att_id, value_cho=value).values()]
+                query = query.filter(id__in=equipment_ids)              
+            return render(request, "Inventory/table.html", {'table':query})
         else:
             messages.error(request,"Error: Valores no permitidos")
         return redirect("oikos:home")

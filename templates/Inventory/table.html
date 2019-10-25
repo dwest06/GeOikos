@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %} Search {% endblock %}
+
+{% block content %}
+<!-- MENSAJES  -->
+{% include "messages.html" %}
+<style>
+body{
+    background-color: rgba(184, 237, 135, 0.7);
+}
+thead,
+tfoot {
+    background-color: white;
+    color: #fff;
+}
+
+tbody {
+    background-color: #e4f0f5;
+}
+
+caption {
+    padding: 10px;
+    caption-side: bottom;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid green;
+    letter-spacing: 1px;
+    font-family: Helvetica;
+    font-size: .8rem;
+    text-align: center;
+}
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 5px 10px;
+}
+td {
+    text-align: center;
+}
+
+</style>
+<div class="container-fluid">
+    <br>
+    <div class="row" >
+        <div>
+            <br>
+            <table> 
+                    <thead">
+                        <th>Nombre</th>
+                        <th>Serial</th>
+                        <th>Fecha de Ingreso</th>
+                        <th>Fecha de Elaboracion</th>
+                        <th>Discontinuado</th>
+                        <th>Fecha de Descontinuado</th>
+                        <th>Notas</th>
+                        <th>Categoria</th>
+                    </thead>
+                    <tbody>
+                        {% for t in table %}
+                        <tr>
+                            <td>{{t.name}}</td>
+                            <td>{{t.serial}}</td>
+                            <td>{{t.entry_date}}</td>
+                            <td>{{t.discontinued}}</td>
+                            <td>{{t.discontinued_date}}</td>
+                            <td>{{t.elaboration_date}}</td>
+                            <td>{{t.notes}}</td>
+                            <td>{{t.category}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                 </table>
+                
+        </div>
+    </div>
+    <a class="btn btn-success" href="{% url 'inventory:select-cat' %}">Volver a la Busqueda</a>
+    <a class="btn btn-success" href="{% url 'oikos:home' %}">Volver al home</a>
+</div>
+{% endblock  %}
