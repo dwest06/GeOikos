@@ -9,15 +9,22 @@ class Category(models.Model):
 	def __str__(self):
 		return self.name
 
+class Group(models.Model):
+	name = models.CharField(max_length=120)
+
+	def __str__(self):
+		return self.name
+
 class Equipment(models.Model):
 	serial = models.IntegerField(unique=True)
 	name = models.CharField(max_length=100)
-	entry_date = models.DateField(null=True)
-	elaboration_date = models.DateField(null=True)
+	entry_date = models.DateField(null=True,blank=True)
+	elaboration_date = models.DateField(null=True,blank=True)
 	discontinued = models.BooleanField(default=False)
 	discontinued_date = models.DateField(null=True)
 	notes = models.TextField(blank=True)
 	category = models.ForeignKey(Category,on_delete=models.CASCADE)
+	group = models.ManyToManyField(Group,blank=True)
 
 	def __str__(self):
 		return self.name+ ': equipment of ' + self.category
@@ -59,12 +66,6 @@ class Attribute_Equipment(models.Model):
 	value_bool = models.BooleanField(null=True)
 	value_cho  = models.ForeignKey(Choices,null=True,on_delete=models.CASCADE)
 
-class Group(models.Model):
-	name = models.CharField(max_length=120)
-	equipment = models.ManyToManyField(Equipment)
-
-	def __str__(self):
-		return self.name
 
 class Request(models.Model):
 	date = models.DateTimeField(auto_now_add=True)
