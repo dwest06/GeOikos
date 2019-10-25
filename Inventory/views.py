@@ -31,6 +31,7 @@ def createCategory(request):
         return render(request, "Inventory/create_category.html", {"categoryform" : catForm, "formset" : attFormset})
 
 def createGroup(request):
+<<<<<<< HEAD
     if request.method == "POST":
         grForm = GroupForm(request.POST)
         if grForm.is_valid():
@@ -42,6 +43,19 @@ def createGroup(request):
     else:
         grForm = GroupForm()
         return render(request, "Inventory/create_group.html", {"form" : grForm})
+=======
+	if request.method == "POST":
+		grForm = GroupForm(request.POST)
+		if grForm.is_valid():
+			grForm.save()
+			messages.success(request, "Group Added!")
+		else:
+			messages.error(request, "Failed to add Group :c")
+		return redirect("oikos:home")
+	else:
+		grForm = GroupForm()
+		return render(request, "Inventory/create_group.html", {"form" : grForm})
+>>>>>>> 51754b5... Arreglar errores y agregar grupos
 
 def EquipCatSelection(request):
     if request.method == "POST":
@@ -57,6 +71,7 @@ def EquipCatSelection(request):
         return render(request, "Inventory/create_equipment.html", {"form" : form})
 
 def createEquipment(request, cat):
+<<<<<<< HEAD
     if request.method == "POST":
         equipForm = EquipmentForm(request.POST)
         catAttributes = list(Attribute.objects.filter(category=cat))
@@ -107,6 +122,58 @@ def createEquipment(request, cat):
                 attForms.append((DateValueForm(),attName))
             elif att.attribute_type=='CHO':
                 attForms.append((ChoiceValueForm(),attName))
+=======
+	if request.method == "POST":
+		equipForm = EquipmentForm(request.POST)
+		catAttributes = list(Attribute.objects.filter(category=cat))
+		attForms=[]
+		for att in catAttributes:
+			if att.attribute_type=='INT' or att.attribute_type=='FLT':
+				attForms.append(IntValueForm(request.POST))
+			elif att.attribute_type=='TXT':
+				attForms.append(TxtValueForm(request.POST))
+			elif att.attribute_type=='STR':
+				attForms.append(StrValueForm(request.POST))
+			elif att.attribute_type=='BOO':
+				attForms.append(BoolValueForm(request.POST))
+			elif att.attribute_type=='DAT':
+				attForms.append(DateValueForm(request.POST))
+			elif att.attribute_type=='CHO':
+				attForms.append(ChoiceValueForm(request.POST))
+		if equipForm.is_valid() and all(attForm.is_valid() for attForm in attForms):
+			equipment= equipForm.save(commit=False)
+			equipment.category = Category.objects.get(pk=cat)
+			equipment.save()
+			i=0
+			for attForm in attForms:
+				value = attForm.save(commit=False)
+				value.equipment = equipment
+				value.attribute = catAttributes[i]
+				value.save()
+				i+=1
+			messages.success(request, "Equpiment Added!")
+		else:
+			messages.error(request, "Failed to add Category :c")
+		return redirect("oikos:home")
+	else:
+		equipForm = EquipmentForm()
+		catAttributes = list(Attribute.objects.filter(category=cat))
+		attForms=[]
+		for att in catAttributes:
+			attName = att.name
+			if att.attribute_type=='INT' or att.attribute_type=='FLT':
+				attForms.append((IntValueForm(),attName))
+			elif att.attribute_type=='TXT':
+				attForms.append((TxtValueForm(),attName))
+			elif att.attribute_type=='STR':
+				attForms.append((StrValueForm(),attName))
+			elif att.attribute_type=='BOO':
+				attForms.append((BoolValueForm(),attName))
+			elif att.attribute_type=='DAT':
+				attForms.append((DateValueForm(),attName))
+			elif att.attribute_type=='CHO':
+				attForms.append((ChoiceValueForm(),attName))
+>>>>>>> 51754b5... Arreglar errores y agregar grupos
 
         return render(request, "Inventory/create_equipment_value.html", {"equipform" : equipForm, "attforms" : attForms})
 
