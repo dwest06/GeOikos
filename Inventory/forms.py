@@ -46,50 +46,36 @@ class IntValueForm(forms.ModelForm):
 		model = Attribute_Equipment
 		fields = ['value_int']
 		labels = { 'value_int' : ''}
-	def add_prefix(self, field_name):
-		return super(IntValueForm, self).add_prefix('value')
 
 class TxtValueForm(forms.ModelForm):
 	class Meta:
 		model = Attribute_Equipment
 		fields = ['value_txt']
 		labels = { 'value_txt' : ''}
-	def add_prefix(self, field_name):
-		return super(TxtValueForm, self).add_prefix('value')
 
 class StrValueForm(forms.ModelForm):
 	class Meta:
 		model = Attribute_Equipment
 		fields = ['value_str']
 		labels = { 'value_str' : ''}
-	def add_prefix(self, field_name):
-		return super(StrValueForm, self).add_prefix('value')
 
 class DateValueForm(forms.ModelForm):
 	class Meta:
 		model = Attribute_Equipment
 		fields = ['value_date']
 		labels = { 'value_date' : ''}
-	def add_prefix(self, field_name):
-		return super(DateValueForm, self).add_prefix('value')
 
 class BoolValueForm(forms.ModelForm):
 	class Meta:
 		model = Attribute_Equipment
 		fields = ['value_bool']
 		labels = { 'value_bool' : ''}
-	def add_prefix(self, field_name):
-		return super(BoolValueForm, self).add_prefix('value')
 
 class ChoiceValueForm(forms.ModelForm):
 	class Meta:
 		model = Attribute_Equipment
 		fields = ['value_cho']
 		labels = { 'value_cho' : ''}
-	def add_prefix(self, field_name):
-		return super(ChoiceValueForm, self).add_prefix('value')
-
-
 
 
 class GroupForm(forms.ModelForm):
