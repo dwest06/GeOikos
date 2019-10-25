@@ -30,6 +30,18 @@ def createCategory(request):
 		attFormset = AttributeFormset(queryset=Attribute.objects.none())
 		return render(request, "Inventory/create_category.html", {"categoryform" : catForm, "formset" : attFormset})
 
+def createGroup(request):
+	if request.method == "POST":
+		grForm = GroupForm(request.POST)
+		if grForm.is_valid():
+			grForm.save()
+			messages.success(request, "Group Added!")
+		else:
+			messages.error(request, "Failed to add Group :c")
+		return redirect("oikos:home")
+	else:
+		grForm = GroupForm()
+		return render(request, "Inventory/create_group.html", {"form" : grForm})
 
 def EquipCatSelection(request):
     if request.method == "POST":
@@ -64,7 +76,7 @@ def createEquipment(request, cat):
 				attForms.append(ChoiceValueForm(request.POST))
 		if equipForm.is_valid() and all(attForm.is_valid() for attForm in attForms):
 			equipment= equipForm.save(commit=False)
-			equipment.category = cat
+			equipment.category = Category.objects.get(pk=cat)
 			equipment.save()
 			i=0
 			for attForm in attForms:
