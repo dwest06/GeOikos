@@ -82,9 +82,7 @@ class AttsQueryForm(forms.Form):
     def __init__(self, category, *args, **kwargs):
         
         super(AttsQueryForm, self).__init__(*args, **kwargs)
-        '''for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
-        '''
+
         for att in Attribute.objects.filter(category=category):
             if att.attribute_type == 'INT' or att.attribute_type == 'FLT':
                 self.fields[att.name] = forms.IntegerField(label=att.name, required=att.nullity)

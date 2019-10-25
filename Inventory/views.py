@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import CatQueryForm, AttsQueryForm
+from .models import *
 
 # Create your views here.
 def CatQueryView(request):
@@ -17,7 +18,21 @@ def CatQueryView(request):
 
 def AttsQueryView(request, category):
     if request.method == "POST":
-        return render(request, "Inventory/search.html", {"form":form})
+        form = AttsQueryForm(category,request.POST)
+        if form.is_valid():
+            user_atts = form.cleaned_data
+            query = Equipment.objects.filter(category=category)
+            for dic in Attribute.objects.filter(category=category).values():
+                att_name = dic['name']
+                try:
+                    value = user_atts[att_name]
+                except KeyError:
+                    continue
+                query = ...
+            redirect("oikos:home")
+        else:
+            messages.error(request,"Error: Valores no permitidos")
+        return redirect("oikos:home")
     else:
         form = AttsQueryForm(category)
         return render(request, "Inventory/search.html", {"form":form})
