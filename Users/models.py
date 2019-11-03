@@ -10,8 +10,6 @@ class User(AbstractUser):
     ]
     USERNAME_FIELD = 'email'
     id_number = models.IntegerField(unique=True,null=True)
-    first_name = models.CharField(max_length=100,null=True)
-    last_name = models.CharField(max_length=100,null=True)
     usb_id = models.IntegerField(null=True)
     email = models.EmailField('email address', unique=True)
     username = models.CharField(max_length=100, verbose_name='Nombre de Usuario')
