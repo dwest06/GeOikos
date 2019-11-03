@@ -7,60 +7,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <style type="text/css">
-        .spacer{
+        /* Sidebar */
+        #sidebar-wrapper{
+        z-index:1;
+        position: absolute;
+        width:0;
+        height:100%;
+        overflow-y:hidden;
+        background: #5b4282;
+        opacity:0.9;
+            transition:all .5s;
+            display:flex;
+            align-items:center;
+        }
+
+        /* Main Content */
+        #page-content-wrapper{
+        width: 100%;	
+        position: absolute;
+        padding:15px;
+            transition:all .5s;
+        }
+
+        #menu-toggle{
+            transition:all .3s;
+            font-size:2em;
+        }
+        /* Change the width of the sidebar to display it*/
+        #wrapper.menuDisplayed #sidebar-wrapper{
+        width:250px;
+        }
+
+        #wrapper.menuDisplayed #page-content-wrapper{
+        padding-left:250px;
+        }
+
+        /* Sidebar styling */
+        .sidebar-nav{
+        padding:0;
+        list-style:none; 
+            transition:all .5s;
+            width:100%;
+            text-align:center;
+        }
+
+        .sidebar-nav li{
+        line-height:40px;  
+            width:100%;
+            transition:all .3s;
+            padding:10px;
+        }
+
+        .sidebar-nav li a {
+        display:block;
+        text-decoration:none;
+        color:#ddd;
+        }
+
+        .sidebar-nav li:hover{
+        background:#846bab;
+        }
+        /* .spacer{
             margin-top:25px;
         }
+
+        .top {
+            position:absolute;
+            left:0; right:0;
+            height: 92px;
+        }
+        .left {
+            position:absolute;
+            left:0; top:92px; bottom: 0;
+            width: 178px;
+        }
+        .main {
+            position: absolute;
+            left:178px; top:92px; right:0; bottom:0;
+        } */
     </style>
     {% block custom_css %}{% endblock %}
     <title>GeOikos!</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-dark bg-dark text-center">
         <a class="navbar-brand" href="#">GeOikos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {% comment %} <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul> {% endcomment %}
-        </div>
     </nav>
-    <div class="container-fluid">
-    <div class="row">
-        {% include 'sidebar.html' %}
+    <div id="wrapper" class="menuDisplayed">
 
-        <div class="col pt-2">
-        {% include 'messages.html' %}
-
-            <div class="container">
-            
-                <div class="row spacer"></div>
-                <div class="row offset-2">
-                    <div class="col-12">
-                        <div class="text-center">
-                            <h1>{% block page-title %}{% endblock %}</h1>   
-                        </div>
-                        
-                        {% block content %}
-                        {% endblock %}
-                    </div>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                {% include 'sidebar.html' %}
+            </ul>
+        </div>
+        
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+            {% include 'messages.html' %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="#" class="btn" id="menu-toggle"><i class="fas fa-bars"></i></a>
+                    <!-- PAGE TITLE -->
+                    <h1>{% block page-title %}{% endblock %}</h1>
+                    <!-- PAGE CONTENT -->
+                    {% block content %}{% endblock %}
                 </div>
             </div>
+            </div>
         </div>
-    </div>
-    </div>
-            
+        </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("#menu-toggle").click(function(e){
+                e.preventDefault();
+                $("#wrapper").toggleClass("menuDisplayed");
+            });
+        });
+
+    </script>
     {% block custom_js %}{% endblock %}
 </body>
 

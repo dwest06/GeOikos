@@ -1,25 +1,24 @@
-<div class="col-2 collapse d-md-flex bg-light pt-2 min-vh-100" id="sidebar">
-    <ul class="nav flex-column flex-nowrap">
-        <li class="nav-item">
-          <a class="nav-link btn btn-block btn-outline-primary" href="{% url 'Inventory:home_inventory' %}">Inicio</a>
-        </li>
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link btn btn-block btn-outline-primary" href="{% url 'Inventory:create_category' %}">Categoria</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn btn-block btn-outline-primary" href="{% url 'Inventory:create_equipment' %}">Equipo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn btn-block btn-outline-primary" href="{% url 'Inventory:select-cat' %}">Buscar Equipo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn btn-block btn-outline-primary" href="{% url 'Users:logout' %}">Logout</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link btn btn-block btn-outline-primary" href="{% url 'Users:login' %}">Login</a>
-        </li>
-        {% endif %}
-    </ul>
-</div>
+
+<ul class="nav flex-column flex-nowrap">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Inventory:home_inventory' %}">Inicio</a>
+    </li>
+    {% if user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Inventory:create_category' %}">Categoria</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Inventory:create_equipment' %}">Equipo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Inventory:select-cat' %}">Buscar Equipo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Users:logout' %}">Logout</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Users:login' %}">Login</a>
+    </li>
+    {% endif %}
+</ul>
