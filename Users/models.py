@@ -14,5 +14,5 @@ class User(AbstractUser):
     email = models.EmailField('email address', unique=True)
     username = models.CharField(max_length=100, verbose_name='Nombre de Usuario')
     balance = models.IntegerField(null=True)
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES,null=True)
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES,null=True, default='IN')
     REQUIRED_FIELDS = ['username'] 
