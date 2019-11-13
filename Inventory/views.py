@@ -81,9 +81,9 @@ def createEquipment(request, cat):
                 value.attribute = catAttributes[i]
                 value.save()
                 i+=1
-            messages.success(request, "Equpiment Added!")
+            messages.success(request, "Equipo Agregado")
         else:
-            messages.error(request, "Failed to add Category :c")
+            messages.error(request, "Fallo al agregar equipo")
         return redirect("Inventory:home_inventory")
     else:
         equipForm = EquipmentForm()
@@ -113,7 +113,7 @@ def CatQueryView(request):
         form = CatQueryForm(request.POST)
         if form.is_valid():
             category = form.cleaned_data['category'].pk
-            return redirect("Inventory:select-atts", category=category)
+            return redirect("Inventory:show_equipment", category=category)
         else:
             messages.error(request,"No existe esta categoria.")
         return redirect("Inventory:home_inventory")
@@ -169,4 +169,29 @@ def LoanCreation(request):
     else:
         lcForm = LoanCreationForm()
         return render(request, "Inventory/create_loan.html", {"form" : lcForm})
+
+def ShowEquipment(request,category):
+    atts = Attribute.objects.filter(category=category)
+    equip = Equipment.objects.filter(category=category)
+    vals = []
+    for eq in equip:
+        vals2 = [eq.name]
+        for att in atts:
+            att_type=att.attribute_type
+            val=Attribute_Equipment.objects.get(attribute=att,equipment=eq)
+            if att_type == 'INT' or att_type == 'FLT':
+                vals2.append(val.value_int)
+            elif att_type == 'STR':
+                vals2.append(val.value_str)
+            elif att_type == 'TXT':
+                vals2.append(val.value_txt)
+            elif att_type == 'BOO':
+                vals2.append(val.value_boo)
+            elif att_type == 'DAT':
+                vals2.append(val.value_dat)
+            elif att_type == 'CHO':
+                vals2.append(val.value_cho)
+        vals.append(vals2)
+    return render(request, "Inventory/equipment_table.html", {'attributes': atts, 'values':vals})
+
 
