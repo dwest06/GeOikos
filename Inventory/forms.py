@@ -10,7 +10,7 @@ class CategoryForm(forms.ModelForm):
 		model = Category
 		fields = ['name']
 		labels = {
-			'name' : 'Category Name'
+			'name' : 'Nombre de la categoria'
 		}
 
 class EquipmentForm(forms.ModelForm):
@@ -21,12 +21,12 @@ class EquipmentForm(forms.ModelForm):
 				'elaboration_date', 'notes', 'group'
 			]
 		labels = {
-			'serial' : 'Serial No.',
-			'name' : 'Equipment Name',
-			'entry_date' : 'Entry Date',
-			'elaboration_date' : 'Elaboration Date',
-			'notes' : 'Notes',
-			'group' : 'Group'
+			'serial' : 'Serial',
+			'name' : 'Nombre del Equipo',
+			'entry_date' : 'Fecha de Entrada',
+			'elaboration_date' : 'Fecha de Elaboracion',
+			'notes' : 'Notas',
+			'group' : 'Grupo'
 		}
 
 AttributeFormset = modelformset_factory(
@@ -34,10 +34,10 @@ AttributeFormset = modelformset_factory(
 	fields = ['name', 'attribute_type', 'unit', 'nullity'],
 	extra = 1,
 	labels = {
-		'name' : 'Attribute Name',
-		'attribute_type' : 'Type',
-		'unit' : 'Unit',
-		'nullity' : 'Not Essential'
+		'name' : 'Nombre del Atributo',
+		'attribute_type' : 'Tipo',
+		'unit' : 'Unidad',
+		'nullity' : 'No esencial'
 	}
 )
 
@@ -97,11 +97,21 @@ class LoanCreationForm(forms.ModelForm):
     class Meta:
         model = Loan 
         fields = ['equipment', 'user', 'hand_over_date']
+        labels = {
+        	'equipment' : 'Equipo',
+        	'user' : 'Usuario',
+        	'hand_over_date' : 'Fecha'
+        }
 
 class LoanDevolutionForm(forms.ModelForm):
     class Meta:
         model = Loan
         fields = ['delivery_date', 'score', 'notes']
+        labels = {
+        	'delivery_date' : 'Fecha',
+        	'score' : 'Puntaje',
+        	'notes' : 'Notas'
+        }
 
 class RepairCreationForm(forms.ModelForm):
     class Meta:

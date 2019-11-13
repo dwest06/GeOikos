@@ -1,11 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
-from .forms import (
-    CategoryForm, AttributeFormset, CatQueryForm, EquipmentForm, 
-    IntValueForm, TxtValueForm, StrValueForm, DateValueForm, 
-    BoolValueForm, ChoiceValueForm, AttsQueryForm, GroupForm
-)
+from .forms import *
 
 
 def homeInventarioView(request):
@@ -21,10 +17,10 @@ def createCategory(request):
                 attribute = attform.save(commit=False)
                 attribute.category = category
                 attribute.save()
-            messages.success(request, "Category Added!")
+            messages.success(request, "Categoria añadida")
         else:
-            messages.error(request, "Failed to add Category :c")
-        return redirect("oikos:home")
+            messages.error(request, "Fallo al añadir categoria")
+        return redirect("Inventory:home_inventory")
     else:
         catForm = CategoryForm()
         attFormset = AttributeFormset(queryset=Attribute.objects.none())
@@ -35,10 +31,10 @@ def createGroup(request):
         grForm = GroupForm(request.POST)
         if grForm.is_valid():
             grForm.save()
-            messages.success(request, "Group Added!")
+            messages.success(request, "Grupo añadido")
         else:
-            messages.error(request, "Failed to add Group :c")
-        return redirect("oikos:home")
+            messages.error(request, "Fallo al añadir grupo")
+        return redirect("Inventory:home_inventory")
     else:
         grForm = GroupForm()
         return render(request, "Inventory/create_group.html", {"form" : grForm})
@@ -51,7 +47,7 @@ def EquipCatSelection(request):
             return redirect("Inventory:create_equipment_value", cat=category)
         else:
             messages.error(request,"No existe esta categoria.")
-        return redirect("oikos:home")
+        return redirect("Inventory:home_inventory")
     else:
         form = CatQueryForm()
         return render(request, "Inventory/create_equipment.html", {"form" : form})
@@ -88,7 +84,7 @@ def createEquipment(request, cat):
             messages.success(request, "Equpiment Added!")
         else:
             messages.error(request, "Failed to add Category :c")
-        return redirect("oikos:home")
+        return redirect("Inventory:home_inventory")
     else:
         equipForm = EquipmentForm()
         catAttributes = list(Attribute.objects.filter(category=cat))
@@ -120,7 +116,7 @@ def CatQueryView(request):
             return redirect("Inventory:select-atts", category=category)
         else:
             messages.error(request,"No existe esta categoria.")
-        return redirect("oikos:home")
+        return redirect("Inventory:home_inventory")
     else:
         form = CatQueryForm()
         return render(request, "Inventory/search.html", {"form" : form})
@@ -156,7 +152,21 @@ def AttsQueryView(request, category):
             return render(request, "Inventory/table.html", {'table':query})
         else:
             messages.error(request,"Error: Valores no permitidos")
-        return redirect("oikos:home")
+        return redirect("Inventory:home_inventory")
     else:
         form = AttsQueryForm(category)
         return render(request, "Inventory/search.html", {"form":form})
+
+def LoanCreation(request):
+    if request.method == "POST":
+        lcForm = LoanCreationForm(request.POST)
+        if lcForm.is_valid():
+            lcForm.save()
+            messages.success(request, "Prestamo cargado")
+        else:
+            messages.error(request, "Fallo al cargar prestamo")
+        return redirect("Inventory:home_inventory")
+    else:
+        lcForm = LoanCreationForm()
+        return render(request, "Inventory/create_loan.html", {"form" : lcForm})
+
