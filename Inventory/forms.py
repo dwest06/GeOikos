@@ -6,76 +6,76 @@ from .models import (Category, Equipment, Attribute, Group,
 from django.core.validators import MaxValueValidator
 
 class CategoryForm(forms.ModelForm):
-	class Meta:
-		model = Category
-		fields = ['name']
-		labels = {
-			'name' : 'Nombre de la categoria'
-		}
+    class Meta:
+        model = Category
+        fields = ['name']
+        labels = {
+            'name' : 'Nombre de la categoria'
+        }
 
 class EquipmentForm(forms.ModelForm):
-	class Meta:
-		model = Equipment
-		fields = [
-				'serial', 'name', 'entry_date', 
-				'elaboration_date', 'notes', 'group'
-			]
-		labels = {
-			'serial' : 'Serial',
-			'name' : 'Nombre del Equipo',
-			'entry_date' : 'Fecha de Entrada',
-			'elaboration_date' : 'Fecha de Elaboracion',
-			'notes' : 'Notas',
-			'group' : 'Grupo'
-		}
+    class Meta:
+        model = Equipment
+        fields = [
+                'serial', 'name', 'entry_date', 
+                'elaboration_date', 'notes', 'group'
+            ]
+        labels = {
+            'serial' : 'Serial',
+            'name' : 'Nombre del Equipo',
+            'entry_date' : 'Fecha de Entrada',
+            'elaboration_date' : 'Fecha de Elaboracion',
+            'notes' : 'Notas',
+            'group' : 'Grupo'
+        }
 
 AttributeFormset = modelformset_factory(
-	Attribute,
-	fields = ['name', 'attribute_type', 'unit', 'nullity'],
-	extra = 1,
-	labels = {
-		'name' : 'Nombre del Atributo',
-		'attribute_type' : 'Tipo',
-		'unit' : 'Unidad',
-		'nullity' : 'No esencial'
-	}
+    Attribute,
+    fields = ['name', 'attribute_type', 'unit', 'nullity'],
+    extra = 1,
+    labels = {
+        'name' : 'Nombre del Atributo',
+        'attribute_type' : 'Tipo',
+        'unit' : 'Unidad',
+        'nullity' : 'No esencial'
+    }
 )
 
 class IntValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_int']
-		labels = { 'value_int' : ''}
+    class Meta:
+        model = Attribute_Equipment
+        fields = ['value_int']
+        labels = { 'value_int' : ''}
 
 class TxtValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_txt']
-		labels = { 'value_txt' : ''}
+    class Meta:
+        model = Attribute_Equipment
+        fields = ['value_txt']
+        labels = { 'value_txt' : ''}
 
 class StrValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_str']
-		labels = { 'value_str' : ''}
+    class Meta:
+        model = Attribute_Equipment
+        fields = ['value_str']
+        labels = { 'value_str' : ''}
 
 class DateValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_date']
-		labels = { 'value_date' : ''}
+    class Meta:
+        model = Attribute_Equipment
+        fields = ['value_date']
+        labels = { 'value_date' : ''}
 
 class BoolValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_bool']
-		labels = { 'value_bool' : ''}
+    class Meta:
+        model = Attribute_Equipment
+        fields = ['value_bool']
+        labels = { 'value_bool' : ''}
 
 class ChoiceValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_cho']
-		labels = { 'value_cho' : ''}
+    class Meta:
+        model = Attribute_Equipment
+        fields = ['value_cho']
+        labels = { 'value_cho' : ''}
 
 
 class GroupForm(forms.ModelForm):
@@ -98,9 +98,9 @@ class LoanCreationForm(forms.ModelForm):
         model = Loan 
         fields = ['equipment', 'user', 'hand_over_date']
         labels = {
-        	'equipment' : 'Equipo',
-        	'user' : 'Usuario',
-        	'hand_over_date' : 'Fecha'
+            'equipment' : 'Equipo',
+            'user' : 'Usuario',
+            'hand_over_date' : 'Fecha'
         }
 
 class LoanDevolutionForm(forms.ModelForm):
@@ -108,9 +108,9 @@ class LoanDevolutionForm(forms.ModelForm):
         model = Loan
         fields = ['delivery_date', 'score', 'notes']
         labels = {
-        	'delivery_date' : 'Fecha',
-        	'score' : 'Puntaje',
-        	'notes' : 'Notas'
+            'delivery_date' : 'Fecha',
+            'score' : 'Puntaje',
+            'notes' : 'Notas'
         }
 
 class RepairCreationForm(forms.ModelForm):
@@ -142,6 +142,11 @@ class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
         fields = ['user', 'transaction', 'reason']
+        labels = {
+            'user' : 'Usuario',
+            'transaction'  : 'Monto',
+            'reason' : 'Motivo'
+        }
 
 class CatQueryForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all())

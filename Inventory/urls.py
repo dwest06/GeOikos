@@ -13,4 +13,5 @@ urlpatterns = [
     path('create-group', views.createGroup , name="create_group"),
     path('create-loan', views.LoanCreation , name="create_loan"),
     path('show-equipment/<int:category>',views.ShowEquipment, name="show_equipment"),
+    path('load-transaction', views.loadTransaction, name="load_transaction"),
 ]

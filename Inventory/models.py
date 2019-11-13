@@ -121,9 +121,9 @@ class EquipmentDebt(models.Model):
 
 class Transaction(models.Model):
 	REASON_OPTIONS = [
-		('P','Payment'),
-		('F','Fine'),
-		('T','Membership'),
+		('P','Pago'),
+		('M','Multa'),
+		('T','Trimestralidad'),
 	]
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	transaction = models.IntegerField()

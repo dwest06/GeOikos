@@ -195,3 +195,18 @@ def ShowEquipment(request,category):
     return render(request, "Inventory/equipment_table.html", {'attributes': atts, 'values':vals})
 
 
+# Transactions
+def loadTransaction(request):
+    if request.method == "POST":
+        form = TransactionForm(request.POST)
+        if form.is_valid():
+            trans = form.save(commit = False)
+            if trans.reason != 'P':
+                trans.transaction *= -1
+            trans.save()
+            messages.success(request, "Transacción cargada")
+        else:
+            messages.error(request, "Fallo al cargar transacción")
+        return redirect("Inventory:load_transaction")
+    form = TransactionForm()
+    return render(request, "Inventory/load_transaction.html", {"form" : form})
