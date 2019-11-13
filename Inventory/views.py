@@ -110,8 +110,39 @@ def createEquipment(request, cat):
 
         return render(request, "Inventory/create_equipment_value.html", {"equipform" : equipForm, "attforms" : attForms})
 
+def createRequest(request):
+    if request.method == "POST":
+        catformset = CatReqFormset(request.POST)
+        eqformset = EqReqFormset(request.POST)
+        comments = CommentsReqForm()
+        if catformset.is_valid() and eqformset.is_valid() and comments.is_valid():
+            
+            requestObj = RequestForm().save(commit=False)
+            requestObj.user = request.user
+            requestObj.specs = comments.cleaned_data['comments']
+            
+            for form in catformset:
+                category = form.cleaned_data[''].pk
+                quantity = form.cleaned_data['quantity']
+                requestObj.category.add(Category.objects.filter(pk=category))
 
-# Create your views here.
+                requestcat =  Request_CatForm().save(commit=False)
+                requestcat.category = Category.objects.filter(pk=category)
+                requestcat.request = requestObj
+                requestcat.quantity = form.cleaned_data['quantity']
+            
+            for form in eqformset:
+                equipment = form.cleaned_data['equipment'].pk
+                requestObj.equipment.add(Equipment.objects.filter(pk=equipment))
+
+            requestObj.save()    
+
+    else:
+        catform = CatReqFormset()
+        eqform = EqReqFormset()
+        comments = CommentsReqForm()
+        return render(request, "Inventory/submit_request.html", {"catformset" : catform, "eqformset" : eqform})
+
 def CatQueryView(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)
@@ -160,3 +191,4 @@ def AttsQueryView(request, category):
     else:
         form = AttsQueryForm(category)
         return render(request, "Inventory/search.html", {"form":form})
+

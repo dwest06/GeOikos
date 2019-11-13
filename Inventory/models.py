@@ -30,7 +30,7 @@ class Equipment(models.Model):
 	group = models.ManyToManyField(Group,blank=True)
 
 	def __str__(self):
-		return self.name+ ': equipment of ' + self.category.name
+		return self.category + str(self.serial) + ': ' + self.name
 
 class Attribute(models.Model):
 	TYPE_CHOICES = [
@@ -76,8 +76,8 @@ class Request(models.Model):
 	date = models.DateTimeField(auto_now_add=True)
 	specs = models.TextField(null=True)
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
-	equipment = models.ManyToManyField(Equipment)
-	category = models.ManyToManyField(Category,through='Request_Category' )
+	equipment = models.ManyToManyField(Equipment, null=True)
+	category = models.ManyToManyField(Category,through='Request_Category',null=True)
 
 	def __str__(self):
 		return 'Request of ' + str(self.user)
