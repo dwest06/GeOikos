@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.urls import reverse_lazy
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -135,6 +136,8 @@ STATICFILES_DIRS = [
 
 # Custom User Model
 AUTH_USER_MODEL = 'Users.User'
+
+LOGIN_URL = reverse_lazy('Users:login')
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

@@ -1,18 +1,40 @@
+{% load tags %}
 
 <ul class="nav flex-column flex-nowrap">
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'Inventory:home_inventory' %}">Inicio</a>
-    </li>
+        <a class="nav-link" href="{% url 'oikos:home' %}">GeOikos</a>
+      </li>
     {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Inventory:home_inventory' %}">Inicio</a>
+      </li>
+      {% if user|is_cuarto_equipo %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Inventory:create_category' %}">Crear Categorías</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Inventory:create_equipment' %}">Añadir Equipo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Inventory:create_loan' %}">Añadir Equipo</a>
+      </li>
+      {% endif %}
+      {% if user|is_activo %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Solicitar Equipo</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Inventory:select-cat' %}">Buscar Equipo</a>
+      </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'Inventory:create_category' %}">Categoria</a>
+      <a class="nav-link" href="#">Blog</a>
     </li>
+    {% if user|is_tesorero %}
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'Inventory:create_equipment' %}">Equipo</a>
+      <a class="nav-link" href="{% url 'Inventory:load_transaction' %}">Cargar Transacciones</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'Inventory:select-cat' %}">Buscar Equipo</a>
-    </li>
+    {% endif %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'Users:logout' %}">Logout</a>
     </li>
