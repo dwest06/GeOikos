@@ -9,7 +9,11 @@ from .forms import (
 
 
 def homeInventarioView(request):
-    return render(request, "Inventory/home.html")
+    context = {
+        'deuda' : 0.00,
+        'grupo' : request.user.groups.all().first()
+    }
+    return render(request, "Inventory/home.html", context)
 
 def createCategory(request):
     if request.method == "POST":

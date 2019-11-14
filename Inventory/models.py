@@ -7,9 +7,6 @@ class Category(models.Model):
 	name = models.CharField(max_length=60, unique=True	)
 
 	def __str__(self):
-		return self.name	
-
-	def __str__(self):
 		return self.name
 
 class Group(models.Model):
@@ -117,7 +114,7 @@ class EquipmentDebt(models.Model):
 	specs = models.TextField(blank=True)
 
 	def __str__(self):
-		return 'Equipment Debt of ' + str(self.equipment)
+		return 'Equipment Debt of '
 
 class Transaction(models.Model):
 	REASON_OPTIONS = [

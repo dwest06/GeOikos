@@ -43,8 +43,6 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    password = forms.CharField(label="Password",
-        widget=forms.PasswordInput, required=False)
 
     class Meta:
         model = User
@@ -58,11 +56,6 @@ class UserChangeForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
-    # def clean_password(self):
-        # Regardless of what the user provides, return the initial value.
-        # This is done here, rather than on the field, because the
-        # field does not have access to the initial value
-        # return self.initial["password"]
 
 class UserLoginForm(forms.Form):
     email = forms.CharField(max_length=30, widget=forms.EmailInput)
