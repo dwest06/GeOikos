@@ -138,3 +138,9 @@ AUTH_USER_MODEL = 'Users.User'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+MEDIA_ROOT = (
+    BASE_DIR
+)
+
+MEDIA_URL = '/img/'
