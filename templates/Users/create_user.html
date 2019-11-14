@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% block title %} Create User {% endblock %}
-
 {% block page-title %}
 {{title}}
 {% endblock %}
@@ -15,7 +13,7 @@
             <form action="" method="POST" class="form-group" >
                 {% csrf_token %}
                 {{form.as_p}}
-                <button type="submit" class="btn btn-success">Aceptar</button>
+                <button type="submit" class="btn btn-success">Ingresar</button>
             </form>
         </div>
     </div>
