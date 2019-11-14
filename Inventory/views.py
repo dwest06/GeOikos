@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
+from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
 
-
+@login_required
 def homeInventarioView(request):
     context = {
         'deuda' : 0.00,
@@ -11,6 +13,8 @@ def homeInventarioView(request):
     }
     return render(request, "Inventory/home.html", context)
 
+@login_required
+@is_admin
 def createCategory(request):
     if request.method == "POST":
         catForm = CategoryForm(request.POST)
@@ -30,6 +34,8 @@ def createCategory(request):
         attFormset = AttributeFormset(queryset=Attribute.objects.none())
         return render(request, "Inventory/create_category.html", {"categoryform" : catForm, "formset" : attFormset})
 
+@login_required
+@is_cuarto_equipo
 def createGroup(request):
     if request.method == "POST":
         grForm = GroupForm(request.POST)
@@ -43,6 +49,8 @@ def createGroup(request):
         grForm = GroupForm()
         return render(request, "Inventory/create_group.html", {"form" : grForm})
 
+@login_required
+@is_pasivo
 def EquipCatSelection(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)
@@ -56,6 +64,8 @@ def EquipCatSelection(request):
         form = CatQueryForm()
         return render(request, "Inventory/create_equipment.html", {"form" : form})
 
+@login_required
+@is_cuarto_equipo
 def createEquipment(request, cat):
     if request.method == "POST":
         equipForm = EquipmentForm(request.POST)
@@ -110,6 +120,8 @@ def createEquipment(request, cat):
 
         return render(request, "Inventory/create_equipment_value.html", {"equipform" : equipForm, "attforms" : attForms})
 
+@login_required
+@is_activo
 def createRequest(request):
     if request.method == "POST":
         catformset = CatReqFormset(request.POST)
@@ -156,6 +168,8 @@ def createRequest(request):
         return render(request, "Inventory/create_request.html", 
                       {"catformset" : catform, "eqformset" : eqform, "comments" : comments})
 
+@login_required
+@is_pasivo
 def CatQueryView(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)
@@ -169,6 +183,8 @@ def CatQueryView(request):
         form = CatQueryForm()
         return render(request, "Inventory/search.html", {"form" : form})
 
+@login_required
+@is_pasivo
 def AttsQueryView(request, category):
     if request.method == "POST":
         form = AttsQueryForm(category,request.POST)
@@ -205,6 +221,8 @@ def AttsQueryView(request, category):
         form = AttsQueryForm(category)
         return render(request, "Inventory/search.html", {"form":form})
 
+@login_required
+@is_cuarto_equipo
 def LoanCreation(request):
     if request.method == "POST":
         lcForm = LoanCreationForm(request.POST)
@@ -218,6 +236,8 @@ def LoanCreation(request):
         lcForm = LoanCreationForm()
         return render(request, "Inventory/create_loan.html", {"form" : lcForm})
 
+@login_required
+@is_pasivo
 def ShowEquipment(request,category):
     atts = Attribute.objects.filter(category=category)
     equip = Equipment.objects.filter(category=category)
@@ -244,6 +264,8 @@ def ShowEquipment(request,category):
 
 
 # Transactions
+@login_required
+@is_tesorero
 def loadTransaction(request):
     if request.method == "POST":
         form = TransactionForm(request.POST)
