@@ -14,4 +14,5 @@ urlpatterns = [
     path('create-loan', views.LoanCreation , name="create_loan"),
     path('show-equipment/<int:category>',views.ShowEquipment, name="show_equipment"),
     path('load-transaction', views.loadTransaction, name="load_transaction"),
+    path('create-request',views.createRequest, name="create_request")
 ]

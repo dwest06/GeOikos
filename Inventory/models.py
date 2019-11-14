@@ -7,9 +7,6 @@ class Category(models.Model):
 	name = models.CharField(max_length=60, unique=True	)
 
 	def __str__(self):
-		return self.name	
-
-	def __str__(self):
 		return self.name
 
 class Group(models.Model):
@@ -30,7 +27,7 @@ class Equipment(models.Model):
 	group = models.ManyToManyField(Group,blank=True)
 
 	def __str__(self):
-		return self.name+ ': equipment of ' + self.category.name
+		return str(self.category) + ' ' + str(self.serial) + ': ' + self.name
 
 class Attribute(models.Model):
 	TYPE_CHOICES = [
@@ -77,7 +74,7 @@ class Request(models.Model):
 	specs = models.TextField(null=True)
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	equipment = models.ManyToManyField(Equipment)
-	category = models.ManyToManyField(Category,through='Request_Category' )
+	category = models.ManyToManyField(Category,through='Request_Category')
 
 	def __str__(self):
 		return 'Request of ' + str(self.user)
@@ -117,7 +114,7 @@ class EquipmentDebt(models.Model):
 	specs = models.TextField(blank=True)
 
 	def __str__(self):
-		return 'Equipment Debt of ' + str(self.equipment)
+		return 'Equipment Debt of '
 
 class Transaction(models.Model):
 	REASON_OPTIONS = [

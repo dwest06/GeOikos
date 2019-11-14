@@ -7,55 +7,60 @@
 {% endblock %}
 
 {% block content %}
+<h1 style="text-align: left;
+color: rgb(0, 0, 0);
+font-family: Consolas, monaco, monospace;
+font-size: 50px;"> Crear Categoría</h1>
+<h2 style="font-family: Consolas, monaco, monospace;
+font-size: 20px;">Herramienta de creación de categorías. Para crear una categoría debe crear sus atributos.</h2>
+    
 <form class="form-horizontal" method="POST" action="">
     {% csrf_token %}
-    <div class="row spacer">
-        <div class="col-2">
-            <label>{{categoryform.name.label}}</label>
+    {{ formset.management_form }}
+    {% for form in formset %}
+    <div class="form-row">
+        <div class="row spacer">   
+            <div class="col-1">
+                <label>{{form.name.label}}</label>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    {{form.name}}
+                </div>
+            </div>
+        </div>  
+        <div class="row spacer">    
+            <div class="col-1">
+                <label>{{form.attribute_type.label}}</label>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    {{form.attribute_type}}
+                </div>
+            </div>
+         <div class="row spacer"> 
+            <div class="col-1">
+                <label>{{form.unit.label}}</label>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    {{form.unit}}
+                </div>
+            </div>
         </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{categoryform.name}}
+        <div class="row spacer"> 
+            <div class="col-1">
+                <label>{{form.nullity.label}}</label>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    {{form.nullity}}
+                </div>
             </div>
         </div>
     </div>
-    {{ formset.management_form }}
-    {% for form in formset %}
-    <div class="row form-row spacer">
-        <div class="col-2">
-            <label>{{form.name.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.name}}
-            </div>
-        </div>
-        <div class="col-2">
-            <label>{{form.attribute_type.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.attribute_type}}
-            </div>
-        </div>
-        <div class="col-2">
-            <label>{{form.unit.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.unit}}
-            </div>
-        </div>
-        <div class="col-2">
-            <label>{{form.nullity.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.nullity}}
-            </div>
-        </div>
         <div class="input-group-append">
-            <button class="btn btn-success add-form-row">+</button>
+            <button class="btn btn-success add-form-row">Añadir Atributo</button>
         </div>
     </div>
     {% endfor %}

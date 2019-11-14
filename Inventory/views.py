@@ -5,7 +5,11 @@ from .forms import *
 
 
 def homeInventarioView(request):
-    return render(request, "Inventory/home.html")
+    context = {
+        'deuda' : 0.00,
+        'grupo' : request.user.groups.all().first()
+    }
+    return render(request, "Inventory/home.html", context)
 
 def createCategory(request):
     if request.method == "POST":
@@ -106,8 +110,52 @@ def createEquipment(request, cat):
 
         return render(request, "Inventory/create_equipment_value.html", {"equipform" : equipForm, "attforms" : attForms})
 
+def createRequest(request):
+    if request.method == "POST":
+        catformset = CatReqFormset(request.POST)
+        eqformset  = EqReqFormset(request.POST)
+        comments   = CommentsReqForm(request.POST)
+       
+        if catformset.is_valid() and eqformset.is_valid() and comments.is_valid():
+            requestObj = Request.objects.create(user=request.user)
+            requestObj.specs = comments.cleaned_data['comments']
+            
+            for form in catformset: 
+                try:
+                    category = form.cleaned_data['category'].pk              
+                    quantity = form.cleaned_data['quantity']
+                except KeyError:
+                    continue
+                requestcat =  Request_Category.objects.create(
+                                category=Category.objects.get(pk=category),
+                                request=requestObj,
+                                quantity=form.cleaned_data['quantity']
+                              )
+                requestcat.save()
+            
+            requestObj.save()
 
-# Create your views here.
+            for form in eqformset:
+                try:
+                    equipment = form.cleaned_data['equipment'].pk
+                except KeyError:
+                    continue
+                requestObj.equipment.add(Equipment.objects.get(pk=equipment))
+        
+        else:
+            messages.error(request,"Form Inválido. Ingrese una cantidad positiva")
+            return redirect("Inventory:create_request")
+        
+        messages.success(request,"")
+        return render(request,"oikos/home.html")
+
+    else:
+        catform = CatReqFormset()
+        eqform = EqReqFormset()
+        comments = CommentsReqForm()
+        return render(request, "Inventory/create_request.html", 
+                      {"catformset" : catform, "eqformset" : eqform, "comments" : comments})
+
 def CatQueryView(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)

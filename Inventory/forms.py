@@ -1,17 +1,17 @@
 from django import forms
-from django.forms import modelformset_factory
+from django.forms import formset_factory, modelformset_factory
 from .models import (Category, Equipment, Attribute, Group, 
-                    Request, Request_Category, Loan, Repair,
-                    EquipmentDebt, Transaction, Attribute_Equipment)
+                    Request, Request_Category, Loan, Repair, 
+					EquipmentDebt, Transaction, Attribute_Equipment)
 from django.core.validators import MaxValueValidator
 
 class CategoryForm(forms.ModelForm):
-    class Meta:
-        model = Category
-        fields = ['name']
-        labels = {
-            'name' : 'Nombre de la categoria'
-        }
+	class Meta:
+		model = Category
+		fields = ['name']
+		labels = {
+			'name' : 'Nombre de Categoría'
+		}
 
 class EquipmentForm(forms.ModelForm):
     class Meta:
@@ -30,15 +30,15 @@ class EquipmentForm(forms.ModelForm):
         }
 
 AttributeFormset = modelformset_factory(
-    Attribute,
-    fields = ['name', 'attribute_type', 'unit', 'nullity'],
-    extra = 1,
-    labels = {
-        'name' : 'Nombre del Atributo',
-        'attribute_type' : 'Tipo',
-        'unit' : 'Unidad',
-        'nullity' : 'No esencial'
-    }
+	Attribute,
+	fields = ['name', 'attribute_type', 'unit', 'nullity'],
+	extra = 1,
+	labels = {
+		'name' : 'Nombre de Atributo',
+		'attribute_type' : 'Tipo de dato',
+		'unit' : 'Unidad',
+		'nullity' : '(No esencial)'
+	}
 )
 
 class IntValueForm(forms.ModelForm):
@@ -86,9 +86,9 @@ class GroupForm(forms.ModelForm):
 class RequestForm(forms.ModelForm):
     class Meta:
         model = Request
-        fields = ['specs', 'equipment', 'category']
+        fields = ['user', 'specs', 'equipment', 'category']
 
-class Request_CategoryForm(forms.ModelForm):
+class Request_CatForm(forms.ModelForm):
     class Meta:
         model = Request_Category
         fields = ['request', 'category', 'quantity']
@@ -150,6 +150,32 @@ class TransactionForm(forms.ModelForm):
 
 class CatQueryForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all())
+
+class CatReqForm(forms.Form):
+	category = forms.ModelChoiceField(queryset=Category.objects.all())
+	quantity = forms.IntegerField(label="quantity", required=True, initial=1)
+
+	def clean_quantity(self):
+		quantity = self.cleaned_data['quantity']
+		if quantity <= 0:
+			raise forms.ValidationError("Debes especificar una cantidad positiva")
+		return quantity
+
+CatReqFormset = formset_factory(
+	CatReqForm,
+	extra = 1
+)
+
+class EqReqForm(forms.Form):
+	equipment = forms.ModelChoiceField(queryset=Equipment.objects.all())
+
+class CommentsReqForm(forms.Form):
+	comments = forms.CharField(required=False, widget=forms.Textarea)
+
+EqReqFormset = formset_factory(
+	EqReqForm,
+	extra = 1
+)
 
 class AttsQueryForm(forms.Form):
 

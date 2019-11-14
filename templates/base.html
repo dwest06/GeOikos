@@ -11,13 +11,13 @@
     <style type="text/css">
         /* Sidebar */
         #sidebar-wrapper{
-        z-index:1;
-        position: absolute;
-        width:0;
-        height:100%;
-        overflow-y:hidden;
-        background: #5b4282;
-        opacity:0.9;
+            z-index:1;
+            position: absolute;
+            width:0;
+            height:100%;
+            overflow-y:hidden;
+            background: #5b4282;
+            opacity:0.9;
             transition:all .5s;
             display:flex;
             align-items:center;
@@ -25,9 +25,9 @@
 
         /* Main Content */
         #page-content-wrapper{
-        width: 100%;	
-        position: absolute;
-        padding:15px;
+            width: 100%;	
+            position: absolute;
+            padding:15px;
             transition:all .5s;
         }
 
@@ -37,17 +37,17 @@
         }
         /* Change the width of the sidebar to display it*/
         #wrapper.menuDisplayed #sidebar-wrapper{
-        width:250px;
+            width:250px;
         }
 
         #wrapper.menuDisplayed #page-content-wrapper{
-        padding-left:250px;
+            padding-left:250px;
         }
 
         /* Sidebar styling */
         .sidebar-nav{
-        padding:0;
-        list-style:none; 
+            padding:0;
+            list-style:none; 
             transition:all .5s;
             width:100%;
             text-align:center;
@@ -61,42 +61,27 @@
         }
 
         .sidebar-nav li a {
-        display:block;
-        text-decoration:none;
-        color:#ddd;
+            display:block;
+            text-decoration:none;
+            color:#ddd;
         }
 
         .sidebar-nav li:hover{
-        background:#846bab;
+            background:#846bab;
         }
-        /* .spacer{
-            margin-top:25px;
+        .mb-20{
+            margin-bottom: 20px;
         }
-
-        .top {
-            position:absolute;
-            left:0; right:0;
-            height: 92px;
-        }
-        .left {
-            position:absolute;
-            left:0; top:92px; bottom: 0;
-            width: 178px;
-        }
-        .main {
-            position: absolute;
-            left:178px; top:92px; right:0; bottom:0;
-        } */
     </style>
     {% block custom_css %}{% endblock %}
-    <title>GeOikos!</title>
+    <title>SIGEO</title>
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-dark text-center">
-        <a class="navbar-brand" href="#">GeOikos</a>
+        <a class="navbar-brand" href="#">SIGEO</a>
     </nav>
-    <div id="wrapper" class="menuDisplayed">
+    <div id="wrapper">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -110,12 +95,21 @@
             <div class="container-fluid">
             {% include 'messages.html' %}
             <div class="row">
-                <div class="col-lg-12">
-                    <a href="#" class="btn" id="menu-toggle"><i class="fas fa-bars"></i></a>
+                <div class="col-lg-1">
+                    <a href="#" class="btn" id="menu-toggle"><i class="fas fa-bars"> Menú</i></a>
+                </div>
+                <div class="col-lg-11">
                     <!-- PAGE TITLE -->
-                    <h1>{% block page-title %}{% endblock %}</h1>
+                    <div class="mb-20 text-center">
+                        <h1 style="width:80%; margin: auto;" class="border bg-light rounded">
+                            {% block page-title %}{% endblock %}
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-lg-12">
                     <!-- PAGE CONTENT -->
                     {% block content %}{% endblock %}
+                </div>
                 </div>
             </div>
             </div>
