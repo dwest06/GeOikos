@@ -1,0 +1,24 @@
+.course-content {
+  margin: 2em auto 4em auto;
+}
+
+.course-content .enter {
+  max-width: 340px;
+}
+
+.course-content .enter .icon-go {
+  top: 38px;
+}
+
+.course-content .enter .mask {
+  top: 28px;
+}
+
+@media screen and (max-width: 365px) {
+  .course-content .enter .icon-go {
+    top: 65px;
+  }
+  .course-content .enter .mask {
+    top: 55px;
+  }
+}
