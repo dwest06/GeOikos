@@ -34,13 +34,13 @@ class Equipment(models.Model):
 
 class Attribute(models.Model):
 	TYPE_CHOICES = [
-		('INT', 'Integer'),
-		('TXT', 'Text'),
+		('INT', 'Entero'),
+		('TXT', 'Texto'),
 		('STR', 'String'),
-		('BOO', 'Boolean'),
-		('FLT', 'Float'),
-		('DAT', 'Date'),
-		('CHO', 'Choice'),
+		('BOO', 'Booleano'),
+		('FLT', 'Decimal'),
+		('DAT', 'Fecha'),
+		('CHO', 'Selección'),
 	]
 	name = models.CharField(max_length=50)
 	attribute_type = models.CharField(max_length=3,choices=TYPE_CHOICES)
