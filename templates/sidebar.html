@@ -20,6 +20,9 @@
       <a class="nav-link" href="{% url 'Inventory:create_loan' %}">Prestamo</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" href="{% url 'Inventory:load_transaction' %}">Cargar Transacciones</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="{% url 'Users:logout' %}">Logout</a>
     </li>
     {% else %}
