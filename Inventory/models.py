@@ -6,16 +6,8 @@ from django.core.validators import MaxValueValidator
 class Category(models.Model):
     name = models.CharField(max_length=60, unique=True  )
 
-<<<<<<< HEAD
-	def __str__(self):
-		return self.name
-=======
-    def __str__(self):
-        return self.name    
-
     def __str__(self):
         return self.name
->>>>>>> a7fdd17eab50527a6a025a0da6e834bde8a361a8
 
 class Group(models.Model):
     name = models.CharField(max_length=120)

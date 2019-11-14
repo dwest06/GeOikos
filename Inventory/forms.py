@@ -48,7 +48,7 @@ class EquipmentForm(forms.ModelForm):
             },
             'elaboration_date' : {
                 'invalid' : 'Fecha inválida',
-            },
+            }
         }
 
 AttributeFormset = modelformset_factory(
