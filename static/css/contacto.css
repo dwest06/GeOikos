@@ -1,0 +1,62 @@
+.map {
+  display: none;
+}
+
+.contact-content {
+  margin-bottom: 2em;
+}
+
+.contact-content .contact-info .sm a {
+  font-size: 1.4em;
+}
+
+.contact-content .contact-form {
+  padding-top: 2em;
+}
+
+.contact-content .contact-form .form .btn {
+  margin: auto;
+  display: block;
+}
+
+.contact-content .contact-form .msg {
+  display: none;
+  position: relative;
+  height: 440px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.contact-content .contact-form .msg p {
+  position: absolute;
+  top: 44%;
+}
+
+.contact-content .contact-form .msg .ok {
+  color: green;
+}
+
+.contact-content .contact-form .msg .fail {
+  color: red;
+}
+
+@media screen and (min-width: 900px) {
+  .map {
+    margin-bottom: 1em;
+    display: block;
+  }
+  .contact-content {
+    display: flex;
+  }
+  .contact-content .contact-info {
+    padding: 1em;
+    padding-left: 0;
+  }
+  .contact-content .contact-form {
+    padding-top: 0px;
+    border-left: 1px solid #ccc;
+    padding: 1em;
+    padding-right: 0;
+  }
+}
