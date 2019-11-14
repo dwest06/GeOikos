@@ -1,0 +1,41 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+
+<div class="wrap">
+		<div class="first-el content">
+			<h1>Junta Directiva</h1>
+			<p>
+				La Junta Directiva, luego de la Asamblea, es el órgano deliberante de la agrupación. Está conformada por 5 miembros escogidos anualmente por los miembros activos de la agrupación en el último trimestre académico de cada año (Abril-Julio).
+			</p>
+			<p>
+				La Junta directiva para el período 2019-2020 se encuentra conformada por:
+			</p>
+		</div>
+		<div class="cards">
+			{% for junta in site.data.junta %}
+			<div class="card corners">
+				<div class="card-img">
+					<img src="{{ site.url }}/{{ junta.picture }}" alt="">
+				</div>
+				<div class="card-info">
+					<h3>{{ junta.nombre }}</h3>
+					<p>
+						{{ junta.cargo }}
+					</p>
+					<div class="sm sm1">
+						{% if junta.instagram %}
+							<a href="{{ junta.instagram }}"><span class="icon-instagram"></span></a>
+						{% endif %}
+						{% if junta.twitter %}
+							<a href="{{ junta.twitter }}"><span class="icon-twitter"></span></a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+
+{% endblock %}

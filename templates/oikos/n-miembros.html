@@ -1,0 +1,51 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+
+  <p>{{miembros_list}}</p>
+  <div class="wrap">
+    <div class="first-el content">
+        <h1>Nuestros miembros</h1>
+        <p>
+            
+        </p>    
+    </div>
+    <div class="cards">
+    {% for miembro in name %}
+    {% load static %}
+        <div class="card corners">
+            <div class="card-img">
+
+                <!--Hay que arreglarlo-->
+
+                <!--{% if miembro == 'Francisco Marcos' %}
+                <img src="../../static/img/miembros/profile-francisco.jpg" alt="">
+                {% endif %}-->
+
+
+                {% if picture %}
+                <img src="{% static picture.url"alt="prueba" >
+                {% endif %}
+
+            </div>
+            <div class="card-info">
+                <h3>{{ miembro }}</h3>
+                <p>
+                    {{ carrera }}
+                </p>
+                <div class="sm sm1">
+                    {% if instagram %}
+                        <a href="{{ instagram }}"><span class="icon-instagram"></span></a>
+                    {% endif %}
+                    {% if twitter %}
+                        <a href="{{ twitter }}"><span class="icon-twitter"></span></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
