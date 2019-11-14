@@ -10,7 +10,7 @@ class CategoryForm(forms.ModelForm):
 		model = Category
 		fields = ['name']
 		labels = {
-			'name' : 'Category Name'
+			'name' : 'Nombre de Categoría'
 		}
 
 class EquipmentForm(forms.ModelForm):
@@ -34,14 +34,12 @@ AttributeFormset = modelformset_factory(
 	fields = ['name', 'attribute_type', 'unit', 'nullity'],
 	extra = 1,
 	labels = {
-		'name' : 'Attribute Name',
-		'attribute_type' : 'Type',
-		'unit' : 'Unit',
-		'nullity' : 'Not Essential'
+		'name' : 'Nombre de Atributo',
+		'attribute_type' : 'Tipo de dato',
+		'unit' : 'Unidad',
+		'nullity' : '(No esencial)'
 	}
 )
-
-
 
 class IntValueForm(forms.ModelForm):
 	class Meta:
@@ -142,6 +140,12 @@ class CatReqForm(forms.Form):
 	category = forms.ModelChoiceField(queryset=Category.objects.all())
 	quantity = forms.IntegerField(label="quantity", required=True, initial=1)
 
+	def clean_quantity(self):
+		quantity = self.cleaned_data['quantity']
+		if quantity <= 0:
+			raise forms.ValidationError("Debes especificar una cantidad positiva")
+		return quantity
+
 CatReqFormset = formset_factory(
 	CatReqForm,
 	extra = 1
@@ -151,7 +155,7 @@ class EqReqForm(forms.Form):
 	equipment = forms.ModelChoiceField(queryset=Equipment.objects.all())
 
 class CommentsReqForm(forms.Form):
-	comments = forms.CharField()
+	comments = forms.CharField(required=False, widget=forms.Textarea)
 
 EqReqFormset = formset_factory(
 	EqReqForm,

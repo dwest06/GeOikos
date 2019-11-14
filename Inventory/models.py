@@ -9,9 +9,6 @@ class Category(models.Model):
 	def __str__(self):
 		return self.name	
 
-	def __str__(self):
-		return self.name
-
 class Group(models.Model):
 	name = models.CharField(max_length=120)
 
@@ -30,7 +27,7 @@ class Equipment(models.Model):
 	group = models.ManyToManyField(Group,blank=True)
 
 	def __str__(self):
-		return self.category + str(self.serial) + ': ' + self.name
+		return str(self.category) + ' ' + str(self.serial) + ': ' + self.name
 
 class Attribute(models.Model):
 	TYPE_CHOICES = [
@@ -76,8 +73,8 @@ class Request(models.Model):
 	date = models.DateTimeField(auto_now_add=True)
 	specs = models.TextField(null=True)
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
-	equipment = models.ManyToManyField(Equipment, null=True)
-	category = models.ManyToManyField(Category,through='Request_Category',null=True)
+	equipment = models.ManyToManyField(Equipment)
+	category = models.ManyToManyField(Category,through='Request_Category')
 
 	def __str__(self):
 		return 'Request of ' + str(self.user)

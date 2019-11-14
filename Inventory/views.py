@@ -4,7 +4,9 @@ from .models import *
 from .forms import (
     CategoryForm, AttributeFormset, CatQueryForm, EquipmentForm, 
     IntValueForm, TxtValueForm, StrValueForm, DateValueForm, 
-    BoolValueForm, ChoiceValueForm, AttsQueryForm, GroupForm
+    BoolValueForm, ChoiceValueForm, AttsQueryForm, GroupForm, 
+    CatReqFormset, EqReqFormset, CommentsReqForm, RequestForm,
+    Request_CatForm
 )
 
 
@@ -113,35 +115,48 @@ def createEquipment(request, cat):
 def createRequest(request):
     if request.method == "POST":
         catformset = CatReqFormset(request.POST)
-        eqformset = EqReqFormset(request.POST)
-        comments = CommentsReqForm()
+        eqformset  = EqReqFormset(request.POST)
+        comments   = CommentsReqForm(request.POST)
+       
         if catformset.is_valid() and eqformset.is_valid() and comments.is_valid():
-            
-            requestObj = RequestForm().save(commit=False)
-            requestObj.user = request.user
+            requestObj = Request.objects.create(user=request.user)
             requestObj.specs = comments.cleaned_data['comments']
             
-            for form in catformset:
-                category = form.cleaned_data[''].pk
-                quantity = form.cleaned_data['quantity']
-                requestObj.category.add(Category.objects.filter(pk=category))
-
-                requestcat =  Request_CatForm().save(commit=False)
-                requestcat.category = Category.objects.filter(pk=category)
-                requestcat.request = requestObj
-                requestcat.quantity = form.cleaned_data['quantity']
+            for form in catformset: 
+                try:
+                    category = form.cleaned_data['category'].pk              
+                    quantity = form.cleaned_data['quantity']
+                except KeyError:
+                    continue
+                requestcat =  Request_Category.objects.create(
+                                category=Category.objects.get(pk=category),
+                                request=requestObj,
+                                quantity=form.cleaned_data['quantity']
+                              )
+                requestcat.save()
             
-            for form in eqformset:
-                equipment = form.cleaned_data['equipment'].pk
-                requestObj.equipment.add(Equipment.objects.filter(pk=equipment))
+            requestObj.save()
 
-            requestObj.save()    
+            for form in eqformset:
+                try:
+                    equipment = form.cleaned_data['equipment'].pk
+                except KeyError:
+                    continue
+                requestObj.equipment.add(Equipment.objects.get(pk=equipment))
+        
+        else:
+            messages.error(request,"Form Inválido. Ingrese una cantidad positiva")
+            return redirect("Inventory:create_request")
+        
+        messages.success(request,"")
+        return render(request,"oikos/home.html")
 
     else:
         catform = CatReqFormset()
         eqform = EqReqFormset()
         comments = CommentsReqForm()
-        return render(request, "Inventory/submit_request.html", {"catformset" : catform, "eqformset" : eqform})
+        return render(request, "Inventory/create_request.html", 
+                      {"catformset" : catform, "eqformset" : eqform, "comments" : comments})
 
 def CatQueryView(request):
     if request.method == "POST":
