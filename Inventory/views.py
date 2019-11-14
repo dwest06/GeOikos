@@ -26,13 +26,14 @@ def createCategory(request):
                 attribute.category = category
                 attribute.save()
             messages.success(request, "Categoria añadida")
+            return redirect("Inventory:create_category")
         else:
             messages.error(request, "Fallo al añadir categoria")
-        return redirect("Inventory:home_inventory")
+            return redirect("Inventory:home_inventory")
     else:
-        catForm = CategoryForm()
+        categoryForm = CategoryForm()
         attFormset = AttributeFormset(queryset=Attribute.objects.none())
-        return render(request, "Inventory/create_category.html", {"categoryform" : catForm, "formset" : attFormset})
+        return render(request, "Inventory/create_category.html", {"categoryform" : categoryForm, "formset" : attFormset})
 
 @login_required
 @is_cuarto_equipo
