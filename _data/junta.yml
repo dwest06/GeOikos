@@ -1,0 +1,22 @@
+- picture: /assets/img/junta/profile-presidente.jpg
+  nombre: Daniel Machado
+  cargo: Presidente
+
+- picture: /assets/img/junta/profile-secretario.png
+  nombre: Ana Lerones
+  cargo: Secretaria
+
+- picture: /assets/img/junta/profile-tesorero.jpg
+  nombre: Marcos Lerones
+  cargo: Tesorero
+  instagram: https://www.instagram.com/marcosjlr/
+
+- picture: /assets/img/junta/profile-dt.jpg
+  nombre: Andrés Chacón
+  cargo: Director Técnico
+
+- picture: /assets/img/junta/profile-equipo.jpg
+  nombre: Katheryn Palacios
+  cargo: Cuarto de Equipo
+  instagram: https://www.instagram.com/kathyppgc/
+  twitter: https://twitter.com/katheppgc

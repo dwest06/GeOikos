@@ -1,0 +1,77 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+
+<div class="wrap">
+        <div class="first-el content">
+            <h1>Contacto</h1>
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d981.0449886037999!2d-66.8777806794109!3d10.407277935668768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af6f4f1fd6ee9%3A0x4ec0a3a8a00b8d61!2sComedor%20Casa%20del%20Estudiante!5e0!3m2!1ses!2sve!4v1573745991977!5m2!1ses!2sve" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info half">
+                    <p>
+                        La sede del Oikos está ubicada en la planta baja del edificio Casa del Estudiante, cerca de la entrada principal de la Universidad
+                        Simón Bolívar.
+                    </p>
+                    <p>
+                        Si tienes dudas, quieres hacer algún curso o te interesa unirte a la agrupación puedes ir a las asambleas, se realizan semanalmente
+                        los días viernes en la sede a las 4 pm.
+                    </p>
+                    <p>
+                        Además puedes comunicarte con nosotros a través de nuestras cuentas en redes sociales y nuestro <strong><a href="mailto:geoikosweb@gmail.com">correo electrónico</a></strong>.
+                    </p>
+                    <div class="sm sm1">
+                            <a href="https://twitter.com/OikosUSB"><span class="icon-twitter"></span></a>
+                            <a href="https://facebook.com/OikosUSB"><span class="icon-facebook"></span></a>
+                            <a href="https://youtube.com/user/GEOIKOS"><span class="icon-youtube"></span></a>
+                            <a href="https://instagram.com/OikosUSB"><span class="icon-instagram"></span></a>
+                    </div>
+                </div>
+            
+                <div class="contact-form half">
+                    <form class="form" action="">
+                        <label for="">Nombre</label>
+                        <input id="name" name="name" type="text" class="in corners" placeholder="¿Cómo te llamas?">
+                        <label for="">Correo</label>
+                        <input id="email" name="email" type="email" class="in corners" placeholder="¿A qué correo enviamos la respuesta?">
+                        <label for="">Mensaje</label>
+                        <textarea id="message" name="message" class="in corners" name="" id="" cols="30" rows="10" placeholder="¿Qué quieres decirnos?"></textarea>
+                        <input id="send-email" type="button" class="btn blue corners" value="Send">
+                    </form>
+                    <div class="msg">
+                        <p></p>
+                    </div>
+                </div>
+                <script>
+                    $("#send-email").on("click", function() {
+                        $.ajax({
+                            url: "https://formspree.io/geoikosweb@gmail.com",
+                            method: "POST",
+                            data: {
+                                email: $('#email').val(),
+                                name: $('#name').val(),
+                                message: $('#message').val()					
+                            },
+                            dataType: "json"
+                        }).done(function (data) {
+                            $('#email').val('');
+                            $('#name').val('');;
+                            $('#message').val('');
+                            //msg
+                            $('.form').hide('fast');
+                            $('.msg p').html('Tu mensaje ha sido enviado con éxito').addClass('ok');
+                            $('.msg').fadeIn('slow');
+                        }).fail(function (response) {
+                            //msg
+                            $('.form').hide('fast');
+                            $('.msg p').html('Ha ocurrido un error. Recarga la página y vuelve a intentarlo').addClass('fail');
+                            $('.msg').fadeIn('slow');
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
