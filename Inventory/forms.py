@@ -59,7 +59,7 @@ AttributeFormset = modelformset_factory(
         'name' : 'Nombre del Atributo',
         'attribute_type' : 'Tipo de dato',
         'unit' : 'Unidad',
-        'nullity' : '(No esencial)'
+        'nullity' : '(Unidad no esencial)'
     },
     error_messages = {
         'name' : {

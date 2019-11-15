@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
-
+# Decorators
+from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
 
 def homeInventarioView(request):
     context = {
@@ -11,6 +13,8 @@ def homeInventarioView(request):
     }
     return render(request, "Inventory/home.html", context)
 
+@login_required
+@is_cuarto_equipo
 def createCategory(request):
     if request.method == "POST":
         catForm = CategoryForm(request.POST)
@@ -22,13 +26,14 @@ def createCategory(request):
                 attribute.category = category
                 attribute.save()
             messages.success(request, "Categoria añadida")
+            return redirect("Inventory:create_category")
         else:
             messages.error(request, "Fallo al añadir categoria")
-        return redirect("Inventory:home_inventory")
+            return redirect("Inventory:home_inventory")
     else:
-        catForm = CategoryForm()
+        categoryForm = CategoryForm()
         attFormset = AttributeFormset(queryset=Attribute.objects.none())
-        return render(request, "Inventory/create_category.html", {"categoryform" : catForm, "formset" : attFormset})
+        return render(request, "Inventory/create_category.html", {"categoryform" : categoryForm, "formset" : attFormset})
 
 def createGroup(request):
     if request.method == "POST":
