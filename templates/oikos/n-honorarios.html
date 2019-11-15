@@ -3,35 +3,135 @@
 {% block content %}
 
 <div class="wrap">
-		<div class="first-el content">
-			<h1>Miembros Honorarios</h1>
-			<p>
-				Son miembros honorarios, aquellas personas que han reunido suficientes méritos dentro del campo del excursionismo y montañismo o han hecho colaboraciones importantes a la agrupación y que el GEO distinga como tales, por decisión de la Asamblea.
-			</p>
-		</div>
-		<div class="cards">
-		{% for honorario in site.data.honorarios %}
-			<div class="card corners">
-				<div class="card-img">
-					<img src="{{ site.url }}/{{ honorario.picture }}" alt="">
-				</div>
-				<div class="card-info">
-					<h3>{{ honorario.name }}</h3>
-					<p>
-						{{ honorario.carrera }}
-					</p>
-					<div class="sm sm1">
-						{% if honorario.instagram %}
-							<a href="{{ honorario.instagram }}"><span class="icon-instagram"></span></a>
-						{% endif %}
-						{% if honorario.twitter %}
-							<a href="{{ honorario.twitter }}"><span class="icon-twitter"></span></a>
-						{% endif %}
-					</div>
+	<div class="first-el content">
+		<h1>Miembros Honorarios</h1>
+		<p>
+			Son miembros honorarios, aquellas personas que han reunido suficientes méritos dentro del campo del excursionismo y montañismo o han hecho colaboraciones importantes a la agrupación y que el GEO distinga como tales, por decisión de la Asamblea.
+		</p>
+	</div>
+	<div class="cards">
+
+		<!--Carlos Márquez (El Perro)-->
+		<div class="card corners">
+			<div class="card-img">
+				<img src="../../static/img/honorarios/profile-h-perro.jpg" alt="">
+			</div>
+			<div class="card-info">
+				<h3>Carlos Márquez (El Perro)</h3>
+				<p>
+					Cohorte '08 USB
+				</p>
+				<div class="sm sm1">
 				</div>
 			</div>
-		{% endfor %}
+		</div>
+
+		<!--J. Vanessa Sánchez-->
+		<div class="card corners">
+			<div class="card-img">
+				<img src="../../static/img/honorarios/profile-h-vane.jpg" alt="">
+			</div>
+			<div class="card-info">
+				<h3>J. Vanessa Sánchez</h3>
+				<p>
+					Cohorte '06 USB
+				</p>
+				<div class="sm sm1">
+				</div>
+			</div>
+		</div>
+
+		<!--Gabriel Mendible (Topo)-->
+		<div class="card corners">
+			<div class="card-img">
+				<img src="../../static/img/honorarios/profile-h-topo.jpg" alt="">
+			</div>
+			<div class="card-info">
+				<h3>Gabriel Mendible (Topo)</h3>
+				<p>
+					Cohorte '04 USB
+				</p>
+				<div class="sm sm1">
+				</div>
+			</div>
+		</div>
+
+		<!--Geraldine Roso-->
+		<div class="card corners">
+			<div class="card-img">
+				<img src="../../static/img/honorarios/profile-h-geral.jpg" alt="">
+			</div>
+			<div class="card-info">
+				<h3>Geraldine Roso</h3>
+				<p>
+					Cohorte '98 USB
+				</p>
+				<div class="sm sm1">
+				</div>
+			</div>
+		</div>
+
+		<!--Dimitar Ralev (Nikita)-->
+		<div class="card corners">
+			<div class="card-img">
+				<img src="../../static/img/honorarios/profile-h-nikita.jpg" alt="">
+			</div>
+			<div class="card-info">
+				<h3>Dimitar Ralev (Nikita)</h3>
+				<p>
+					Cohorte '00 USB
+				</p>
+				<div class="sm sm1">
+				</div>
+			</div>
+		</div>
+
+		<!--Víctor Drobinic-->
+		<div class="card corners">
+			<div class="card-img">
+				<img src="../../static/img/honorarios/profile-h-drobinic.jpg" alt="">
+			</div>
+			<div class="card-info">
+				<h3>Víctor Drobinic</h3>
+				<p>
+					Cohorte '96 USB
+				</p>
+				<div class="sm sm1">
+				</div>
+			</div>
+		</div>
+
+		<!--Bernardo Féfix-->
+		<div class="card corners">
+			<div class="card-img">
+				<img src="../../static/img/honorarios/profile-h-bernardo.jpg" alt="">
+			</div>
+			<div class="card-info">
+				<h3>Bernardo Féfix</h3>
+				<p>
+					Cohorte '98 USB
+				</p>
+				<div class="sm sm1">
+				</div>
+			</div>
+		</div>
+
+		<!--Jorge Olivares-->
+		<div class="card corners">
+			<div class="card-img">
+				<img src="../../static/img/honorarios/profile-h-jorgeo.jpg" alt="">
+			</div>
+			<div class="card-info">
+				<h3>Jorge Olivares</h3>
+				<p>
+					Cohorte '10 USB
+				</p>
+				<div class="sm sm1">
+					<a href="https://www.instagram.com/jorgeolivaresp/"><span class="icon-instagram"></span></a>
+				</div>
+			</div>
 		</div>
 	</div>
+</div>
 
 {% endblock %}

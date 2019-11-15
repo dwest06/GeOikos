@@ -13,27 +13,85 @@
 			</p>
 		</div>
 		<div class="cards">
-			{% for junta in site.data.junta %}
+
+			<!--Presidente-->
 			<div class="card corners">
 				<div class="card-img">
-					<img src="{{ site.url }}/{{ junta.picture }}" alt="">
+					<img src="../../static/img/junta/profile-presidente.jpg" alt="">
 				</div>
 				<div class="card-info">
-					<h3>{{ junta.nombre }}</h3>
+					<h3>Daniel Machado</h3>
 					<p>
-						{{ junta.cargo }}
+						Presidente
 					</p>
 					<div class="sm sm1">
-						{% if junta.instagram %}
-							<a href="{{ junta.instagram }}"><span class="icon-instagram"></span></a>
-						{% endif %}
-						{% if junta.twitter %}
-							<a href="{{ junta.twitter }}"><span class="icon-twitter"></span></a>
-						{% endif %}
 					</div>
 				</div>
 			</div>
-			{% endfor %}
+			
+			<!--Secretaria-->
+			<div class="card corners">
+				<div class="card-img">
+					<img src="../../static/img/junta/profile-secretario.png" alt="">
+				</div>
+				<div class="card-info">
+					<h3>Ana Lerones</h3>
+					<p>
+						Secretaria
+					</p>
+					<div class="sm sm1">
+					</div>
+				</div>
+			</div>
+
+			<!--Tesorero-->
+			<div class="card corners">
+				<div class="card-img">
+					<img src="../../static/img/junta/profile-tesorero.jpg" alt="">
+				</div>
+				<div class="card-info">
+					<h3>Marcos Lerones</h3>
+					<p>
+						Tesorero
+					</p>
+					<div class="sm sm1">
+						<a href="https://www.instagram.com/marcosjlr/"><span class="icon-instagram"></span></a>
+					</div>
+				</div>
+			</div>
+		  
+			<!--Director Técnico-->
+			<div class="card corners">
+				<div class="card-img">
+					<img src="../../static/img/junta/profile-dt.jpg" alt="">
+				</div>
+				<div class="card-info">
+					<h3>Andrés Chacón</h3>
+					<p>
+						Director Técnico
+					</p>
+					<div class="sm sm1">
+						
+					</div>
+				</div>
+			</div>
+
+			<!--Cuarto de Equipo-->
+			<div class="card corners">
+				<div class="card-img">
+					<img src="../../static/img/junta/profile-equipo.jpg" alt="">
+				</div>
+				<div class="card-info">
+					<h3>Katheryn Palacios</h3>
+					<p>
+						Cuarto de Equipo
+					</p>
+					<div class="sm sm1">
+						<a href="https://www.instagram.com/kathyppgc/"><span class="icon-instagram"></span></a>
+						<a href="https://twitter.com/katheppgc"><span class="icon-twitter"></span></a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
