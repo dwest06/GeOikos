@@ -325,9 +325,9 @@ class TransactionForm(forms.ModelForm):
         model = Transaction
         fields = ['user', 'transaction', 'reason']
         labels = {
-            'user' : 'Usuario',
-            'transaction'  : 'Monto',
-            'reason' : 'Motivo'
+            'user' : 'Usuario: ',
+            'transaction'  : 'Monto: ',
+            'reason' : 'Motivo: '
         }
         error_messages = {
             'user' : {
@@ -342,8 +342,8 @@ class TransactionForm(forms.ModelForm):
         }
 
 class CatReqForm(forms.Form):
-    category = forms.ModelChoiceField(queryset=Category.objects.all())
-    quantity = forms.IntegerField(label="quantity", required=True, initial=1)
+    category = forms.ModelChoiceField(queryset=Category.objects.all(),label="Categoría")
+    quantity = forms.IntegerField(label="Cantidad", required=True, initial=1)
 
     def clean_quantity(self):
         quantity = self.cleaned_data['quantity']
@@ -361,7 +361,7 @@ CatReqFormset = formset_factory(
 )
 
 class EqReqForm(forms.Form):
-    equipment = forms.ModelChoiceField(queryset=Equipment.objects.all())
+    equipment = forms.ModelChoiceField(queryset=Equipment.objects.all(),label="Equipo")
 
 class CommentsReqForm(forms.Form):
     comments = forms.CharField(required=False, widget=forms.Textarea)

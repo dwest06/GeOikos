@@ -11,16 +11,37 @@ font-size: 50px;">
 <p style="font-family: Consolas, monaco, monospace;font-size: 20px;">
     Herramienta para agregar valores a los atributos de equipo.
 </p>
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmModal">Confirmación: Añadir Equipo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Al hacer click en aceptar, se agregará la nueva instancia de equipo.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" form="create-form" value="Submit">Aceptar</button>
+        </div>
+        </div>
+    </div>
+</div>
 <form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
     {% csrf_token %}
-    {{ formset.management_form }}
     <div class="form-group"> 
         <div class="form-row"> 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 required">
                 <label class="control-label">{{equipform.name.label}}</label>
                 {% render_field equipform.name class="form-control" placeholder=equipform.name.label %}
+                <div class="valid-feedback">Completo</div>
+                <div class="invalid-feedback">Requerido</div>
             </div>
-            <div class="form-group col-1">
+            <div class="form-group col-1 required">
                 <label class="control-label">{{equipform.serial.label}}</label>
                 {% render_field equipform.serial class="form-control" %}
             </div>
@@ -36,8 +57,29 @@ font-size: 50px;">
             </div>
         </div>
     </div>
+    <div class="form-group"> 
+        {% for form in attforms %}
+        <div class="form-group"> 
+            <label class="control-label">{{form.1}}</label>
+            <div class="form-group">
+                {{ form.0 }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <div class="form-group">
+            <label>Grupo</label>
+            {% render_field equipform.group class="form-control col-md-2" %}
+        </div>
+     </div>
+    <div class="form-group">
+        <div class="form-group  col-md-4">
+            <label>Notas</label>
+            {% render_field equipform.notes class="form-control" %}
+        </div>
+    </div>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Ingresar Equipo</button>
 </form>
-
-<button type="submit" class="btn btn-success">Ingresar Equipo de esta Categoria</button>
 
 {% endblock  %}
