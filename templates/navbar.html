@@ -55,12 +55,8 @@
           <li><a href="{{ site.baseurl }}/expediciones">Expediciones</a></li>
           <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
 
-          <li><a href="{% url 'Users:create_user' %}">Crear Usuario</a></li>
-
           {% if user.is_authenticated %}
-          <li><a href="{% url 'Users:modify_user' user.pk %}">Modificar Usuario</a></li>
           <li><a class="nav-link" href="{% url 'Users:logout' %}">Logout</a></li>
-          <li><a class="nav-link" href="{% url 'Users:delete_user' user.pk %}">Borrar Usuario</a></li>
           <li><a class="nav-link" href="{% url 'Inventory:home_inventory' %}">Inventario</a></li>
 
           {% else %}

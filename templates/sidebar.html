@@ -5,6 +5,8 @@
       <a class="nav-link" href="{% url 'Inventory:home_inventory' %}">Inicio</a>
     </li>
     {% if user.is_authenticated %}
+
+      <!-- USUARIOS CON PERMISO DE CUARTO DE EQUIPO -->
       {% if user|is_cuarto_equipo %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'Inventory:create_category' %}">Categoria</a>
@@ -16,6 +18,15 @@
         <a class="nav-link" href="{% url 'Inventory:select-cat' %}">Buscar Equipo</a>
       </li>
       {% endif %}
+
+      <!-- USUARIOS CON PERMISO DE GESTOR DE USUARIOS -->
+      {% if user|is_gestor_usuario %}
+      <li class="nav-item"> 
+        <a class="nav-link" href="{% url 'Inventory:manage_users' %}">Usuarios</a>
+      </li>
+      {% endif %}
+
+      <!-- USUARIOS CON PERMISO DE MIEMBRO ACTIVO -->
       {% if user|is_activo %}
       <li class="nav-item">
         <a class="nav-link" href="#">Solicitar</a>

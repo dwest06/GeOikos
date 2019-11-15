@@ -60,7 +60,7 @@ def create_user(request):
             messages.success(request, "Usuario Agregado")
         else:
             messages.error(request,"Datos Invalidos")
-        return redirect("oikos:home")
+        return redirect("Inventory:manage_users")
     else:
         form = UserCreationForm()
         context = {
@@ -74,7 +74,8 @@ def create_user(request):
 @login_required
 def modify_user(request, pk, *args, **kwargs):
     if request.method == "POST":
-        form = UserChangeForm(request.POST, instance=request.user)
+        instance = User.objects.get(pk=pk)
+        form = UserChangeForm(request.POST, instance=instance)
         if form.is_valid():
             user = form.save()
             if request.user.groups.filter(Q(name='admin') | Q(name='gestor_usuarios')).exists():
@@ -106,13 +107,14 @@ def modify_user(request, pk, *args, **kwargs):
 
 @login_required
 @is_gestor_usuario  
-def delete_user(request, pk, *args, **kwargs):
-    if request.method == "GET":
+def delete_user(request, *args, **kwargs):
+    if request.method == "POST":
+        pk = request.POST.get("user")
         user = User.objects.get(pk = pk)
         user.delete()
-        messages.error(request,"Usuario Eliminado")
+        messages.success(request,"Usuario Eliminado Exitosamente")
     
-    return redirect("oikos:home")
+    return redirect("Inventory:manage_users")
 
 @login_required
 def change_password_user(request):

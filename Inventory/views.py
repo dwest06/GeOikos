@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import (
     CategoryForm, AttributeFormset, CatQueryForm, EquipmentForm, 
     IntValueForm, TxtValueForm, StrValueForm, DateValueForm, 
     BoolValueForm, ChoiceValueForm, AttsQueryForm, GroupForm
 )
-
+from Users.models import User
+from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
 
 def homeInventarioView(request):
     context = {
@@ -115,7 +117,6 @@ def createEquipment(request, cat):
         return render(request, "Inventory/create_equipment_value.html", {"equipform" : equipForm, "attforms" : attForms})
 
 
-# Create your views here.
 def CatQueryView(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)
@@ -164,3 +165,9 @@ def AttsQueryView(request, category):
     else:
         form = AttsQueryForm(category)
         return render(request, "Inventory/search.html", {"form":form})
+
+# VISTAS DE GESTOR DE USUARIOS
+@login_required
+@is_gestor_usuario
+def manage_users(request, *args, **kwargs):
+    return render(request, 'Inventory/manage_user.html', {'users': User.objects.all()})

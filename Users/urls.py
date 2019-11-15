@@ -7,7 +7,7 @@ app_name = "Users"
 urlpatterns = [
     path('create-user', create_user, name="create_user"),
     path('modify-user/<int:pk>', modify_user, name="modify_user"),
-    path('delete-user/<int:pk>', delete_user, name="delete_user"),
+    path('delete-user', delete_user, name="delete_user"),
     path('login', login_user, name="login"),
     path('logout', logout_user, name="logout"),
 ]
