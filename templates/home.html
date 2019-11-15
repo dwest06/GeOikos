@@ -1,3 +1,4 @@
+<!-- ESTE TEMPLATE NO ESTÁ SIENDO USADO AHORA -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +12,9 @@
         {% include "messages.html" %}
         <div class="row">
             <ul>
-                <li><a href="{% url 'Users:create_user' %}">Crear Usuario</a></li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'Users:modify_user' user.pk %}">Modificar Usuario</a></li>
-                <li><a href="{% url 'Users:logout' %}">Logout</a></li>
+                {% if user.is_authenticated %}  
                 <li><a href="{% url 'home_inventory' %}">Inventario</a></li>
+                <li><a href="{% url 'Users:logout' %}">Logout</a></li>
                 {% else %}
                 <li><a href="{% url 'Users:login' %}">Login</a></li>
                 {% endif %}
