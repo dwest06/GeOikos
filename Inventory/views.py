@@ -2,16 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
-<<<<<<< HEAD
-from .forms import (
-    CategoryForm, AttributeFormset, CatQueryForm, EquipmentForm, 
-    IntValueForm, TxtValueForm, StrValueForm, DateValueForm, 
-    BoolValueForm, ChoiceValueForm, AttsQueryForm, GroupForm
-)
-from Users.models import User
-=======
 from .forms import *
->>>>>>> payments
+from Users.models import User
 from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
 
 @login_required
@@ -178,11 +170,8 @@ def createRequest(request):
         return render(request, "Inventory/create_request.html", 
                       {"catformset" : catform, "eqformset" : eqform, "comments" : comments})
 
-<<<<<<< HEAD
-=======
 @login_required
 @is_pasivo
->>>>>>> payments
 def CatQueryView(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)
@@ -234,13 +223,12 @@ def AttsQueryView(request, category):
         form = AttsQueryForm(category)
         return render(request, "Inventory/search.html", {"form":form})
 
-<<<<<<< HEAD
 # VISTAS DE GESTOR DE USUARIOS
 @login_required
 @is_gestor_usuario
 def manage_users(request, *args, **kwargs):
     return render(request, 'Inventory/manage_user.html', {'users': User.objects.all()})
-=======
+
 @login_required
 @is_cuarto_equipo
 def LoanCreation(request):
@@ -297,5 +285,4 @@ def loadTransaction(request):
             messages.error(request, "Fallo al cargar transacción")
         return redirect("Inventory:load_transaction")
     form = TransactionForm()
-    return render(request, "Inventory/load_transaction.html", {"form" : form})
->>>>>>> payments
+    return render(request, "Inventory/load_transaction.html", {"form" : form, "heading": "Cargar Transacciones"})

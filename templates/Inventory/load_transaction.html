@@ -3,44 +3,49 @@
 
 {% block page-title %}
     {% if heading %}
-        <h3>{{heading}}</h3>
+        {{heading}}
     {% endif %}
 {% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="offset-md-3 col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h1> Cargar Pagos y Deudas</h1>
+                <p style="font-family: Consolas, monaco, monospace;
+                    font-size: 20px;">Herramienta para cargar pagos y deudas de los miembros.</p>
+            </div>
 
-<h1 style="text-align: left;
-    color: rgb(0, 0, 0);
-    font-family: Consolas, monaco, monospace;
-    font-size: 50px;"> Cargar Pagos y Deudas</h1>
-<p style="font-family: Consolas, monaco, monospace;
-    font-size: 20px;">Herramienta para cargar pagos y deudas de los miembros.</p>
-
-
-<form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
-    {% csrf_token %}
-    <div class="form-group required">
-        <label class="control-label">{{form.user.label}}</label>
-        {% render_field form.user class="form-control col-md-6" %}
-        <div class="valid-feedback">Correcto</div>
-        <div class="invalid-feedback">Requerido</div>
+            <div class="card-body">
+                <form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
+                    {% csrf_token %}
+                    <div class="form-group required">
+                        <label class="control-label">{{form.user.label}}</label>
+                        {% render_field form.user class="form-control" %}
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Requerido</div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label">{{form.transaction.label}}</label>
+                        {% render_field form.transaction class="form-control" placeholder="0.00" %}
+                        <small class="form-text text-muted">
+                            A lo sumo dos decimales
+                        </small>
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Requerido</div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="control-label">{{form.reason.label}}</label>
+                        {% render_field form.reason class="form-control" %}
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Requerido</div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Agregar Transacción</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="form-group required">
-        <label class="control-label">{{form.transaction.label}}</label>
-        {% render_field form.transaction class="form-control col-md-6" placeholder="0.00" %}
-        <small class="form-text text-muted">
-            A lo sumo dos decimales
-        </small>
-        <div class="valid-feedback">Correcto</div>
-        <div class="invalid-feedback">Requerido</div>
-    </div>
-    <div class="form-group required">
-        <label class="control-label">{{form.reason.label}}</label>
-        {% render_field form.reason class="form-control col-md-6" %}
-        <div class="valid-feedback">Correcto</div>
-        <div class="invalid-feedback">Requerido</div>
-    </div>
-    <button type="submit" class="btn btn-success">Agregar Transacción</button>
-</form>
+</div>
 
 {% endblock  %}
