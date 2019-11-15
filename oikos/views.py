@@ -8,20 +8,8 @@ def home(request):
 def noikos(request):
     return render(request, "oikos/n-oikos.html")
 
-def nmiembros(request):
-    miembros_list = {
-        "name":['Francisco Marcos',
-                'Carlos Sivira'],
-        "picture":['../../static/img/miembros/profile-francisco.jpg',
-                  '../../static/img/miembros/profile-carlos.jpg'],
-        "carrera":["Cohorte '11 USB",
-                   "Cohorte '15 USB"],
-        "instagram":['https://www.instagram.com/wrancisco/',
-                     ''],
-        "twitter":['https://twitter.com/wrancisco', 
-                     '']
-    }
-    return render(request, "oikos/n-miembros.html",miembros_list)
+def nmiembros(request): 
+    return render(request, "oikos/n-miembros.html")
 
 '''
 - name: Michael Sanchez

@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block page-title %}
+    {% if heading %}
+        <h3>{{heading}}</h3>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" method="POST" action="">
+    {% csrf_token %}
+    {{ catformset.management_form }}
+    {% for form in catformset %}
+    <div class="row cat-form-row spacer">
+        <div class="col-2">
+            <label>{{form.category.label}}</label>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                {{form.category}}
+            </div>
+        </div>
+        <div class="col-2">
+            <label>{{form.quantity.label}}</label>
+        </div>
+        <div class="col-4">
+            <div class="input-number">
+                {{form.quantity}}
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-success add-cat-form-row">+</button>
+        </div>
+    </div>
+    {% endfor %}
+    {{ eqformset.management_form }}
+    {% for form in eqformset %}
+    <div class="row eq-form-row spacer">
+        <div class="col-2">
+            <label>{{form.equipment.label}}</label>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                {{form.equipment}}
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-success add-eq-form-row">+</button>
+        </div>
+    </div>
+    {% endfor %}
+    {{comments.comments}}
+    <div class="row spacer">
+        <div class="col-4 offset-2">
+            <button type="submit" class="btn btn-block btn-primary">Solicitar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+
+{% block custom_js %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script type="text/javascript">
+    function updateElementIndex(el, prefix, ndx) {
+        var id_regex = new RegExp('(' + prefix + '-\\d+)');
+        var replacement = prefix + '-' + ndx;
+        if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+        if (el.id) el.id = el.id.replace(id_regex, replacement);
+        if (el.name) el.name = el.name.replace(id_regex, replacement);
+    }
+    function cloneMore(selector, prefix) {
+        var newElement = $(selector).clone(true);
+        var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+        newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function () {
+            var name = $(this).attr('name')
+            if (name) {
+                name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                var id = 'id_' + name;
+                $(this).attr({ 'name': name, 'id': id }).val('').removeAttr('checked');
+            }
+        });
+        newElement.find('label').each(function () {
+            var forValue = $(this).attr('for');
+            if (forValue) {
+                forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                $(this).attr({ 'for': forValue });
+            }
+        });
+        total++;
+        $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+        return false;
+    }
+    function replaceBtnCat(selector){
+        var conditionRow = $('.cat-form-row:not(:last)');
+        conditionRow.find('.btn.add-cat-form-row')
+            .removeClass('btn-success').addClass('btn-danger')
+            .removeClass('add-cat-form-row').addClass('remove-cat-form-row')
+            .html('-');
+    }
+    function replaceBtnEq(selector){
+        var conditionRow = $('.eq-form-row:not(:last)');
+        conditionRow.find('.btn.add-eq-form-row')
+            .removeClass('btn-success').addClass('btn-danger')
+            .removeClass('add-eq-form-row').addClass('remove-eq-form-row')
+            .html('-');
+    }
+    function deleteFormCat(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (total > 1) {
+            btn.closest('.cat-form-row').remove();
+            var forms = $('.cat-form-row');
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function () {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+        return false;
+    }
+    function deleteFormEq(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (total > 1) {
+            btn.closest('.eq-form-row').remove();
+            var forms = $('.eq-form-row');
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function () {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+        return false;
+    }
+    $(document).on('click', '.add-cat-form-row', function (e) {
+        e.preventDefault();
+        cloneMore('.cat-form-row:last', 'form');
+        replaceBtnCat('.cat-form-row:last')
+        return false;
+    });
+    $(document).on('click', '.add-eq-form-row', function (e) {
+        e.preventDefault();
+        cloneMore('.eq-form-row:last', 'form');
+        replaceBtnEq('.eq-form-row:last')
+        return false;
+    });
+    $(document).on('click', '.remove-cat-form-row', function (e) {
+        e.preventDefault();
+        deleteFormCat('form', $(this));
+        return false;
+    });
+    $(document).on('click', '.remove-eq-form-row', function (e) {
+        e.preventDefault();
+        deleteFormEq('form', $(this));
+        return false;
+    });
+</script>
+{% endblock %}

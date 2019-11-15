@@ -17,3 +17,6 @@ class User(AbstractUser):
     status = models.CharField(max_length=2, choices=STATUS_CHOICES,null=True, default='IN')
     foto = models.ImageField(upload_to="users/", blank=True, default=None, null=True)
     REQUIRED_FIELDS = ['username'] 
+
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name + ' (' + self.username + ')'

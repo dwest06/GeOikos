@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
 {% block page-title %}
     {% if heading %}
@@ -7,63 +8,79 @@
 {% endblock %}
 
 {% block content %}
-<form class="form-horizontal" method="POST" action="">
+      
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmModal">Confirmación: Añadir Categoría</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Al hacer click en aceptar, se creará una nueva categoría.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" form="create-form" value="Submit">Aceptar</button>
+        </div>
+        </div>
+    </div>
+</div>
+    
+<h1 style="text-align: left;
+color: rgb(0, 0, 0);
+font-family: Consolas, monaco, monospace;
+font-size: 50px;"> Crear Categoría</h1>
+<p style="font-family: Consolas, monaco, monospace;
+font-size: 20px;">Herramienta de creación de categorías. Para crear una categoría debe crear sus atributos.</p>
+    
+<form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
     {% csrf_token %}
-    <div class="row spacer">
-        <div class="col-2">
-            <label>{{categoryform.name.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{categoryform.name}}
-            </div>
-        </div>
-    </div>
     {{ formset.management_form }}
+    <div class="form-group required">
+        <label class="control-label">{{categoryform.name.label}}</label>
+        {% render_field categoryform.name class="form-control col-md-6" placeholder="Inserte el nombre de la categoría" %}
+        <div class="valid-feedback">Correcto</div>
+        <div class="invalid-feedback">Requerido</div>
+    </div>
     {% for form in formset %}
-    <div class="row form-row spacer">
-        <div class="col-2">
-            <label>{{form.name.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.name}}
+        <div class="form-col">
+            <div class="form-row"> 
+                <div class="form-group col-md-6">
+                    <label class="control-label">{{form.name.label}}</label>
+                    {% render_field form.name class="form-control" placeholder=form.name.label %}
+                </div>
+                <div class="form-group col-1">
+                    <label class="control-label">{{form.attribute_type.label}}</label>
+                    {% render_field form.attribute_type class="form-control" placeholder=form.attribute_type.label %}
+                </div>
             </div>
-        </div>
-        <div class="col-2">
-            <label>{{form.attribute_type.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.attribute_type}}
+            <div class="form-row"> 
+                <div class="form-group col-md-1">
+                    <label>{{form.unit.label}}</label>
+                    {% render_field form.unit class="form-control" placeholder=form.unit.label %}
+                </div>
+                <div class="form-group col-md-3 text-center">
+                    <label>{{form.nullity.label}}</label>
+                    {% render_field form.nullity class="form-control align-items-center" %}
+                    <small class="form-text text-muted">
+                        Indica si la unidad será considerada necesaria.
+                    </small>
+                </div>
             </div>
-        </div>
-        <div class="col-2">
-            <label>{{form.unit.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.unit}}
+            <div class="input-group-append">
+                <button class="btn btn-success add-form-col">Añadir otro atributo</button>
             </div>
+            <p></p>  
         </div>
-        <div class="col-2">
-            <label>{{form.nullity.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.nullity}}
-            </div>
-        </div>
-        <div class="input-group-append">
-            <button class="btn btn-success add-form-row">+</button>
-        </div>
-    </div>
     {% endfor %}
-    <div class="row spacer">
-        <div class="col-4 offset-2">
-            <button type="submit" class="btn btn-block btn-primary">Create</button>
-        </div>
-    </div>
+    <p></p>
+    <button type="button" class="btn col-2 btn-primary" data-toggle="modal" data-target="#confirmModal">
+        Añadir Categoría
+    </button>
 </form>
 {% endblock %}
 
@@ -100,18 +117,18 @@
         total++;
         $('#id_' + prefix + '-TOTAL_FORMS').val(total);
         $(selector).after(newElement);
-        var conditionRow = $('.form-row:not(:last)');
-        conditionRow.find('.btn.add-form-row')
+        var conditionRow = $('.form-col:not(:last)');
+        conditionRow.find('.btn.add-form-col')
             .removeClass('btn-success').addClass('btn-danger')
-            .removeClass('add-form-row').addClass('remove-form-row')
-            .html('-');
+            .removeClass('add-form-col').addClass('remove-form-col')
+            .html('Eliminar este atributo');
         return false;
     }
     function deleteForm(prefix, btn) {
         var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
         if (total > 1) {
-            btn.closest('.form-row').remove();
-            var forms = $('.form-row');
+            btn.closest('.form-col').remove();
+            var forms = $('.form-col');
             $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
             for (var i = 0, formCount = forms.length; i < formCount; i++) {
                 $(forms.get(i)).find(':input').each(function () {
@@ -121,15 +138,35 @@
         }
         return false;
     }
-    $(document).on('click', '.add-form-row', function (e) {
+    $(document).on('click', '.add-form-col', function (e) {
         e.preventDefault();
-        cloneMore('.form-row:last', 'form');
+        cloneMore('.form-col:last', 'form');
         return false;
     });
-    $(document).on('click', '.remove-form-row', function (e) {
+    $(document).on('click', '.remove-form-col', function (e) {
         e.preventDefault();
         deleteForm('form', $(this));
         return false;
     });
+</script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+            }, false);
+        });
+        }, false);
+    })();
 </script>
 {% endblock %}

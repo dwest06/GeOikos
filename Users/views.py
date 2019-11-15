@@ -21,14 +21,12 @@ def login_user(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            print(User.objects.all(), request)
-            user = authenticate(request, username=email, password=password)
+            user = authenticate(request, username=email, password=password)           
             if user is not None:
                 login(request, user)
                 messages.success(request, "Bienvenido " + str(user.username))
-            return redirect("Inventory:home_inventory")
-        else:
-            messages.error(request,"Email o Password Incorrecto")
+                return redirect("Inventory:home_inventory")
+        messages.error(request,"Email o Password Incorrecto")
         return redirect("Users:login")
     else:
         form = UserLoginForm()
@@ -59,7 +57,7 @@ def create_user(request):
                 user.save()
             messages.success(request, "Usuario Agregado")
         else:
-            messages.error(request,"Datos Invalidos")
+            messages.error(request,"Datos Inválidos")
         return redirect("Inventory:manage_users")
     else:
         form = UserCreationForm()

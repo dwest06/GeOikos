@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'oikos',                # Pagina principal y cursos 
     'Users',                # Sistema de usuarios, auth y session
     'Inventory',            # Sistema de prestamos de equipos
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

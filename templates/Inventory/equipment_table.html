@@ -46,25 +46,16 @@ td {
             <table> 
                     <thead">
                         <th>Nombre</th>
-                        <th>Serial</th>
-                        <th>Fecha de Ingreso</th>
-                        <th>Fecha de Elaboracion</th>
-                        <th>Descontinuado</th>
-                        <th>Fecha de Descontinuado</th>
-                        <th>Notas</th>
-                        <th>Categoria</th>
+                        {% for att in attributes %}
+                            <th>{{att.name}}</th>
+                        {% endfor %}
                     </thead>
                     <tbody>
-                        {% for t in table %}
+                        {% for eq in values %}
                         <tr>
-                            <td>{{t.name}}</td>
-                            <td>{{t.serial}}</td>
-                            <td>{{t.entry_date}}</td>
-                            <td>{{t.discontinued}}</td>
-                            <td>{{t.discontinued_date}}</td>
-                            <td>{{t.elaboration_date}}</td>
-                            <td>{{t.notes}}</td>
-                            <td>{{t.category}}</td>
+                            {% for val in eq %}
+                            <td>{{val}}</td>
+                            {% endfor %}
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -73,6 +64,6 @@ td {
         </div>
     </div>
     <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Volver a la Busqueda</a>
-    <a class="btn btn-success" href="{% url 'oikos:home' %}">Volver al home</a>
+    <a class="btn btn-success" href="{% url 'Inventory:home_inventory' %}">Volver al home</a>
 </div>
 {% endblock  %}

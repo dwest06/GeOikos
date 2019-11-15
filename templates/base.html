@@ -72,6 +72,11 @@
         .mb-20{
             margin-bottom: 20px;
         }
+
+        .form-group.required .control-label:after {
+            content:"*";
+            color:red;
+        }
     </style>
 
     <!-- CSS de GEOikos -->
@@ -89,14 +94,14 @@
 	<script src="{{ site.baseurl }}/assets/js/sorttable.js"></script>
 
     {% block custom_css %}{% endblock %}
-    <title>GeOikos!</title>
+    <title>SIGEO</title>
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-dark text-center">
-        <a class="navbar-brand" href="/">GeOikos</a>
+        <a class="navbar-brand" href="#">SIGEO</a>
     </nav>
-    <div id="wrapper" class="menuDisplayed">
+    <div id="wrapper">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -111,7 +116,7 @@
             {% include 'messages.html' %}
             <div class="row">
                 <div class="col-lg-1">
-                    <a href="#" class="btn" id="menu-toggle"><i class="fas fa-bars"></i></a>
+                    <a href="#" class="btn" id="menu-toggle"><i class="fas fa-bars"> Menú</i></a>
                 </div>
                 <div class="col-lg-11">
                     <!-- PAGE TITLE -->

@@ -56,9 +56,8 @@
           <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
 
           {% if user.is_authenticated %}
-          <li><a class="nav-link" href="{% url 'Users:logout' %}">Logout</a></li>
           <li><a class="nav-link" href="{% url 'Inventory:home_inventory' %}">Inventario</a></li>
-
+          <li><a class="nav-link" href="{% url 'Users:logout' %}">Logout</a></li>
           {% else %}
           <li><a class="nav-link" href="{% url 'Users:login' %}">Iniciar Sesión</a></li>
           {% endif %}
@@ -67,14 +66,15 @@
       </nav>
     </header>
 
-{% block content %}{% endblock %}
+{% block content %}
+{% endblock %}
 
 
-<footer class="blue">
+<footer class="blue" style="position:relative; z-index:1;">
     <div class="wrap">
       <div class="foo-logo">
         <div>
-          <a href="{{ site.baseurl }}/index.html"><img src="../../static/img/logo-footer.png"alt=""></a>
+          <a href="/#"><img src="../../static/img/logo-footer.png"alt=""></a>
         </div>
       </div>
       <div class="foo-links">
@@ -82,12 +82,12 @@
           <h3>Oikos</h3>
           <ul class="no-bullet">
             <li><a href="/#">Principal</a></li>
-            <li><a href="{{ site.baseurl }}/noikos">Oikos</a></li>
-            <li><a href="{{ site.baseurl }}/njd">Junta Directiva</a></li>
-            <li><a href="{{ site.baseurl }}/nhonorarios">Miembros Honorarios</a></li>
-            <li><a href="{{ site.baseurl }}/contacto">Contacto</a></li>
-            <li><a href="{{ site.baseurl }}/expediciones">Expediciones</a></li>
-            <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
+            <li><a href="/noikos">Oikos</a></li>
+            <li><a href="/njd">Junta Directiva</a></li>
+            <li><a href="/nhonorarios">Miembros Honorarios</a></li>
+            <li><a href="/contacto">Contacto</a></li>
+            <li><a href="/expediciones">Expediciones</a></li>
+            <li><a href="/blog">Blog</a></li>
           </ul>
         </div>
         <div class="foo-links-síguenos">

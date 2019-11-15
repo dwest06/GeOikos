@@ -29,7 +29,7 @@ def is_admin(function=None):
         return actual_decorator(function)
     return actual_decorator
 
-def is_gestor_usuario(function=None,):
+def is_gestor_usuario(function=None):
     """
     Decorator for check if user is gestor de usuarios.
     """
@@ -40,7 +40,7 @@ def is_gestor_usuario(function=None,):
         return actual_decorator(function)
     return actual_decorator
 
-def is_tesorero(function=None,):
+def is_tesorero(function=None):
     """
     Decorator for check if user is tesorero.
     """
@@ -51,7 +51,7 @@ def is_tesorero(function=None,):
         return actual_decorator(function)
     return actual_decorator
 
-def is_cuarto_equipo(function=None,):
+def is_cuarto_equipo(function=None):
     """
     Decorator for check if user is cuarto de equipo.
     """
@@ -62,7 +62,7 @@ def is_cuarto_equipo(function=None,):
         return actual_decorator(function)
     return actual_decorator
 
-def is_activo(function=None,):
+def is_activo(function=None):
     """
     Decorator for check if user is miembro activo.
     """
@@ -79,7 +79,7 @@ def is_activo(function=None,):
         return actual_decorator(function)
     return actual_decorator
 
-def is_pasivo(function=None,):
+def is_pasivo(function=None):
     """
     Decorator for check if user is miembro pasivo.
     """
