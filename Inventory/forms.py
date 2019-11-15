@@ -352,7 +352,7 @@ class CatReqForm(forms.Form):
         return quantity
 
 class CatQueryForm(forms.Form):
-    category = forms.ModelChoiceField(queryset=Category.objects.all())
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), label='Categoría: ')
 
 CatReqFormset = formset_factory(
     CatReqForm,

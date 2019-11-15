@@ -1,21 +1,21 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
-{% block title %} Search {% endblock %}
+{% block page-title %}
+    {% if heading %}
+        <h3>{{heading}}</h3>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-<!-- MENSAJES  -->
-{% include "messages.html" %}
 <style>
-body{
-    background-color: rgba(184, 237, 135, 0.7);
-}
 thead,
 tfoot {
     background-color: white;
     color: #fff;
 }
 tbody {
-    background-color: #e4f0f5;
+    background-color: white;
 }
 caption {
     padding: 10px;
@@ -44,26 +44,33 @@ td {
         <div>
             <br>
             <table> 
-                    <thead">
-                        <th>Nombre</th>
-                        {% for att in attributes %}
-                            <th>{{att.name}}</th>
+                <thead">
+                    <th>Nombre</th>
+                    <th>Serial</th>
+                    <th>Fecha de Ingreso</th>
+                    <th>Fecha de Elaboracion</th>
+                    <th>Descontinuado</th>
+                    <th>Fecha de Descontinuado</th>
+                    <th>Notas</th>
+                    <th>Categoria</th>
+                    {% for att in attributes %}
+                        <th>{{att.name}}</th>
+                    {% endfor %}
+                </thead>
+                <tbody>
+                    {% for t in values %}
+                    <tr>
+                        {% for val in t %}
+                        <td>{{val}}</td>
                         {% endfor %}
-                    </thead>
-                    <tbody>
-                        {% for eq in values %}
-                        <tr>
-                            {% for val in eq %}
-                            <td>{{val}}</td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                 </table>
-                
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>         
         </div>
     </div>
+    <p></p>
     <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Volver a la Busqueda</a>
-    <a class="btn btn-success" href="{% url 'Inventory:home_inventory' %}">Volver al home</a>
+    <!--<a class="btn btn-success" href="{% url 'Inventory:home_inventory' %}">Volver al home</a>-->
 </div>
 {% endblock  %}
