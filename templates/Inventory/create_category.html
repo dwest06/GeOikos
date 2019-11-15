@@ -8,7 +8,69 @@
 {% endblock %}
 
 {% block content %}
-      
+<div class="row">
+    <div class="offset-md-3 col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h1 style="text-align: left;
+                color: rgb(0, 0, 0);
+                font-family: Consolas, monaco, monospace;
+                font-size: 50px;"> Crear Categoría</h1>
+                <p style="font-family: Consolas, monaco, monospace;
+                font-size: 20px;">Herramienta de creación de categorías. Para crear una categoría debe crear sus atributos.</p>
+            </div>
+
+            <div class="card-body">
+                <form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    <div class="form-group required">
+                        <label class="control-label">{{categoryform.name.label}}</label>
+                        {% render_field categoryform.name class="form-control" placeholder="Inserte el nombre de la categoría" %}
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Requerido</div>
+                    </div>
+                    {% for form in formset %}
+                        <div class="form-col">
+                            <div class="form-row"> 
+                                <div class="form-group">
+                                    <label class="control-label">{{form.name.label}}</label>
+                                    {% render_field form.name class="form-control" placeholder=form.name.label %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">{{form.attribute_type.label}}</label>
+                                    {% render_field form.attribute_type class="form-control" placeholder=form.attribute_type.label %}
+                                </div>
+                            </div>
+                            <div class="form-row"> 
+                                <div class="form-group">
+                                    <label>{{form.unit.label}}</label>
+                                    {% render_field form.unit class="form-control" placeholder=form.unit.label %}
+                                </div>
+                                <div class="form-group col-md-3 text-center">
+                                    <label>{{form.nullity.label}}</label>
+                                    {% render_field form.nullity class="form-control align-items-center" %}
+                                    <small class="form-text text-muted">
+                                        Indica si la unidad será considerada necesaria.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-success add-form-col">Añadir otro atributo</button>
+                            </div>
+                            <p></p>  
+                        </div>
+                    {% endfor %}
+                    <p></p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
+                        Añadir Categoría
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -29,59 +91,6 @@
         </div>
     </div>
 </div>
-    
-<h1 style="text-align: left;
-color: rgb(0, 0, 0);
-font-family: Consolas, monaco, monospace;
-font-size: 50px;"> Crear Categoría</h1>
-<p style="font-family: Consolas, monaco, monospace;
-font-size: 20px;">Herramienta de creación de categorías. Para crear una categoría debe crear sus atributos.</p>
-    
-<form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
-    {% csrf_token %}
-    {{ formset.management_form }}
-    <div class="form-group required">
-        <label class="control-label">{{categoryform.name.label}}</label>
-        {% render_field categoryform.name class="form-control col-md-6" placeholder="Inserte el nombre de la categoría" %}
-        <div class="valid-feedback">Correcto</div>
-        <div class="invalid-feedback">Requerido</div>
-    </div>
-    {% for form in formset %}
-        <div class="form-col">
-            <div class="form-row"> 
-                <div class="form-group col-md-6">
-                    <label class="control-label">{{form.name.label}}</label>
-                    {% render_field form.name class="form-control" placeholder=form.name.label %}
-                </div>
-                <div class="form-group col-1">
-                    <label class="control-label">{{form.attribute_type.label}}</label>
-                    {% render_field form.attribute_type class="form-control" placeholder=form.attribute_type.label %}
-                </div>
-            </div>
-            <div class="form-row"> 
-                <div class="form-group col-md-1">
-                    <label>{{form.unit.label}}</label>
-                    {% render_field form.unit class="form-control" placeholder=form.unit.label %}
-                </div>
-                <div class="form-group col-md-3 text-center">
-                    <label>{{form.nullity.label}}</label>
-                    {% render_field form.nullity class="form-control align-items-center" %}
-                    <small class="form-text text-muted">
-                        Indica si la unidad será considerada necesaria.
-                    </small>
-                </div>
-            </div>
-            <div class="input-group-append">
-                <button class="btn btn-success add-form-col">Añadir otro atributo</button>
-            </div>
-            <p></p>  
-        </div>
-    {% endfor %}
-    <p></p>
-    <button type="button" class="btn col-2 btn-primary" data-toggle="modal" data-target="#confirmModal">
-        Añadir Categoría
-    </button>
-</form>
 {% endblock %}
 
 {% block custom_js %}
