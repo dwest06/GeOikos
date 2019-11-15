@@ -325,9 +325,9 @@ class TransactionForm(forms.ModelForm):
         model = Transaction
         fields = ['user', 'transaction', 'reason']
         labels = {
-            'user' : 'Usuario',
-            'transaction'  : 'Monto',
-            'reason' : 'Motivo'
+            'user' : 'Usuario: ',
+            'transaction'  : 'Monto: ',
+            'reason' : 'Motivo: '
         }
         error_messages = {
             'user' : {

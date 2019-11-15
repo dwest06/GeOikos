@@ -123,5 +123,5 @@ class Transaction(models.Model):
         ('T','Trimestralidad'),
     ]
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    transaction = models.IntegerField()
+    transaction = models.DecimalField(max_digits=7, decimal_places=2)
     reason = models.CharField(max_length=1,choices=REASON_OPTIONS)

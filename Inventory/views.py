@@ -263,14 +263,12 @@ def ShowEquipment(request,category):
         vals.append(vals2)
     return render(request, "Inventory/equipment_table.html", {'attributes': atts, 'values':vals})
 
-
-# Transactions
 @login_required
 @is_tesorero
 def loadTransaction(request):
     if request.method == "POST":
         form = TransactionForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and form.cleaned_data['transaction'] > 0.00:
             trans = form.save(commit = False)
             if trans.reason != 'P':
                 trans.transaction *= -1
