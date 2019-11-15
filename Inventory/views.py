@@ -251,7 +251,7 @@ def ShowEquipment(request,category):
     equip = Equipment.objects.filter(category=category)
     vals = []
     for eq in equip:
-        vals2 = [eq.name]
+        vals2 = [eq.name, eq.serial, eq.entry_date, eq.elaboration_date, eq.discontinued, eq.discontinued_date, eq.notes, eq.category]
         for att in atts:
             att_type=att.attribute_type
             val=Attribute_Equipment.objects.get(attribute=att,equipment=eq)
