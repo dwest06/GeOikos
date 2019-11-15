@@ -1,26 +1,31 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
-{% block title %} Crear Grupo {% endblock %}
+{% block page-title %}
+    {% if heading %}
+        <h3>Crear Grupo </h3>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
+
 <!-- MENSAJES  -->
 {% include "messages.html" %}
 <style>
 body{
-    background-color: rgba(184, 237, 135, 0.7);
+    background-color: rgba(255, 255, 255);
 }
 </style>
-<div class="container-fluid">
-    <br>
-    <div class="row" >
-        <div class="offset-md-4 col-md-4 card">
-            <br>
-            <form action="" method="POST" class="form-group" >
-                {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="btn btn-success">Crear Grupo</button>
-            </form>
-        </div>
-    </div>
-</div>
-{% endblock  %}
+
+<h1 style="text-align: left; color: rgb(0, 0, 0); font-family: Consolas, monaco, monospace; font-size: 50px;"> 
+    Crear Grupo
+</h1>
+<p style="font-family: Consolas, monaco, monospace;
+font-size: 20px;">Herramienta de creación de grupos. Para crear un grupo debe introducir su nombre.</p>
+    
+    <form action="" method="POST" class="form-group" >
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-success">Crear Grupo</button>
+    </form>
+{% endblock %}

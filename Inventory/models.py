@@ -1,6 +1,7 @@
 from django.db import models
 from Users.models import User
 from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError 
 
 # Create your models here.
 class Category(models.Model):
@@ -125,3 +126,4 @@ class Transaction(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     transaction = models.DecimalField(max_digits=7, decimal_places=2)
     reason = models.CharField(max_length=1,choices=REASON_OPTIONS)
+    

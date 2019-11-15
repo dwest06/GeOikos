@@ -4,13 +4,15 @@ from .models import (Category, Equipment, Attribute, Group,
                     Request, Request_Category, Loan, Repair, 
                     EquipmentDebt, Transaction, Attribute_Equipment)
 from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError 
+
 
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name']
         labels = {
-            'name' : 'Nombre de la categoría'
+            'name' : 'Nombre de la categoria'
         }
         error_messages = {
             'name' : {
@@ -50,6 +52,11 @@ class EquipmentForm(forms.ModelForm):
                 'invalid' : 'Fecha inválida',
             }
         }
+    def clean_serial(self):
+        serial = self.cleaned_data['serial']
+        if quantity < 0:
+            raise forms.ValidationError("Debes especificar una cantidad positiva")
+        return quantity
 
 AttributeFormset = modelformset_factory(
     Attribute,
@@ -59,7 +66,7 @@ AttributeFormset = modelformset_factory(
         'name' : 'Nombre del Atributo',
         'attribute_type' : 'Tipo de dato',
         'unit' : 'Unidad',
-        'nullity' : '(Unidad no esencial)'
+        'nullity' : '(No esencial)'
     },
     error_messages = {
         'name' : {
@@ -145,7 +152,7 @@ class GroupForm(forms.ModelForm):
     class Meta:
         model = Group
         fields = ['name']
-
+        labels = { 'name' : 'Nombre'}
         error_messages = {
             'name' : {
                 'required' : 'Campo obligatorio',
@@ -322,6 +329,7 @@ class EquipmentDebtReturnForm(forms.ModelForm):
 
 class TransactionForm(forms.ModelForm):
     class Meta:
+        
         model = Transaction
         fields = ['user', 'transaction', 'reason']
         labels = {
@@ -331,7 +339,7 @@ class TransactionForm(forms.ModelForm):
         }
         error_messages = {
             'user' : {
-                'required' : 'Campo obligatorio',
+                'required' : "Campo obligatorio"
             },
             'transaction' : {
                 'required' : 'Campo obligatorio',
