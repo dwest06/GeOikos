@@ -10,18 +10,18 @@
       </li>
       {% if user|is_cuarto_equipo %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'Inventory:create_category' %}">Crear Categorías</a>
+        <a class="nav-link" href="{% url 'Inventory:create_category' %}">Crear Categorí­as</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'Inventory:create_equipment' %}">Añadir Equipo</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'Inventory:create_loan' %}">Añadir Equipo</a>
+        <a class="nav-link" href="{% url 'Inventory:create_loan' %}">Cargar préstamos</a>
       </li>
       {% endif %}
-      {% if user|is_activo %}
+      {% if user|is_activo %} 
       <li class="nav-item">
-        <a class="nav-link" href="#">Solicitar Equipo</a>
+        <a class="nav-link" href="{% url 'Inventory:create_request' %}">Solicitar Equipo</a>
       </li>
       {% endif %}
       <li class="nav-item">
