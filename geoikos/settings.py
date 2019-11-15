@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.urls import reverse_lazy
 import django_heroku
 import dj_database_url
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'oikos',                # Pagina principal y cursos 
     'Users',                # Sistema de usuarios, auth y session
     'Inventory',            # Sistema de prestamos de equipos
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -140,5 +142,13 @@ STATICFILES_DIRS = [
 # Custom User Model
 AUTH_USER_MODEL = 'Users.User'
 
+LOGIN_URL = reverse_lazy('Users:login')
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+MEDIA_ROOT = (
+    BASE_DIR
+)
+
+MEDIA_URL = '/img/'

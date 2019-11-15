@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load tags %}
+
+{% block page-title %}
+Gestion de Usuarios
+{% endblock  %}
+
+{% block content %}
+<div class="row mb-20">
+  <div class="offset-md-8 col-md-4">
+    <div class="card text-center">
+      <div class="card-header">
+        <h4>Añadir Usuario</h4>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'Users:create_user' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3>Gestion de Usuarios</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover w-full">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Nombre</th>
+              <th>Modificar</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for user in users %}
+            <tr>
+              <td>{{user.pk}}</td>
+              <td>{{user.username}}</td>
+              <td>{{user.email}} </td>
+              <td>{{user.first_name}}</td>
+              <td><a href="{% url 'Users:modify_user' user.pk %}" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+              <td><div data-toggle="modal" data-target="#modalEliminar" data-pk="{{user.pk}}" class="btn btn-danger delete-user"><i class="fas fa-times"></i></div></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ELIMINAR -->
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="ModalEliminar" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¿Está seguro que quiere eliminarlo?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{% url 'Users:delete_user' %}" method="POST" class="form-group">
+        {% csrf_token %}
+        <input type="hidden" name="user" id="delete-user" value="">
+        <div class="modal-body">
+          <p>¿Desea eliminar el usuario?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger">Eliminarlo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock  %}
+
+{% block custom_js %}
+<script>
+  let main = () => {
+    // Para eliminar un producto
+    $('.delete-user').on('click', function(){
+      let pk = $(this).attr('data-pk');
+      $('#delete-user').val(pk)
+    });
+  }
+
+  $(document).ready(main())
+</script>
+{% endblock %}

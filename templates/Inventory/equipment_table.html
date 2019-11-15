@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block page-title %}
+    {% if heading %}
+        <h3>{{heading}}</h3>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<style>
+thead,
+tfoot {
+    background-color: white;
+    color: #fff;
+}
+tbody {
+    background-color: white;
+}
+caption {
+    padding: 10px;
+    caption-side: bottom;
+}
+table {
+    border-collapse: collapse;
+    border: 2px solid green;
+    letter-spacing: 1px;
+    font-family: Helvetica;
+    font-size: .8rem;
+    text-align: center;
+}
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 5px 10px;
+}
+td {
+    text-align: center;
+}
+</style>
+<div class="container-fluid">
+    <br>
+    <div class="row" >
+        <div>
+            <br>
+            <table> 
+                <thead>
+                    <th>Nombre</th>
+                    <th>Serial</th>
+                    <th>Fecha de Ingreso</th>
+                    <th>Fecha de Elaboracion</th>
+                    <th>Descontinuado</th>
+                    <th>Fecha de Descontinuado</th>
+                    <th>Notas</th>
+                    <th>Categoria</th>
+                    {% for att in attributes %}
+                        <th>{{att.name}}</th>
+                    {% endfor %}
+                </thead>
+                <tbody>
+                    {% for t in values %}
+                    <tr>
+                        {% for val in t %}
+                        <td>{{val}}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>         
+        </div>
+    </div>
+    <p></p>
+    <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Volver a la Busqueda</a>
+    <!--<a class="btn btn-success" href="{% url 'Inventory:home_inventory' %}">Volver al home</a>-->
+</div>
+{% endblock  %}

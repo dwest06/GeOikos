@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-
-{% block title %} Create User {% endblock %}
+{% load tags %}
 
 {% block page-title %}
-Crear Usuario
+{{title}}
 {% endblock %}
 
 {% block content %}
@@ -15,7 +14,37 @@ Crear Usuario
             <form action="" method="POST" class="form-group" >
                 {% csrf_token %}
                 {{form.as_p}}
-                <button type="submit" class="btn btn-success">Submiteame</button>
+                {% if request.user|is_gestor_usuario %}
+                    <!-- SELECT PARA ASIGNARLE UN STATUS -->
+                    <p>
+                        <label for="status">Status:</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="">Elegir</option>
+                            {% for k, s in status.items %}
+                                {% if k == request.user.status %}
+                                    <option value="{{k}}" selected>{{s}}</option>
+                                {% else %}
+                                    <option value="{{k}}">{{s}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <!-- SELECT PARA ASIGNARLE UN GRUPO -->
+                        <label for="group">Grupo:</label>
+                        <select name="group" id="group" class="form-control">
+                            <option value="">Elegir</option>
+                            {% for group in groups %}
+                                {% if user_group == group %}
+                                    <option value="{{group}}" selected>{{group}}</option>
+                                {% else %}
+                                    <option value="{{group}}">{{group}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </p>
+                {% endif %}
+                <button type="submit" class="btn btn-success">Ingresar</button>
             </form>
         </div>
     </div>

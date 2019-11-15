@@ -1,0 +1,44 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+
+<div class="hero-vl hero-vl-1" id="hero-vl-index">
+		<img src="../../static/img/cursos.jpg" alt="">
+		<div class="hero hero-1" id="hero-index">
+			<div class="jumbotron corners">
+				<h1><span>Baja y Media Montaña</span><br>Escalada<br>Alta Montaña</h1>
+			</div>
+		</div>
+	</div>
+	<section class="about">
+		<div class="wrap">
+			<h2>Cursos</h2>
+			<p>
+				El Grupo Excursionista Oikos ofrece tres cursos, donde se busca instruir a los participantes en las prácticas, teoría y conocimientos necesarios para realizar montaña y escalada. Los cursos se encuentran abiertos a la comunidad universitaria de la Universidad Simón Bolívar y a personas externas a la universidad.
+			</p>
+		</div>
+	</section>
+	<section class="courses">
+		<div class="wrap">
+			<h2>Aprende con<br>nosotros</h2>
+			<div class="cards">
+				<div class="card-2 corners">
+					<span class="icon-baja"></span>
+					<h3>Baja y Media Montaña</h3>
+					<a href="{{ site.baseurl }}/cbaja"><input type="button" class="btn corners white" value="+Info"></a>
+				</div>
+				<div class="card-2 corners">
+					<span class="icon-escalada"></span>
+					<h3>Escalada en Roca</h3>
+					<a href="{{ site.baseurl }}/croca"><input type="button" class="btn corners white" value="+Info"></a>
+				</div>
+				<div class="card-2 corners">
+					<span class="icon-alta"></span>
+					<h3>Alta Montaña</h3>
+					<a href="{{ site.baseurl }}/calta"><input type="button" class="btn corners white" value="+Info"></a>
+				</div>
+			</div>
+		</div>	
+	</section>
+
+{% endblock %}

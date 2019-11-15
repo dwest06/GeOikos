@@ -1,22 +1,30 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
-{% block title %} Search {% endblock %}
+{% block page-title %}
+    {% if heading %}
+        <h3>{{heading}}</h3>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-<style>
 
-</style>
-<div class="container-fluid">
-    <br>
-    <div class="row" >
-        <div class="offset-md-4 col-md-4 card">
-            <br>
-            <form action="" method="POST" class="form-group" >
-                {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="btn btn-success">Submit</button>
-            </form>
-        </div>
+<h1 style="text-align: left;
+    color: rgb(0, 0, 0);
+    font-family: Consolas, monaco, monospace;
+    font-size: 50px;"> Búsqueda</h1>
+<p style="font-family: Consolas, monaco, monospace;
+    font-size: 20px;">Herramienta para cargar pagos y deudas de los miembros.</p>
+
+<form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
+    {% csrf_token %}
+    <div class="form-group required">
+        <label class="control-label">{{form.category.label}}</label>
+        {% render_field form.category class="form-control col-md-6" %}
+        <div class="valid-feedback">Correcto</div>
+        <div class="invalid-feedback">Requerido</div>
     </div>
-</div>
+    <button type="submit" class="btn btn-success">Buscar</button>
+</form>
+
 {% endblock  %}

@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
-{% block title %} Search {% endblock %}
+{% block page-title %}
+    {% if heading %}
+        <h3>{{heading}}</h3>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-<!-- MENSAJES  -->
-{% include "messages.html" %}
 <style>
 body{
     background-color: rgba(184, 237, 135, 0.7);
@@ -44,12 +47,20 @@ td {
         <div>
             <br>
             <table> 
+<<<<<<< HEAD
                     <thead">
+=======
+                    <thead>
+>>>>>>> master
                         <th>Nombre</th>
                         <th>Serial</th>
                         <th>Fecha de Ingreso</th>
                         <th>Fecha de Elaboracion</th>
+<<<<<<< HEAD
                         <th>Discontinuado</th>
+=======
+                        <th>Descontinuado</th>
+>>>>>>> master
                         <th>Fecha de Descontinuado</th>
                         <th>Notas</th>
                         <th>Categoria</th>

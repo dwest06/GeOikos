@@ -1,20 +1,32 @@
 {% extends "base.html" %}
-
-{% block title %} Create User {% endblock %}
+{% load widget_tweaks %}
 
 {% block content %}
-<style>
-
-</style>
+<h1 style="text-align: left;
+color: rgb(0, 0, 0);
+font-family: Consolas, monaco, monospace;
+font-size: 50px;"> 
+    Agregar equipo
+</h1>
+<p style="font-family: Consolas, monaco, monospace;font-size: 20px;">
+    Herramienta de creación de instancias de equipo.
+</p>
 <div class="container-fluid">
-    <br>
     <div class="row" >
         <div class="offset-md-4 col-md-4 card">
-            <br>
-            <form action="" method="POST" class="form-group" >
+            <p></p>
+            <form action="" method="POST" class="form-group needs-validation" novalidate>
                 {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="btn btn-success">Ingresar Equipo de esta Categoria</button>
+                <div class="form-group">
+                    <div class="form-col"> 
+                        <label>Selecciona una categoría:</label>
+                        <p></p>
+                        {% render_field form.category class="custom-select col-md-6 required" %}
+                        <div class="invalid-feedback">Requerido</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Continuar</button>
+                <p></p>
             </form>
         </div>
     </div>

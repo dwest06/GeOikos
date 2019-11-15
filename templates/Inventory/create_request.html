@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block page-title %}
+    {% if heading %}
+        <h3>Solicitud</h3>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+      
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmModal">Confirmación: Realizar solicitud.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Al hacer click en aceptar, se enviará la solicitud de equipo a Cuarto de Equipo.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" form="create-form" value="Submit">Aceptar</button>
+        </div>
+        </div>
+    </div>
+</div>
+    
+<h1 style="text-align: left;
+color: rgb(0, 0, 0);
+font-family: Consolas, monaco, monospace;
+font-size: 50px;"> Solicitar equipo</h1>
+<p style="font-family: Consolas, monaco, monospace;
+font-size: 20px;">Herramienta de solicitud de equipo. 
+Puede especificar que tipo de equipo desea solicitar (categoría) 
+o qué equipo en específico desea solicitar.</p>
+
+<form class="form-horizontal" id="create-form" method="POST" action="">
+    {% csrf_token %}
+    {{ catformset.management_form }}
+    {% for form in catformset %}
+    <div class="cat-form-col">
+        <div class="form-row"> 
+            <div class="form-group col-md-2">
+                <label class="control-label">{{form.category.label}}</label>
+                {% render_field form.category class="form-control" %}
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">{{form.quantity.label}}</label>
+                {% render_field form.quantity class="form-control" %}
+                <small class="form-text text-muted">
+                    Ingrese una cantidad mayor a 0
+                </small>
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-success add-cat">Añadir otra categoría</button>
+        </div>
+        <p></p>
+    </div>
+    {% endfor %}
+    {{ eqformset.management_form }}
+    {% for form in eqformset %}
+    <div class="eq-form-col">
+        <div class="form-row"> 
+            <div class="form-group col-md-2">
+                <label class="control-label">{{form.equipment.label}}</label>
+                {% render_field form.equipment class="form-control" %}
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-success add-eq">Añadir otro equipo</button>
+        </div>
+        <p></p>
+    </div>
+    {% endfor %}
+    <div class="form-group">
+        <label>Comentarios</label>
+        {% render_field comments.comments class="form-control col-md-4" %}
+    </div>
+    <button type="button" class="btn col-2 btn-primary" data-toggle="modal" data-target="#confirmModal">
+        Enviar solicitud
+    </button>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script type="text/javascript">
+    function updateElementIndex(el, prefix, ndx) {
+        var id_regex = new RegExp('(' + prefix + '-\\d+)');
+        var replacement = prefix + '-' + ndx;
+        if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+        if (el.id) el.id = el.id.replace(id_regex, replacement);
+        if (el.name) el.name = el.name.replace(id_regex, replacement);
+    }
+    function cloneMore(selector, prefix) {
+        var newElement = $(selector).clone(true);
+        var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+        newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function () {
+            var name = $(this).attr('name')
+            if (name) {
+                name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                var id = 'id_' + name;
+                $(this).attr({ 'name': name, 'id': id }).val('').removeAttr('checked');
+            }
+        });
+        newElement.find('label').each(function () {
+            var forValue = $(this).attr('for');
+            if (forValue) {
+                forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                $(this).attr({ 'for': forValue });
+            }
+        });
+        total++;
+        $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+        return false;
+    }
+    function replaceBtnCat(selector){
+        var conditionRow = $('.cat-form-col:not(:last)');
+        conditionRow.find('.btn.add-cat')
+            .removeClass('btn-success').addClass('btn-danger')
+            .removeClass('add-cat').addClass('remove-cat')
+            .html('Eliminar esta categoría');
+    }
+    function replaceBtnEq(selector){
+        var conditionRow = $('.eq-form-col:not(:last)');
+        conditionRow.find('.btn.add-eq')
+            .removeClass('btn-success').addClass('btn-danger')
+            .removeClass('add-eq').addClass('remove-eq')
+            .html('Eliminar este equipo');
+    }
+    function deleteFormCat(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (total > 1) {
+            btn.closest('.cat-form-col').remove();
+            var forms = $('.cat-form-col');
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function () {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+        return false;
+    }
+    function deleteFormEq(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (total > 1) {
+            btn.closest('.eq-form-row').remove();
+            var forms = $('.eq-form-row');
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function () {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+        return false;
+    }
+    $(document).on('click', '.add-cat', function (e) {
+        e.preventDefault();
+        cloneMore('.cat-form-col:last', 'form');
+        replaceBtnCat('.cat-form-col:last')
+        return false;
+    });
+    $(document).on('click', '.add-eq', function (e) {
+        e.preventDefault();
+        cloneMore('.eq-form-col:last', 'form');
+        replaceBtnEq('.eq-form-col:last')
+        return false;
+    });
+    $(document).on('click', '.remove-cat', function (e) {
+        e.preventDefault();
+        deleteFormCat('form', $(this));
+        return false;
+    });
+    $(document).on('click', '.remove-eq', function (e) {
+        e.preventDefault();
+        deleteFormEq('form', $(this));
+        return false;
+    });
+</script>
+
+{% endblock %}
