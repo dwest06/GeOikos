@@ -96,7 +96,7 @@ class IntValueForm(forms.ModelForm):
                 'invalid' : 'Entrada inválida'
             }
         }
-
+        
 class TxtValueForm(forms.ModelForm):
     class Meta:
         model = Attribute_Equipment
