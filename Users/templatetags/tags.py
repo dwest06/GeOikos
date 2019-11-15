@@ -1,5 +1,8 @@
 from django import template
 from django.db.models import Q
+from Users.models import User
+
+STATUS_DICT = dict(User.STATUS_CHOICES)
 
 register = template.Library()
 
@@ -39,3 +42,7 @@ def is_pasivo(user):
             Q(name='activo') |
             Q(name='pasivo')
         ).exists()
+
+@register.filter
+def get_status(status):
+	return STATUS_DICT.get(status)

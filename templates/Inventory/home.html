@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load tags %}
 
 {% block page-title %}
 Bienvenido al sistema de Prestamo
@@ -70,6 +71,7 @@ Bienvenido al sistema de Prestamo
       </div>
       <div class="card-body">
         <p class="card-text">Status Actual: {{grupo|upper}}</p>
+        <p class="card-text">Status Actual: {{request.user.status|get_status}}</p>
       </div>
     </div>
   </div>

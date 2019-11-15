@@ -47,8 +47,16 @@ def create_user(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            group = Group.objects.get(name = request.POST.get('group'))
-            user.groups.add(group)
+            try:
+                group = Group.objects.get(name = request.POST.get('group'))
+                user.groups.add(group)
+            except:
+                pass
+
+            status = request.POST.get('status')
+            if status != "":
+                user.status = status
+                user.save()
             messages.success(request, "Usuario Agregado")
         else:
             messages.error(request,"Datos Invalidos")
@@ -58,7 +66,8 @@ def create_user(request):
         context = {
             "form" : form, 
             'title': 'Crear Usuario', 
-            'groups': GROUPS
+            'groups': GROUPS,
+            'status': dict(User.STATUS_CHOICES)
         }
         return render(request, "Users/create_user.html", context)
 
@@ -69,9 +78,16 @@ def modify_user(request, pk, *args, **kwargs):
         if form.is_valid():
             user = form.save()
             if request.user.groups.filter(Q(name='admin') | Q(name='gestor_usuarios')).exists():
-                group = Group.objects.get(name = request.POST.get('group'))
-                user.groups.clear()
-                user.groups.add(group)
+                try:
+                    group = Group.objects.get(name = request.POST.get('group'))
+                    user.groups.clear()
+                    user.groups.add(group)
+                except:
+                    pass
+                status = request.POST.get('status')
+                if status != "":
+                    user.status = status
+                    user.save()
             messages.success(request, "Usuario Modificado")
         else:
             messages.error(request,"Datos Inalidos")
@@ -83,7 +99,8 @@ def modify_user(request, pk, *args, **kwargs):
             "form" : form, 
             'title': 'Modificar Usuario', 
             'groups': GROUPS, 
-            'user_group': request.user.groups.first().name
+            'user_group': request.user.groups.first().name,
+            'status': dict(User.STATUS_CHOICES)
         }
         return render(request, "Users/create_user.html", context)
 

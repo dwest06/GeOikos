@@ -15,4 +15,5 @@ class User(AbstractUser):
     username = models.CharField(max_length=100, verbose_name='Nombre de Usuario')
     balance = models.IntegerField(null=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICES,null=True, default='IN')
+    foto = models.ImageField(upload_to="users/", blank=True, default=None, null=True)
     REQUIRED_FIELDS = ['username'] 
