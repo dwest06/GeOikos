@@ -8,65 +8,46 @@
 {% endblock %}
 
 {% block content %}
-<style>
-thead,
-tfoot {
-    background-color: white;
-    color: #fff;
-}
-tbody {
-    background-color: white;
-}
-caption {
-    padding: 10px;
-    caption-side: bottom;
-}
-table {
-    border-collapse: collapse;
-    border: 2px solid green;
-    letter-spacing: 1px;
-    font-family: Helvetica;
-    font-size: .8rem;
-    text-align: center;
-}
-td,
-th {
-    border: 1px solid rgb(190, 190, 190);
-    padding: 5px 10px;
-}
-td {
-    text-align: center;
-}
-</style>
+
 <div class="container-fluid">
     <br>
     <div class="row" >
         <div>
             <br>
-            <table> 
-                <thead>
-                    <th>Nombre</th>
-                    <th>Serial</th>
-                    <th>Fecha de Ingreso</th>
-                    <th>Fecha de Elaboracion</th>
-                    <th>Descontinuado</th>
-                    <th>Fecha de Descontinuado</th>
-                    <th>Notas</th>
-                    <th>Categoria</th>
-                    {% for att in attributes %}
-                        <th>{{att.name}}</th>
-                    {% endfor %}
-                </thead>
-                <tbody>
-                    {% for t in values %}
-                    <tr>
-                        {% for val in t %}
-                        <td>{{val}}</td>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>         
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Equipos</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table table-hover w-full"> 
+                            <thead style="color:black;" >
+                                <th>Nombre</th>
+                                <th>Serial</th>
+                                <th>Fecha de Ingreso</th>
+                                <th>Fecha de Elaboracion</th>
+                                <th>Descontinuado</th>
+                                <th>Fecha de Descontinuado</th>
+                                <th>Notas</th>
+                                <th>Categoria</th>
+                                {% for att in attributes %}
+                                    <th>{{att.name}}</th>
+                                {% endfor %}
+                            </thead>
+                            <tbody>
+                                {% for t in values %}
+                                <tr>
+                                    {% for val in t %}
+                                    <td>{{val}}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>         
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <p></p>
