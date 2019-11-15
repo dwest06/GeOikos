@@ -1,26 +1,50 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
-{% block title %} Agregar Prestamo {% endblock %}
+{% block page-title %}
+    {% if heading %}
+        <h3>{{heading}}</h3>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-<!-- MENSAJES  -->
-{% include "messages.html" %}
-<style>
-body{
-    background-color: rgba(184, 237, 135, 0.7);
-}
-</style>
-<div class="container-fluid">
-    <br>
-    <div class="row" >
-        <div class="offset-md-4 col-md-4 card">
-            <br>
-            <form action="" method="POST" class="form-group" >
-                {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="btn btn-success">Agregar Prestamo</button>
-            </form>
-        </div>
+
+<h1 style="text-align: left;
+    color: rgb(0, 0, 0);
+    font-family: Consolas, monaco, monospace;
+    font-size: 50px;"> Cargar Préstamos</h1>
+<p style="font-family: Consolas, monaco, monospace;
+    font-size: 20px;">Herramienta registrar préstamos de equipo.</p>
+
+<form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
+    {% csrf_token %}
+    <div class="form-group required">
+        <label class="control-label">{{form.equipment.label}}</label>
+        {% render_field form.equipment class="form-control col-md-6" %}
+        <small class="form-text text-muted">
+            Equipo que está siendo prestado
+        </small>
+        <div class="valid-feedback">Correcto</div>
+        <div class="invalid-feedback">Requerido</div>
     </div>
-</div>
+    <div class="form-group required">
+        <label class="control-label">{{form.user.label}}</label>
+        {% render_field form.user class="form-control col-md-6" %}
+        <small class="form-text text-muted">
+            Usuario que recibe el equipo.
+        </small>
+        <div class="valid-feedback">Correcto</div>
+        <div class="invalid-feedback">Requerido</div>
+    </div>
+    <div class="form-group required">
+        <label class="control-label">{{form.hand_over_date.label}}</label>
+        {% render_field form.hand_over_date class="form-control col-md-6" placeholder="mm/dd/yyyy" %}
+        <small class="form-text text-muted">
+            Fecha de entrega del equipo.
+        </small>
+        <div class="valid-feedback">Correcto</div>
+        <div class="invalid-feedback">Requerido</div>
+    </div>
+    <button type="submit" class="btn btn-success">Cargar Préstamo</button>
+</form>
 {% endblock  %}
