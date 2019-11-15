@@ -2,18 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
-<<<<<<< HEAD
-from .forms import (
-    CategoryForm, AttributeFormset, CatQueryForm, EquipmentForm, 
-    IntValueForm, TxtValueForm, StrValueForm, DateValueForm, 
-    BoolValueForm, ChoiceValueForm, AttsQueryForm
-)
-
-=======
 from .forms import *
 from Users.models import User
 from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
->>>>>>> master
 
 @login_required
 def homeInventarioView(request):
@@ -35,16 +26,6 @@ def createCategory(request):
                 attribute = attform.save(commit=False)
                 attribute.category = category
                 attribute.save()
-<<<<<<< HEAD
-            messages.success(request, "Category Added!")
-        else:
-            messages.error(request, "Failed to add Category :c")
-        return redirect("oikos:home")
-    else:
-        catForm = CategoryForm()
-        attFormset = AttributeFormset(queryset=Attribute.objects.none())
-        return render(request, "Inventory/create_category.html", {"categoryform" : catForm, "formset" : attFormset})
-=======
             messages.success(request, "Categoria añadida")
             return redirect("Inventory:create_category")
         else:
@@ -54,7 +35,6 @@ def createCategory(request):
         categoryForm = CategoryForm()
         attFormset = AttributeFormset(queryset=Attribute.objects.none())
         return render(request, "Inventory/create_category.html", {"categoryform" : categoryForm, "formset" : attFormset})
->>>>>>> master
 
 @login_required
 @is_cuarto_equipo
@@ -63,17 +43,10 @@ def createGroup(request):
         grForm = GroupForm(request.POST)
         if grForm.is_valid():
             grForm.save()
-<<<<<<< HEAD
-            messages.success(request, "Group Added!")
-        else:
-            messages.error(request, "Failed to add Group :c")
-        return redirect("oikos:home")
-=======
             messages.success(request, "Grupo añadido")
         else:
             messages.error(request, "Fallo al añadir grupo")
         return redirect("Inventory:home_inventory")
->>>>>>> master
     else:
         grForm = GroupForm()
         return render(request, "Inventory/create_group.html", {"form" : grForm})
@@ -124,17 +97,10 @@ def createEquipment(request, cat):
                 value.attribute = catAttributes[i]
                 value.save()
                 i+=1
-<<<<<<< HEAD
-            messages.success(request, "Equpiment Added!")
-        else:
-            messages.error(request, "Failed to add Category :c")
-        return redirect("oikos:home")
-=======
             messages.success(request, "Equipo Agregado")
         else:
             messages.error(request, "Fallo al agregar equipo")
         return redirect("Inventory:home_inventory")
->>>>>>> master
     else:
         equipForm = EquipmentForm()
         catAttributes = list(Attribute.objects.filter(category=cat))
@@ -255,9 +221,6 @@ def AttsQueryView(request, category):
         return redirect("Inventory:home_inventory")
     else:
         form = AttsQueryForm(category)
-<<<<<<< HEAD
-        return render(request, "Inventory/search.html", {"form":form})
-=======
         return render(request, "Inventory/search.html", {"form":form})
 
 # VISTAS DE GESTOR DE USUARIOS
@@ -323,4 +286,3 @@ def loadTransaction(request):
         return redirect("Inventory:load_transaction")
     form = TransactionForm()
     return render(request, "Inventory/load_transaction.html", {"form" : form, "heading": "Cargar Transacciones"})
->>>>>>> master

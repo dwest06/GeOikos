@@ -86,43 +86,17 @@ AttributeFormset = modelformset_factory(
 )
 
 class IntValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_int']
-		labels = { 'value_int' : ''}
+    class Meta:
+        model = Attribute_Equipment
+        fields = ['value_int']
+        labels = { 'value_int' : ''}
 
         error_messages = {
             'value_int' : {
                 'invalid' : 'Entrada inválida'
             }
         }
-
-class TxtValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_txt']
-		labels = { 'value_txt' : ''}
-
-class StrValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_str']
-		labels = { 'value_str' : ''}
-
-class DateValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_date']
-		labels = { 'value_date' : ''}
-
-class BoolValueForm(forms.ModelForm):
-	class Meta:
-		model = Attribute_Equipment
-		fields = ['value_bool']
-		labels = { 'value_bool' : ''}
-
         
-
 class TxtValueForm(forms.ModelForm):
     class Meta:
         model = Attribute_Equipment
