@@ -54,9 +54,9 @@ class EquipmentForm(forms.ModelForm):
         }
     def clean_serial(self):
         serial = self.cleaned_data['serial']
-        if quantity < 0:
+        if serial < 0:
             raise forms.ValidationError("Debes especificar una cantidad positiva")
-        return quantity
+        return serial
 
 AttributeFormset = modelformset_factory(
     Attribute,
