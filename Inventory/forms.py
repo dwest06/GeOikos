@@ -10,7 +10,7 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ['name']
         labels = {
-            'name' : 'Nombre de la categoria'
+            'name' : 'Nombre de la categoría'
         }
         error_messages = {
             'name' : {
@@ -342,8 +342,8 @@ class TransactionForm(forms.ModelForm):
         }
 
 class CatReqForm(forms.Form):
-    category = forms.ModelChoiceField(queryset=Category.objects.all())
-    quantity = forms.IntegerField(label="quantity", required=True, initial=1)
+    category = forms.ModelChoiceField(queryset=Category.objects.all(),label="Categoría")
+    quantity = forms.IntegerField(label="Cantidad", required=True, initial=1)
 
     def clean_quantity(self):
         quantity = self.cleaned_data['quantity']
@@ -353,14 +353,15 @@ class CatReqForm(forms.Form):
 
 class CatQueryForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all(), label='Categoría: ')
-
+    error_messages = {'category' : {'invalid' : 'Campo obligatorio'}}
+    
 CatReqFormset = formset_factory(
     CatReqForm,
     extra = 1
 )
 
 class EqReqForm(forms.Form):
-    equipment = forms.ModelChoiceField(queryset=Equipment.objects.all())
+    equipment = forms.ModelChoiceField(queryset=Equipment.objects.all(),label="Equipo")
 
 class CommentsReqForm(forms.Form):
     comments = forms.CharField(required=False, widget=forms.Textarea)

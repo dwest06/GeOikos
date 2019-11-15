@@ -52,7 +52,7 @@ def createGroup(request):
         return render(request, "Inventory/create_group.html", {"form" : grForm})
 
 @login_required
-@is_pasivo
+@is_cuarto_equipo
 def EquipCatSelection(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)
@@ -60,8 +60,8 @@ def EquipCatSelection(request):
             category = form.cleaned_data['category'].pk
             return redirect("Inventory:create_equipment_value", cat=category)
         else:
-            messages.error(request,"No existe esta categoria.")
-        return redirect("Inventory:home_inventory")
+            messages.error(request,"No existe esta categoría.")
+            return redirect("Inventory:home_inventory")
     else:
         form = CatQueryForm()
         return render(request, "Inventory/create_equipment.html", {"form" : form})
@@ -157,11 +157,11 @@ def createRequest(request):
                 requestObj.equipment.add(Equipment.objects.get(pk=equipment))
         
         else:
-            messages.error(request,"Form Inválido. Ingrese una cantidad positiva")
+            messages.error(request,"Formularios Inválidos")
             return redirect("Inventory:create_request")
         
-        messages.success(request,"")
-        return render(request,"oikos/home.html")
+        messages.success(request,"Solicitud enviada")
+        return redirect("Inventory:create_request")
 
     else:
         catform = CatReqFormset()

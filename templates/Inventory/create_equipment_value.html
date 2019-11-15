@@ -1,38 +1,85 @@
 {% extends "base.html" %}
-
-{% block title %} Crear Equipo {% endblock %}
-
-{% block content %}
-<!-- MENSAJES  -->
+{% load widget_tweaks %}
 {% include "messages.html" %}
-<style>
-body{
-    background-color: rgba(184, 237, 135, 0.7);
-}
-</style>
-<div class="container-fluid">
-    <br>
-    <div class="row" >
-        <div class="offset-md-4 col-md-4 card">
-            <br>
-            <form action="" method="POST" class="form-group" >
-                {% csrf_token %}
-                {{equipform.as_p}}
-                {% for form in attforms %}
-                    <div class="row form-row spacer">
-                        <div class="col-4">
-                            <label>{{form.1}}</label>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                {{form.0}}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-                <button type="submit" class="btn btn-success">Ingresar Equipo de esta Categoria</button>
-            </form>
+{% block content %}
+<h1 style="text-align: left;
+color: rgb(0, 0, 0);
+font-family: Consolas, monaco, monospace;
+font-size: 50px;"> 
+    Agregar valores a el equipo
+</h1>
+<p style="font-family: Consolas, monaco, monospace;font-size: 20px;">
+    Herramienta para agregar valores a los atributos de equipo.
+</p>
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmModal">Confirmación: Añadir Equipo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Al hacer click en aceptar, se agregará la nueva instancia de equipo.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" form="create-form" value="Submit">Aceptar</button>
+        </div>
         </div>
     </div>
 </div>
+<form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
+    {% csrf_token %}
+    <div class="form-group"> 
+        <div class="form-row"> 
+            <div class="form-group col-md-6 required">
+                <label class="control-label">{{equipform.name.label}}</label>
+                {% render_field equipform.name class="form-control" placeholder=equipform.name.label %}
+                <div class="valid-feedback">Completo</div>
+                <div class="invalid-feedback">Requerido</div>
+            </div>
+            <div class="form-group col-1 required">
+                <label class="control-label">{{equipform.serial.label}}</label>
+                {% render_field equipform.serial class="form-control" %}
+            </div>
+        </div>
+        <div class="form-row"> 
+            <div class="form-group col-md-2">
+                <label class="control-label">{{equipform.entry_date.label}}</label>
+                {% render_field equipform.entry_date class="form-control" placeholder="MM/DD/YYYY"  %}
+            </div>
+            <div class="form-group col-2">
+                    <label class="control-label">{{equipform.elaboration_date.label}}</label>
+                    {% render_field equipform.elaboration_date class="form-control" placeholder="MM/DD/YYYY" %}
+            </div>
+        </div>
+    </div>
+    <div class="form-group"> 
+        {% for form in attforms %}
+        <div class="form-group"> 
+            <label class="control-label">{{form.1}}</label>
+            <div class="form-group">
+                {{ form.0 }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <div class="form-group">
+            <label>Grupo</label>
+            {% render_field equipform.group class="form-control col-md-2" %}
+        </div>
+     </div>
+    <div class="form-group">
+        <div class="form-group  col-md-4">
+            <label>Notas</label>
+            {% render_field equipform.notes class="form-control" %}
+        </div>
+    </div>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Ingresar Equipo</button>
+</form>
+
 {% endblock  %}

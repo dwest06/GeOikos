@@ -1,63 +1,92 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
 {% block page-title %}
     {% if heading %}
-        <h3>{{heading}}</h3>
+        <h3>Solicitud</h3>
     {% endif %}
 {% endblock %}
 
 {% block content %}
-<form class="form-horizontal" method="POST" action="">
+      
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmModal">Confirmación: Realizar solicitud.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Al hacer click en aceptar, se enviará la solicitud de equipo a Cuarto de Equipo.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" form="create-form" value="Submit">Aceptar</button>
+        </div>
+        </div>
+    </div>
+</div>
+    
+<h1 style="text-align: left;
+color: rgb(0, 0, 0);
+font-family: Consolas, monaco, monospace;
+font-size: 50px;"> Solicitar equipo</h1>
+<p style="font-family: Consolas, monaco, monospace;
+font-size: 20px;">Herramienta de solicitud de equipo. 
+Puede especificar que tipo de equipo desea solicitar (categoría) 
+o qué equipo en específico desea solicitar.</p>
+
+<form class="form-horizontal" id="create-form" method="POST" action="">
     {% csrf_token %}
     {{ catformset.management_form }}
     {% for form in catformset %}
-    <div class="row cat-form-row spacer">
-        <div class="col-2">
-            <label>{{form.category.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.category}}
+    <div class="cat-form-col">
+        <div class="form-row"> 
+            <div class="form-group col-md-2">
+                <label class="control-label">{{form.category.label}}</label>
+                {% render_field form.category class="form-control" %}
             </div>
-        </div>
-        <div class="col-2">
-            <label>{{form.quantity.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-number">
-                {{form.quantity}}
+            <div class="form-group col-md-2">
+                <label class="control-label">{{form.quantity.label}}</label>
+                {% render_field form.quantity class="form-control" %}
+                <small class="form-text text-muted">
+                    Ingrese una cantidad mayor a 0
+                </small>
             </div>
         </div>
         <div class="input-group-append">
-            <button class="btn btn-success add-cat-form-row">+</button>
+            <button class="btn btn-success add-cat">Añadir otra categoría</button>
         </div>
+        <p></p>
     </div>
     {% endfor %}
     {{ eqformset.management_form }}
     {% for form in eqformset %}
-    <div class="row eq-form-row spacer">
-        <div class="col-2">
-            <label>{{form.equipment.label}}</label>
-        </div>
-        <div class="col-4">
-            <div class="input-group">
-                {{form.equipment}}
+    <div class="eq-form-col">
+        <div class="form-row"> 
+            <div class="form-group col-md-2">
+                <label class="control-label">{{form.equipment.label}}</label>
+                {% render_field form.equipment class="form-control" %}
             </div>
         </div>
         <div class="input-group-append">
-            <button class="btn btn-success add-eq-form-row">+</button>
+            <button class="btn btn-success add-eq">Añadir otro equipo</button>
         </div>
+        <p></p>
     </div>
     {% endfor %}
-    {{comments.comments}}
-    <div class="row spacer">
-        <div class="col-4 offset-2">
-            <button type="submit" class="btn btn-block btn-primary">Solicitar</button>
-        </div>
+    <div class="form-group">
+        <label>Comentarios</label>
+        {% render_field comments.comments class="form-control col-md-4" %}
     </div>
+    <button type="button" class="btn col-2 btn-primary" data-toggle="modal" data-target="#confirmModal">
+        Enviar solicitud
+    </button>
 </form>
 {% endblock %}
-
 
 {% block custom_js %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -95,24 +124,24 @@
         return false;
     }
     function replaceBtnCat(selector){
-        var conditionRow = $('.cat-form-row:not(:last)');
-        conditionRow.find('.btn.add-cat-form-row')
+        var conditionRow = $('.cat-form-col:not(:last)');
+        conditionRow.find('.btn.add-cat')
             .removeClass('btn-success').addClass('btn-danger')
-            .removeClass('add-cat-form-row').addClass('remove-cat-form-row')
-            .html('-');
+            .removeClass('add-cat').addClass('remove-cat')
+            .html('Eliminar esta categoría');
     }
     function replaceBtnEq(selector){
-        var conditionRow = $('.eq-form-row:not(:last)');
-        conditionRow.find('.btn.add-eq-form-row')
+        var conditionRow = $('.eq-form-col:not(:last)');
+        conditionRow.find('.btn.add-eq')
             .removeClass('btn-success').addClass('btn-danger')
-            .removeClass('add-eq-form-row').addClass('remove-eq-form-row')
-            .html('-');
+            .removeClass('add-eq').addClass('remove-eq')
+            .html('Eliminar este equipo');
     }
     function deleteFormCat(prefix, btn) {
         var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
         if (total > 1) {
-            btn.closest('.cat-form-row').remove();
-            var forms = $('.cat-form-row');
+            btn.closest('.cat-form-col').remove();
+            var forms = $('.cat-form-col');
             $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
             for (var i = 0, formCount = forms.length; i < formCount; i++) {
                 $(forms.get(i)).find(':input').each(function () {
@@ -136,24 +165,24 @@
         }
         return false;
     }
-    $(document).on('click', '.add-cat-form-row', function (e) {
+    $(document).on('click', '.add-cat', function (e) {
         e.preventDefault();
-        cloneMore('.cat-form-row:last', 'form');
-        replaceBtnCat('.cat-form-row:last')
+        cloneMore('.cat-form-col:last', 'form');
+        replaceBtnCat('.cat-form-col:last')
         return false;
     });
-    $(document).on('click', '.add-eq-form-row', function (e) {
+    $(document).on('click', '.add-eq', function (e) {
         e.preventDefault();
-        cloneMore('.eq-form-row:last', 'form');
-        replaceBtnEq('.eq-form-row:last')
+        cloneMore('.eq-form-col:last', 'form');
+        replaceBtnEq('.eq-form-col:last')
         return false;
     });
-    $(document).on('click', '.remove-cat-form-row', function (e) {
+    $(document).on('click', '.remove-cat', function (e) {
         e.preventDefault();
         deleteFormCat('form', $(this));
         return false;
     });
-    $(document).on('click', '.remove-eq-form-row', function (e) {
+    $(document).on('click', '.remove-eq', function (e) {
         e.preventDefault();
         deleteFormEq('form', $(this));
         return false;
