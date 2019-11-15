@@ -4,6 +4,8 @@ from .models import (Category, Equipment, Attribute, Group,
                     Request, Request_Category, Loan, Repair, 
                     EquipmentDebt, Transaction, Attribute_Equipment)
 from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError 
+
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -145,7 +147,7 @@ class GroupForm(forms.ModelForm):
     class Meta:
         model = Group
         fields = ['name']
-
+        labels = { 'name' : 'Nombre'}
         error_messages = {
             'name' : {
                 'required' : 'Campo obligatorio',
@@ -322,6 +324,7 @@ class EquipmentDebtReturnForm(forms.ModelForm):
 
 class TransactionForm(forms.ModelForm):
     class Meta:
+        
         model = Transaction
         fields = ['user', 'transaction', 'reason']
         labels = {
@@ -331,7 +334,7 @@ class TransactionForm(forms.ModelForm):
         }
         error_messages = {
             'user' : {
-                'required' : 'Campo obligatorio',
+                'required' : "Campo obligatorio"
             },
             'transaction' : {
                 'required' : 'Campo obligatorio',
