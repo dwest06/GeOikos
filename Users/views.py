@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from django.db.models import Q
 from .forms import UserCreationForm, UserChangeForm, UserLoginForm
 from .models import User
 
 # Decorators
 from .permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
-
+from .management.commands.create_groups import GROUPS
 # Home
 #def home(request):
 #  return render(request,'templates/oikos/home.html')
@@ -28,7 +30,7 @@ def login_user(request):
         return redirect("Users:login")
     else:
         form = UserLoginForm()
-        return render(request, "Users/create_user.html", {"form" : form, 'title': 'Iniciar Sesión'})
+        return render(request, "Users/login.html", {"form" : form, 'title': 'Iniciar Sesión'})
 
 @login_required
 def logout_user(request):
@@ -42,21 +44,32 @@ def create_user(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            group = Group.objects.get(name = request.POST.get('group'))
+            user.groups.add(group)
             messages.success(request, "Usuario Agregado")
         else:
-            messages.error(request,"Datos Inv?lidos")
+            messages.error(request,"Datos Invalidos")
         return redirect("oikos:home")
     else:
         form = UserCreationForm()
-        return render(request, "Users/create_user.html", {"form" : form, 'title': 'Crear Usuario'})
+        context = {
+            "form" : form, 
+            'title': 'Crear Usuario', 
+            'groups': GROUPS
+        }
+        return render(request, "Users/create_user.html", context)
 
 @login_required
 def modify_user(request, pk, *args, **kwargs):
     if request.method == "POST":
         form = UserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            if request.user.groups.filter(Q(name='admin') | Q(name='gestor_usuarios')).exists():
+                group = Group.objects.get(name = request.POST.get('group'))
+                user.groups.clear()
+                user.groups.add(group)
             messages.success(request, "Usuario Modificado")
         else:
             messages.error(request,"Datos Inalidos")
@@ -64,7 +77,13 @@ def modify_user(request, pk, *args, **kwargs):
     else:
         user = User.objects.get(pk = pk)
         form = UserChangeForm(instance=user)
-        return render(request, "Users/create_user.html", {"form" : form})
+        context = {
+            "form" : form, 
+            'title': 'Modificar Usuario', 
+            'groups': GROUPS, 
+            'user_group': request.user.groups.first().name
+        }
+        return render(request, "Users/create_user.html", context)
 
 @login_required
 @is_gestor_usuario  

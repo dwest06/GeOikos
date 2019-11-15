@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load tags %}
 
 {% block page-title %}
 {{title}}
@@ -13,7 +14,20 @@
             <form action="" method="POST" class="form-group" >
                 {% csrf_token %}
                 {{form.as_p}}
-                <button type="submit" class="btn btn-success">Ingresar</button>
+                {% if request.user|is_gestor_usuario %}
+                    <select name="group" class="form-control">
+                        <option value="">Elegir</option>
+                        {% for group in groups %}
+                            {% if user_group == group %}
+                                <option value="{{group}}" selected>{{group}}</option>
+                            {% else %}
+                                <option value="{{group}}">{{group}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% endif %}
+                <br>
+                <button type="submit" class="btn btn-success">Aceptar</button>
             </form>
         </div>
     </div>

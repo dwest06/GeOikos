@@ -48,6 +48,8 @@ def createGroup(request):
         grForm = GroupForm()
         return render(request, "Inventory/create_group.html", {"form" : grForm})
 
+@login_required
+@is_cuarto_equipo
 def EquipCatSelection(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)
@@ -55,8 +57,8 @@ def EquipCatSelection(request):
             category = form.cleaned_data['category'].pk
             return redirect("Inventory:create_equipment_value", cat=category)
         else:
-            messages.error(request,"No existe esta categoria.")
-        return redirect("Inventory:home_inventory")
+            messages.error(request,"No existe esta categoría.")
+            return redirect("Inventory:home_inventory")
     else:
         form = CatQueryForm()
         return render(request, "Inventory/create_equipment.html", {"form" : form})

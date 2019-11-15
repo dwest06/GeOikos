@@ -10,7 +10,7 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ['name']
         labels = {
-            'name' : 'Nombre de la categoria'
+            'name' : 'Nombre de la categoría'
         }
         error_messages = {
             'name' : {
@@ -353,6 +353,7 @@ class CatReqForm(forms.Form):
 
 class CatQueryForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all())
+    error_messages = {'category' : {'invalid' : 'Campo obligatorio'}}
 
 CatReqFormset = formset_factory(
     CatReqForm,
