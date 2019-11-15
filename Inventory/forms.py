@@ -10,7 +10,7 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ['name']
         labels = {
-            'name' : 'Nombre de la categoría'
+            'name' : 'Nombre de la categoria'
         }
         error_messages = {
             'name' : {
@@ -50,6 +50,11 @@ class EquipmentForm(forms.ModelForm):
                 'invalid' : 'Fecha inválida',
             }
         }
+    def clean_serial(self):
+        serial = self.cleaned_data['serial']
+        if quantity < 0:
+            raise forms.ValidationError("Debes especificar una cantidad positiva")
+        return quantity
 
 AttributeFormset = modelformset_factory(
     Attribute,
@@ -59,7 +64,7 @@ AttributeFormset = modelformset_factory(
         'name' : 'Nombre del Atributo',
         'attribute_type' : 'Tipo de dato',
         'unit' : 'Unidad',
-        'nullity' : '(Unidad no esencial)'
+        'nullity' : '(No esencial)'
     },
     error_messages = {
         'name' : {
@@ -353,7 +358,6 @@ class CatReqForm(forms.Form):
 
 class CatQueryForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all())
-    error_messages = {'category' : {'invalid' : 'Campo obligatorio'}}
 
 CatReqFormset = formset_factory(
     CatReqForm,

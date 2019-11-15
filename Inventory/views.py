@@ -63,6 +63,8 @@ def EquipCatSelection(request):
         form = CatQueryForm()
         return render(request, "Inventory/create_equipment.html", {"form" : form})
 
+@login_required
+@is_cuarto_equipo
 def createEquipment(request, cat):
     if request.method == "POST":
         equipForm = EquipmentForm(request.POST)
