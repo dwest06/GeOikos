@@ -28,7 +28,6 @@ table {
     border-collapse: collapse;
     border: 2px solid green;
     letter-spacing: 1px;
-    font-family: Helvetica;
     font-size: .8rem;
     text-align: center;
 }
@@ -46,16 +45,17 @@ td {
     <div class="row" >
         <div>
             <br>
-            <table> 
+            <table>
+                <caption>Tabla</caption>
                     <thead>
-                        <th>Nombre</th>
-                        <th>Serial</th>
-                        <th>Fecha de Ingreso</th>
-                        <th>Fecha de Elaboracion</th>
-                        <th>Descontinuado</th>
-                        <th>Fecha de Descontinuado</th>
-                        <th>Notas</th>
-                        <th>Categoria</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Serial</th>
+                        <th scope="col">Fecha de Ingreso</th>
+                        <th scope="col">Fecha de Elaboracion</th>
+                        <th scope="col">Descontinuado</th>
+                        <th scope="col">Fecha de Descontinuado</th>
+                        <th scope="col">Notas</th>
+                        <th scope="col">Categoria</th>
                     </thead>
                     <tbody>
                         {% for t in table %}

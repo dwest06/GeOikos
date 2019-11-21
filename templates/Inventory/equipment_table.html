@@ -21,18 +21,19 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table table-hover w-full"> 
+                        <table class="table table-hover w-full">
+                            <caption>Tabla para Equipos</caption>
                             <thead style="color:black;" >
-                                <th>Nombre</th>
-                                <th>Serial</th>
-                                <th>Fecha de Ingreso</th>
-                                <th>Fecha de Elaboracion</th>
-                                <th>Descontinuado</th>
-                                <th>Fecha de Descontinuado</th>
-                                <th>Notas</th>
-                                <th>Categoria</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Serial</th>
+                                <th scope="col">Fecha de Ingreso</th>
+                                <th scope="col">Fecha de Elaboracion</th>
+                                <th scope="col">Descontinuado</th>
+                                <th scope="col">Fecha de Descontinuado</th>
+                                <th scope="col">Notas</th>
+                                <th scope="col">Categoria</th>
                                 {% for att in attributes %}
-                                    <th>{{att.name}}</th>
+                                    <th scope="col">{{att.name}}</th>
                                 {% endfor %}
                             </thead>
                             <tbody>
