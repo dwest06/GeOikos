@@ -3,11 +3,11 @@ from .models import (
     Category ,
     Equipment ,
     Attribute ,
-    Attribute_Equipment ,
+    AttributeEquipmet ,
     Choices ,
     Group ,
     Request ,
-    Request_Category ,
+    RequestCategory ,
     Loan ,
     Repair ,
     EquipmentDebt ,
@@ -17,11 +17,11 @@ from .models import (
 admin.site.register(Category)
 admin.site.register(Equipment)
 admin.site.register(Attribute)
-admin.site.register(Attribute_Equipment)
+admin.site.register(AttributeEquipmet)
 admin.site.register(Choices)
 admin.site.register(Group)
 admin.site.register(Request)
-admin.site.register(Request_Category)
+admin.site.register(RequestCategory)
 admin.site.register(Loan)
 admin.site.register(Repair)
 admin.site.register(EquipmentDebt)

@@ -1,8 +1,8 @@
 from django import forms
 from django.forms import formset_factory, modelformset_factory
 from .models import (Category, Equipment, Attribute, Group, 
-                    Request, Request_Category, Loan, Repair, 
-                    EquipmentDebt, Transaction, Attribute_Equipment)
+                    Request, RequestCategory, Loan, Repair, 
+                    EquipmentDebt, Transaction, AttributeEquipmet)
 from django.core.validators import MaxValueValidator
 from django.core.exceptions import ValidationError 
 
@@ -54,9 +54,9 @@ class EquipmentForm(forms.ModelForm):
         }
     def clean_serial(self):
         serial = self.cleaned_data['serial']
-        if quantity < 0:
+        if serial < 0:
             raise forms.ValidationError("Debes especificar una cantidad positiva")
-        return quantity
+        return serial
 
 AttributeFormset = modelformset_factory(
     Attribute,
@@ -87,7 +87,7 @@ AttributeFormset = modelformset_factory(
 
 class IntValueForm(forms.ModelForm):
     class Meta:
-        model = Attribute_Equipment
+        model = AttributeEquipmet
         fields = ['value_int']
         labels = { 'value_int' : ''}
 
@@ -99,7 +99,7 @@ class IntValueForm(forms.ModelForm):
         
 class TxtValueForm(forms.ModelForm):
     class Meta:
-        model = Attribute_Equipment
+        model = AttributeEquipmet
         fields = ['value_txt']
         labels = { 'value_txt' : ''}
 
@@ -112,7 +112,7 @@ class TxtValueForm(forms.ModelForm):
 
 class StrValueForm(forms.ModelForm):
     class Meta:
-        model = Attribute_Equipment
+        model = AttributeEquipmet
         fields = ['value_str']
         labels = { 'value_str' : ''}
 
@@ -125,7 +125,7 @@ class StrValueForm(forms.ModelForm):
 
 class DateValueForm(forms.ModelForm):
     class Meta:
-        model = Attribute_Equipment
+        model = AttributeEquipmet
         fields = ['value_date']
         labels = { 'value_date' : ''}
 
@@ -137,13 +137,13 @@ class DateValueForm(forms.ModelForm):
 
 class BoolValueForm(forms.ModelForm):
     class Meta:
-        model = Attribute_Equipment
+        model = AttributeEquipmet
         fields = ['value_bool']
         labels = { 'value_bool' : ''}
 
 class ChoiceValueForm(forms.ModelForm):
     class Meta:
-        model = Attribute_Equipment
+        model = AttributeEquipmet
         fields = ['value_cho']
         labels = { 'value_cho' : ''}
 
@@ -173,9 +173,9 @@ class RequestForm(forms.ModelForm):
             }
         }
 
-class Request_CategoryForm(forms.ModelForm):
+class RequestCategoryForm(forms.ModelForm):
     class Meta:
-        model = Request_Category
+        model = RequestCategory
         fields = ['request', 'category', 'quantity']
 
         error_messages = {

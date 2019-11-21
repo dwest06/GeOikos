@@ -57,7 +57,7 @@ class Choices(models.Model):
     def __str__(self):
         return self.option_name
 
-class Attribute_Equipment(models.Model):
+class AttributeEquipmet(models.Model):
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
     attribute = models.ForeignKey(Attribute,on_delete=models.CASCADE)
     value_str = models.CharField(max_length=100,null=True)
@@ -75,12 +75,12 @@ class Request(models.Model):
     specs = models.TextField(null=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     equipment = models.ManyToManyField(Equipment)
-    category = models.ManyToManyField(Category,through='Request_Category' )
+    category = models.ManyToManyField(Category,through='RequestCategory' )
 
     def __str__(self):
         return 'Solicitud de ' + str(self.user)
 
-class Request_Category(models.Model):
+class RequestCategory(models.Model):
     request = models.ForeignKey(Request, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
