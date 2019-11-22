@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../static/css/contacto.css">
     <link rel="stylesheet" href="../../static/css/expediciones.css">
     <link rel="stylesheet" href="../../static/css/cursos.css">
-    <link rel="icon" href="../../static/img/favicon.png"></link>
+    <link rel="icon" href="../../static/img/favicon.png">
       
     <!-- Scripts de Oikos -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -70,7 +70,9 @@
 {% block content %}
 {% endblock %}
 
+{% include "footer.html" %}
 
+{% comment %} 
 <footer class="blue" style="position:relative; z-index:1;">
     <div class="wrap">
       <div class="foo-logo">
@@ -127,7 +129,7 @@
       Grupo Excursionista Oikos - Universidad Simón Bolívar, Casa del Estudiante, PB<br>
       <span>Diseño y desarrollo por <a href="https://lual.com.ve">Lual</a></span>
     </div>
-  </footer>
+  </footer> {% endcomment %}
   </body>
   </html>
   

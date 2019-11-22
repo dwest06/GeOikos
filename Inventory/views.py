@@ -7,7 +7,7 @@ from Users.models import User
 from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
 
 @login_required
-def homeInventarioView(request):
+def home_inventario_view(request):
     context = {
         'deuda' : 0.00,
         'grupo' : request.user.groups.all().first()
@@ -16,7 +16,7 @@ def homeInventarioView(request):
 
 @login_required
 @is_admin
-def createCategory(request):
+def create_category(request):
     if request.method == "POST":
         cat_form = CategoryForm(request.POST)
         att_formset = AttributeFormset(request.POST)
@@ -38,7 +38,7 @@ def createCategory(request):
 
 @login_required
 @is_cuarto_equipo
-def createGroup(request):
+def create_group(request):
     if request.method == "POST":
         gr_form = GroupForm(request.POST)
         if gr_form.is_valid():
@@ -53,7 +53,7 @@ def createGroup(request):
 
 @login_required
 @is_cuarto_equipo
-def EquipCatSelection(request):
+def equip_cat_selection(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)
         if form.is_valid():
@@ -68,31 +68,35 @@ def EquipCatSelection(request):
 
 @login_required
 @is_cuarto_equipo
-def createEquipment(request, cat):
+def create_equipment(request, cat):
+    def append_att_forms(att, att_forms, att_name=None):
+        if att.attribute_type=='INT' or att.attribute_type=='FLT':
+            att_forms.append(IntValueForm(request.POST), att_name)
+        elif att.attribute_type=='TXT':
+            att_forms.append(TxtValueForm(request.POST), att_name)
+        elif att.attribute_type=='STR':
+            att_forms.append(StrValueForm(request.POST), att_name)
+        elif att.attribute_type=='BOO':
+            att_forms.append(BoolValueForm(request.POST), att_name)
+        elif att.attribute_type=='DAT':
+            att_forms.append(DateValueForm(request.POST), att_name)
+        elif att.attribute_type=='CHO':
+            att_forms.append(ChoiceValueForm(request.POST), att_name)
+
+    
     if request.method == "POST":
         equip_form = EquipmentForm(request.POST)
         cat_attributes = list(Attribute.objects.filter(category=cat))
         att_forms=[]
         for att in cat_attributes:
-            if att.attribute_type=='INT' or att.attribute_type=='FLT':
-                att_forms.append(IntValueForm(request.POST))
-            elif att.attribute_type=='TXT':
-                att_forms.append(TxtValueForm(request.POST))
-            elif att.attribute_type=='STR':
-                att_forms.append(StrValueForm(request.POST))
-            elif att.attribute_type=='BOO':
-                att_forms.append(BoolValueForm(request.POST))
-            elif att.attribute_type=='DAT':
-                att_forms.append(DateValueForm(request.POST))
-            elif att.attribute_type=='CHO':
-                att_forms.append(ChoiceValueForm(request.POST))
-        if equip_form.is_valid() and all(attForm.is_valid() for attForm in att_forms):
+            append_att_forms(att,att_forms)
+        if equip_form.is_valid() and all(att_form.is_valid() for att_form in att_forms):
             equipment= equip_form.save(commit=False)
             equipment.category = Category.objects.get(pk=cat)
             equipment.save()
             i=0
-            for attForm in att_forms:
-                value = attForm.save(commit=False)
+            for att_form in att_forms:
+                value = att_form.save(commit=False)
                 value.equipment = equipment
                 value.attribute = cat_attributes[i]
                 value.save()
@@ -106,25 +110,14 @@ def createEquipment(request, cat):
         cat_attributes = list(Attribute.objects.filter(category=cat))
         att_forms=[]
         for att in cat_attributes:
-            attName = att.name
-            if att.attribute_type=='INT' or att.attribute_type=='FLT':
-                att_forms.append((IntValueForm(),attName))
-            elif att.attribute_type=='TXT':
-                att_forms.append((TxtValueForm(),attName))
-            elif att.attribute_type=='STR':
-                att_forms.append((StrValueForm(),attName))
-            elif att.attribute_type=='BOO':
-                att_forms.append((BoolValueForm(),attName))
-            elif att.attribute_type=='DAT':
-                att_forms.append((DateValueForm(),attName))
-            elif att.attribute_type=='CHO':
-                att_forms.append((ChoiceValueForm(),attName))
+            att_name = att.name
+            append_att_forms(att,att_forms, att_name)
 
         return render(request, "Inventory/create_equipment_value.html", {"equipform" : equip_form, "attforms" : att_forms})
 
 @login_required
 @is_activo
-def createRequest(request):
+def create_request(request):
     if request.method == "POST":
         catformset = CatReqFormset(request.POST)
         eqformset  = EqReqFormset(request.POST)
@@ -172,7 +165,7 @@ def createRequest(request):
 
 @login_required
 @is_pasivo
-def CatQueryView(request):
+def cat_query_view(request):
     if request.method == "POST":
         form = CatQueryForm(request.POST)
         if form.is_valid():
@@ -187,7 +180,7 @@ def CatQueryView(request):
 
 @login_required
 @is_pasivo
-def AttsQueryView(request, category):
+def atts_query_view(request, category):
     if request.method == "POST":
         form = AttsQueryForm(category,request.POST)
         if form.is_valid():
@@ -231,7 +224,7 @@ def manage_users(request, *args, **kwargs):
 
 @login_required
 @is_cuarto_equipo
-def LoanCreation(request):
+def loan_creation(request):
     if request.method == "POST":
         lc_form = LoanCreationForm(request.POST)
         if lc_form.is_valid():
@@ -246,7 +239,7 @@ def LoanCreation(request):
 
 @login_required
 @is_pasivo
-def ShowEquipment(request,category):
+def show_equipment(request,category):
     atts = Attribute.objects.filter(category=category)
     equip = Equipment.objects.filter(category=category)
     vals = []
@@ -272,7 +265,7 @@ def ShowEquipment(request,category):
 
 @login_required
 @is_tesorero
-def loadTransaction(request):
+def load_transaction(request):
     if request.method == "POST":
         form = TransactionForm(request.POST)
         if form.is_valid() and form.cleaned_data['transaction'] > 0.00:

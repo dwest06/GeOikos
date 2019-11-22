@@ -10,9 +10,7 @@ from .models import User
 # Decorators
 from .permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
 from .management.commands.create_groups import GROUPS
-# Home
-#def home(request):
-#  return render(request,'templates/oikos/home.html')
+
 
 # Authentication
 def login_user(request):
@@ -91,17 +89,17 @@ def modify_user(request, pk, *args, **kwargs):
         else:
             messages.error(request,"Datos Inalidos")
         return redirect("Inventory:home_inventory")
-    else:
-        user = User.objects.get(pk = pk)
-        form = UserChangeForm(instance=user)
-        context = {
-            "form" : form, 
-            'title': 'Modificar Usuario', 
-            'groups': GROUPS, 
-            'user_group': request.user.groups.first().name,
-            'status': dict(User.STATUS_CHOICES)
-        }
-        return render(request, "Users/create_user.html", context)
+    
+    user = User.objects.get(pk = pk)
+    form = UserChangeForm(instance=user)
+    context = {
+        "form" : form, 
+        'title': 'Modificar Usuario', 
+        'groups': GROUPS, 
+        'user_group': request.user.groups.first().name,
+        'status': dict(User.STATUS_CHOICES)
+    }
+    return render(request, "Users/create_user.html", context)
 
 @login_required
 @is_gestor_usuario  
