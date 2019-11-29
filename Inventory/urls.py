@@ -15,5 +15,8 @@ urlpatterns = [
     path('create-loan', views.loan_creation , name="create_loan"),
     path('show-equipment/<int:category>',views.show_equipment, name="show_equipment"),
     path('load-transaction', views.load_transaction, name="load_transaction"),
-    path('create-request',views.create_request, name="create_request")
+    path('create-request',views.create_request, name="create_request"),
+
+    # VISTAS DE TESORERO
+    path('tesorero', views.home_tesorero_view, name="tesorero"),
 ]

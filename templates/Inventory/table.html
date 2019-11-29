@@ -8,45 +8,16 @@
 {% endblock %}
 
 {% block content %}
-<style>
-body{
-    background-color: rgba(184, 237, 135, 0.7);
-}
-thead,
-tfoot {
-    background-color: white;
-    color: #fff;
-}
-tbody {
-    background-color: #e4f0f5;
-}
-caption {
-    padding: 10px;
-    caption-side: bottom;
-}
-table {
-    border-collapse: collapse;
-    border: 2px solid green;
-    letter-spacing: 1px;
-    font-size: .8rem;
-    text-align: center;
-}
-td,
-th {
-    border: 1px solid rgb(190, 190, 190);
-    padding: 5px 10px;
-}
-td {
-    text-align: center;
-}
-</style>
-<div class="container-fluid">
-    <br>
-    <div class="row" >
-        <div>
-            <br>
-            <table>
-                <caption>Tabla</caption>
+<div class="row" >
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3>Tabla</h3>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-hover w-full" id="table">
+                    <caption>Tabla</caption>
                     <thead>
                         <th scope="col">Nombre</th>
                         <th scope="col">Serial</th>
@@ -71,11 +42,20 @@ td {
                         </tr>
                         {% endfor %}
                     </tbody>
-                 </table>
-                
+                </table>
+            </div>
         </div>
     </div>
+</div>
     <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Volver a la Busqueda</a>
     <a class="btn btn-success" href="{% url 'oikos:home' %}">Volver al home</a>
 </div>
+{% endblock  %}
+
+{% block custom_js %}
+<script>
+  $('#table').DataTable({
+			"order" : [[0,"desc"]]
+		});
+</script>
 {% endblock  %}

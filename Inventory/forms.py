@@ -96,6 +96,11 @@ class IntValueForm(forms.ModelForm):
                 'invalid' : 'Entrada inválida'
             }
         }
+
+    def __init__(self, *args, **kwargs):
+        super(IntValueForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
         
 class TxtValueForm(forms.ModelForm):
     class Meta:
@@ -110,6 +115,11 @@ class TxtValueForm(forms.ModelForm):
             }
         }
 
+    def __init__(self, *args, **kwargs):
+        super(TxtValueForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
 class StrValueForm(forms.ModelForm):
     class Meta:
         model = AttributeEquipmet
@@ -123,6 +133,11 @@ class StrValueForm(forms.ModelForm):
             }
         }
 
+    def __init__(self, *args, **kwargs):
+        super(StrValueForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
 class DateValueForm(forms.ModelForm):
     class Meta:
         model = AttributeEquipmet
@@ -135,17 +150,32 @@ class DateValueForm(forms.ModelForm):
             }
         }
 
+    def __init__(self, *args, **kwargs):
+        super(DateValueForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+    
 class BoolValueForm(forms.ModelForm):
     class Meta:
         model = AttributeEquipmet
         fields = ['value_bool']
         labels = { 'value_bool' : ''}
 
+    def __init__(self, *args, **kwargs):
+        super(BoolValueForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
 class ChoiceValueForm(forms.ModelForm):
     class Meta:
         model = AttributeEquipmet
         fields = ['value_cho']
         labels = { 'value_cho' : ''}
+
+    def __init__(self, *args, **kwargs):
+        super(ChoiceValueForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
 
 
 class GroupForm(forms.ModelForm):

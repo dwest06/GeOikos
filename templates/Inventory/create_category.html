@@ -2,22 +2,16 @@
 {% load widget_tweaks %}
 
 {% block page-title %}
-    {% if heading %}
-        <h3>Categoría </h3>
-    {% endif %}
+    Categoría
 {% endblock %}
 
 {% block content %}
 <div class="row">
-    <div class="offset-md-3 col-md-6">
+    <div class="offset-lg-2 col-lg-8 col-md-12">
         <div class="card">
             <div class="card-header">
-                <h1 style="text-align: center;
-                color: rgb(0, 0, 0);
-                font-family: Consolas, monaco, monospace;
-                font-size: 50px;"> Crear Categoría</h1>
-                <p style="font-family: Consolas, monaco, monospace; text-align:center;
-                font-size: 20px;">Herramienta de creación de categorías. Para crear una categoría debe crear sus atributos.</p>
+                <h1>Crear Categoría</h1>
+                <p>Herramienta de creación de categorías. Para crear una categoría debe crear sus atributos.</p>
             </div>
 
             <div class="card-body">
@@ -58,14 +52,14 @@
                             <div class="input-group-append">
                                 <button class="btn btn-success add-form-col">Añadir otro atributo</button>
                             </div>
-                            <p></p>  
                         </div>
                     {% endfor %}
-                    <p></p>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
-                        Añadir Categoría
-                    </button>
                 </form>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
+                    Añadir Categoría
+                </button>
             </div>
         </div>
     </div>

@@ -2,56 +2,62 @@
 {% load widget_tweaks %}
 
 {% block page-title %}
-    {% if heading %}
-        <h3>{{heading}}</h3>
-    {% endif %}
+    Equipos Disponibles
 {% endblock %}
 
 {% block content %}
 
-<div class="container-fluid">
-    <br>
     <div class="row" >
-        <div>
-            <br>
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Equipos</h3>
-                    </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Equipos</h3>
+                </div>
 
-                    <div class="card-body">
-                        <table class="table table-hover w-full">
-                            <caption>Tabla para Equipos</caption>
-                            <thead style="color:black;" >
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Serial</th>
-                                <th scope="col">Fecha de Ingreso</th>
-                                <th scope="col">Fecha de Elaboracion</th>
-                                <th scope="col">Descontinuado</th>
-                                <th scope="col">Fecha de Descontinuado</th>
-                                <th scope="col">Notas</th>
-                                <th scope="col">Categoria</th>
-                                {% for att in attributes %}
-                                    <th scope="col">{{att.name}}</th>
+                <div class="card-body">
+                    <table class="table table-hover w-full" id="table">
+                        <caption>Tabla para Equipos</caption>
+                        <thead style="color:black;" >
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Serial</th>
+                            <th scope="col">Fecha de Ingreso</th>
+                            <th scope="col">Fecha de Elaboracion</th>
+                            <th scope="col">Descontinuado</th>
+                            <th scope="col">Fecha de Descontinuado</th>
+                            <th scope="col">Notas</th>
+                            <th scope="col">Categoria</th>
+                            {% for att in attributes %}
+                                <th scope="col">{{att.name}}</th>
+                            {% endfor %}
+                            <th scope="col">Solicitar</th>
+                        </thead>
+                        <tbody>
+                            {% for t in values %}
+                            <tr>
+                                {% for val in t %}
+                                <td>{{val}}</td>
                                 {% endfor %}
-                            </thead>
-                            <tbody>
-                                {% for t in values %}
-                                <tr>
-                                    {% for val in t %}
-                                    <td>{{val}}</td>
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>         
-                    </div>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-primary">
+                                        <i class="fas fa-hand-point-up"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>         
                 </div>
             </div>
         </div>
     </div>
-    <p></p>
+    
     <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Volver a la Busqueda</a>
-</div>
+{% endblock  %}
+
+{% block custom_js %}
+<script>
+  $('#table').DataTable({
+			"order" : [[0,"desc"]]
+		});
+</script>
 {% endblock  %}

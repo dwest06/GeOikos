@@ -2,13 +2,75 @@
 {% load widget_tweaks %}
 
 {% block page-title %}
-    {% if heading %}
-        <h3>Solicitud</h3>
-    {% endif %}
+    Solicitud
 {% endblock %}
 
 {% block content %}
-      
+<div class="row">
+    <div class="offset-xl-4 col-xl-4 offset-md-2 col-md-8 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h1>Solicitar equipo</h1>
+                <p>Herramienta de solicitud de equipo. Puede especificar que tipo de 
+                    equipo desea solicitar (categoría) o qué equipo en específico desea solicitar.</p>
+            </div>
+
+            <div class="card-body">
+                <form class="form-horizontal form-group" id="create-form" method="POST" action="">
+                    {% csrf_token %}
+                    {{ catformset.management_form }}
+                    {% for form in catformset %}
+                    <div class="cat-form-col">
+                        <div class="form-row mb-20"> 
+                            <div class="form-group col">
+                                <label class="control-label">{{form.category.label}}</label>
+                                {% render_field form.category class="form-control" %}
+                            </div>
+                            <div class="form-group col">
+                                <label class="control-label">{{form.quantity.label}}</label>
+                                {% render_field form.quantity class="form-control" min=0 %}
+                                <small class="form-text text-muted">
+                                    Ingrese una cantidad mayor a 0
+                                </small>
+                            </div>
+                        </div>
+                        <div class="input-group-append mb-20">
+                            <button class="btn btn-success add-cat">Añadir otra categoría</button>
+                        </div>
+                        <p></p>
+                    </div>
+                    {% endfor %}
+                    {{ eqformset.management_form }}
+                    {% for form in eqformset %}
+                    <div class="eq-form-col">
+                        <div class="form-row mb-20"> 
+                            <div class="col">
+                                <label class="control-label">{{form.equipment.label}}</label>
+                                {% render_field form.equipment class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="input-group-append mb-20">
+                            <button class="btn btn-success add-eq">Añadir otro equipo</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="form-row mb-20">
+                        <div class="col">
+                            <label>Comentarios</label>
+                            {% render_field comments.comments class="form-control" %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Enviar solicitud</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Modal -->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -29,62 +91,4 @@
         </div>
     </div>
 </div>
-    
-<h1 style="text-align: left;
-color: rgb(0, 0, 0);
-font-family: Consolas, monaco, monospace;
-font-size: 50px;"> Solicitar equipo</h1>
-<p style="font-family: Consolas, monaco, monospace;
-font-size: 20px;">Herramienta de solicitud de equipo. 
-Puede especificar que tipo de equipo desea solicitar (categoría) 
-o qué equipo en específico desea solicitar.</p>
-
-<form class="form-horizontal" id="create-form" method="POST" action="">
-    {% csrf_token %}
-    {{ catformset.management_form }}
-    {% for form in catformset %}
-    <div class="cat-form-col">
-        <div class="form-row"> 
-            <div class="form-group col-md-2">
-                <label class="control-label">{{form.category.label}}</label>
-                {% render_field form.category class="form-control" %}
-            </div>
-            <div class="form-group col-md-2">
-                <label class="control-label">{{form.quantity.label}}</label>
-                {% render_field form.quantity class="form-control" %}
-                <small class="form-text text-muted">
-                    Ingrese una cantidad mayor a 0
-                </small>
-            </div>
-        </div>
-        <div class="input-group-append">
-            <button class="btn btn-success add-cat">Añadir otra categoría</button>
-        </div>
-        <p></p>
-    </div>
-    {% endfor %}
-    {{ eqformset.management_form }}
-    {% for form in eqformset %}
-    <div class="eq-form-col">
-        <div class="form-row"> 
-            <div class="form-group col-md-2">
-                <label class="control-label">{{form.equipment.label}}</label>
-                {% render_field form.equipment class="form-control" %}
-            </div>
-        </div>
-        <div class="input-group-append">
-            <button class="btn btn-success add-eq">Añadir otro equipo</button>
-        </div>
-        <p></p>
-    </div>
-    {% endfor %}
-    <div class="form-group">
-        <label>Comentarios</label>
-        {% render_field comments.comments class="form-control col-md-4" %}
-    </div>
-    <button type="button" class="btn col-2 btn-primary" data-toggle="modal" data-target="#confirmModal">
-        Enviar solicitud
-    </button>
-</form>
-
 {% endblock %}

@@ -6,92 +6,99 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+    <!-- DataTable -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    
     <style type="text/css">
         /* Sidebar */
-        #sidebar-wrapper{
-            z-index:1;
+        #sidebar-wrapper {
+            z-index: 1;
             position: absolute;
-            width:0;
-            height:100%;
-            overflow-y:hidden;
+            width: 0;
+            height: 100%;
+            overflow-y: hidden;
             background: #5b4282;
-            opacity:0.9;
-            transition:all .5s;
-            display:flex;
-            align-items:center;
+            opacity: 0.9;
+            transition: all .5s;
+            display: flex;
+            align-items: center;
         }
 
         /* Main Content */
-        #page-content-wrapper{
-            width: 100%;	
+        #page-content-wrapper {
+            width: 100%;
             position: absolute;
-            padding:15px;
-            transition:all .5s;
+            padding: 15px;
+            transition: all .5s;
         }
 
-        #menu-toggle{
-            transition:all .3s;
-            font-size:2em;
+        #menu-toggle {
+            transition: all .3s;
+            font-size: 2em;
         }
+
         /* Change the width of the sidebar to display it*/
-        #wrapper.menuDisplayed #sidebar-wrapper{
-            width:250px;
+        #wrapper.menuDisplayed #sidebar-wrapper {
+            width: 250px;
         }
 
-        #wrapper.menuDisplayed #page-content-wrapper{
-            padding-left:250px;
+        #wrapper.menuDisplayed #page-content-wrapper {
+            padding-left: 250px;
         }
 
         /* Sidebar styling */
-        .sidebar-nav{
-            padding:0;
-            list-style:none; 
-            transition:all .5s;
-            width:100%;
-            text-align:center;
+        .sidebar-nav {
+            padding: 0;
+            list-style: none;
+            transition: all .5s;
+            width: 100%;
+            text-align: center;
         }
 
-        .sidebar-nav li{
-        line-height:40px;  
-            width:100%;
-            transition:all .3s;
-            padding:10px;
+        .sidebar-nav li {
+            line-height: 40px;
+            width: 100%;
+            transition: all .3s;
+            padding: 10px;
         }
 
         .sidebar-nav li a {
-            display:block;
-            text-decoration:none;
-            color:#ddd;
+            display: block;
+            text-decoration: none;
+            color: #ddd;
         }
 
-        .sidebar-nav li:hover{
-            background:#846bab;
+        .sidebar-nav li:hover {
+            background: #846bab;
         }
-        .mb-20{
+
+        .mb-20 {
             margin-bottom: 20px;
         }
 
         .form-group.required .control-label:after {
-            content:"*";
-            color:red;
+            content: "*";
+            color: red;
         }
     </style>
 
     <!-- CSS de GEOikos -->
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/styles.css">
-	<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/index.css">
-	<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/n-oikos.css">
-	<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/contacto.css">
-	<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/expediciones.css">
-	<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/cursos.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/index.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/n-oikos.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/contacto.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/expediciones.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/cursos.css">
     <link rel="icon" href="{{ site.baseurl }}/assets/img/favicon.png">
-    
+
     <!-- Scripts de Oikos -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="{{ site.baseurl }}/assets/js/scripts.js"></script>
-	<script src="{{ site.baseurl }}/assets/js/sorttable.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/scripts.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/sorttable.js"></script>
 
     {% block custom_css %}{% endblock %}
     <title>SIGEO</title>
@@ -109,60 +116,66 @@
                 {% include 'sidebar.html' %}
             </ul>
         </div>
-        
+
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-            {% include 'messages.html' %}
-            <div class="row">
-                <div class="col-lg-1">
-                    <a href="#" class="btn" id="menu-toggle"><i class="fas fa-bars"> Menú</i></a>
-                </div>
-                <div class="col-lg-11">
-                    <!-- PAGE TITLE -->
-                    <div class="mb-20 text-center">
-                        <h1 style="width:80%; margin: auto;" class="border bg-light rounded">
-                            {% block page-title %}{% endblock %}
-                        </h1>
+                {% include 'messages.html' %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="#" style="float: left;" class="btn" id="menu-toggle"><i class="fas fa-bars"></i></a>
+                        <!-- PAGE TITLE -->
+                        <div class="mb-20 text-center">
+                            <h1 style="margin: auto; padding-bottom: 10px; " class="border bg-light rounded">
+                                {% block page-title %}{% endblock %}
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <!-- PAGE CONTENT -->
+                        {% block content %}{% endblock %}
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <!-- PAGE CONTENT -->
-                    {% block content %}{% endblock %}
-                </div>
-                </div>
-            </div>
             </div>
         </div>
     </div>
-    <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-      'use strict';
-      window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
-    })();
-    </script>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <!-- DATATABLE -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $("#menu-toggle").click(function(e){
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#menu-toggle").click(function (e) {
                 e.preventDefault();
                 $("#wrapper").toggleClass("menuDisplayed");
             });
@@ -200,14 +213,14 @@
             $(selector).after(newElement);
             return false;
         }
-        function replaceBtnCat(selector){
+        function replaceBtnCat(selector) {
             var conditionRow = $('.cat-form-col:not(:last)');
             conditionRow.find('.btn.add-cat')
                 .removeClass('btn-success').addClass('btn-danger')
                 .removeClass('add-cat').addClass('remove-cat')
                 .html('Eliminar esta categoría');
         }
-        function replaceBtnEq(selector){
+        function replaceBtnEq(selector) {
             var conditionRow = $('.eq-form-col:not(:last)');
             conditionRow.find('.btn.add-eq')
                 .removeClass('btn-success').addClass('btn-danger')
@@ -265,6 +278,7 @@
             return false;
         });
     </script>
+    {% block custom_js %}{% endblock %}
 </body>
 
 </html>

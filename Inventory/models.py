@@ -127,3 +127,5 @@ class Transaction(models.Model):
     transaction = models.DecimalField(max_digits=7, decimal_places=2)
     reason = models.CharField(max_length=1,choices=REASON_OPTIONS)
     
+    def __str__(self):
+        return 'Transaccion de ' + str(self.user) + ', ' + str(self.transaction) + ', ' + str(self.reason) 

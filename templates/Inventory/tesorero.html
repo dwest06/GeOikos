@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load tags %}
+
+{% block page-title %}
+Tesorero
+{% endblock  %}
+
+{% block content %}
+<div class="row mb-20">
+  <!-- CARGAR TRANSACCION -->
+  <div class="col-md-6 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Cargar Transaccion</h3>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'Inventory:load_transaction' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+  <!-- DEUDAS TRIMISTRALES -->
+  <div class="col-md-6 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Deudas Trimestrales</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover w-full tabledat">
+          <caption>Para manejo de deudas trimestrales</caption>
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Username</th>
+              <th scope="col">Deuda</th>
+              <th scope="col">Modificar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for t in trimestral %}
+            <tr>
+              <td>{{t.user.pk}}</td>
+              <td>{{t.user.username}}</td>
+              <td>sex</td>
+              <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+              <td>
+                <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
+                  class="btn btn-danger delete-user">
+                  <i class="fas fa-times"></i>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-footer">
+        <div class="btn btn-warning">Aumento masivo</div>
+      </div>
+    </div>
+  </div>
+
+ </div> 
+<div class="row mb-20">
+    <!-- DEUDAS PAGOS -->
+  <div class="col-md-6 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Deudas de Pagos</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover w-full tabledat">
+        <caption>Para manejo de deudas de pagos</caption>
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Deuda</th>
+            <th scope="col">Modificar</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for t in pagos %}
+          <tr>
+            <td>{{t.user.pk}}</td>
+            <td>{{t.user.username}}</td>
+            <td>sex</td>
+            <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+            <td>
+              <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
+                class="btn btn-danger delete-user">
+                <i class="fas fa-times"></i>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEUDAS MULTA -->
+  <div class="col-md-6 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Deudas de Multas</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover w-full tabledat">
+        <caption>Para manejo de deudas de multas</caption>
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Deuda</th>
+            <th scope="col">Modificar</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for t in multas %}
+          <tr>
+            <td>{{t.user.pk}}</td>
+            <td>{{t.user.username}}</td>
+            <td>sex</td>
+            <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+            <td>
+              <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
+                class="btn btn-danger delete-user">
+                <i class="fas fa-times"></i>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+  
+{% endblock  %}
+
+{% block custom_js %}
+<script>
+  $('.tabledat').DataTable({
+			"order" : [[0,"desc"]]
+		});
+</script>
+{% endblock  %}

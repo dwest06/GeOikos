@@ -6,6 +6,9 @@ from .forms import *
 from Users.models import User
 from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
 
+######################
+## VISTAS PRINCIPALES
+######################
 @login_required
 def home_inventario_view(request):
     context = {
@@ -13,6 +16,19 @@ def home_inventario_view(request):
         'grupo' : request.user.groups.all().first()
     }
     return render(request, "Inventory/home.html", context)
+
+@login_required
+@is_tesorero
+def home_tesorero_view(request):
+    if request.method == "GET":
+        context = {
+            "trimestral" : Transaction.objects.filter(reason='T'),
+            "pagos" : Transaction.objects.filter(reason='P'),
+            "multas" : Transaction.objects.filter(reason='M')
+
+        }
+    return render(request, "Inventory/tesorero.html", context)
+
 
 @login_required
 @is_admin
@@ -64,32 +80,28 @@ def equip_cat_selection(request):
             return redirect("Inventory:home_inventory")
     else:
         form = CatQueryForm()
-        return render(request, "Inventory/create_equipment.html", {"form" : form})
+        return render(request, "Inventory/create_equipment.html", {"form" : form, })
 
 @login_required
 @is_cuarto_equipo
-def create_equipment(request, cat):
-    def append_att_forms(att, att_forms, att_name=None):
-        if att.attribute_type=='INT' or att.attribute_type=='FLT':
-            att_forms.append(IntValueForm(request.POST), att_name)
-        elif att.attribute_type=='TXT':
-            att_forms.append(TxtValueForm(request.POST), att_name)
-        elif att.attribute_type=='STR':
-            att_forms.append(StrValueForm(request.POST), att_name)
-        elif att.attribute_type=='BOO':
-            att_forms.append(BoolValueForm(request.POST), att_name)
-        elif att.attribute_type=='DAT':
-            att_forms.append(DateValueForm(request.POST), att_name)
-        elif att.attribute_type=='CHO':
-            att_forms.append(ChoiceValueForm(request.POST), att_name)
-
-    
+def create_equipment(request, cat):    
     if request.method == "POST":
         equip_form = EquipmentForm(request.POST)
         cat_attributes = list(Attribute.objects.filter(category=cat))
         att_forms=[]
         for att in cat_attributes:
-            append_att_forms(att,att_forms)
+            if att.attribute_type=='INT' or att.attribute_type=='FLT':
+                att_forms.append(IntValueForm(request.POST))
+            elif att.attribute_type=='TXT':
+                att_forms.append(TxtValueForm(request.POST))
+            elif att.attribute_type=='STR':
+                att_forms.append(StrValueForm(request.POST))
+            elif att.attribute_type=='BOO':
+                att_forms.append(BoolValueForm(request.POST))
+            elif att.attribute_type=='DAT':
+                att_forms.append(DateValueForm(request.POST))
+            elif att.attribute_type=='CHO':
+                att_forms.append(ChoiceValueForm(request.POST))
         if equip_form.is_valid() and all(att_form.is_valid() for att_form in att_forms):
             equipment= equip_form.save(commit=False)
             equipment.category = Category.objects.get(pk=cat)
@@ -111,9 +123,23 @@ def create_equipment(request, cat):
         att_forms=[]
         for att in cat_attributes:
             att_name = att.name
-            append_att_forms(att,att_forms, att_name)
+            if att.attribute_type=='INT' or att.attribute_type=='FLT':
+                att_forms.append((IntValueForm(),att_name))
+            elif att.attribute_type=='TXT':
+                att_forms.append((TxtValueForm(),att_name))
+            elif att.attribute_type=='STR':
+                att_forms.append((StrValueForm(),att_name))
+            elif att.attribute_type=='BOO':
+                att_forms.append((BoolValueForm(),att_name))
+            elif att.attribute_type=='DAT':
+                att_forms.append((DateValueForm(),att_name))
+            elif att.attribute_type=='CHO':
+                att_forms.append((ChoiceValueForm(),att_name))
 
-        return render(request, "Inventory/create_equipment_value.html", {"equipform" : equip_form, "attforms" : att_forms})
+
+        return render(request, "Inventory/create_equipment_value.html", context = {
+            "equipform" : equip_form, "attforms" : att_forms, 'page_title': 'Crear Equipo'}
+            )
 
 @login_required
 @is_activo
@@ -276,6 +302,6 @@ def load_transaction(request):
             messages.success(request, "Transacción cargada")
         else:
             messages.error(request, "Fallo al cargar transacción")
-        return redirect("Inventory:load_transaction")
+        return redirect("Inventory:tesorero")
     form = TransactionForm()
     return render(request, "Inventory/load_transaction.html", {"form" : form, "heading": "Cargar Transacciones"})
