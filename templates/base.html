@@ -17,9 +17,7 @@
         /* Sidebar */
         #sidebar-wrapper {
             z-index: 1;
-            position: absolute;
             width: 0;
-            height: 100%;
             overflow-y: hidden;
             background: #5b4282;
             opacity: 0.9;
@@ -31,7 +29,6 @@
         /* Main Content */
         #page-content-wrapper {
             width: 100%;
-            position: absolute;
             padding: 15px;
             transition: all .5s;
         }
@@ -47,7 +44,6 @@
         }
 
         #wrapper.menuDisplayed #page-content-wrapper {
-            padding-left: 250px;
         }
 
         /* Sidebar styling */
@@ -108,7 +104,7 @@
     <nav class="navbar navbar-dark bg-dark text-center">
         <a class="navbar-brand" href="#">SIGEO</a>
     </nav>
-    <div id="wrapper" class="menuDisplayed">
+    <div id="wrapper" class="menuDisplayed" style="display:flex;">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
