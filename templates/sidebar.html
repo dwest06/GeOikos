@@ -6,26 +6,31 @@
       </li>
     {% if user.is_authenticated %}
 
-      <!-- USUARIOS CON PERMISO DE CUARTO DE EQUIPO -->
       <li class="nav-item">
         <a class="nav-link" href="{% url 'Inventory:home_inventory' %}">Inicio</a>
       </li>
+      <!-- USUARIOS CON PERMISO DE CUARTO DE EQUIPO -->
       {% if user|is_cuarto_equipo %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'Inventory:create_category' %}">Crear Categorí­as</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'Inventory:create_equipment' %}">Añadir Equipo</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'Inventory:create_loan' %}">Cargar préstamos</a>
+        <a class="nav-link" href="{% url 'Inventory:cuarto_equipo' %}">Cuarto de Equipo</a>
       </li>
       {% endif %}
-
       <!-- USUARIOS CON PERMISO DE GESTOR DE USUARIOS -->
       {% if user|is_gestor_usuario %}
       <li class="nav-item"> 
         <a class="nav-link" href="{% url 'Inventory:manage_users' %}">Usuarios</a>
+      </li>
+      {% endif %}
+      <!-- USUARIOS CON PERMISO DE ADMINISTRADOR -->
+      {% if user|is_admin %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Inventory:create_group' %}">Crear Grupos</a>
+      </li>
+      {% endif %}
+      <!-- USUARIOS CON PERMISO DE TESORERO -->
+      {% if user|is_tesorero %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Inventory:tesorero' %}">Tesoreria</a>
       </li>
       {% endif %}
 
@@ -35,28 +40,19 @@
         <a class="nav-link" href="{% url 'Inventory:create_request' %}">Solicitar Equipo</a>
       </li>
       {% endif %}
+
       <li class="nav-item">
         <a class="nav-link" href="{% url 'Inventory:select-cat' %}">Buscar Equipo</a>
       </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Blog</a>
-    </li>
-    {% if user|is_admin %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'Inventory:create_group' %}">Crear Grupos</a>
-    </li>
-    {% endif %}
-    {% if user|is_tesorero %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'Inventory:tesorero' %}">Tesoreria</a>
-    </li>
-    {% endif %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'Users:logout' %}">Logout</a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Users:logout' %}">Logout</a>
+      </li>
     {% else %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'Users:login' %}">Login</a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Users:login' %}">Login</a>
+      </li>
     {% endif %}
 </ul>

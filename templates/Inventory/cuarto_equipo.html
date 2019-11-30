@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load tags %}
+
+{% block page-title %}
+Cuarto de Equipo
+{% endblock  %}
+
+{% block content %}
+<div class="row mb-20">
+  <!-- CREAR CATEGORIA -->
+  <div class="col-md-4 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Crear Categorí­as</h3>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'Inventory:create_category' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARGAR EQUIPO -->
+  <div class="col-md-4 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Añadir Equipo</h3>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'Inventory:create_equipment' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARGAR EQUIPO -->
+  <div class="col-md-4 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Cargar préstamos</h3>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'Inventory:create_loan' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PRESTAMOS -->
+  <div class="col-sm-12 mb-20">
+    <div class="card text-center">
+
+      <div class="card-header">
+        <h3>Pestamos</h3>
+      </div>
+
+      <div class="card-body">
+        <table class="table table-hover w-full tabledat">
+          <caption>Para manejo de prestamos de equipos</caption>
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Equipo</th>
+              <th scope="col">Username</th>
+              <th scope="col">hand_over_date</th>
+              <th scope="col">fecha de devolucion</th>
+              <th scope="col">fecha de entrega</th>
+              <th scope="col">Accion</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for t in prestamos %}
+            <tr>
+              <td>{{t.pk}}</td>
+              <td>{{t.equipment.name}}</td>
+              <td>{{t.user.username}}</td>
+              <td>{{t.hand_over_date}}</td>
+              <td>{{t.deadline}}</td>
+              <td>{{t.delivery_date}}</td>
+              <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SOLICITUDES -->
+  <div class="col-sm-12 mb-20">
+    <div class="card text-center">
+    
+      <div class="card-header">
+        <h3>Solicitudes</h3>
+      </div>
+
+      <div class="card-body">
+        <table class="table table-hover w-full tabledat">
+          <caption>Para manejo de solicitudes de equipos</caption>
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Solicitante</th>
+              <th scope="col">Equipo(s) solicitados</th>
+              <th scope="col">Especificaciones</th>
+              <th scope="col">fecha de solicitud</th>
+              <th scope="col">Aceptar</th>
+              <th scope="col">Rechazar</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for t in solicitudes %}
+            <tr>
+              <td>{{t.pk}}</td>
+              <td>{{t.user.username}}</td>
+              <td><div class="btn btn-info"><i class="fas fa-pencil-alt"></i></div></td>
+              <td><div class="btn btn-dark"><i class="fas fa-pencil-alt"></i></div></td>
+              <td>{{t.date}}</td>
+              <td><a href="" class="btn btn-success"><i class="fas fa-check"></i></a></td>
+              <td>
+              <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
+                class="btn btn-danger delete-user">
+                <i class="fas fa-times"></i>
+              </div>
+            </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+ </div> 
+<div class="row mb-20">
+    <!-- DEUDAS PAGOS -->
+  <div class="col-md-6 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Categorias</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover w-full tabledat">
+        <caption>Para manejo de categorias</caption>
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Modificar</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for t in categorias %}
+          <tr>
+            <td>{{t.pk}}</td>
+            <td>{{t.name}}</td>
+            <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+            <td>
+              <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
+                class="btn btn-danger delete-user">
+                <i class="fas fa-times"></i>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEUDAS MULTA -->
+  <div class="col-md-6 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Deudas de Multas</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover w-full tabledat">
+        <caption>Para manejo de deudas de multas</caption>
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Serial</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Modificar</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for t in equipos %}
+          <tr>
+            <td>{{t.pk}}</td>
+            <td>{{t.serial}}</td>
+            <td>{{t.name}}</td>
+            <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+            <td>
+              <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
+                class="btn btn-danger delete-user">
+                <i class="fas fa-times"></i>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+  
+{% endblock  %}
+
+{% block custom_js %}
+<script>
+  $('.tabledat').DataTable({
+			"order" : [[0,"desc"]]
+		});
+</script>
+{% endblock  %}

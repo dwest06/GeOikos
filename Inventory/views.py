@@ -29,6 +29,17 @@ def home_tesorero_view(request):
         }
     return render(request, "Inventory/tesorero.html", context)
 
+@login_required
+@is_cuarto_equipo
+def home_cuarto_equipo_view(request):
+    if request.method == "GET":
+        context = {
+            "prestamos" : Loan.objects.all(),
+            "solicitudes" : Request.objects.all(),
+            "categorias" : Category.objects.all(),
+            "equipos" : Equipment.objects.all(),
+        }
+    return render(request, "Inventory/cuarto_equipo.html", context)
 
 @login_required
 @is_admin
