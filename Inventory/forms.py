@@ -1,4 +1,4 @@
-from django import forms
+﻿from django import forms
 from django.forms import formset_factory, modelformset_factory
 from .models import (Category, Equipment, Attribute, Group, 
                     Request, RequestCategory, Loan, Repair, 
@@ -380,7 +380,10 @@ class TransactionForm(forms.ModelForm):
         }
 
 class CatReqForm(forms.Form):
-    category = forms.ModelChoiceField(queryset=Category.objects.all(),label="Categoría")
+    notAvEq =[x.equipment.id for x in Loan.objects.filter(delivery_date__isnull=True)]
+    avCat = {x.category.id for x in Equipment.objects.exclude(id__in=notAvEq)}
+    category = forms.ModelChoiceField(queryset=Category.objects.filter(id__in=avCat), label="Categoría")
+    print(avCat)
     quantity = forms.IntegerField(label="Cantidad", required=True, initial=1)
 
     def clean_quantity(self):
@@ -399,7 +402,8 @@ CatReqFormset = formset_factory(
 )
 
 class EqReqForm(forms.Form):
-    equipment = forms.ModelChoiceField(queryset=Equipment.objects.all(),label="Equipo")
+    notAvEq = [x.equipment.id for x in Loan.objects.filter(delivery_date__isnull=True)]
+    equipment = forms.ModelChoiceField(queryset=Equipment.objects.exclude(id__in=notAvEq),label="Equipo")
 
 class CommentsReqForm(forms.Form):
     comments = forms.CharField(required=False, widget=forms.Textarea)

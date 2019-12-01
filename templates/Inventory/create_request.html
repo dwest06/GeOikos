@@ -24,11 +24,15 @@
                         <div class="form-row mb-20"> 
                             <div class="form-group col">
                                 <label class="control-label">{{form.category.label}}</label>
-                                {% render_field form.category class="form-control" %}
+                                <select multiple class="form-control">
+                                    {% for cat in form.category %}
+                                        <option>{{cat}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <div class="form-group col">
                                 <label class="control-label">{{form.quantity.label}}</label>
-                                {% render_field form.quantity class="form-control" min=0 %}
+                                {% render_field form.quantity class="form-control" min=1 %}
                                 <small class="form-text text-muted">
                                     Ingrese una cantidad mayor a 0
                                 </small>

@@ -25,7 +25,7 @@ class Equipment(models.Model):
     discontinued_date = models.DateField(blank=True, null=True)
     notes = models.TextField(blank=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    group = models.ManyToManyField(Group,blank=True,null=True,on_delete=models.SET_NULL)
+    group = models.ManyToManyField(Group,blank=True)
 
     def __str__(self):
         return self.name+ ': equipo de ' + self.category.name
@@ -64,7 +64,7 @@ class AttributeEquipmet(models.Model):
     value_txt = models.TextField(null=True)
     value_int = models.IntegerField(null=True)
     value_date = models.DateField(null=True)
-    value_float = models.DecimalField(max_digits=11, decimal_places=2)
+    value_float = models.DecimalField(max_digits=11, decimal_places=2,null=True)
     value_bool = models.BooleanField(null=True)
     value_cho  = models.ForeignKey(Choices,null=True,on_delete=models.CASCADE)
     def __str__(self):
@@ -89,8 +89,8 @@ class RequestCategory(models.Model):
 
 class Loan(models.Model):
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    creator = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='loan_user')
+    #creator = models.ForeignKey(User,on_delete=models.CASCADE,related_name='creator_user')
     hand_over_date = models.DateTimeField()
     deadline = models.DateTimeField(null=True, blank=True)
     delivery_date = models.DateTimeField(null=True, blank=True)
