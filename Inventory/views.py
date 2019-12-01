@@ -12,7 +12,6 @@ from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_t
 ######################
 @login_required
 def home_inventario_view(request):
-    tcost = Trimestrality.objects.all().first().amount
     user = User.objects.get(pk=request.user.pk)
 
     # Deuda total
@@ -23,7 +22,7 @@ def home_inventario_view(request):
     # Solicitudes
 
     context = {
-        'deuda' : round(deuda * tcost, 2),
+        'deuda' : deuda,
         'grupo' : request.user.groups.all().first(),
         'solicitudes' : Request.objects.filter(user=user),
         'prestamos' : Loan.objects.filter(user=user)
@@ -335,8 +334,9 @@ def load_transaction(request):
 def load_all_trim(request):
     if request.method == "POST":
         activos = User.objects.filter(groups__name="activo")
+        tcost = Trimestrality.objects.all().first().amount
         for act in activos:
-            t = Transaction(user=act, transaction=-1.00, reason='T')
+            t = Transaction(user=act, transaction=-tcost, reason='T')
             t.save()
         messages.success(request, "Trimestralidades cargadas")
     return redirect("Inventory:tesorero")
