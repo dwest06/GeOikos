@@ -19,4 +19,6 @@ urlpatterns = [
 
     # VISTAS DE TESORERO
     path('tesorero', views.home_tesorero_view, name="tesorero"),
+    # VISTAS DE CUARTO DE EQUIPO
+    path('cuarto-equipo', views.home_cuarto_equipo_view, name="cuarto_equipo"),
 ]
