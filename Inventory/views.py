@@ -11,8 +11,10 @@ from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_t
 ######################
 @login_required
 def home_inventario_view(request):
+    tcost = Trimestrality.objects.all().first().amount
+    balance = -sum(Transaction.objects.filter(user=request.user.id).values_list('transaction', flat=True))
     context = {
-        'deuda' : 0.00,
+        'deuda' : round(balance * tcost, 2),
         'grupo' : request.user.groups.all().first()
     }
     return render(request, "Inventory/home.html", context)

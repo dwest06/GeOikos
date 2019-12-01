@@ -129,3 +129,6 @@ class Transaction(models.Model):
     
     def __str__(self):
         return 'Transaccion de ' + str(self.user) + ', ' + str(self.transaction) + ', ' + str(self.reason) 
+
+class Trimestrality(models.Model):
+    amount = models.DecimalField(max_digits=7, decimal_places=2)
