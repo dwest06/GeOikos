@@ -56,7 +56,12 @@ Tesorero
       </div>
 
       <div class="card-footer">
-        <div class="btn btn-warning">Aumento masivo</div>
+        <form id="load-all-trim" method="POST" action="tesorero/load-all-trim">
+          {% csrf_token %}
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
+            Aumento masivo
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -139,6 +144,27 @@ Tesorero
       </table>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="confirmModal">Confirmación: ¿Seguro que desea cargar trimetralidad a todos los miembros activos?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          Al hacer click en aceptar, se le cargará una deuda de trimestralidad a todos los miembros activos en el sistema.
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" form="load-all-trim" value="Submit">Aceptar</button>
+      </div>
+      </div>
   </div>
 </div>
   

@@ -318,3 +318,14 @@ def load_transaction(request):
         return redirect("Inventory:tesorero")
     form = TransactionForm()
     return render(request, "Inventory/load_transaction.html", {"form" : form, "heading": "Cargar Transacciones"})
+
+@login_required
+@is_tesorero
+def load_all_trim(request):
+    if request.method == "POST":
+        activos = User.objects.filter(groups__name="activo")
+        for act in activos:
+            t = Transaction(user=act, transaction=-1.00, reason='T')
+            t.save()
+        messages.success(request, "Trimestralidades cargadas")
+    return redirect("Inventory:tesorero")
