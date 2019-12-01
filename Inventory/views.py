@@ -22,7 +22,7 @@ def home_inventario_view(request):
     # Solicitudes
 
     context = {
-        'deuda' : deuda * Decimal(-1),
+        'deuda' : deuda,
         'grupo' : request.user.groups.all().first(),
         'solicitudes' : Request.objects.filter(user=user),
         'prestamos' : Loan.objects.filter(user=user)
