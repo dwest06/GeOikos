@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from decimal import Decimal
 from .models import *
 from .forms import *
 from Users.models import User
@@ -12,10 +13,20 @@ from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_t
 @login_required
 def home_inventario_view(request):
     tcost = Trimestrality.objects.all().first().amount
-    balance = -sum(Transaction.objects.filter(user=request.user.id).values_list('transaction', flat=True))
+    user = User.objects.get(pk=request.user.pk)
+
+    # Deuda total
+    deuda = Decimal(0)
+    for i in user.transaction_set.all():
+        deuda -= i.transaction
+
+    # Solicitudes
+
     context = {
-        'deuda' : round(balance * tcost, 2),
-        'grupo' : request.user.groups.all().first()
+        'deuda' : round(deuda * tcost, 2),
+        'grupo' : request.user.groups.all().first(),
+        'solicitudes' : Request.objects.filter(user=user),
+        'prestamos' : Loan.objects.filter(user=user)
     }
     return render(request, "Inventory/home.html", context)
 
