@@ -46,13 +46,19 @@ def home_cuarto_equipo_view(request):
 def create_category(request):
     if request.method == "POST":
         cat_form = CategoryForm(request.POST)
-        att_formset = AttributeFormset(request.POST)
-        if cat_form.is_valid() and att_formset.is_valid():
+        redirect("Inventory:create_category")
+        if cat_form.is_valid():
             category = cat_form.save()
-            for attform in att_formset:
-                attribute = attform.save(commit=False)
-                attribute.category = category
-                attribute.save()
+            names = request.POST.getlist('att_name')
+            types = request.POST.getlist('att_type')
+            units = request.POST.getlist('unit')
+            nulls = request.POST.getlist('nullity')
+            for i in range(0,len(names)):
+                att = Attribute(name=names[i],attribute_type=types[i],unit=units[i])
+                if(nulls[i] == 'Opcional'):
+                    att.nullity = True
+                att.category = category
+                att.save()
             messages.success(request, "Categoria añadida")
             return redirect("Inventory:create_category")
         else:
@@ -60,8 +66,7 @@ def create_category(request):
             return redirect("Inventory:home_inventory")
     else:
         category_form = CategoryForm()
-        att_formset = AttributeFormset(queryset=Attribute.objects.none())
-        return render(request, "Inventory/create_category.html", {"categoryform" : category_form, "formset" : att_formset})
+        return render(request, "Inventory/create_category.html", {"categoryform" : category_form})
 
 @login_required
 @is_cuarto_equipo
@@ -279,26 +284,51 @@ def loan_creation(request):
 def show_equipment(request,category):
     atts = Attribute.objects.filter(category=category)
     equip = Equipment.objects.filter(category=category)
-    vals = []
+    catname = Category.objects.get(id=category).name
+    borrowedEq = [ x['equipment'] for x in Loan.borrowedEq() ]
+    discontinuedEq = [ x['id'] for x in Equipment.discontinuedEq() ]
+    rows = []
     for eq in equip:
-        vals2 = [eq.name, eq.serial, eq.entry_date, eq.elaboration_date, eq.discontinued, eq.discontinued_date, eq.notes, eq.category]
+
+        available = 'Disponible'
+        if(eq.id in borrowedEq):
+            available = 'Prestado'
+        elif(eq.id in discontinuedEq):
+            available = 'Discontinuado'
+        
+        vals = [eq.serial, eq.name]
+        name = eq.name
         for att in atts:
             att_type=att.attribute_type
             val=AttributeEquipmet.objects.get(attribute=att,equipment=eq)
-            if att_type == 'INT' or att_type == 'FLT':
-                vals2.append(val.value_int)
+            if att_type == 'INT':
+                vals.append(val.value_int)
             elif att_type == 'STR':
-                vals2.append(val.value_str)
+                vals.append(val.value_str)
             elif att_type == 'TXT':
-                vals2.append(val.value_txt)
+                vals.append(val.value_txt)
             elif att_type == 'BOO':
-                vals2.append(val.value_boo)
+                vals.append(val.value_boo)
             elif att_type == 'DAT':
-                vals2.append(val.value_dat)
+                vals.append(val.value_dat)
+            elif att_type == 'FLT':
+                vals.append(val.value_float)
             elif att_type == 'CHO':
-                vals2.append(val.value_cho)
-        vals.append(vals2)
-    return render(request, "Inventory/equipment_table.html", {'attributes': atts, 'values':vals})
+                vals.append(val.value_cho)
+
+        info = [ 
+            {'name':'Fecha de elaboración','value':eq.elaboration_date}, 
+            {'name':'Fecha de llegada a Oikos', 'value':eq.entry_date},
+            {'name':'Fecha de descontinuación', 'value':eq.discontinued_date}, 
+            {'name':'Notas sobre el equipo', 'value':eq.notes}
+            ]
+
+        rows.append({'name':name, 'vals':vals, 'av':available, 'info':info})
+
+    return render(request, "Inventory/equipment_table.html", {'attributes': atts, 
+                                                              'rows' : rows,
+                                                              'name' : catname                                                
+                                                              })
 
 @login_required
 @is_tesorero

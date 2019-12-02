@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 
 {% block page-title %}
-    Equipos Disponibles
+    Equipo Disponible
 {% endblock %}
 
 {% block content %}
@@ -11,37 +11,76 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>Equipos</h3>
+                    <h3>Categoría: {{name}}</h3>
                 </div>
 
                 <div class="card-body">
                     <table class="table table-hover w-full" id="table">
                         <caption>Tabla para Equipos</caption>
                         <thead style="color:black;" >
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Serial</th>
-                            <th scope="col">Fecha de Ingreso</th>
-                            <th scope="col">Fecha de Elaboracion</th>
-                            <th scope="col">Descontinuado</th>
-                            <th scope="col">Fecha de Descontinuado</th>
-                            <th scope="col">Notas</th>
-                            <th scope="col">Categoria</th>
+                            <th scope="col" class="text-center">Serial</th>
+                            <th scope="col" class="text-center">Nombre</th>
                             {% for att in attributes %}
-                                <th scope="col">{{att.name}}</th>
+                                <th scope="col" class="text-center">{{att.name}}</th>
                             {% endfor %}
-                            <th scope="col">Solicitar</th>
+                            <th scope="col" class="text-center">Información Adicional</th>
+                            <th scope="col" class="text-center">Disponibilidad</th>
                         </thead>
                         <tbody>
-                            {% for t in values %}
-                            <tr>
-                                {% for val in t %}
-                                <td>{{val}}</td>
+                            {% for r in rows %}
+                            <tr> 
+                                {% for val in r.vals %}
+                                    {% if val != None %}
+                                        <td class="text-center">{{val}}</td>
+                                    {% else %}
+                                        <td class="text-center"> </td>
+                                    {% endif %}
                                 {% endfor %}
+                                <div class="modal fade" id="info{{forloop.counter}}" tabindex="-1">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="Title">{{r.name}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body ">
+                                                <div class="card">
+                                                    <p class="text-center">Aqui deberia haber una foto jejeps</p>
+                                                    <ul class="list-group list-group-flush">
+                                                        {% for d in r.info %}
+                                                            {% if d.value != None %}
+                                                                <li class="list-group-item">
+                                                                    {{d.name}}: {{d.value}}
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="list-group-item">
+                                                                    {{d.name}}: Desconocido
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-primary">
-                                        <i class="fas fa-hand-point-up"></i>
-                                    </a>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#info{{forloop.counter}}">
+                                        Ver
+                                    </button>
                                 </td>
+                                {% if r.av == "Disponible" %}
+                                    <td class="text-center text-success" style="font-weight:bold">Disponible</td>
+                                {% elif r.av == "Prestado" %}
+                                    <td class="text-center text-secondary" style="font-weight:bold">Prestado</td>
+                                {% else %}
+                                    <td class="text-center text-danger" style="font-weight:bold">Descontinuado</td>                                      
+                                {% endif %}
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -50,8 +89,8 @@
             </div>
         </div>
     </div>
-    
-    <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Volver a la Busqueda</a>
+    <br/>
+    <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Seleccionar otra Categoría</a>
 {% endblock  %}
 
 {% block custom_js %}

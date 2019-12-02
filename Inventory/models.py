@@ -30,6 +30,20 @@ class Equipment(models.Model):
     def __str__(self):
         return self.name+ ': equipo de ' + self.category.name
 
+    def discontinuedEq():
+        return Equipment.objects.filter(discontinued=True).values('id')
+
+    def notAvEquipment():
+        borrowed = Loan.borrowedEq()
+        notAv = Equipment.discontinuedEq().union(borrowed)
+        notAvEq = [x['id'] for x in notAv]
+        return notAvEq
+    
+    def avEquipment():
+        notAvEq = Equipment.notAvEquipment()
+        avEq = Equipment.objects.exclude(id__in=notAvEq)
+        return avEq
+
 class Attribute(models.Model):
     TYPE_CHOICES = [
         ('INT', 'Entero'),
@@ -38,7 +52,7 @@ class Attribute(models.Model):
         ('BOO', 'Booleano'),
         ('FLT', 'Decimal'),
         ('DAT', 'Fecha'),
-        ('CHO', 'Selecciรณn'),
+        ('CHO', 'Selección'),
     ]
     name = models.CharField(max_length=50)
     attribute_type = models.CharField(max_length=3,choices=TYPE_CHOICES)
@@ -48,7 +62,7 @@ class Attribute(models.Model):
 
     def __str__(self):
         return self.name
-
+    
 # Opciones para un atributo de multiples opciones
 class Choices(models.Model):
     attribute = models.ForeignKey(Attribute,on_delete=models.CASCADE)
@@ -99,6 +113,9 @@ class Loan(models.Model):
     
     def __str__(self):
         return 'Prestamo de equipo de ' + str(self.user)
+
+    def borrowedEq():
+        return Loan.objects.filter(delivery_date__isnull=True).values('equipment')
 
 class Repair(models.Model):
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
