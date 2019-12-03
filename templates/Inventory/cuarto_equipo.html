@@ -64,6 +64,7 @@ Cuarto de Equipo
               <th scope="col">fecha de devolucion</th>
               <th scope="col">fecha de entrega</th>
               <th scope="col">Accion</th>
+              <th scope="col">Cargar Devolución</th>
             </tr>
           </thead>
           <tbody>
@@ -76,6 +77,7 @@ Cuarto de Equipo
               <td>{{t.deadline}}</td>
               <td>{{t.delivery_date}}</td>
               <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+              <a href="{% url 'Inventory:loan_devolution/{{t.pk}}' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
             </tr>
           {% endfor %}
           </tbody>

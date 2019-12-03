@@ -56,7 +56,7 @@ class Attribute(models.Model):
     ]
     name = models.CharField(max_length=50)
     attribute_type = models.CharField(max_length=3,choices=TYPE_CHOICES)
-    unit = models.CharField(max_length=20,blank=True)
+    unit = models.CharField(max_length=20,blank=True,default="")
     nullity = models.BooleanField(default=False)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
 
@@ -88,7 +88,7 @@ class AttributeEquipmet(models.Model):
 
 class Request(models.Model):
     date = models.DateTimeField(auto_now_add=True)
-    specs = models.TextField(blank=True)
+    specs = models.TextField(blank=True,default="")
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     equipment = models.ManyToManyField(Equipment)
     category = models.ManyToManyField(Category,through='RequestCategory')

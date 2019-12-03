@@ -301,6 +301,30 @@ def loan_creation(request):
         return render(request, "Inventory/create_loan.html", {"form" : lc_form})
 
 @login_required
+@is_cuarto_equipo
+def loan_devolution(request,loan):
+    if request.method == "POST":
+        instance = Loan.objects.get(pk=loan)
+        form = LoanDevolutionForm(request.POST)
+        if form.is_valid():
+            delivery_date= form.cleaned_data.get("delivery_date")
+            score= form.cleaned_data.get("score")
+            notes= form.cleaned_data.get("notes")
+            instance.delivery_date=delivery_date
+            instance.score=score
+            instance.notes=notes
+            instance.save()
+            messages.success(request, "Devolución cargada")
+        else:
+            messages.error(request, "Fallo al cargar devolución")
+        return redirect("Inventory:home_inventory")
+    else: 
+        form = LoanDevolutionForm()
+        return render(request, "Inventory/loan_devolution.html", {"form" : form})
+
+        
+
+@login_required
 @is_pasivo
 def show_equipment(request,category):
     atts = Attribute.objects.filter(category=category)
