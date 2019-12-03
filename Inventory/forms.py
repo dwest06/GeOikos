@@ -391,10 +391,14 @@ class TransactionForm(forms.ModelForm):
         }
 
 class CatReqForm(forms.Form):
-    notAvEq = Equipment.notAvEquipment()
-    avCat = {x.category.id for x in Equipment.objects.exclude(id__in=notAvEq)}
-    category = forms.ModelChoiceField(queryset=Category.objects.filter(id__in=avCat), label="Categoría")
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), label="Categoría")
     quantity = forms.IntegerField(label="Cantidad", required=True, initial=1)
+
+    def __init__(self, *a, **kw):
+        super().__init__(*a, **kw)
+        notAvEq = Equipment.notAvEquipment()
+        avCat = {x.category.id for x in Equipment.objects.exclude(id__in=notAvEq)}
+        self.fields['category'].queryset = Category.objects.filter(id__not_Fin=avCat)
 
     def clean_quantity(self):
         quantity = self.cleaned_data['quantity']
@@ -412,13 +416,16 @@ CatReqFormset = formset_factory(
 
 class EqReqForm(forms.Form):
     equipment = forms.ModelChoiceField(
-        queryset=Equipment.objects.exclude(id__in=Equipment.notAvEquipment()),
+        queryset=Equipment.objects.all(),
         label="Equipo"
     )
 
+    def __init__(self, *a, **kw):
+        super().__init__(a, kw)
+        self.fields['equipment'].queryset=Equipment.objects.exclude(id__in=Equipment.notAvEquipment())        
 class CommentsReqForm(forms.Form):
     comments = forms.CharField(required=False, widget=forms.Textarea)
-
+    
 EqReqFormset = formset_factory(
     EqReqForm,
     extra = 1
