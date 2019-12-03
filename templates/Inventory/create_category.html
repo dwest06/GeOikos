@@ -13,53 +13,23 @@
                 <h1>Crear Categoría</h1>
                 <p>Herramienta de creación de categorías. Para crear una categoría debe crear sus atributos.</p>
             </div>
-
             <div class="card-body">
                 <form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
                     {% csrf_token %}
-                    {{ formset.management_form }}
                     <div class="form-group required">
                         <label class="control-label">{{categoryform.name.label}}</label>
                         {% render_field categoryform.name class="form-control" placeholder="Inserte el nombre de la categoría" %}
                         <div class="valid-feedback">Correcto</div>
                         <div class="invalid-feedback">Requerido</div>
                     </div>
-                    {% for form in formset %}
-                        <div class="form-col">
-                            <div class="form-row"> 
-                                <div class="form-group">
-                                    <label>{{form.name.label}}</label>
-                                    {% render_field form.name class="form-control" placeholder=form.name.label %}
-                                </div>
-                                <div class="form-group">
-                                    <label>{{form.attribute_type.label}}</label>
-                                    {% render_field form.attribute_type class="form-control" placeholder=form.attribute_type.label %}
-                                </div>
-                            </div>
-                            <div class="form-row"> 
-                                <div class="form-group">
-                                    <label>{{form.unit.label}}</label>
-                                    {% render_field form.unit class="form-control" placeholder=form.unit.label %}
-                                </div>
-                                <div class="form-group col-md-3 text-center">
-                                    <label>{{form.nullity.label}}</label>
-                                    {% render_field form.nullity class="form-control align-items-center" %}
-                                    <small class="form-text text-muted">
-                                        Indica si la unidad será considerada necesaria.
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="input-group-append">
-                                <button class="btn btn-success add-form-col">Añadir otro atributo</button>
-                            </div>
-                        </div>
-                    {% endfor %}
+                    <div id="form_zone"></div>
                 </form>
             </div>
             <div class="card-footer">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
                     Añadir Categoría
                 </button>
+                <button type="button" class="btn btn-secondary add_form">Añadir</button>
             </div>
         </div>
     </div>
@@ -85,5 +55,77 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+        function cloneMore(selector) {
+
+            $('#form_zone').append(`
+                <div class="form-col att_form">
+                    <div class="form-row"> 
+                        <div class="form-group required">
+                            <label class="control-label">Nombre del Atributo</label>
+                            <input name="att_name" class="form-control" placeholder="Ingrese el nombre del atributo" required>
+                            <div class="valid-feedback">Correcto</div>
+                            <div class="invalid-feedback">Requerido</div>
+                        </div>
+                        <div class="form-group required" >
+                            <label class="control-label" for="tipos">Tipo de dato</label>
+                                <select name="att_type" class="form-control" id="tipos" required>
+                                    <option value="INT">Entero</option>
+                                    <option value="STR">String (Cadena de caracteres)</option>
+                                    <option value="TXT">Texto</option>
+                                    <option value="BOO">Booleano (Verdadero y Falso)</option>
+                                    <option value="FLt">Entero con decimales</option>
+                                    <option value="DAT">Fecha</option>
+                                    <option value="CHO">Selección</option>
+                                </select>
+                            <div class="valid-feedback">Correcto</div>
+                            <div class="invalid-feedback">Requerido</div>
+                        </div>
+                    </div>
+                    <div class="form-row"> 
+                        <div class="form-group">
+                            <label>Unidad</label>
+                            <input name="unit" class="form-control" placeholder="Ingrese la unidad">
+                            <div class="valid-feedback">Correcto</div>
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="null">Indique si el atributo es opcional</label>
+                                <select name="nullity" class="form-control" id="null" required>
+                                    <option>Necesario</option>
+                                    <option>Opcional</option>
+                                </select>
+                            <div class="valid-feedback">Correcto</div>
+                            <div class="invalid-feedback">Requerido</div>
+                        </div>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-danger remove_form">Eliminar</button>  
+                    </div>
+                    <br>   
+                </div>`
+            );
+        
+            return false;
+        }
+
+        function deleteFormCat(btn) {
+            btn.closest('.att_form').remove();
+            return false;
+        }
+
+        $(document).on('click', '.add_form', function (e) {
+            e.preventDefault();
+            cloneMore('.att_form:last');
+            return false;
+        });
+
+        $(document).on('click', '.remove_form', function (e) {
+            e.preventDefault();
+            deleteFormCat( $(this));
+            return false;
+        });
+</script>
 
 {% endblock %}

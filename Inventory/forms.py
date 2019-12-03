@@ -1,4 +1,4 @@
-from django import forms
+﻿from django import forms
 from django.forms import formset_factory, modelformset_factory
 from .models import (Category, Equipment, Attribute, Group, 
                     Request, RequestCategory, Loan, Repair, 
@@ -57,34 +57,7 @@ class EquipmentForm(forms.ModelForm):
         if serial < 0:
             raise forms.ValidationError("Debes especificar una cantidad positiva")
         return serial
-
-AttributeFormset = modelformset_factory(
-    Attribute,
-    fields = ['name', 'attribute_type', 'unit', 'nullity'],
-    extra = 1,
-    labels = {
-        'name' : 'Nombre del Atributo',
-        'attribute_type' : 'Tipo de dato',
-        'unit' : 'Unidad',
-        'nullity' : '(No esencial)'
-    },
-    error_messages = {
-        'name' : {
-            'required' : 'Campo obligatorio',
-            'invalid' : 'Entrada inválida',
-            'max_length' : 'Máximo de caracteres excedido',
-        },
-        'attribute_type' : {
-            'required' : 'Campo obligatorio',
-            'invalid' : 'Entrada inválida',
-        },
-        'unit' : {
-            'invalid' : 'Entrada inválida',
-            'max_length' : 'Máximo de caracteres excedido',
-        }
-    }
-)
-
+        
 class IntValueForm(forms.ModelForm):
     class Meta:
         model = AttributeEquipmet
@@ -380,7 +353,9 @@ class TransactionForm(forms.ModelForm):
         }
 
 class CatReqForm(forms.Form):
-    category = forms.ModelChoiceField(queryset=Category.objects.all(),label="Categoría")
+    notAvEq = Equipment.notAvEquipment()
+    avCat = {x.category.id for x in Equipment.objects.exclude(id__in=notAvEq)}
+    category = forms.ModelChoiceField(queryset=Category.objects.filter(id__in=avCat), label="Categoría")
     quantity = forms.IntegerField(label="Cantidad", required=True, initial=1)
 
     def clean_quantity(self):
@@ -391,7 +366,6 @@ class CatReqForm(forms.Form):
 
 class CatQueryForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all(), label='Categoría: ')
-    error_messages = {'category' : {'invalid' : 'Campo obligatorio'}}
     
 CatReqFormset = formset_factory(
     CatReqForm,
@@ -399,7 +373,10 @@ CatReqFormset = formset_factory(
 )
 
 class EqReqForm(forms.Form):
-    equipment = forms.ModelChoiceField(queryset=Equipment.objects.all(),label="Equipo")
+    equipment = forms.ModelChoiceField(
+        queryset=Equipment.objects.exclude(id__in=Equipment.notAvEquipment()),
+        label="Equipo"
+    )
 
 class CommentsReqForm(forms.Form):
     comments = forms.CharField(required=False, widget=forms.Textarea)
