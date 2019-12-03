@@ -12,9 +12,10 @@ class Category(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=120, unique=True)
-    
+        
     def __str__(self):
         return self.name
+
 
 class Equipment(models.Model):
     serial = models.IntegerField(blank=True, null=True)
@@ -62,6 +63,8 @@ class Attribute(models.Model):
 
     def __str__(self):
         return self.name
+    def isBlank(attribute):
+        return Attribute.objects.filter(pk=attribute).nullity
     
 # Opciones para un atributo de multiples opciones
 class Choices(models.Model):
@@ -72,8 +75,9 @@ class Choices(models.Model):
         return self.option_name
 
 class AttributeEquipmet(models.Model):
+
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
-    attribute = models.ForeignKey(Attribute,on_delete=models.CASCADE)
+    attribute = models.ForeignKey(Attribute,on_delete=models.CASCADE)   
     value_str = models.CharField(max_length=100,null=True)
     value_txt = models.TextField(null=True)
     value_int = models.IntegerField(null=True)
@@ -83,8 +87,8 @@ class AttributeEquipmet(models.Model):
     value_cho  = models.ForeignKey(Choices,null=True,on_delete=models.CASCADE)
     def __str__(self):
         return self.attribute.name + " de " + self.equipment.name
-    def isBlank(self):
-        return Attribute.objects.filter(pk=attribute).nullity
+    
+    
 
 class Request(models.Model):
     date = models.DateTimeField(auto_now_add=True)

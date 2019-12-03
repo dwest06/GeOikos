@@ -46,7 +46,6 @@ def home_cuarto_equipo_view(request):
 def create_category(request):
     if request.method == "POST":
         cat_form = CategoryForm(request.POST)
-        redirect("Inventory:create_category")
         if cat_form.is_valid():
             category = cat_form.save()
             names = request.POST.getlist('att_name')
@@ -96,41 +95,66 @@ def equip_cat_selection(request):
             return redirect("Inventory:home_inventory")
     else:
         form = CatQueryForm()
-        return render(request, "Inventory/create_equipment.html", {"form" : form, })
+        return render(request, "Inventory/create_equipment.html", {"form" : form })
 
 @login_required
 @is_cuarto_equipo
 def create_equipment(request, cat):    
     if request.method == "POST":
+        print(request.POST)
         equip_form = EquipmentForm(request.POST)
-        cat_attributes = list(Attribute.objects.filter(category=cat))
-        att_forms=[]
-        for att in cat_attributes:
-            if att.attribute_type=='INT' or att.attribute_type=='FLT':
-                att_forms.append(IntValueForm(request.POST))
-            elif att.attribute_type=='TXT':
-                att_forms.append(TxtValueForm(request.POST))
-            elif att.attribute_type=='STR':
-                att_forms.append(StrValueForm(request.POST))
-            elif att.attribute_type=='BOO':
-                att_forms.append(BoolValueForm(request.POST))
-            elif att.attribute_type=='DAT':
-                att_forms.append(DateValueForm(request.POST))
-            elif att.attribute_type=='CHO':
-                att_forms.append(ChoiceValueForm(request.POST))
-        if equip_form.is_valid() and all(att_form.is_valid() for att_form in att_forms):
-            equipment= equip_form.save(commit=False)
+        if equip_form.is_valid():
+            
+            equipment = equip_form.save(commit=False)
             equipment.category = Category.objects.get(pk=cat)
             equipment.save()
-            i=0
-            for att_form in att_forms:
-                value = att_form.save(commit=False)
-                value.equipment = equipment
-                value.attribute = cat_attributes[i]
-                value.save()
-                i+=1
+            for group in request.POST.getlist('group'):
+                if group != '':
+                    g = Group.objects.get(name=group)
+                    equipment.group.add(g)
+
+            cat_attributes = list(Attribute.objects.filter(category=cat))
+            
+            idxs = [0,0,0,0,0,0,0]
+            lists = [
+                request.POST.getlist('value_int'),
+                request.POST.getlist('value_txt'),
+                request.POST.getlist('value_str'),
+                request.POST.getlist('value_bool'),
+                request.POST.getlist('value_date'),
+                request.POST.getlist('value_cho'),
+                request.POST.getlist('value_float')
+            ]
+
+            for att in cat_attributes:
+                att_val = AttributeEquipmet()
+                if att.attribute_type=='INT': #0
+                    att_val.value_int = lists[0][idxs[0]]
+                    idxs[0]+=1
+                elif att.attribute_type=='TXT': #1
+                    att_val.value_txt = lists[1][idxs[1]]
+                    idxs[1]+=1
+                elif att.attribute_type=='STR': #2
+                    att_val.value_str = lists[2][idxs[2]]
+                    idxs[2]+=1
+                elif att.attribute_type=='BOO': #3
+                    att_val.value_bool = lists[3][idxs[3]]
+                    idxs[3]+=1
+                elif att.attribute_type=='DAT': #4
+                    att_val.value_date = lists[4][idxs[4]]
+                    idxs[4]+=1
+                elif att.attribute_type=='CHO': #5
+                    att_val.value_cho = lists[5][idxs[5]]
+                    idxs[5]+=1
+                elif att.attribute_type=='FLT': #6
+                    att_val.value_float = lists[6][idxs[6]]
+                    idxs[6]+=1
+                att_val.equipment = equipment
+                att_val.attribute = att
+                att_val.save()
             messages.success(request, "Equipo Agregado")
-        else:
+            return redirect("Inventory:home_inventory")
+        else:                
             messages.error(request, "Fallo al agregar equipo")
         return redirect("Inventory:home_inventory")
     else:
@@ -139,22 +163,25 @@ def create_equipment(request, cat):
         att_forms=[]
         for att in cat_attributes:
             att_name = att.name
-            if att.attribute_type=='INT' or att.attribute_type=='FLT':
-                att_forms.append((IntValueForm(),att_name))
+            att_null = not att.nullity
+            if att.attribute_type=='INT':
+                form = IntValueForm(att_null)
             elif att.attribute_type=='TXT':
-                att_forms.append((TxtValueForm(),att_name))
+                form = TxtValueForm(att_null)
             elif att.attribute_type=='STR':
-                att_forms.append((StrValueForm(),att_name))
+                form = StrValueForm(att_null)
             elif att.attribute_type=='BOO':
-                att_forms.append((BoolValueForm(),att_name))
+                form = BoolValueForm(att_null)
             elif att.attribute_type=='DAT':
-                att_forms.append((DateValueForm(),att_name))
+                form = DateValueForm(att_null)
             elif att.attribute_type=='CHO':
-                att_forms.append((ChoiceValueForm(),att_name))
-
-
+                form = ChoiceValueForm(att_null)
+            elif att.attribute_type=='FLT':
+                form = FltValueForm(att_null)
+            att_forms.append((form,att_name,att_null))
+        groups = Group.objects.all()
         return render(request, "Inventory/create_equipment_value.html", context = {
-            "equipform" : equip_form, "attforms" : att_forms, 'page_title': 'Crear Equipo'}
+            "equipform" : equip_form, "attforms" : att_forms, 'groups':groups, 'page_title': 'Crear Equipo'}
             )
 
 @login_required
@@ -282,6 +309,7 @@ def loan_creation(request):
 @login_required
 @is_pasivo
 def show_equipment(request,category):
+
     atts = Attribute.objects.filter(category=category)
     equip = Equipment.objects.filter(category=category)
     catname = Category.objects.get(id=category).name
@@ -322,8 +350,8 @@ def show_equipment(request,category):
             {'name':'Fecha de descontinuación', 'value':eq.discontinued_date}, 
             {'name':'Notas sobre el equipo', 'value':eq.notes}
             ]
-
-        rows.append({'name':name, 'vals':vals, 'av':available, 'info':info})
+        groups = [group for group in eq.group.all()]
+        rows.append({'name':name, 'vals':vals, 'av':available, 'info':info, 'groups':groups})
 
     return render(request, "Inventory/equipment_table.html", {'attributes': atts, 
                                                               'rows' : rows,

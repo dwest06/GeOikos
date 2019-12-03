@@ -13,21 +13,19 @@
                 <h1>Agregar valores a el equipo</h1>
                 <p>Herramienta para agregar valores a los atributos de equipo.</p>
             </div>
-
             <div class="card-body">
                 <form class="form-horizontal needs-validation form-group" id="create-form" method="POST" action="" novalidate>
                     {% csrf_token %}
-
                     <div class="form-row mb-20"> 
-                        <div class="col required">
+                        <div class="form-group col required">
                             <label class="control-label">{{equipform.name.label}}</label>
-                            {% render_field equipform.name class="form-control" placeholder=equipform.name.label %}
+                            {% render_field equipform.name class="form-control" required="true" placeholder=equipform.name.label %}
                             <div class="valid-feedback">Completo</div>
                             <div class="invalid-feedback">Requerido</div>
                         </div>
-                        <div class="col required">
-                            <label class="control-label">{{equipform.serial.label}}</label>
-                            {% render_field equipform.serial class="form-control" %}
+                        <div class="col">
+                            <label>{{equipform.serial.label}}</label>
+                            {% render_field equipform.serial class="form-control" min=0 %}
                         </div>
                     </div>
 
@@ -37,7 +35,7 @@
                             <input type="date" name="entry_date" placeholder="MM/DD/YYYY" class="form-control" id="id_entry_date">
                         </div>
                         <div class="col">
-                            <label class="control-label">{{equipform.elaboration_date.label}}</label>
+                            <label >{{equipform.elaboration_date.label}}</label>
                             <input type="date" name="elaboration_date" placeholder="MM/DD/YYYY" class="form-control" id="id_elaboration_date">
                         </div>
                     </div>
@@ -45,16 +43,34 @@
                     <div class="form-row mb-20">
                         <div class="col">
                             {% for form in attforms %}
-                                <label class="control-label">{{form.1}}</label>
-                                {{ form.0 }}
+                                {% if form.2 %}
+                                <div class="form-group required"></div>
+                                    <label class="control-label">{{form.1}} (opcional)</label>
+                                    {{ form.0 }}
+                                    <div class="valid-feedback">Completo</div>
+                                    <div class="invalid-feedback">Requerido</div>
+                                </div>
+                                {% else %}
+                                <div class="form-group required">
+                                    <label class="control-label">{{form.1}}</label>
+                                    {{ form.0 }}
+                                    <div class="valid-feedback">Completo</div>
+                                    <div class="invalid-feedback">Requerido</div>
+                                </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
 
                     <div class="form-row mb-20">
                         <div class="col">
-                            <label>Grupo</label>
-                            {% render_field equipform.group class="form-control" %}
+                            <label>Grupos</label>
+                            <select multiple class="form-control" name="group">
+                                <option selected value>Sin grupo</option>
+                                {% for group in groups %}
+                                <option>{{group}}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </div>
 
@@ -73,9 +89,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
