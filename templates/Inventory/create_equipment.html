@@ -20,13 +20,12 @@
                         <div class="form-col"> 
                             <label>Selecciona una categoría:</label>
                             <p></p>
-                            {% render_field form.category class="custom-select required" %}
+                            {% render_field form.category class="custom-select form-control required" %}
                             <div class="invalid-feedback">Requerido</div>
                         </div>
                     </div>
                 </form>    
             </div>
-
             <div class="card-footer">
                     <button type="submit" form="add-cat" class="btn btn-success">Continuar</button>
             </div>

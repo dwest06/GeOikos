@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from decimal import Decimal
 from .models import *
 from .forms import *
 from Users.models import User
@@ -11,9 +12,20 @@ from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_t
 ######################
 @login_required
 def home_inventario_view(request):
+    user = User.objects.get(pk=request.user.pk)
+
+    # Deuda total
+    deuda = Decimal(0)
+    for i in user.transaction_set.all():
+        deuda += i.transaction
+
+    # Solicitudes
+
     context = {
-        'deuda' : 0.00,
-        'grupo' : request.user.groups.all().first()
+        'deuda' : deuda,
+        'grupo' : request.user.groups.all().first(),
+        'solicitudes' : Request.objects.filter(user=user),
+        'prestamos' : Loan.objects.filter(user=user)
     }
     return render(request, "Inventory/home.html", context)
 
@@ -46,7 +58,6 @@ def home_cuarto_equipo_view(request):
 def create_category(request):
     if request.method == "POST":
         cat_form = CategoryForm(request.POST)
-        redirect("Inventory:create_category")
         if cat_form.is_valid():
             category = cat_form.save()
             names = request.POST.getlist('att_name')
@@ -96,96 +107,100 @@ def equip_cat_selection(request):
             return redirect("Inventory:home_inventory")
     else:
         form = CatQueryForm()
-        return render(request, "Inventory/create_equipment.html", {"form" : form, })
+        return render(request, "Inventory/create_equipment.html", {"form" : form })
 
 @login_required
 @is_cuarto_equipo
 def create_equipment(request, cat):    
     if request.method == "POST":
+        print(request.POST)
         equip_form = EquipmentForm(request.POST)
-        catAttributes = list(Attribute.objects.filter(category=cat))
-        att_forms=[]
-        for att in catAttributes:
-            attName = att.name
-            if att.attribute_type=='INT' or att.attribute_type=='FLT':
-                att_forms.append(IntValueForm(request.POST,prefix = attName))
-            elif att.attribute_type=='TXT':
-                att_forms.append(TxtValueForm(request.POST,prefix = attName))
-            elif att.attribute_type=='STR':
-                att_forms.append(StrValueForm(request.POST,prefix = attName))
-            elif att.attribute_type=='BOO':
-                att_forms.append(BoolValueForm(request.POST,prefix = attName))
-            elif att.attribute_type=='DAT':
-                att_forms.append(DateValueForm(request.POST,prefix = attName))
-            elif att.attribute_type=='CHO':
-                att_forms.append(ChoiceValueForm(request.POST,prefix = attName))
-        if equip_form.is_valid() and all(attForm.is_valid() for attForm in att_forms):
-            equipment= equip_form.save(commit=False)
+        if equip_form.is_valid():
+            
+            equipment = equip_form.save(commit=False)
             equipment.category = Category.objects.get(pk=cat)
             equipment.save()
-            i=0
-            for attForm in att_forms:
-                value = attForm.save(commit=False)
-                value.equipment = equipment
-                value.attribute = catAttributes[i]
-                value.save()
-                i+=1
+            for group in request.POST.getlist('group'):
+                if group != '':
+                    g = Group.objects.get(name=group)
+                    equipment.group.add(g)
+
+            cat_attributes = list(Attribute.objects.filter(category=cat))
+            
+            idxs = [0,0,0,0,0,0,0]
+            lists = [
+                request.POST.getlist('value_int'),
+                request.POST.getlist('value_txt'),
+                request.POST.getlist('value_str'),
+                request.POST.getlist('value_bool'),
+                request.POST.getlist('value_date'),
+                request.POST.getlist('value_cho'),
+                request.POST.getlist('value_float')
+            ]
+
+            for att in cat_attributes:
+                att_val = AttributeEquipmet()
+                if att.attribute_type=='INT': #0
+                    att_val.value_int = lists[0][idxs[0]]
+                    idxs[0]+=1
+                elif att.attribute_type=='TXT': #1
+                    att_val.value_txt = lists[1][idxs[1]]
+                    idxs[1]+=1
+                elif att.attribute_type=='STR': #2
+                    att_val.value_str = lists[2][idxs[2]]
+                    idxs[2]+=1
+                elif att.attribute_type=='BOO': #3
+                    att_val.value_bool = lists[3][idxs[3]]
+                    idxs[3]+=1
+                elif att.attribute_type=='DAT': #4
+                    att_val.value_date = lists[4][idxs[4]]
+                    idxs[4]+=1
+                elif att.attribute_type=='CHO': #5
+                    att_val.value_cho = lists[5][idxs[5]]
+                    idxs[5]+=1
+                elif att.attribute_type=='FLT': #6
+                    att_val.value_float = lists[6][idxs[6]]
+                    idxs[6]+=1
+                att_val.equipment = equipment
+                att_val.attribute = att
+                att_val.save()
             messages.success(request, "Equipo Agregado")
             return redirect("Inventory:home_inventory")
-        else:
-            equip_form = EquipmentForm(request.POST)
-            catAttributes = list(Attribute.objects.filter(category=cat))
-            att_forms=[]
-            for att in catAttributes:
-                attName = att.name
-                if att.attribute_type=='INT' or att.attribute_type=='FLT':
-                    att_forms.append((IntValueForm(request.POST,prefix = attName),attName))
-                elif att.attribute_type=='TXT':
-                    att_forms.append((TxtValueForm(request.POST,prefix = attName),attName))
-                elif att.attribute_type=='STR':
-                    att_forms.append((StrValueForm(request.POST,prefix = attName),attName))
-                elif att.attribute_type=='BOO':
-                    att_forms.append((BoolValueForm(request.POST,prefix = attName),attName))
-                elif att.attribute_type=='DAT':
-                    att_forms.append((DateValueForm(request.POST,prefix = attName),attName))
-                elif att.attribute_type=='CHO':
-                    att_forms.append((ChoiceValueForm(request.POST,prefix = attName),attName))
+        else:                
             messages.error(request, "Fallo al agregar equipo")
-            return render(request, "Inventory/create_equipment_value.html", context = {
-                "equipform" : equip_form, "attforms" : att_forms, 'page_title': 'Crear Equipo'}
-                )
+            return render(request, "Inventory:ḧome_inventory")
     else:
         equip_form = EquipmentForm()
         catAttributes = list(Attribute.objects.filter(category=cat))
         att_forms=[]
-        for att in catAttributes:
-            attName = att.name
-            if att.attribute_type=='INT' or att.attribute_type=='FLT':
-                att_forms.append((IntValueForm(prefix=attName),attName))
+        for att in cat_attributes:
+            att_name = att.name
+            att_null = not att.nullity
+            if att.attribute_type=='INT':
+                form = IntValueForm(att_null)
             elif att.attribute_type=='TXT':
-                att_forms.append((TxtValueForm(prefix=attName),attName))
+                form = TxtValueForm(att_null)
             elif att.attribute_type=='STR':
-                att_forms.append((StrValueForm(prefix=attName),attName))
+                form = StrValueForm(att_null)
             elif att.attribute_type=='BOO':
-                att_forms.append((BoolValueForm(prefix=attName),attName))
+                form = BoolValueForm(att_null)
             elif att.attribute_type=='DAT':
-                att_forms.append((DateValueForm(prefix=attName),attName))
+                form = DateValueForm(att_null)
             elif att.attribute_type=='CHO':
-                att_forms.append((ChoiceValueForm(prefix=attName),attName))
-
-
+                form = ChoiceValueForm(att_null)
+            elif att.attribute_type=='FLT':
+                form = FltValueForm(att_null)
+            att_forms.append((form,att_name,att_null))
+        groups = Group.objects.all()
         return render(request, "Inventory/create_equipment_value.html", context = {
-            "equipform" : equip_form, "attforms" : att_forms, 'page_title': 'Crear Equipo'}
-            )
+            "equipform" : equip_form, "attforms" : att_forms, 'groups':groups, 'page_title': 'Crear Equipo'
+            })
 
 @login_required
 @is_activo
 def create_request(request):
     if request.method == "POST":
-        catformset = CatReqFormset(request.POST)
-        eqformset  = EqReqFormset(request.POST)
-        comments   = CommentsReqForm(request.POST)
-       
+        ''' falta implementar esto '''       
         if catformset.is_valid() and eqformset.is_valid() and comments.is_valid():
             request_obj = Request.objects.create(user=request.user)
             request_obj.specs = comments.cleaned_data['comments']
@@ -220,11 +235,7 @@ def create_request(request):
         return redirect("Inventory:create_request")
 
     else:
-        catform = CatReqFormset()
-        eqform = EqReqFormset()
-        comments = CommentsReqForm()
-        return render(request, "Inventory/create_request.html", 
-                      {"catformset" : catform, "eqformset" : eqform, "comments" : comments})
+        return render(request, "Inventory/create_request.html")
 
 @login_required
 @is_pasivo
@@ -327,6 +338,7 @@ def loan_devolution(request,loan):
 @login_required
 @is_pasivo
 def show_equipment(request,category):
+
     atts = Attribute.objects.filter(category=category)
     equip = Equipment.objects.filter(category=category)
     catname = Category.objects.get(id=category).name
@@ -367,8 +379,8 @@ def show_equipment(request,category):
             {'name':'Fecha de descontinuación', 'value':eq.discontinued_date}, 
             {'name':'Notas sobre el equipo', 'value':eq.notes}
             ]
-
-        rows.append({'name':name, 'vals':vals, 'av':available, 'info':info})
+        groups = [group for group in eq.group.all()]
+        rows.append({'name':name, 'vals':vals, 'av':available, 'info':info, 'groups':groups})
 
     return render(request, "Inventory/equipment_table.html", {'attributes': atts, 
                                                               'rows' : rows,

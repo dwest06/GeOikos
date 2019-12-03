@@ -20,16 +20,16 @@
                         <label class="control-label">{{categoryform.name.label}}</label>
                         {% render_field categoryform.name class="form-control" placeholder="Inserte el nombre de la categoría" %}
                         <div class="valid-feedback">Correcto</div>
-                        <div class="invalid-feedback">Requerido</div>
+                        <div class="invalid-feedback">Incorrecto</div>
                     </div>
                     <div id="form_zone"></div>
                 </form>
             </div>
             <div class="card-footer">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
+                <button type="button" class="btn btn-primary add_form">Añadir atributo a la categoría</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">
                     Añadir Categoría
                 </button>
-                <button type="button" class="btn btn-secondary add_form">Añadir</button>
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
                             <label class="control-label">Nombre del Atributo</label>
                             <input name="att_name" class="form-control" placeholder="Ingrese el nombre del atributo" required>
                             <div class="valid-feedback">Correcto</div>
-                            <div class="invalid-feedback">Requerido</div>
+                            <div class="invalid-feedback">Incorrecto</div>
                         </div>
                         <div class="form-group required" >
                             <label class="control-label" for="tipos">Tipo de dato</label>
@@ -76,12 +76,11 @@
                                     <option value="STR">String (Cadena de caracteres)</option>
                                     <option value="TXT">Texto</option>
                                     <option value="BOO">Booleano (Verdadero y Falso)</option>
-                                    <option value="FLt">Entero con decimales</option>
+                                    <option value="FLT">Entero con decimales</option>
                                     <option value="DAT">Fecha</option>
-                                    <option value="CHO">Selección</option>
                                 </select>
                             <div class="valid-feedback">Correcto</div>
-                            <div class="invalid-feedback">Requerido</div>
+                            <div class="invalid-feedback">Incorrecto</div>
                         </div>
                     </div>
                     <div class="form-row"> 
@@ -97,7 +96,7 @@
                                     <option>Opcional</option>
                                 </select>
                             <div class="valid-feedback">Correcto</div>
-                            <div class="invalid-feedback">Requerido</div>
+                            <div class="invalid-feedback">Incorrecto</div>
                         </div>
                     </div>
                     <div class="input-group-append">

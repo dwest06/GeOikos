@@ -1,11 +1,10 @@
 ﻿from django import forms
-from django.forms import formset_factory, modelformset_factory
+from django.forms import formset_factory, modelformset_factory, widgets
+from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError 
 from .models import (Category, Equipment, Attribute, Group, 
                     Request, RequestCategory, Loan, Repair, 
                     EquipmentDebt, Transaction, AttributeEquipmet)
-from django.core.validators import MaxValueValidator
-from django.core.exceptions import ValidationError 
-
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -25,15 +24,14 @@ class EquipmentForm(forms.ModelForm):
         model = Equipment
         fields = [
                 'serial', 'name', 'entry_date', 
-                'elaboration_date', 'notes', 'group'
+                'elaboration_date', 'notes'
             ]
         labels = {
             'serial' : 'Serial',
             'name' : 'Nombre del Equipo',
-            'entry_date' : 'Fecha de Entrada',
+            'entry_date' : 'Fecha de entrada a Oikos',
             'elaboration_date' : 'Fecha de Elaboracion',
             'notes' : 'Notas',
-            'group' : 'Grupo'
         }
         error_messages = {
             'serial' : {
@@ -54,6 +52,8 @@ class EquipmentForm(forms.ModelForm):
         }
     def clean_serial(self):
         serial = self.cleaned_data['serial']
+        if serial is None:
+            return None
         if serial < 0:
             raise forms.ValidationError("Debes especificar una cantidad positiva")
         return serial
@@ -70,10 +70,31 @@ class IntValueForm(forms.ModelForm):
             }
         }
 
-    def __init__(self, *args, **kwargs):
+        widgets = {
+            'value_int' : widgets.NumberInput(attrs={'class' : 'form-control ', 'placeholder' : 'Inserte un entero aquí'})
+        }
+
+    def __init__(self, required, *args, **kwargs):
         super(IntValueForm, self).__init__(*args, **kwargs)
+        self.fields['value_int'].required=required
+
+class FltValueForm(forms.ModelForm):
+    class Meta:
+        model = AttributeEquipmet
+        fields = ['value_float']
+        labels = { 'value_float' : ''}
+
+        error_messages = {
+            'value_float' : {
+                'invalid' : 'Entrada inválida'
+            }
+        }
+
+    def __init__(self, required, *args, **kwargs):
+        super(FltValueForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+        self.fields['value_float'].required=required
         
 class TxtValueForm(forms.ModelForm):
     class Meta:
@@ -88,10 +109,13 @@ class TxtValueForm(forms.ModelForm):
             }
         }
 
-    def __init__(self, *args, **kwargs):
+        widgets = {
+            'value_txt' : widgets.Textarea(attrs={'class' : 'form-control ', 'placeholder' : 'Inserte texto aquí'})
+        }
+
+    def __init__(self, required, *args, **kwargs):
         super(TxtValueForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
+        self.fields['value_txt'].required=required
 
 class StrValueForm(forms.ModelForm):
     class Meta:
@@ -106,10 +130,11 @@ class StrValueForm(forms.ModelForm):
             }
         }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, required, *args, **kwargs):
         super(StrValueForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+        self.fields['value_str'].required=required
 
 class DateValueForm(forms.ModelForm):
     class Meta:
@@ -123,21 +148,33 @@ class DateValueForm(forms.ModelForm):
             }
         }
 
-    def __init__(self, *args, **kwargs):
+        widgets = {
+            'value_date' : widgets.DateInput(attrs={'type':'date', 'class':'form-control', 'placeholder':'MM/DD/YYYY'})
+        }
+
+    def __init__(self, required, *args, **kwargs):
         super(DateValueForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['type'] = 'date'
+            visible.field.widget.attrs['placeholder'] = "mm/dd/yyyy"
+        self.fields['value_date'].required=required
     
 class BoolValueForm(forms.ModelForm):
     class Meta:
         model = AttributeEquipmet
         fields = ['value_bool']
         labels = { 'value_bool' : ''}
+        
+        widgets = {
+            'value_bool' : widgets.Select(attrs={'class':'form-control custom-select'}, choices=[(True,'Verdadero'),(False,'Falso')])
+        }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, required, *args, **kwargs):
         super(BoolValueForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+        self.fields['value_bool'].required=required
 
 class ChoiceValueForm(forms.ModelForm):
     class Meta:
@@ -145,10 +182,11 @@ class ChoiceValueForm(forms.ModelForm):
         fields = ['value_cho']
         labels = { 'value_cho' : ''}
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, required, *args, **kwargs):
         super(ChoiceValueForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+        self.fields['value_cho'].required=required
 
 
 class GroupForm(forms.ModelForm):
@@ -167,7 +205,7 @@ class GroupForm(forms.ModelForm):
 class RequestForm(forms.ModelForm):
     class Meta:
         model = Request
-        fields = ['user', 'specs', 'equipment', 'category']
+        fields = ['user', 'specs', 'category']
 
         error_messages = {
             'specs' : {
@@ -353,10 +391,14 @@ class TransactionForm(forms.ModelForm):
         }
 
 class CatReqForm(forms.Form):
-    notAvEq = Equipment.notAvEquipment()
-    avCat = {x.category.id for x in Equipment.objects.exclude(id__in=notAvEq)}
-    category = forms.ModelChoiceField(queryset=Category.objects.filter(id__in=avCat), label="Categoría")
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), label="Categoría")
     quantity = forms.IntegerField(label="Cantidad", required=True, initial=1)
+
+    def __init__(self, *a, **kw):
+        super().__init__(*a, **kw)
+        notAvEq = Equipment.notAvEquipment()
+        avCat = {x.category.id for x in Equipment.objects.exclude(id__in=notAvEq)}
+        self.fields['category'].queryset = Category.objects.filter(id__not_Fin=avCat)
 
     def clean_quantity(self):
         quantity = self.cleaned_data['quantity']
@@ -374,13 +416,16 @@ CatReqFormset = formset_factory(
 
 class EqReqForm(forms.Form):
     equipment = forms.ModelChoiceField(
-        queryset=Equipment.objects.exclude(id__in=Equipment.notAvEquipment()),
+        queryset=Equipment.objects.all(),
         label="Equipo"
     )
 
+    def __init__(self, *a, **kw):
+        super().__init__(a, kw)
+        self.fields['equipment'].queryset=Equipment.objects.exclude(id__in=Equipment.notAvEquipment())        
 class CommentsReqForm(forms.Form):
     comments = forms.CharField(required=False, widget=forms.Textarea)
-
+    
 EqReqFormset = formset_factory(
     EqReqForm,
     extra = 1

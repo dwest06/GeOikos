@@ -95,7 +95,7 @@ Cuarto de Equipo
         <h3>Solicitudes</h3>
       </div>
 
-      <div class="card-body">
+      <div class="card-body" style="overflow-x: scroll">
         <table class="table table-hover w-full tabledat">
           <caption>Para manejo de solicitudes de equipos</caption>
           <thead>
@@ -135,13 +135,13 @@ Cuarto de Equipo
 
  </div> 
 <div class="row mb-20">
-    <!-- DEUDAS PAGOS -->
+    <!-- CATEGORIAS -->
   <div class="col-md-6 col-sm-12 mb-20">
     <div class="card text-center">
       <div class="card-header">
         <h3>Categorias</h3>
       </div>
-      <div class="card-body">
+      <div class="card-body" style="overflow-x: scroll">
         <table class="table table-hover w-full tabledat">
         <caption>Para manejo de categorias</caption>
         <thead>
@@ -172,15 +172,15 @@ Cuarto de Equipo
     </div>
   </div>
 
-  <!-- DEUDAS MULTA -->
+  <!-- EQUIPOS -->
   <div class="col-md-6 col-sm-12 mb-20">
     <div class="card text-center">
       <div class="card-header">
-        <h3>Deudas de Multas</h3>
+        <h3>Equipos</h3>
       </div>
-      <div class="card-body">
+      <div class="card-body" style="overflow-x: scroll">
         <table class="table table-hover w-full tabledat">
-        <caption>Para manejo de deudas de multas</caption>
+        <caption>Para manejo de equipos</caption>
         <thead>
           <tr>
             <th scope="col">Id</th>
@@ -217,7 +217,20 @@ Cuarto de Equipo
 {% block custom_js %}
 <script>
   $('.tabledat').DataTable({
-			"order" : [[0,"desc"]]
+			"order" : [[0,"desc"]],
+      "language": {
+        "search": "Buscar:",
+        "emptyTable":     "No hay entradas para esta tabla",
+        "info":           "Mostrando _START_ hasta _END_ de _TOTAL_ entradas",
+        "infoEmpty":      "Mostrando 0 de 0 entradas",
+        "lengthMenu":     "Mostrar _MENU_ entradas",
+        "paginate": {
+          "first":      "Primera",
+          "last":       "Ultima",
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },
+      }
 		});
 </script>
 {% endblock  %}
