@@ -15,7 +15,7 @@
                 <h3>Tabla</h3>
             </div>
 
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
                 <table class="table table-hover w-full" id="table">
                     <caption>Tabla</caption>
                     <thead>
@@ -55,7 +55,20 @@
 {% block custom_js %}
 <script>
   $('#table').DataTable({
-			"order" : [[0,"desc"]]
-		});
+        "order" : [[0,"desc"]],
+        "language": {
+            "search": "Buscar:",
+            "emptyTable":     "No hay entradas para esta tabla",
+            "info":           "Mostrando _START_ hasta _END_ de _TOTAL_ entradas",
+            "infoEmpty":      "Mostrando 0 de 0 entradas",
+            "lengthMenu":     "Mostrar _MENU_ entradas",
+            "paginate": {
+                "first":      "Primera",
+                "last":       "Ultima",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+        }
+    });
 </script>
 {% endblock  %}
