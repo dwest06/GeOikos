@@ -18,52 +18,40 @@
             <div class="card-body">
                 <form class="form-horizontal form-group" id="create-form" method="POST" action="">
                     {% csrf_token %}
-                    {{ catformset.management_form }}
-                    {% for form in catformset %}
-                    <div class="cat-form-col">
-                        <div class="form-row mb-20"> 
-                            <div class="form-group col">
-                                <label class="control-label">{{form.category.label}}</label>
-                                {% render_field form.category class="form-control" %}
-                            </div>
-                            <div class="form-group col">
-                                <label class="control-label">{{form.quantity.label}}</label>
-                                {% render_field form.quantity class="form-control" min=1 %}
-                                <small class="form-text text-muted">
-                                    Ingrese una cantidad mayor a 0
-                                </small>
-                            </div>
+                    <div class="form-group cat_form col">
+                        <div class="form-group col">
+                            <label class="control-label required">Categoría</label>
+                            <select name="cat_value" class="form-control" required>
+                                <option disabled selected value>-----</option>
+                                {% for cat in categories %}
+                                    <option value="{{cat}}">{{cat.name}}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="valid-feedback">Correcto</div>
+                            <div class="invalid-feedback">Incorrecto</div>
                         </div>
-                        <div class="input-group-append mb-20">
-                            <button class="btn btn-success add-cat">Añadir otra categoría</button>
-                        </div>
-                        <p></p>
-                    </div>
-                    {% endfor %}
-                    {{ eqformset.management_form }}
-                    {% for form in eqformset %}
-                    <div class="eq-form-col">
-                        <div class="form-row mb-20"> 
-                            <div class="col">
-                                <label class="control-label">{{form.equipment.label}}</label>
-                                {% render_field form.equipment class="form-control" %}
-                            </div>
-                        </div>
-                        <div class="input-group-append mb-20">
-                            <button class="btn btn-success add-eq">Añadir otro equipo</button>
+                        <div class="form-group col">
+                            <label class="control-label required">Cantidad</label>
+                            <input name="cat_q" type="number" min="1" required>
+                            <small class="form-text text-muted">
+                                Ingrese una cantidad mayor a 0
+                            </small>
+                            <div class="valid-feedback">Correcto</div>
+                            <div class="invalid-feedback">Incorrecto</div>
                         </div>
                     </div>
-                    {% endfor %}
                     <div class="form-row mb-20">
                         <div class="col">
-                            <label>Comentarios</label>
-                            {% render_field comments.comments class="form-control" %}
+                            <label>Especificaciones</label>
+                            <textare name="comments" class="form-control" rows="8">
+                                Especificaciones o comentarios acerca de la solicitud.
+                            </textarea>
                         </div>
                     </div>
                 </form>
             </div>
-
             <div class="card-footer">
+                <button type="button" class="btn btn-primary add_form">Añadir otra categoría</button>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Enviar solicitud</button>
             </div>
         </div>
@@ -91,4 +79,59 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+
+    function cloneMore(selector) {
+
+        $('.create-form').append(`
+            <div class="form-group cat_form col">
+                <div class="form-group col">
+                    <label class="control-label required">Categoría</label>
+                    <select name="cat_value" class="form-control" required>
+                        <option disabled selected value>-----</option>
+                        {% for cat in categories %}
+                            <option value="{{cat}}">{{cat.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="valid-feedback">Correcto</div>
+                    <div class="invalid-feedback">Incorrecto</div>
+                </div>
+                <div class="form-group col">
+                    <label class="control-label required">Cantidad</label>
+                    <input name="cat_q" type="number" min="1" required>
+                    <small class="form-text text-muted">
+                        Ingrese una cantidad mayor a 0
+                    </small>
+                    <div class="valid-feedback">Correcto</div>
+                    <div class="invalid-feedback">Incorrecto</div>
+                </div>
+                <div class="input-group-append">
+                        <button class="btn btn-danger remove_form">Eliminar</button>  
+                    </div>
+                <br> 
+            </div>`
+        );
+    
+        return false;
+    }
+
+    function deleteFormCat(btn) {
+        btn.closest('.cat_form').remove();
+        return false;
+    }
+
+    $(document).on('click', '.add_form', function (e) {
+        e.preventDefault();
+        cloneMore('.cat_form:last');
+        return false;
+    });
+
+    $(document).on('click', '.remove_form', function (e) {
+        e.preventDefault();
+        deleteFormCat($(this));
+        return false;
+    });
+</script>
 {% endblock %}

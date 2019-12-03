@@ -1,11 +1,10 @@
 ﻿from django import forms
 from django.forms import formset_factory, modelformset_factory, widgets
+from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError 
 from .models import (Category, Equipment, Attribute, Group, 
                     Request, RequestCategory, Loan, Repair, 
                     EquipmentDebt, Transaction, AttributeEquipmet)
-from django.core.validators import MaxValueValidator
-from django.core.exceptions import ValidationError 
-
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -206,7 +205,7 @@ class GroupForm(forms.ModelForm):
 class RequestForm(forms.ModelForm):
     class Meta:
         model = Request
-        fields = ['user', 'specs', 'equipment', 'category']
+        fields = ['user', 'specs', 'category']
 
         error_messages = {
             'specs' : {

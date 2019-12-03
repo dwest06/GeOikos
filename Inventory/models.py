@@ -37,7 +37,7 @@ class Equipment(models.Model):
     def notAvEquipment():
         borrowed = Loan.borrowedEq()
         notAv = Equipment.discontinuedEq().union(borrowed)
-        notAvEq = [x['id'] for x in notAv]
+        notAvEq = [ x['id'] for x in notAv ]
         return notAvEq
     
     def avEquipment():
@@ -94,7 +94,6 @@ class Request(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     specs = models.TextField(blank=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    equipment = models.ManyToManyField(Equipment)
     category = models.ManyToManyField(Category,through='RequestCategory')
 
     def __str__(self):
@@ -108,7 +107,7 @@ class RequestCategory(models.Model):
 class Loan(models.Model):
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='loan_user')
-    #creator = models.ForeignKey(User,on_delete=models.CASCADE,related_name='creator_user')
+    creator = models.ForeignKey(User,on_delete=models.CASCADE,related_name='creator_user')
     hand_over_date = models.DateTimeField()
     deadline = models.DateTimeField(null=True, blank=True)
     delivery_date = models.DateTimeField(null=True, blank=True)

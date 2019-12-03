@@ -200,10 +200,7 @@ def create_equipment(request, cat):
 @is_activo
 def create_request(request):
     if request.method == "POST":
-        catformset = CatReqFormset(request.POST)
-        eqformset  = EqReqFormset(request.POST)
-        comments   = CommentsReqForm(request.POST)
-       
+        ''' falta implementar esto '''       
         if catformset.is_valid() and eqformset.is_valid() and comments.is_valid():
             request_obj = Request.objects.create(user=request.user)
             request_obj.specs = comments.cleaned_data['comments']
@@ -238,11 +235,7 @@ def create_request(request):
         return redirect("Inventory:create_request")
 
     else:
-        catform = CatReqFormset()
-        eqform = EqReqFormset()
-        comments = CommentsReqForm()
-        return render(request, "Inventory/create_request.html", 
-                      {"catformset" : catform, "eqformset" : eqform, "comments" : comments})
+        return render(request, "Inventory/create_request.html")
 
 @login_required
 @is_pasivo
