@@ -391,3 +391,42 @@ def load_transaction(request):
         return redirect("Inventory:tesorero")
     form = TransactionForm()
     return render(request, "Inventory/load_transaction.html", {"form" : form, "heading": "Cargar Transacciones"})
+
+
+@login_required
+@is_cuarto_equipo
+def devolution_deadline_global(request):
+    if request.method == "POST":
+        form = DateForm(request.POST)
+        if form.is_valid():
+            date= form.cleaned_data.get("date")
+            activeloans = Loan.objects.filter(delivery_date__isnull=True).filter(deadline__isnull=True, deadline__gte=date)
+            activeloans.deadline=date
+            activeloans.save()
+            messages.success(request, "Fecha de entrega cargada")
+        else:
+            messages.success(request, "Fecha inválida")
+        return redirect("Inventory:cuarto_equipo")
+    else:
+        form = DateForm()
+        ###### CREAR TEMMPLATE
+        return redirect("Inventory:cuarto_equipo")
+
+@login_required
+@is_cuarto_equipo
+def devolution_deadline_single(request,pk):
+    if request.method == "POST":
+        form = DateForm(request.POST)
+        if form.is_valid():
+            date= form.cleaned_data.get("date")
+            loan = Loan.objects.get(pk=pk)
+            loan.deadline=date
+            loan.save()
+            messages.success(request, "Fecha de entrega cargada")
+        else:
+            messages.success(request, "Fecha inválida")
+        return redirect("Inventory:cuarto_equipo")
+    else:
+        form = DateForm()
+        ###### CREAR TEMMPLATE
+        return redirect("Inventory:cuarto_equipo")

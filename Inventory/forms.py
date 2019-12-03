@@ -407,3 +407,5 @@ class AttsQueryForm(forms.Form):
                 CHOICES = [dic['option_name'] for dic in Choices.objects.filter(attribute=att).values('option_name')]
                 self.fields[att.name] = forms.ChoiceField(choices=CHOICES, label=att.name, required=att.nullity)
     
+class DateForm(forms.Form):
+    date = forms.DateField()
