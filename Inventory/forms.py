@@ -174,7 +174,10 @@ class BoolValueForm(forms.ModelForm):
         super(BoolValueForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+            if not required:
+                visible.field.widget.choices = [(None,'-----'),(True,'Verdadero'),(False,'Falso')]
         self.fields['value_bool'].required=required
+        
 
 class ChoiceValueForm(forms.ModelForm):
     class Meta:
@@ -199,35 +202,6 @@ class GroupForm(forms.ModelForm):
                 'required' : 'Campo obligatorio',
                 'invalid' : 'Entrada inválida',
                 'max_length' : 'Máximo de caracteres excedido'
-            }
-        }
-
-class RequestForm(forms.ModelForm):
-    class Meta:
-        model = Request
-        fields = ['user', 'specs', 'category']
-
-        error_messages = {
-            'specs' : {
-                'invalid' : 'Entrada inválida',
-                'max_length' : 'Máximo de caracteres excedido'
-            }
-        }
-
-class RequestCategoryForm(forms.ModelForm):
-    class Meta:
-        model = RequestCategory
-        fields = ['request', 'category', 'quantity']
-
-        error_messages = {
-            'request' : {
-                'required' : 'Campo obligatorio',
-            },
-            'category' : {
-                'required' : 'Campo obligatorio',
-            },
-            'quantity' : {
-                'required' : 'Campo obligatorio'
             }
         }
 

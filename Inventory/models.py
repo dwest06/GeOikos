@@ -93,11 +93,13 @@ class AttributeEquipmet(models.Model):
 class Request(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     specs = models.TextField(blank=True,default="")
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='requesting_user')
+    user2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='equipment_user',null=True)
     category = models.ManyToManyField(Category,through='RequestCategory')
+    status = models.BooleanField(default=False)
 
     def __str__(self):
-        return 'Solicitud de ' + str(self.user)
+        return 'Solicitud de ' + str(self.user1)
 
 class RequestCategory(models.Model):
     request = models.ForeignKey(Request, on_delete=models.CASCADE)

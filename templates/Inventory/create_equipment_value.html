@@ -6,7 +6,7 @@
 {% endblock  %}
 
 {% block content %}
-<div class="row">
+<div class="col">
     <div class="offset-lg-2 col-lg-8 col-md-12">
         <div class="card">
             <div class="card-header">
@@ -40,26 +40,24 @@
                         </div>
                     </div>
 
-                    <div class="form-row mb-20">
-                        <div class="col">
-                            {% for form in attforms %}
-                                {% if form.2 %}
-                                <div class="form-group required"></div>
-                                    <label class="control-label">{{form.1}} (opcional)</label>
-                                    {{ form.0 }}
-                                    <div class="valid-feedback">Completo</div>
-                                    <div class="invalid-feedback">Requerido</div>
-                                </div>
-                                {% else %}
-                                <div class="form-group required">
-                                    <label class="control-label">{{form.1}}</label>
-                                    {{ form.0 }}
-                                    <div class="valid-feedback">Completo</div>
-                                    <div class="invalid-feedback">Requerido</div>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
+                    <div class="form-col mb-20">
+                        {% for form in attforms %}
+                            {% if not form.2 %}
+                            <div class="form-group">
+                                <label class="control-label">{{form.1}} (opcional)</label>
+                                {{ form.0 }}
+                                <div class="valid-feedback">Completo</div>
+                                <div class="invalid-feedback">Requerido</div>
+                            </div>
+                            {% else %}
+                            <div class="form-group required">
+                                <label class="control-label">{{form.1}}</label>
+                                {{ form.0 }}
+                                <div class="valid-feedback">Completo</div>
+                                <div class="invalid-feedback">Requerido</div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
 
                     <div class="form-row mb-20">
@@ -82,7 +80,6 @@
                     </div>
                 </form>
             </div>
-
             <div class="card-footer">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Ingresar Equipo</button>
             </div>

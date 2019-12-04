@@ -17,7 +17,7 @@ urlpatterns = [
     path('load-transaction', views.load_transaction, name="load_transaction"),
     path('create-request',views.create_request, name="create_request"),
     path('loan-devolution/<int:loan>' ,views.loan_devolution, name="loan_devolution"),
-
+    path('show-request/<int:request_id>',views.show_request,name="show_request"),
     # VISTAS DE TESORERO
     path('tesorero', views.home_tesorero_view, name="tesorero"),
     # VISTAS DE CUARTO DE EQUIPO

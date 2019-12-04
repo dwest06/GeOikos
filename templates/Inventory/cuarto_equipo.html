@@ -102,28 +102,29 @@ Cuarto de Equipo
             <tr>
               <th scope="col">Id</th>
               <th scope="col">Solicitante</th>
-              <th scope="col">Equipo(s) solicitados</th>
-              <th scope="col">Especificaciones</th>
-              <th scope="col">fecha de solicitud</th>
-              <th scope="col">Aceptar</th>
-              <th scope="col">Rechazar</th>
+              <th scope="col">Fecha de solicitud</th>
+              <th scope="col">Detalles</th>
+              <th scope="col">Estado</th>
             </tr>
           </thead>
           <tbody>
           {% for t in solicitudes %}
             <tr>
               <td>{{t.pk}}</td>
-              <td>{{t.user.username}}</td>
-              <td><div class="btn btn-info"><i class="fas fa-pencil-alt"></i></div></td>
-              <td><div class="btn btn-dark"><i class="fas fa-pencil-alt"></i></div></td>
+              <td>{{t.user1}}</td>
               <td>{{t.date}}</td>
-              <td><a href="" class="btn btn-success"><i class="fas fa-check"></i></a></td>
               <td>
-              <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
-                class="btn btn-danger delete-user">
-                <i class="fas fa-times"></i>
-              </div>
-            </td>
+                <form action="/inventory/show-request/{{t.pk}}" method="GET">
+                  <input type="submit" class="btn btn-primary" value="Ver detalles"/>
+                </form>
+              </td> 
+              {% if t.user2 == None %}
+              <td class="text-center text-secondary" style="font-weight:bold">Sin responder</td>
+              {% elif t.status %}
+              <td class="text-center text-success" style="font-weight:bold">Aprobado por {{ t.user2 }}</td>
+              {% else %}
+              <td class="text-center text-danger" style="font-weight:bold">Rechazado por {{ t.user2 }}</td>
+              {% endif %}
             </tr>
           {% endfor %}
           </tbody>
@@ -132,6 +133,7 @@ Cuarto de Equipo
 
     </div>
   </div>
+
 
  </div> 
 <div class="row mb-20">
@@ -149,7 +151,6 @@ Cuarto de Equipo
             <th scope="col">Id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Modificar</th>
-            <th scope="col">Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -158,13 +159,6 @@ Cuarto de Equipo
             <td>{{t.pk}}</td>
             <td>{{t.name}}</td>
             <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
-            <td>
-              <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
-                class="btn btn-danger delete-user">
-                <i class="fas fa-times"></i>
-              </div>
-            </td>
-          </tr>
         {% endfor %}
         </tbody>
       </table>
@@ -187,7 +181,6 @@ Cuarto de Equipo
             <th scope="col">Serial</th>
             <th scope="col">Nombre</th>
             <th scope="col">Modificar</th>
-            <th scope="col">Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -197,12 +190,6 @@ Cuarto de Equipo
             <td>{{t.serial}}</td>
             <td>{{t.name}}</td>
             <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
-            <td>
-              <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
-                class="btn btn-danger delete-user">
-                <i class="fas fa-times"></i>
-              </div>
-            </td>
           </tr>
         {% endfor %}
         </tbody>
@@ -211,7 +198,7 @@ Cuarto de Equipo
     </div>
   </div>
 </div>
-  
+
 {% endblock  %}
 
 {% block custom_js %}
