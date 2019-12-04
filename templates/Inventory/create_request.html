@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 
 {% block page-title %}
-    Solicitud
+    Cuarto de equipo
 {% endblock %}
 
 {% block content %}
@@ -11,41 +11,44 @@
         <div class="card">
             <div class="card-header">
                 <h1>Solicitar equipo</h1>
-                <p>Herramienta de solicitud de equipo. Puede especificar que tipo de 
-                    equipo desea solicitar (categoría) o qué equipo en específico desea solicitar.</p>
+                <p>Herramienta de solicitud de equipo.</p>
+                <p>     
+                    Especifique qué categorías de equipo desea solicitar.
+                    Cualquier comentario o especificación debe ser escrita debajo.
+                </p>
             </div>
 
             <div class="card-body">
-                <form class="form-horizontal form-group" id="create-form" method="POST" action="">
+                <form class="form-horizontal form-group needs-validation" id="request-form" method="POST" action="" novalidate>
                     {% csrf_token %}
-                    <div class="form-group cat_form col">
-                        <div class="form-group col">
-                            <label class="control-label required">Categoría</label>
-                            <select name="cat_value" class="form-control" required>
-                                <option disabled selected value>-----</option>
-                                {% for cat in categories %}
-                                    <option value="{{cat}}">{{cat.name}}</option>
-                                {% endfor %}
-                            </select>
-                            <div class="valid-feedback">Correcto</div>
-                            <div class="invalid-feedback">Incorrecto</div>
-                        </div>
-                        <div class="form-group col">
-                            <label class="control-label required">Cantidad</label>
-                            <input name="cat_q" type="number" min="1" required>
-                            <small class="form-text text-muted">
-                                Ingrese una cantidad mayor a 0
-                            </small>
-                            <div class="valid-feedback">Correcto</div>
-                            <div class="invalid-feedback">Incorrecto</div>
+                    <div class="form-group col category_form"> 
+                        <div class="form-group cat_form col">
+                            <div class="form-group col required">
+                                <label class="control-label">Categoría</label>
+                                <select name="cat_value" class="form-control" required>
+                                    <option disabled selected value>-----</option>
+                                    {% for cat in categories %}
+                                        <option value="{{cat}}">{{cat.name}}</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="valid-feedback">Correcto</div>
+                                <div class="invalid-feedback">Incorrecto</div>
+                            </div>
+                            <div class="form-group col required">
+                                <label class="control-label">Cantidad: </label>
+                                <input class="form-control" name="cat_q" type="number" min="1" required>
+                                <div class="valid-feedback">Correcto</div>
+                                <div class="invalid-feedback">Incorrecto</div>
+                                <small class="form-text text-muted">
+                                    Ingrese una cantidad mayor a 0
+                                </small>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row mb-20">
                         <div class="col">
                             <label>Especificaciones</label>
-                            <textare name="comments" class="form-control" rows="8">
-                                Especificaciones o comentarios acerca de la solicitud.
-                            </textarea>
+                            <textarea name="comments" class="form-control" placeholder="Comentarios" rows="8"></textarea>
                         </div>
                     </div>
                 </form>
@@ -74,7 +77,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" form="create-form" value="Submit">Aceptar</button>
+            <button type="submit" class="btn btn-primary" form="request-form" value="Submit">Aceptar</button>
         </div>
         </div>
     </div>
@@ -84,11 +87,11 @@
 <script type="text/javascript">
 
     function cloneMore(selector) {
-
-        $('.create-form').append(`
+        console.log("entro "+selector)
+        $('.category_form').append(`
             <div class="form-group cat_form col">
-                <div class="form-group col">
-                    <label class="control-label required">Categoría</label>
+                <div class="form-group col required">
+                    <label class="control-label">Categoría</label>
                     <select name="cat_value" class="form-control" required>
                         <option disabled selected value>-----</option>
                         {% for cat in categories %}
@@ -98,19 +101,16 @@
                     <div class="valid-feedback">Correcto</div>
                     <div class="invalid-feedback">Incorrecto</div>
                 </div>
-                <div class="form-group col">
-                    <label class="control-label required">Cantidad</label>
-                    <input name="cat_q" type="number" min="1" required>
+                <div class="form-group col required">
+                    <label class="control-label">Cantidad: </label>
+                    <input class="form-control" name="cat_q" type="number" min="1" required>
+                    <div class="valid-feedback">Correcto</div>
+                    <div class="invalid-feedback">Incorrecto</div>
                     <small class="form-text text-muted">
                         Ingrese una cantidad mayor a 0
                     </small>
-                    <div class="valid-feedback">Correcto</div>
-                    <div class="invalid-feedback">Incorrecto</div>
                 </div>
-                <div class="input-group-append">
-                        <button class="btn btn-danger remove_form">Eliminar</button>  
-                    </div>
-                <br> 
+                <button type="button" class="btn btn-danger remove_form">Eliminar</button>
             </div>`
         );
     
@@ -134,4 +134,5 @@
         return false;
     });
 </script>
+
 {% endblock %}

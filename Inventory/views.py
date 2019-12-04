@@ -200,42 +200,37 @@ def create_equipment(request, cat):
 @is_activo
 def create_request(request):
     if request.method == "POST":
-        ''' falta implementar esto '''       
-        if catformset.is_valid() and eqformset.is_valid() and comments.is_valid():
-            request_obj = Request.objects.create(user=request.user)
-            request_obj.specs = comments.cleaned_data['comments']
-            
-            for form in catformset: 
-                try:
-                    category = form.cleaned_data['category'].pk              
-                    quantity = form.cleaned_data['quantity']
-                except KeyError:
-                    continue
-                requestcat =  RequestCategory.objects.create(
-                                category=Category.objects.get(pk=category),
-                                request=request_obj,
-                                quantity=form.cleaned_data['quantity']
-                              )
-                requestcat.save()
-            
-            request_obj.save()
+                             
+        cat_list = request.POST.getlist('cat_value')
+        q_list = request.POST.getlist('cat_q')
 
-            for form in eqformset:
-                try:
-                    equipment = form.cleaned_data['equipment'].pk
-                except KeyError:
-                    continue
-                request_obj.equipment.add(Equipment.objects.get(pk=equipment))
-        
-        else:
-            messages.error(request,"Formularios Inválidos")
+        if(len(cat_list)!=len(q_list)):
+            messages.error(request,"Solicitud incorrecta")
             return redirect("Inventory:create_request")
+
+        if(any(int(q)<=0 for q in q_list) or 
+           not all(Category.objects.filter(name=cat).exists() for cat in cat_list)):
+           messages.error(request,"Solicitud incorrecta")
+           return redirect("Inventory:create_request")
+
+        request_obj = Request.objects.create(user=request.user,specs=request.POST['comments'])
+
+        for i in range(0,len(cat_list)):
+            quantity = int(q_list[i])
+            category = Category.objects.get(name=cat_list[i])
+            request_cat = RequestCategory.objects.create(
+                                                        request=request_obj,
+                                                        category=category,
+                                                        quantity=quantity
+                                                        )
+            request_cat.save()
         
         messages.success(request,"Solicitud enviada")
         return redirect("Inventory:create_request")
 
     else:
-        return render(request, "Inventory/create_request.html")
+        categories = Category.objects.all()
+        return render(request, "Inventory/create_request.html", {'categories':categories})
 
 @login_required
 @is_pasivo
