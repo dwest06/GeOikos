@@ -11,39 +11,37 @@
     <div class="offset-xl-4 col-xl-4 offset-md-2 col-md-8 col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h1> Cargar Devolución de Préstamo</h1>
+                <h1 class="text-center">Cargar Devolución de Préstamo</h1>
                 <p>Herramienta para registrar devoluciones de equipo.</p>
             </div>
 
             <div class="card-body">
                 <form class="form-horizontal needs-validation form-group" id="create-form" method="POST" action="" novalidate>
                     {% csrf_token %}
-                    <div class="required mb-20">
-                        <label class="control-label">{{form.delivery_date.label}}</label>
-                        {% render_field form.delivery_date class="form-control" placeholder="mm/dd/yyyy"%}
+                    <div class="form-group required mb-20">
+                        <label class="control-label">Fecha de devolución</label>
+                        {% render_field form.delivery_date type="date" class="form-control" required="true" %}
                         <small class="form-text text-muted">
                             Fecha de devolución
                         </small>
                         <div class="valid-feedback">Correcto</div>
                         <div class="invalid-feedback">Requerido</div>
                     </div>
-                    <div class="required mb-20">
-                        <label class="control-label">{{form.score.label}}</label>
-                        {% render_field form.score class="form-control" %}
+                    <div class="form-group required mb-20">
+                        <label class="control-label">Puntuación</label>
+                        {% render_field form.score class="form-control" min=0 max=5 %}
                         <small class="form-text text-muted">
                             Puntuación
                         </small>
                         <div class="valid-feedback">Correcto</div>
                         <div class="invalid-feedback">Requerido</div>
                     </div>
-                    <div class="required mb-20">
-                        <label class="control-label">{{form.notes.label}}</label>
-                        {% render_field form.notes type="date" class="form-control" %}
+                    <div class="mb-20">
+                        <label>Comentarios y Observaciones</label>
+                        {% render_field form.notes class="form-control" %}
                         <small class="form-text text-muted">
                             Observaciones
                         </small>
-                        <div class="valid-feedback">Correcto</div>
-                        <div class="invalid-feedback">Requerido</div>
                     </div>
                     <button type="submit" class="btn btn-success">Cargar Devolución</button>
                 </form>

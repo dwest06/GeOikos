@@ -57,27 +57,84 @@ Cuarto de Equipo
           <caption>Para manejo de prestamos de equipos</caption>
           <thead>
             <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Equipo</th>
-              <th scope="col">Username</th>
-              <th scope="col">hand_over_date</th>
-              <th scope="col">fecha de devolucion</th>
-              <th scope="col">fecha de entrega</th>
-              <th scope="col">Accion</th>
-              <th scope="col">Cargar Devolución</th>
+              <th class="text-center" scope="col">Id</th>
+              <th class="text-center" scope="col">Equipo</th>
+              <th class="text-center" scope="col">Usuario</th>
+              <th class="text-center" scope="col">Fecha de Recepción</th>
+              <th class="text-center" scope="col">Fecha de Entrega</th>
+              <th class="text-center" scope="col">Fecha de Devolución</th>
+              <th class="text-center" scope="col">Estado</th>
+              <th class="text-center" scope="col">Detalles</th>
             </tr>
           </thead>
           <tbody>
           {% for t in prestamos %}
             <tr>
-              <td>{{t.pk}}</td>
-              <td>{{t.equipment.name}}</td>
-              <td>{{t.user.username}}</td>
-              <td>{{t.hand_over_date}}</td>
-              <td>{{t.deadline}}</td>
-              <td>{{t.delivery_date}}</td>
-              <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
-              <td><a href="Inventory:loan_gsfdzdevolution/{{t.pk}}" class="btn btn-success"><i class="fas fa-plus"></i></a></td>
+              <td class="text-center">{{t.pk}}</td>
+              <td class="text-center">{{t.equipment.name}}</td>
+              <td class="text-center">{{t.user}}</td>
+              <td class="text-center">{{t.hand_over_date}}</td>
+              {% if t.deadline is None %}
+              <td class="text-center"><span class="text-primary" style="font-weight:bold">No se ha asignado una fecha de entrega</span></td>
+              {% else %}
+              <td class="text-center">{{t.deadline}}</td>
+              {% endif %}
+              {% if t.delivery_date is None %}
+              <td class="text-center"><span class="text-danger" style="font-weight:bold">Prestamo activo</span></td>
+              {% else %}
+              <td class="text-center">{{t.delivery_date}}</td>
+              {% endif %}
+              {% if t.delivery_date is None %}
+                <td><a href="{% url 'Inventory:loan_devolution' t.pk %}" class="btn btn-success">Cargar devolución</a></td>
+              {% else %}
+              <td class="text-center"><span class="text-success" style="font-weight:bold">Equipo devuelto</span></td>
+              {% endif %}
+                <div class="modal fade" id="info{{forloop.counter}}" tabindex="-1">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="Title">Prestamo {{t.pk}}</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body ">
+                              <div class="card">
+                                  <ul class="list-group list-group-flush">
+                                      <li class="list-group-item text-center">
+                                        <span style="font-weight:bold">Recibe: {{t.user}}</span>
+                                      </li>
+                                      <li class="list-group-item text-center">
+                                          <span style="font-weight:bold">Entrega: {{t.creator}}</span>
+                                      </li>
+                                      <li class="list-group-item text-center">
+                                          <span style="font-weight:bold">Equipo: {{t.equipment.name}}</span>
+                                      </li>
+                                      {% if t.delivery_date is not None %}
+                                        <li class="list-group-item text-center">
+                                            <span style="font-weight:bold">Puntuación: {{t.score}}/5</span>
+                                        </li>
+                                        {% if t.notes %}
+                                        <li class="list-group-item text-center">
+                                            <label>Notas:</label>
+                                              {{t.notes}}
+                                        </li>
+                                        {% endif %}
+                                      {% endif %}
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Volver</button>
+                          </div>
+                          <td class="text-center">
+                              <button class="btn btn-primary" data-toggle="modal" data-target="#info{{forloop.counter}}">
+                                  Ver Detalles
+                              </button>
+                          </td>
+                      </div>
+                  </div>
+              </div>
             </tr>
           {% endfor %}
           </tbody>

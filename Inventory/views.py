@@ -6,6 +6,7 @@ from .models import *
 from .forms import *
 from Users.models import User
 from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
+
 ######################
 ## VISTAS PRINCIPALES
 ######################
@@ -235,7 +236,7 @@ def create_equipment(request, cat):
             "equipform" : equip_form, "attforms" : att_forms, 'groups':groups, 'page_title': 'Crear Equipo'
             })
 
-def filterAndFill(lists, attributes, equipment):
+def filterAndFillM(lists, attributes, equipment):
     atts = []
     idxs = [0,0,0,0,0,0]
     for att in attributes:
@@ -324,7 +325,7 @@ def modify_equipment(request,eq_id):
                 request.POST.getlist('value_date'),
                 request.POST.getlist('value_float')
             ]
-            att_val = filterAndFill(lists,cat_attributes,eq_id)
+            att_val = filterAndFillM(lists,cat_attributes,eq_id)
             equipment.save()
             for group in request.POST.getlist('group'):
                 if group != '':
@@ -510,15 +511,15 @@ def loan_creation(request):
 @is_cuarto_equipo
 def loan_devolution(request,loan):
     if request.method == "POST":
+        if not Loan.objects.filter(pk=loan).exists():
+            messages.error(request, "Préstamo no existente")
+            return redirect("Inventory:home_inventory")
         instance = Loan.objects.get(pk=loan)
         form = LoanDevolutionForm(request.POST)
         if form.is_valid():
-            delivery_date= form.cleaned_data.get("delivery_date")
-            score= form.cleaned_data.get("score")
-            notes= form.cleaned_data.get("notes")
-            instance.delivery_date=delivery_date
-            instance.score=score
-            instance.notes=notes
+            instance.delivery_date=form.cleaned_data.get("delivery_date")
+            instance.score=form.cleaned_data.get("score")
+            instance.notes=form.cleaned_data.get("notes")
             instance.save()
             messages.success(request, "Devolución cargada")
         else:
@@ -538,8 +539,9 @@ def show_request(request,request_id):
             return redirect("Inventory:cuarto_equipo") 
 
         req = Request.objects.get(id=request_id)
-        if not (request.user.groups.first()=='cuarto_equipo'
-            or  request.user.groups.first()=='admin') and request.user.id != req.user1.id:
+        if ((request.user.groups.first().name!='cuarto_equipo' and
+             request.user.groups.first().name!='admin') and 
+             request.user.id != req.user1.id):
             messages.error(request, "Permiso denegado")
             return redirect("Inventory:cuarto_equipo") 
 
@@ -554,8 +556,8 @@ def show_request(request,request_id):
             return redirect("Inventory:cuarto_equipo") 
         req = Request.objects.get(id=request_id)
 
-        if(not (request.user.groups.first()=='cuarto_equipo'
-            or  request.user.groups.first()=='admin') and request.user.id != req.user1.id):
+        if (request.user.groups.first().name!='cuarto_equipo' and
+            request.user.groups.first().name!='admin'):
             messages.error(request, "Permiso denegado")
             return redirect("Inventory:cuarto_equipo") 
 

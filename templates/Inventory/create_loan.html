@@ -18,8 +18,8 @@
             <div class="card-body">
                 <form class="form-horizontal needs-validation form-group" id="create-form" method="POST" action="" novalidate>
                     {% csrf_token %}
-                    <div class="required mb-20">
-                        <label class="control-label">{{form.equipment.label}}</label>
+                    <div class="form-group required mb-20">
+                        <label class="control-label">Equipo</label>
                         {% render_field form.equipment class="form-control" %}
                         <small class="form-text text-muted">
                             Equipo que está siendo prestado
@@ -27,8 +27,8 @@
                         <div class="valid-feedback">Correcto</div>
                         <div class="invalid-feedback">Requerido</div>
                     </div>
-                    <div class="required mb-20">
-                        <label class="control-label">{{form.user.label}}</label>
+                    <div class="form-group required mb-20">
+                        <label class="control-label">Usuario</label>
                         {% render_field form.user class="form-control" %}
                         <small class="form-text text-muted">
                             Usuario que recibe el equipo.
@@ -36,11 +36,11 @@
                         <div class="valid-feedback">Correcto</div>
                         <div class="invalid-feedback">Requerido</div>
                     </div>
-                    <div class="required mb-20">
-                        <label class="control-label">{{form.hand_over_date.label}}</label>
+                    <div class="form-group required mb-20">
+                        <label class="control-label">Fecha de recepción</label>
                         {% render_field form.hand_over_date type="date" class="form-control" placeholder="mm/dd/yyyy" %}
                         <small class="form-text text-muted">
-                            Fecha de entrega del equipo.
+                            Fecha en la que el equipo es recibido por el Oikeano.
                         </small>
                         <div class="valid-feedback">Correcto</div>
                         <div class="invalid-feedback">Requerido</div>

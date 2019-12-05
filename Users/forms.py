@@ -47,6 +47,12 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email', 'username', 'first_name', 'last_name')
+        labels = {
+            'email':'E-mail',
+            'username':'Nombre de Usuario',
+            'first_name':'Nombre',
+            'last_name':'Apellido'
+        }
 
     def __init__(self, *args, **kwargs):
         super(UserChangeForm, self).__init__(*args, **kwargs)

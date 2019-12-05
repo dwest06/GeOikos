@@ -90,6 +90,12 @@ def modify_user(request, pk, *args, **kwargs):
             messages.error(request,"Datos Inalidos")
         return redirect("Inventory:home_inventory")
     
+    if((request.user.groups.first().name != 'admin' or
+        request.user.groups.first().name != 'gestor_usuarios') and 
+        request.user.pk != pk):
+        messages.error(request,"Operaci?n no permitida.")
+        return redirect("Inventory:home_inventory") 
+        
     user = User.objects.get(pk = pk)
     form = UserChangeForm(instance=user)
     context = {

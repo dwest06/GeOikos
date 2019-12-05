@@ -91,7 +91,7 @@ class AttributeEquipmet(models.Model):
     
 
 class Request(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField(auto_now_add=True)
     specs = models.TextField(blank=True,default="")
     user1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='requesting_user')
     user2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='equipment_user',null=True)
@@ -110,9 +110,9 @@ class Loan(models.Model):
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='loan_user')
     creator = models.ForeignKey(User,on_delete=models.CASCADE,related_name='creator_user')
-    hand_over_date = models.DateTimeField()
-    deadline = models.DateTimeField(null=True, blank=True)
-    delivery_date = models.DateTimeField(null=True, blank=True)
+    hand_over_date = models.DateField()
+    deadline = models.DateField(null=True, blank=True)
+    delivery_date = models.DateField(null=True, blank=True)
     score = models.IntegerField(null=True)
     notes = models.TextField(blank=True)
     

@@ -12,7 +12,7 @@ from .models import (
     Repair ,
     EquipmentDebt ,
     Transaction ,
-    Trimestrality
+    Quarterly
 )
 
 admin.site.register(Category)
@@ -27,4 +27,4 @@ admin.site.register(Loan)
 admin.site.register(Repair)
 admin.site.register(EquipmentDebt)
 admin.site.register(Transaction)
-admin.site.register(Trimestrality)
+admin.site.register(Quarterly)

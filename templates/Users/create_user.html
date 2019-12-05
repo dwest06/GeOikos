@@ -11,13 +11,13 @@
     <div class="row" >
         <div class="offset-md-4 col-md-4 card">
             <br>
-            <form action="" method="POST" class="form-group" >
+            <form action="" method="POST" class="form-group needs-validation" novalidate>
                 {% csrf_token %}
                 {{form.as_p}}
                 {% if request.user|is_gestor_usuario %}
                     <!-- SELECT PARA ASIGNARLE UN STATUS -->
                     <p>
-                        <label for="status">Status:</label>
+                        <label for="status">Estado en la agrupación:</label>
                         <select name="status" id="status" class="form-control">
                             <option value="">Elegir</option>
                             {% for k, s in status.items %}
