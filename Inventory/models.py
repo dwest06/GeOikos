@@ -155,9 +155,5 @@ class Transaction(models.Model):
     def __str__(self):
         return 'Transaccion de ' + str(self.user) + ', ' + str(self.transaction) + ', ' + str(self.reason) 
 
-class Tariff(models.Model):
-    penalty = models.IntegerField(blank=False)
-    quarterly = models.IntegerField(blank=False)
-
-    def __str__(self):
-        return 'Multas: ' + str(self.penalty) + ', Trimestralidad: ' + str(self.quarterly)
+class Quarterly(models.Model):
+    amount = models.DecimalField(max_digits=7, decimal_places=2)

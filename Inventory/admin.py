@@ -11,7 +11,8 @@ from .models import (
     Loan ,
     Repair ,
     EquipmentDebt ,
-    Transaction 
+    Transaction ,
+    Trimestrality
 )
 
 admin.site.register(Category)
@@ -26,3 +27,4 @@ admin.site.register(Loan)
 admin.site.register(Repair)
 admin.site.register(EquipmentDebt)
 admin.site.register(Transaction)
+admin.site.register(Trimestrality)

@@ -16,7 +16,7 @@ def home_inventario_view(request):
     # Deuda total
     deuda = Decimal(0)
     for i in user.transaction_set.all():
-        deuda += i.transaction
+        deuda -= i.transaction
 
     # Solicitudes
 
@@ -673,3 +673,15 @@ def devolution_deadline_single(request,pk):
         form = DateForm()
         ###### CREAR TEMMPLATE
         return redirect("Inventory:cuarto_equipo")
+
+@login_required
+@is_tesorero
+def load_all_trim(request):
+    if request.method == "POST":
+        activos = User.objects.filter(groups__name="activo")
+        tcost = Quarterly.objects.all().first().amount
+        for act in activos:
+            t = Transaction(user=act, transaction=-tcost, reason='T')
+            t.save()
+        messages.success(request, "Trimestralidades cargadas")
+    return redirect("Inventory:tesorero")

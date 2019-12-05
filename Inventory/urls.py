@@ -21,6 +21,7 @@ urlpatterns = [
     path('show-request/<int:request_id>',views.show_request,name="show_request"),
     # VISTAS DE TESORERO
     path('tesorero', views.home_tesorero_view, name="tesorero"),
+    path('tesorero/load-all-trim', views.load_all_trim, name="load_all_trim"),
     # VISTAS DE CUARTO DE EQUIPO
     path('cuarto-equipo', views.home_cuarto_equipo_view, name="cuarto_equipo"),
 ]
