@@ -9,15 +9,11 @@ class User(AbstractUser):
         ('EX', 'Ex-miembro')
     ]
     USERNAME_FIELD = 'email'
-    id_number = models.IntegerField(unique=True,null=True)
+    email = models.EmailField('email-address', unique=True)
     usb_id = models.IntegerField(null=True)
-    email = models.EmailField('email address', unique=True)
-    username = models.CharField(max_length=100, verbose_name='Nombre de Usuario')
-    first_name = models.CharField(max_length=100, verbose_name='Nombre')
-    last_name = models.CharField(max_length=100, verbose_name="Appellido")
     balance = models.IntegerField(null=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICES,null=True, default='IN')
-    foto = models.ImageField(upload_to="users/", blank=True, default=None, null=True)
+    photo = models.ImageField(upload_to="users/", blank=True, default=None, null=True)
     REQUIRED_FIELDS = ['username'] 
 
     def __str__(self):
