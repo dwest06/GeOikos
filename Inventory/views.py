@@ -6,7 +6,7 @@ from .models import *
 from .forms import *
 from Users.models import User
 from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
-
+from datetime import date
 ######################
 ## VISTAS PRINCIPALES
 ######################
@@ -115,7 +115,7 @@ def filterAndFill(lists, attributes):
     for att in attributes:
         att_val = AttributeEquipmet()
         if att.attribute_type=='INT': #0
-            if att.nullity and list[0][idxs[0]] == '':
+            if att.nullity and lists[0][idxs[0]] == '':
                 att_val.value_int = None
             else:
                 if lists[0][idxs[0]] == '':
@@ -161,12 +161,12 @@ def filterAndFill(lists, attributes):
                 idxs[4]+=1
         elif att.attribute_type=='FLT': #5
             if att.nullity and lists[5][idxs[5]] == '':
-                att_val.value_flt = None
+                att_val.value_float = None
             else:
                 if lists[5][idxs[5]] == '':
                     messages.error(request, "Fallo al agregar equipo")
                     return render(request, "Inventory:create-equipment")
-                att_val.value_flt = Decimal(lists[5][idxs[5]])
+                att_val.value_float = Decimal(lists[5][idxs[5]])
                 idxs[5]+=1
         att_val.attribute = att
         atts.append(att_val)
@@ -235,6 +235,163 @@ def create_equipment(request, cat):
         return render(request, "Inventory/create_equipment_value.html", context = {
             "equipform" : equip_form, "attforms" : att_forms, 'groups':groups, 'page_title': 'Crear Equipo'
             })
+
+def filterAndFill(lists, attributes, equipment):
+    atts = []
+    idxs = [0,0,0,0,0,0]
+    for att in attributes:
+        att_val = AttributeEquipmet.objects.get(equipment=equipment,attribute=att)
+        if att.attribute_type=='INT': #0
+            if att.nullity and lists[0][idxs[0]] == '':
+                att_val.value_int = None
+            else:
+                if lists[0][idxs[0]] == '':
+                    messages.error(request, "Fallo al agregar equipo")
+                    return render(request, "Inventory:create-equipment")
+                att_val.value_int = int(lists[0][idxs[0]])
+                idxs[0]+=1
+        elif att.attribute_type=='TXT': #1
+            if att.nullity and lists[1][idxs[1]] == '':
+                att_val.value_txt = None
+            else:
+                if lists[1][idxs[1]] == '':
+                    messages.error(request, "Fallo al agregar equipo")
+                    return render(request, "Inventory:create-equipment")
+                att_val.value_txt = lists[1][idxs[1]]
+                idxs[1]+=1
+        elif att.attribute_type=='STR': #2
+            if att.nullity and lists[2][idxs[2]] == '':
+                att_val.value_str = None
+            else:
+                if lists[2][idxs[2]] == '':
+                    messages.error(request, "Fallo al agregar equipo")
+                    return render(request, "Inventory:create-equipment")
+                att_val.value_str = lists[2][idxs[2]]
+                idxs[2]+=1
+        elif att.attribute_type=='BOO': #3
+            if att.nullity and lists[3][idxs[3]] == '':
+                att_val.value_bool = None
+            else:
+                if lists[3][idxs[3]] == '':
+                    messages.error(request, "Fallo al agregar equipo")
+                    return render(request, "Inventory:create-equipment")
+                att_val.value_bool = (lists[3][idxs[3]] == "True")
+                idxs[3]+=1
+        elif att.attribute_type=='DAT': #4
+            if att.nullity and lists[4][idxs[4]] == '':
+                att_val.value_date = None
+            else:
+                if lists[4][idxs[4]] == '':
+                    messages.error(request, "Fallo al agregar equipo")
+                    return render(request, "Inventory:create-equipment")
+                att_val.value_date = lists[4][idxs[4]]
+                idxs[4]+=1
+        elif att.attribute_type=='FLT': #5
+            if att.nullity and lists[5][idxs[5]] == '':
+                att_val.value_float = None
+            else:
+                if lists[5][idxs[5]] == '':
+                    messages.error(request, "Fallo al agregar equipo")
+                    return render(request, "Inventory:create-equipment")
+                att_val.value_float = Decimal(lists[5][idxs[5]])
+                idxs[5]+=1
+        att_val.attribute = att
+        atts.append(att_val)
+    return atts
+
+@login_required
+@is_cuarto_equipo
+def modify_equipment(request,eq_id):    
+    if request.method == "POST":
+        equip_form = EquipmentForm(request.POST)
+        if equip_form.is_valid():
+
+            if not Equipment.objects.filter(pk=eq_id).exists():
+                messages.error(request, "Esta instancia de equipo no existe.")
+                return render(request, "Inventory:ḧome_inventory")
+
+            eq_obj = Equipment.objects.get(pk=eq_id)
+            
+            equipment = equip_form.save(commit=False)
+            equipment.id = eq_id
+                        
+            equipment.category = Category.objects.get(pk=eq_obj.category.pk)
+            cat_attributes = list(Attribute.objects.filter(category=eq_obj.category.pk))
+            lists = [
+                request.POST.getlist('value_int'),
+                request.POST.getlist('value_txt'),
+                request.POST.getlist('value_str'),
+                request.POST.getlist('value_bool'),
+                request.POST.getlist('value_date'),
+                request.POST.getlist('value_float')
+            ]
+            att_val = filterAndFill(lists,cat_attributes,eq_id)
+            equipment.save()
+            for group in request.POST.getlist('group'):
+                if group != '':
+                    g = Group.objects.get(name=group)
+                    equipment.group.add(g)
+            for att in att_val:
+                att.save()
+            messages.success(request, "Equipo Agregado")
+            return redirect("Inventory:home_inventory")
+        else:                
+            messages.error(request, "Fallo al agregar equipo")
+            return render(request, "Inventory:ḧome_inventory")
+    else:
+
+        if not Equipment.objects.filter(pk=eq_id).exists():
+            messages.error(request, "Esta instancia de equipo no existe.")
+            return render(request, "Inventory:ḧome_inventory")
+
+        eq_obj = Equipment.objects.get(pk=eq_id)
+        initial = {
+            'serial' : eq_obj.serial,
+            'name' : eq_obj.name,
+            'notes': eq_obj.notes
+        }
+        entry_date = str(eq_obj.entry_date)
+        elab_date = str(eq_obj.elaboration_date)
+
+        equip_form = EquipmentForm(initial=initial)
+
+        cat_attributes = list(Attribute.objects.filter(category=eq_obj.category))
+        att_forms=[]
+        for att in cat_attributes:
+            att_name = att.name
+            att_required = not att.nullity
+            val = AttributeEquipmet.objects.get(equipment=eq_obj.pk,attribute=att.pk)
+            if att.attribute_type=='INT':
+                initial = {'value_int': val.value_int}
+                form = IntValueForm(att_required, initial=initial)
+            elif att.attribute_type=='TXT':
+                initial = {'value_txt': val.value_txt }
+                form = TxtValueForm(att_required, initial=initial)
+            elif att.attribute_type=='STR':
+                initial = {'value_str': val.value_str }
+                form = StrValueForm(att_required, initial=initial)
+            elif att.attribute_type=='BOO':
+                initial = {'value_bool': val.value_bool }
+                form = BoolValueForm(att_required, initial=initial)
+            elif att.attribute_type=='DAT':
+                initial = {'value_date': val.value_date }
+                form = DateValueForm(att_required, initial=initial)
+            elif att.attribute_type=='FLT':
+                print(val.value_float)
+                initial = {'value_float': val.value_float }
+                form = FltValueForm(att_required, initial=initial)
+            att_forms.append((form,att_name,att_required))
+        groups = Group.objects.all()
+
+        return render(request, "Inventory/modify_equipment_value.html", context = {
+            'attforms' : att_forms,
+            "equipform" : equip_form,
+            "entry_date": entry_date,
+            "elab_date" : elab_date
+            })
+            
+            
+
 
 @login_required
 @is_activo
@@ -369,28 +526,41 @@ def loan_devolution(request,loan):
         return render(request, "Inventory/loan_devolution.html", {"form" : form})
 
 @login_required
-@is_cuarto_equipo
+@is_pasivo
 def show_request(request,request_id):
     if request.method == "GET":
-
+       
         if not Request.objects.filter(id=request_id).exists(): 
             messages.error(request, "No existe esta solicitud")
-            return redirect("Inventory:cuarto-equipo") 
-        
+            return redirect("Inventory:cuarto_equipo") 
+
         req = Request.objects.get(id=request_id)
+        if not (request.user.groups.first()=='cuarto_equipo'
+            or  request.user.groups.first()=='admin') and request.user.id != req.user1.id:
+            messages.error(request, "Permiso denegado")
+            return redirect("Inventory:cuarto_equipo") 
+
         req_cat = RequestCategory.objects.filter(request=request_id)
         context = {'req':req,'requestCat':req_cat}
         return render(request,"Inventory/show_request.html",context)
+
     else:
+
         if not Request.objects.filter(id=request_id).exists(): 
             messages.error(request, "No existe esta solicitud")
-            return redirect("Inventory:cuarto-equipo") 
+            return redirect("Inventory:cuarto_equipo") 
         req = Request.objects.get(id=request_id)
+
+        if(not (request.user.groups.first()=='cuarto_equipo'
+            or  request.user.groups.first()=='admin') and request.user.id != req.user1.id):
+            messages.error(request, "Permiso denegado")
+            return redirect("Inventory:cuarto_equipo") 
+
         req.user2 = request.user
         req.status = request.POST['value']
         req.save()
         messages.success(request,"Solicitud procesada con éxito.")
-        return redirect("Inventory:cuarto-equipo")
+        return redirect("Inventory:cuarto_equipo")
 
 
 @login_required

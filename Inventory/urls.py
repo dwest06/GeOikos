@@ -8,6 +8,7 @@ urlpatterns = [
     path('create-category', views.create_category, name='create_category'),
     path('create-equipment', views.equip_cat_selection , name="create_equipment"),
     path('create-equipment-value/<int:cat>', views.create_equipment , name="create_equipment_value"),
+    path('modify-equipment-value/<int:eq_id>', views.modify_equipment , name="modify_equipment_value"),
     path('select-cat', views.cat_query_view , name="select-cat"),
     path('select-atts/<int:category>', views.atts_query_view, name="select-atts"),
     path('create-group', views.create_group , name="create_group"),

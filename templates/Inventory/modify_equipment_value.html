@@ -1,0 +1,110 @@
+﻿{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block page-title %}
+Modificar Equipo
+{% endblock  %}
+
+{% block content %}
+<div class="col">
+    <div class="offset-lg-2 col-lg-8 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h1>Modificar valores del equipo</h1>
+                <p>Herramienta para modificar los valores de los atributos del equipo.</p>
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal needs-validation form-group" id="create-form" method="POST" action="" novalidate>
+                    {% csrf_token %}
+                    <div class="form-row mb-20"> 
+                        <div class="form-group col required">
+                            <label class="control-label">{{equipform.name.label}}</label>
+                            {% render_field equipform.name class="form-control" required="true" placeholder=equipform.name.label %}
+                            <div class="valid-feedback">Completo</div>
+                            <div class="invalid-feedback">Requerido</div>
+                        </div>
+                        <div class="col">
+                            <label>{{equipform.serial.label}}</label>
+                            {% render_field equipform.serial class="form-control" min=0 %}
+                        </div>
+                    </div>
+                    <div class="form-row mb-20"> 
+                        <div class="col">
+                            <label>{{equipform.entry_date.label}}</label>
+                            <input type="date" name="entry_date" class="form-control" id="id_entry_date" value={{entry_date}}>
+                        </div>
+                        <div class="col">
+                            <label>{{equipform.elaboration_date.label}}</label>
+                            <input type="date" name="elaboration_date"  class="form-control" id="id_elaboration_date" value={{elab_date}}>
+                        </div>
+                    </div>
+
+                    <div class="form-col mb-20">
+                        {% for form in attforms %}
+                            {% if not form.2 %}
+                            <div class="form-group">
+                                <label class="control-label">{{form.1}} (opcional)</label>
+                                {{ form.0 }}
+                                <div class="valid-feedback">Completo</div>
+                                <div class="invalid-feedback">Requerido</div>
+                            </div>
+                            {% else %}
+                            <div class="form-group required">
+                                <label class="control-label">{{form.1}}</label>
+                                {{ form.0 }}
+                                <div class="valid-feedback">Completo</div>
+                                <div class="invalid-feedback">Requerido</div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-row mb-20">
+                        <div class="col">
+                            <label>Grupos</label>
+                            <select multiple class="form-control" name="group">
+                                <option selected value>Sin grupo</option>
+                                {% for group in groups %}
+                                <option>{{group}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label>Notas</label>
+                            {% render_field equipform.notes class="form-control" %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Modificar Equipo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmModal">Confirmación: Modificar Equipo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Al hacer click en aceptar, se modificará esta instancia de equipo.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" form="create-form" value="Submit">Aceptar</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
