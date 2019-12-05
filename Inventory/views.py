@@ -6,7 +6,6 @@ from .models import *
 from .forms import *
 from Users.models import User
 from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
-from datetime import date
 ######################
 ## VISTAS PRINCIPALES
 ######################
@@ -468,9 +467,9 @@ def atts_query_view(request, category):
                 elif att_type == 'TXT':
                     equipment_ids = [val['equipment_id'] for val in AttributeEquipmet.objects.filter(attribute=att_id, value_txt=value).values()]
                 elif att_type == 'BOO':
-                    equipment_ids = [val['equipment_id'] for val in AttributeEquipmet.objects.filter(attribute=att_id, value_boo=value).values()]
+                    equipment_ids = [val['equipment_id'] for val in AttributeEquipmet.objects.filter(attribute=att_id, value_bool=value).values()]
                 elif att_type == 'DAT':
-                    equipment_ids = [val['equipment_id'] for val in AttributeEquipmet.objects.filter(attribute=att_id, value_dat=value).values()]
+                    equipment_ids = [val['equipment_id'] for val in AttributeEquipmet.objects.filter(attribute=att_id, value_date=value).values()]
                 elif att_type == 'CHO':
                     equipment_ids = [val['equipment_id'] for val in AttributeEquipmet.objects.filter(attribute=att_id, value_cho=value).values()]
                 query = query.filter(id__in=equipment_ids)              
@@ -494,12 +493,16 @@ def loan_creation(request):
     if request.method == "POST":
         lc_form = LoanCreationForm(request.POST)
         if lc_form.is_valid():
-            lc_form.save()
+            loan= lc_form.save(commit=False)
+            loan.creator = request.user
+            loan.save()
             messages.success(request, "Prestamo cargado")
         else:
             messages.error(request, "Fallo al cargar prestamo")
         return redirect("Inventory:home_inventory")
     else:
+        LoanCreationForm.base_fields['equipment'] = forms.ModelChoiceField(queryset=Equipment.avEquipment())
+        LoanCreationForm.base_fields['user'] = forms.ModelChoiceField(queryset=User.objects.filter(status="AC"))
         lc_form = LoanCreationForm()
         return render(request, "Inventory/create_loan.html", {"form" : lc_form})
 
@@ -595,7 +598,7 @@ def show_equipment(request,category):
             elif att_type == 'BOO':
                 vals.append(val.value_bool)
             elif att_type == 'DAT':
-                vals.append(val.value_dat)
+                vals.append(val.value_date)
             elif att_type == 'FLT':
                 vals.append(val.value_float)
             elif att_type == 'CHO':
