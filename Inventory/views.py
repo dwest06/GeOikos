@@ -673,6 +673,10 @@ def load_transaction(request):
             if trans.reason != 'P':
                 trans.transaction *= -1
             trans.save()
+            userid = request.POST['user']
+            user = User.objects.get(pk=userid)
+            user.balance += trans.transaction
+            user.save()
             messages.success(request, "Transacción cargada")
         else:
             messages.error(request, "Fallo al cargar transacción")

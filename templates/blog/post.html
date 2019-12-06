@@ -45,8 +45,8 @@
           <thead>
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Title</th>
-              <th scope="col">Status</th>
+              <th scope="col">Titulo</th>
+              <th scope="col">Estatus</th>
               <th scope="col">Modificar</th>
               <th scope="col">Eliminar</th>
             </tr>
@@ -93,10 +93,10 @@
         {% csrf_token %}
         <input type="hidden" name="post" id="delete-post" value="">
         <div class="modal-body">
-          <p>¿Desea eliminar el usuario?</p>
+          <p>¿Desea eliminar el post?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-danger">Eliminarlo</button>
         </div>
       </form>

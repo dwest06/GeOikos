@@ -6,6 +6,11 @@ class CreatePost(forms.ModelForm):
     class Meta:
         model = Post
         fields = ("title", "content", "status")
+        labels ={
+            "title": "Titulo",
+            "content" : "Contenido",
+            "status" : "Estatus"
+        }
 
     def __init__(self, *args, **kwargs):
         super(CreatePost, self).__init__(*args, **kwargs)

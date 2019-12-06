@@ -8,7 +8,7 @@ from .forms import CreatePost
 
 
 # SECCION DE BLOG
-@login_required
+
 def get_blog_posts(request):
     """
     Retorna todos los posts, con paginacion, para la seccion de blog
@@ -27,7 +27,7 @@ def get_blog_posts(request):
     print(posts.has_other_pages)
     return render(request, 'oikos/blog.html', { 'posts': posts, 'fino': "fino" })
 
-@login_required
+
 def get_blog_post(request, pk):
     """
     Retorna la vista completa del post seleccionado
