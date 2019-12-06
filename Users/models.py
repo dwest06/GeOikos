@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     STATUS_CHOICES = [
-        ('AC', 'Activo'),
+        ('AC', 'Miembro Activo'),
         ('AS', 'Aspirante Estrella'),
         ('IN', 'Inactivo'),
         ('EX', 'Ex-miembro')

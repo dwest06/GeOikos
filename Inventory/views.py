@@ -23,7 +23,8 @@ def home_inventario_view(request):
 
     context = {
         'deuda' : deuda,
-        'grupo' : request.user.groups.all().first(),
+        'trans' : Transaction.objects.filter(user=user),
+        'grupo' : request.user.groups.all().first().name,
         'solicitudes' : Request.objects.filter(user1=user),
         'prestamos' : Loan.objects.filter(user=user)
     }

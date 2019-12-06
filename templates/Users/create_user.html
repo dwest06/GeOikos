@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 {% load tags %}
 
 {% block page-title %}
@@ -13,13 +14,37 @@
             <br>
             <form action="" method="POST" class="form-group needs-validation" novalidate>
                 {% csrf_token %}
-                {{form.as_p}}
+                <div class="col">
+                    <div class="form-group required row">
+                        <label class="control-label" for="email">{{form.email.label}}</label>
+                        {% render_field form.email class="form-control" id="email" required=True placeholder="Correo electrónico" %}
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Incorrecto</div>
+                    </div>
+                    <div class="form-group required row">
+                        <label class="control-label" for="username">{{form.username.label}}</label>
+                        {% render_field form.username class="form-control" id="username" required=True placeholder="Nombre de usuario" %}
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Incorrecto</div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname">{{form.first_name.label}}</label>
+                        {% render_field form.first_name class="form-control" id="fname" placeholder="Nombre" %}
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Incorrecto</div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname">{{form.last_name.label}}</label>
+                        {% render_field form.last_name class="form-control" id="lname" placeholder="Apellido" %}
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Incorrecto</div>
+                    </div>
+                </div>
                 {% if request.user|is_gestor_usuario %}
                     <!-- SELECT PARA ASIGNARLE UN STATUS -->
                     <p>
                         <label for="status">Estado en la agrupación:</label>
                         <select name="status" id="status" class="form-control">
-                            <option value="">Elegir</option>
                             {% for k, s in status.items %}
                                 {% if k == request.user.status %}
                                     <option value="{{k}}" selected>{{s}}</option>
@@ -33,12 +58,13 @@
                         <!-- SELECT PARA ASIGNARLE UN GRUPO -->
                         <label for="group">Grupo:</label>
                         <select name="group" id="group" class="form-control">
-                            <option value="">Elegir</option>
                             {% for group in groups %}
-                                {% if user_group == group %}
-                                    <option value="{{group}}" selected>{{group}}</option>
-                                {% else %}
-                                    <option value="{{group}}">{{group}}</option>
+                                {% if user_group == "admin" or group != "admin" %}
+                                    {% if user_group == group %}
+                                        <option value="{{group}}" selected>{{group|clean}}</option>
+                                    {% else %}
+                                        <option value="{{group}}">{{group|clean}}</option>
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                         </select>

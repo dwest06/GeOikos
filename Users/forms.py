@@ -7,17 +7,23 @@ class UserCreationForm(forms.ModelForm):
     password.
     """
     error_messages = {
-        'password_mismatch': "Las contraseñas no coinciden.",
+        'password_mismatch': "Las contraseÃ±as no coinciden.",
     }
     password1 = forms.CharField(label="Password",
         widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirmar Password",
         widget=forms.PasswordInput,
-        help_text="Ingresa la misma contraseña para su validacion.")
+        help_text="Ingresa la misma contraseÃ±a para su validacion.")
 
     class Meta:
         model = User
         fields = ("email", "username", "first_name", "last_name")
+        labels = {
+            'email':'Correo Electrónico',
+            'username':'Nombre de Usuario',
+            'first_name':'Nombre',
+            'last_name':'Apellido'
+        }
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -51,7 +57,7 @@ class UserChangeForm(forms.ModelForm):
             'email':'E-mail',
             'username':'Nombre de Usuario',
             'first_name':'Nombre',
-            'last_name':'Apellido'
+            'last_name':'Apellido',
         }
 
     def __init__(self, *args, **kwargs):
