@@ -11,7 +11,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     email = models.EmailField('email-address', unique=True)
     usb_id = models.IntegerField(null=True)
-    balance = models.IntegerField(null=True)
+    balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     status = models.CharField(max_length=2, choices=STATUS_CHOICES,null=True, default='IN')
     pic = models.ImageField(upload_to = 'img/Users', default = 'img/Users/None/default.png', blank=True)
     REQUIRED_FIELDS = ['username']

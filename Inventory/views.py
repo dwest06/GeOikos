@@ -38,8 +38,8 @@ def home_tesorero_view(request):
         context = {
             "trimestral" : Transaction.objects.filter(reason='T'),
             "pagos" : Transaction.objects.filter(reason='P'),
-            "multas" : Transaction.objects.filter(reason='M')
-
+            "multas" : Transaction.objects.filter(reason='M'),
+            "trim" : Quarterly.objects.get_or_create(pk=1)[0].amount
         }
     return render(request, "Inventory/tesorero.html", context)
 
@@ -615,25 +615,26 @@ def show_equipment(request,category):
         elif(eq.id in discontinuedEq):
             available = 'Descontinuado'
         
-        vals = [eq.serial, eq.name]
+        vals = [(eq.serial,''),(eq.name,'')]
         name = eq.name
         for att in atts:
             att_type=att.attribute_type
+            unit = att.unit
             val=AttributeEquipmet.objects.get(attribute=att,equipment=eq)
             if att_type == 'INT':
-                vals.append(val.value_int)
+                vals.append((val.value_int,unit))
             elif att_type == 'STR':
-                vals.append(val.value_str)
+                vals.append((val.value_str,unit))
             elif att_type == 'TXT':
-                vals.append(val.value_txt)
+                vals.append((val.value_txt,unit))
             elif att_type == 'BOO':
-                vals.append(val.value_bool)
+                vals.append((val.value_bool,unit))
             elif att_type == 'DAT':
-                vals.append(val.value_date)
+                vals.append((val.value_date,unit))
             elif att_type == 'FLT':
-                vals.append(val.value_float)
+                vals.append((val.value_float,unit))
             elif att_type == 'CHO':
-                vals.append(val.value_cho)
+                vals.append((val.value_cho,unit))
 
         date = eq.elaboration_date
 
@@ -709,12 +710,23 @@ def devolution_deadline_single(request,loan):
 @is_tesorero
 def load_all_trim(request):
     if request.method == "POST":
-        activos = User.objects.filter(groups__name="activo")
-        tcost = Quarterly.objects.all().first().amount
+        activos = User.objects.filter(status="AC")
+        tcost = Quarterly.objects.get_or_create(pk=1)[0].amount
         for act in activos:
             t = Transaction(user=act, transaction=-tcost, reason='T')
             t.save()
         messages.success(request, "Trimestralidades cargadas")
+    return redirect("Inventory:tesorero")
+
+@login_required
+@is_tesorero
+def setQuarterly(request):
+    if request.method == "POST":
+        price = request.POST['price']
+        q = Quarterly.objects.get_or_create(pk=1)[0]
+        q.amount = price
+        q.save()
+        messages.success(request, "Trimestralidad Actualizada")
     return redirect("Inventory:tesorero")
 
 @login_required

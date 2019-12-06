@@ -8,7 +8,7 @@ Tesorero
 {% block content %}
 <div class="row mb-20">
   <!-- CARGAR TRANSACCION -->
-  <div class="col-md-6 col-sm-12 mb-20">
+  <div class="col-md-3 col-sm-12 mb-20">
     <div class="card text-center">
       <div class="card-header">
         <h3>Cargar Transaccion</h3>
@@ -19,8 +19,128 @@ Tesorero
     </div>
   </div>
   
+    <!-- SETEAR TRIMESTRALIDAD -->
+    <div class="col-md-3 col-sm-12 mb-20">
+      <div class="card text-center">
+        <div class="card-header">
+          <h5>Establecer precio de Trimestralidad</h5>
+        </div>
+        <div class="card-body">
+          <div class="modal fade" id="pricem" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title text-center" id="Title">Establecer precio de la Trimestralidad</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                  <form class="needs-validation" id="priceform" action="{% url 'Inventory:set_trim' %}" method="POST" novalidate>
+                    {% csrf_token %}
+                    <label class="control-label required">Precio de la Trimestralidad</label>
+                    <input type="number" name="price" placeholder="0.00" class="form-control" id="number" min="0" step=".01" required/>
+                    <div class="valid-feedback">Correcto</div>
+                    <div class="invalid-feedback">Incorrecto</div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success" form="priceform" value="Submit">Aceptar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button data-toggle="modal" data-target="#pricem" class="btn btn-success"><i class="fas fa-plus"></i></button>
+        </div>
+    </div>
+  </div>
+      
+  <!-- TRIMESTRALIDAD GLOBAL -->
+  <div class="col-md-3 col-sm-12 mb-20">
+      <div class="card text-center">
+        <div class="card-header">
+          <h4>Cargar Pago de Trimestralidad</h4>
+        </div>
+        <div class="card-body">
+          <div class="modal fade" id="pricem2" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center" id="Title">Aumento global de la trimestralidad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                  <p>
+                    Está apunto de ejecutar un recargo de la trimestralidad a todos los usuarios activos.
+                    Seleccione Aceptar si desea continuar.
+                  </p>
+                </div>
+                <div class="modal-footer">
+                      <form action="{% url 'Inventory:load_all_trim' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary" value="Aceptar"/>
+                      </form>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button data-toggle="modal" data-target="#pricem2" class="btn btn-success"><i class="fas fa-plus"></i></button>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12 mb-20">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3>Trimestralidad</h3>
+        </div>
+        <div class="card-body">
+          <h5>{{trim}}</h5>
+        </div>
+      </div>
+    </div>
+</div>
+
+  
+
+<div class="row mb-20">
+
+  <!-- BALANCE -->
+  <div class="col-sm-12 mb-20">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3>Balance</h3>
+        </div>
+        <div class="card-body" style="overflow-x: scroll">
+          <table class="table table-hover w-full tabledat">
+            <caption>Para revisar el balance de los usuarios</caption>
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Usuario</th>
+                <th class="text-center" scope="col">Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <td class="text-center">{{user.pk}}</td>
+                <td class="text-center">{{user}}</td>
+                <td class="text-center">{{user.balance}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+   
+
   <!-- PAGOS -->
-  <div class="col-md-6 col-sm-12 mb-20">
+  <div class="col-sm-12 mb-20">
     <div class="card text-center">
       <div class="card-header">
         <h3>Pagos</h3>
@@ -30,26 +150,19 @@ Tesorero
           <caption>Para manejo de pagos efectuados por los usuarios</caption>
           <thead>
             <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Username</th>
-              <th scope="col">Deuda</th>
-              <th scope="col">Modificar</th>
-              <th scope="col">Eliminar</th>
+              <th class="text-center" scope="col">Id</th>
+              <th class="text-center" scope="col">Usuario</th>
+              <th class="text-center" scope="col">Fecha</th>
+              <th class="text-center" scope="col">Monto</th>
             </tr>
           </thead>
           <tbody>
             {% for t in pagos %}
             <tr>
-              <td>{{t.user.pk}}</td>
-              <td>{{t.user.username}}</td>
-              <td>{{t.transaction}}</td>
-              <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
-              <td>
-                <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
-                  class="btn btn-danger delete-user">
-                  <i class="fas fa-times"></i>
-                </div>
-              </td>
+              <td class="text-center">{{t.pk}}</td>
+              <td class="text-center">{{t.user}}</td>
+              <td class="text-center">{{t.date}}</td>
+              <td class="text-center">{{t.transaction}}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -57,90 +170,33 @@ Tesorero
       </div>
     </div>
   </div>
-
  </div> 
-<div class="row mb-20">
     
-
-  <!-- DEUDAS TRIMISTRALES -->
-  <div class="col-md-6 col-sm-12 mb-20">
+<div class="row mb-20">
+  <!-- Multas -->
+  <div class="col-sm-12 mb-20">
     <div class="card text-center">
       <div class="card-header">
-        <h3>Deudas Trimestrales</h3>
+        <h3>Multas</h3>
       </div>
       <div class="card-body" style="overflow-x: scroll">
         <table class="table table-hover w-full tabledat">
-          <caption>Para manejo de deudas trimestrales</caption>
+          <caption>Multas aplicadas a los usuarios</caption>
           <thead>
             <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Username</th>
-              <th scope="col">Deuda</th>
-              <th scope="col">Modificar</th>
-              <th scope="col">Eliminar</th>
+              <th class="text-center" scope="col">Id</th>
+              <th class="text-center" scope="col">Usuario</th>
+              <th class="text-center" scope="col">Fecha</th>
+              <th class="text-center" scope="col">Monto</th>
             </tr>
           </thead>
           <tbody>
-          {% for t in trimestral %}
+            {% for t in pagos %}
             <tr>
-              <td>{{t.user.pk}}</td>
-              <td>{{t.user.username}}</td>
-              <td>{{t.transaction}}</td>
-              <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
-              <td>
-                <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
-                  class="btn btn-danger delete-user">
-                  <i class="fas fa-times"></i>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card-footer">
-          <form id="load-all-trim" method="POST" action="tesorero/load-all-trim">
-            {% csrf_token %}
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
-              Aumento masivo
-            </button>
-          </form>
-        </div>
-    </div>
-  </div>
-
-  <!-- DEUDAS MULTA -->
-  <div class="col-md-6 col-sm-12 mb-20">
-    <div class="card text-center">
-      <div class="card-header">
-        <h3>Deudas de Multas</h3>
-      </div>
-      <div class="card-body" style="overflow-x: scroll">
-        <table class="table table-hover w-full tabledat">
-          <caption>Para manejo de deudas de multas</caption>
-          <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Username</th>
-              <th scope="col">Deuda</th>
-              <th scope="col">Modificar</th>
-              <th scope="col">Eliminar</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for t in multas %}
-            <tr>
-              <td>{{t.user.pk}}</td>
-              <td>{{t.user.username}}</td>
-              <td>{{t.transaction}}</td>
-              <td><a href="" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
-              <td>
-                <div data-toggle="modal" data-target="#" data-pk="{{t.user.pk}}" 
-                  class="btn btn-danger delete-user">
-                  <i class="fas fa-times"></i>
-                </div>
-              </td>
+              <td class="text-center">{{t.pk}}</td>
+              <td class="text-center">{{t.user}}</td>
+              <td class="text-center">{{t.date}}</td>
+              <td class="text-center">{{t.transaction}}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -150,27 +206,42 @@ Tesorero
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-      <div class="modal-header">
-          <h5 class="modal-title" id="confirmModal">Confirmación: ¿Seguro que desea cargar trimetralidad a todos los miembros activos?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
+<div class="row mb-20">
+  <!-- TRIMESTRALIDADES -->
+  <div class="col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Descuentos Por Trimestralidades</h3>
       </div>
-      <div class="modal-body">
-          Al hacer click en aceptar, se le cargará una deuda de trimestralidad a todos los miembros activos en el sistema.
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full tabledat">
+          <caption>Trimestralidades</caption>
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Usuario</th>
+                <th class="text-center" scope="col">Fecha</th>
+                <th class="text-center" scope="col">Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for t in trimestral %}
+              <tr>
+              <td class="text-center">{{t.pk}}</td>
+              <td class="text-center">{{t.user}}</td>
+              <td class="text-center">{{t.date}}</td>
+              <td class="text-center">{{t.transaction}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary" form="load-all-trim" value="Submit">Aceptar</button>
-      </div>
-      </div>
+    </div>
   </div>
 </div>
-  
+
+
 {% endblock  %}
 
 {% block custom_js %}

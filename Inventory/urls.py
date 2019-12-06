@@ -19,6 +19,7 @@ urlpatterns = [
     path('tesorero', views.home_tesorero_view, name="tesorero"),
     path('load-transaction', views.load_transaction, name="load_transaction"),
     path('tesorero/load-all-trim', views.load_all_trim, name="load_all_trim"),
+    path('tesorero/set-trim', views.setQuarterly, name="set_trim"),
     # VISTAS DE CUARTO DE EQUIPO
     path('cuarto-equipo', views.home_cuarto_equipo_view, name="cuarto_equipo"),
     path('discontinue-eq/<int:eq>',views.discontinue_eq,name="discontinue_eq"),

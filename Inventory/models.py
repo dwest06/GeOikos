@@ -159,4 +159,4 @@ class Transaction(models.Model):
         return 'Transaccion de ' + str(self.user) + ', ' + str(self.transaction) + ', ' + str(self.reason) 
 
 class Quarterly(models.Model):
-    amount = models.DecimalField(max_digits=7, decimal_places=2)
+    amount = models.DecimalField(max_digits=7, decimal_places=2,default=0)

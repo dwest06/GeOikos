@@ -41,11 +41,11 @@
                         <tbody>
                             {% for r in rows %}
                             <tr> 
-                                {% for val in r.vals %}
+                                {% for val,unit in r.vals %}
                                     {% if val != None %}
-                                        <td class="text-center">{{val}}</td>
+                                        <td class="text-center">{{val}} {{unit}}</td>
                                     {% else %}
-                                        <td class="text-center"> </td>
+                                        <td class="text-center">-</td>
                                     {% endif %}
                                 {% endfor %}
                                 {% if r.date is None %}
