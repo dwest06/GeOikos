@@ -27,6 +27,7 @@ class Equipment(models.Model):
     notes = models.TextField(blank=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     group = models.ManyToManyField(Group,blank=True)
+    pic = models.ImageField(upload_to = 'img/Inventory', default = 'img/Inventory/None/default.jpeg', blank=True)
 
     def __str__(self):
         return self.name+ ': equipo de ' + self.category.name

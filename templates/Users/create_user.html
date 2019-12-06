@@ -12,7 +12,7 @@
     <div class="row" >
         <div class="offset-md-4 col-md-4 card">
             <br>
-            <form action="" method="POST" class="form-group needs-validation" novalidate>
+            <form action="" method="POST" class="form-group needs-validation" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
                 <div class="col">
                     <div class="form-group required row">
@@ -53,6 +53,10 @@
                         <div class="invalid-feedback">Incorrecto</div>
                     </div>
                     {% endif %}
+                    <div class="form-group row">
+                        <label for="pic">{{form.pic.label}}</label>
+                        {% render_field form.pic class="form-control-file" id="pic" type="file" %}
+                    </div>
                 </div>
                 {% if request.user|is_gestor_usuario %}
                     <!-- SELECT PARA ASIGNARLE UN STATUS -->

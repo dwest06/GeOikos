@@ -17,12 +17,13 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ("email", "username", "first_name", "last_name")
+        fields = ("email", "username", "first_name", "last_name","pic")
         labels = {
             'email':'Correo Electrónico',
             'username':'Nombre de Usuario',
             'first_name':'Nombre',
-            'last_name':'Apellido'
+            'last_name':'Apellido',
+            'pic':'Foto de Perfil'
         }
 
     def __init__(self, *args, **kwargs):
@@ -52,12 +53,13 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'first_name', 'last_name')
+        fields = ('email', 'username', 'first_name', 'last_name','pic')
         labels = {
             'email':'E-mail',
             'username':'Nombre de Usuario',
             'first_name':'Nombre',
             'last_name':'Apellido',
+            'pic':'Foto de Perfil'
         }
 
     def __init__(self, *args, **kwargs):
