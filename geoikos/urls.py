@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include("oikos.urls")),
     path('users/', include("Users.urls")),
     path('inventory/', include("Inventory.urls")),
+    path('blog/', include("blog.urls")),
 ]
