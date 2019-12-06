@@ -14,7 +14,7 @@ Modificar Equipo
                 <p>Herramienta para modificar los valores de los atributos del equipo.</p>
             </div>
             <div class="card-body">
-                <form class="form-horizontal needs-validation form-group" id="create-form" method="POST" action="" novalidate>
+                <form class="form-horizontal needs-validation form-group" enctype="multipart/form-data" id="create-form" method="POST" action="" novalidate>
                     {% csrf_token %}
                     <div class="form-row mb-20"> 
                         <div class="form-group col required">
@@ -39,6 +39,13 @@ Modificar Equipo
                         </div>
                     </div>
 
+                    <div class="form-row mb-20"> 
+                        <div class="col">
+                            <label>Foto de equipo</label>
+                            {% render_field equipform.pic name="pic"  class="form-control-file" min=0 type="file" %}
+                        </div>
+                    </div>
+    
                     <div class="form-col mb-20">
                         {% for form in attforms %}
                             {% if not form.2 %}

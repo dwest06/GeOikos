@@ -31,19 +31,19 @@
 
                     <div class="form-row mb-20"> 
                         <div class="col">
-                            <label>{{equipform.pic.label}}</label>
-                            {% render_field equipform.pic class="form-control-file" min=0 type="file"%}
-                        </div>
-                    </div>
-
-                    <div class="form-row mb-20"> 
-                        <div class="col">
                             <label class="control-label">{{equipform.entry_date.label}}</label>
                             <input type="date" name="entry_date" placeholder="MM/DD/YYYY" class="form-control" id="id_entry_date">
                         </div>
                         <div class="col">
                             <label >{{equipform.elaboration_date.label}}</label>
                             <input type="date" name="elaboration_date" placeholder="MM/DD/YYYY" class="form-control" id="id_elaboration_date">
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-20"> 
+                        <div class="col">
+                            <label>Foto de equipo</label>
+                            {% render_field equipform.pic class="form-control-file" min=0 type="file" %}
                         </div>
                     </div>
 

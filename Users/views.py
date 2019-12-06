@@ -97,6 +97,7 @@ def modify_user(request, pk, *args, **kwargs):
         return redirect("Inventory:home_inventory") 
         
     user = User.objects.get(pk = pk)
+    user.pic = None
     form = UserChangeForm(instance=user)
     context = {
         "form" : form, 

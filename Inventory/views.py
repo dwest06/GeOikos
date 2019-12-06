@@ -209,7 +209,6 @@ def create_equipment(request, cat):
                 request.POST.getlist('value_date'),
                 request.POST.getlist('value_float')
             ]
-            print("reakn",request.POST)
             att_val = filterAndFill(lists,cat_attributes)
             equipment.save()
             for group in request.POST.getlist('group'):
@@ -318,18 +317,22 @@ def filterAndFillM(lists, attributes, equipment):
 @is_cuarto_equipo
 def modify_equipment(request,eq_id):    
     if request.method == "POST":
-        equip_form = EquipmentForm(request.POST)
+        equip_form = EquipmentForm(request.POST, request.FILES)
+       
         if equip_form.is_valid():
 
             if not Equipment.objects.filter(pk=eq_id).exists():
                 messages.error(request, "Esta instancia de equipo no existe.")
-                return render(request, "Inventory:ḧome_inventory")
+                return render(request, "Inventory:home_inventory")
 
             eq_obj = Equipment.objects.get(pk=eq_id)
             
             equipment = equip_form.save(commit=False)
             equipment.id = eq_id
-                        
+
+            if request.FILES.get('pic') is None:
+                equipment.pic = eq_obj.pic
+
             equipment.category = Category.objects.get(pk=eq_obj.category.pk)
             cat_attributes = list(Attribute.objects.filter(category=eq_obj.category.pk))
             lists = [
