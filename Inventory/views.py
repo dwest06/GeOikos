@@ -40,7 +40,7 @@ def home_tesorero_view(request):
             "pagos" : Transaction.objects.filter(reason='P'),
             "multas" : Transaction.objects.filter(reason='M'),
             "trim" : Quarterly.objects.get_or_create(pk=1)[0].amount,
-            "users" : Users.objects.all()
+            "users" : User.objects.all()
         }
     return render(request, "Inventory/tesorero.html", context)
 
