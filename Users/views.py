@@ -28,7 +28,7 @@ def login_user(request):
         return redirect("Users:login")
     else:
         form = UserLoginForm()
-        return render(request, "Users/login.html", {"form" : form, 'title': 'Iniciar Sesión'})
+        return render(request, "Users/login.html", {"form" : form, 'title': 'Iniciar Sesiรณn'})
 
 @login_required
 def logout_user(request):

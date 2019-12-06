@@ -13,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
         widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirmar Password",
         widget=forms.PasswordInput,
-        help_text="Ingresa la misma contraseÃ±a para su validacion.")
+        help_text="Ingresa la misma contraseña para su validacion.")
 
     class Meta:
         model = User
