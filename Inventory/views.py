@@ -39,7 +39,8 @@ def home_tesorero_view(request):
             "trimestral" : Transaction.objects.filter(reason='T'),
             "pagos" : Transaction.objects.filter(reason='P'),
             "multas" : Transaction.objects.filter(reason='M'),
-            "trim" : Quarterly.objects.get_or_create(pk=1)[0].amount
+            "trim" : Quarterly.objects.get_or_create(pk=1)[0].amount,
+            "users" : Users.objects.all()
         }
     return render(request, "Inventory/tesorero.html", context)
 
