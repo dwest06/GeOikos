@@ -5,30 +5,46 @@ from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=60, unique=True  )
+    name = models.CharField(max_length=60, unique=True)
 
     def __str__(self):
         return self.name
 
 class Group(models.Model):
-    name = models.CharField(max_length=120)
-
+    name = models.CharField(max_length=120, unique=True)
+        
     def __str__(self):
         return self.name
 
+
 class Equipment(models.Model):
-    serial = models.IntegerField(unique=True)
+    serial = models.IntegerField(blank=True, null=True)
     name = models.CharField(max_length=100)
-    entry_date = models.DateField(null=True,blank=True)
-    elaboration_date = models.DateField(null=True,blank=True)
+    entry_date = models.DateField(blank=True, null=True)
+    elaboration_date = models.DateField(blank=True, null=True)
     discontinued = models.BooleanField(default=False)
-    discontinued_date = models.DateField(null=True)
+    discontinued_date = models.DateField(blank=True, null=True)
     notes = models.TextField(blank=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     group = models.ManyToManyField(Group,blank=True)
+    pic = models.ImageField(upload_to = 'img/Inventory', default = 'img/Inventory/None/default.jpeg', blank=True)
 
     def __str__(self):
         return self.name+ ': equipo de ' + self.category.name
+
+    def discontinuedEq():
+        return Equipment.objects.filter(discontinued=True).values('id')
+
+    def notAvEquipment():
+        borrowed = Loan.borrowedEq()
+        notAv = Equipment.discontinuedEq().union(borrowed)
+        notAvEq = [ x['id'] for x in notAv ]
+        return notAvEq
+    
+    def avEquipment():
+        notAvEq = Equipment.notAvEquipment()
+        avEq = Equipment.objects.exclude(id__in=notAvEq)
+        return avEq
 
 class Attribute(models.Model):
     TYPE_CHOICES = [
@@ -42,13 +58,15 @@ class Attribute(models.Model):
     ]
     name = models.CharField(max_length=50)
     attribute_type = models.CharField(max_length=3,choices=TYPE_CHOICES)
-    unit = models.CharField(max_length=20, null=True, blank=True)
+    unit = models.CharField(max_length=20,blank=True,default="")
     nullity = models.BooleanField(default=False)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
-
+    def isBlank(attribute):
+        return Attribute.objects.filter(pk=attribute).nullity
+    
 # Opciones para un atributo de multiples opciones
 class Choices(models.Model):
     attribute = models.ForeignKey(Attribute,on_delete=models.CASCADE)
@@ -58,27 +76,32 @@ class Choices(models.Model):
         return self.option_name
 
 class AttributeEquipmet(models.Model):
+
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
-    attribute = models.ForeignKey(Attribute,on_delete=models.CASCADE)
+    attribute = models.ForeignKey(Attribute,on_delete=models.CASCADE)   
     value_str = models.CharField(max_length=100,null=True)
     value_txt = models.TextField(null=True)
     value_int = models.IntegerField(null=True)
     value_date = models.DateField(null=True)
+    value_float = models.DecimalField(max_digits=11, decimal_places=2,null=True)
     value_bool = models.BooleanField(null=True)
     value_cho  = models.ForeignKey(Choices,null=True,on_delete=models.CASCADE)
     def __str__(self):
         return self.attribute.name + " de " + self.equipment.name
-
+    
+    
 
 class Request(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
-    specs = models.TextField(null=True)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    equipment = models.ManyToManyField(Equipment)
-    category = models.ManyToManyField(Category,through='RequestCategory' )
+    date = models.DateField(auto_now_add=True)
+    specs = models.TextField(blank=True,default="")
+    comments = models.TextField(blank=True, default="")
+    user1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='requesting_user')
+    user2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='equipment_user',null=True)
+    category = models.ManyToManyField(Category,through='RequestCategory')
+    status = models.BooleanField(default=False)
 
     def __str__(self):
-        return 'Solicitud de ' + str(self.user)
+        return 'Solicitud de ' + str(self.user1)
 
 class RequestCategory(models.Model):
     request = models.ForeignKey(Request, on_delete=models.CASCADE)
@@ -87,15 +110,19 @@ class RequestCategory(models.Model):
 
 class Loan(models.Model):
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    hand_over_date = models.DateTimeField()
-    deadline = models.DateTimeField(null=True)
-    delivery_date = models.DateTimeField(null=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='loan_user')
+    creator = models.ForeignKey(User,on_delete=models.CASCADE,related_name='creator_user')
+    hand_over_date = models.DateField()
+    deadline = models.DateField(null=True, blank=True)
+    delivery_date = models.DateField(null=True, blank=True)
     score = models.IntegerField(null=True)
     notes = models.TextField(blank=True)
-
+    
     def __str__(self):
         return 'Prestamo de equipo de ' + str(self.user)
+
+    def borrowedEq():
+        return Loan.objects.filter(delivery_date__isnull=True).values('equipment')
 
 class Repair(models.Model):
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
@@ -115,7 +142,7 @@ class EquipmentDebt(models.Model):
     specs = models.TextField(blank=True)
 
     def __str__(self):
-        return 'Deuda de equipo de ' + str(self.equipment)
+        return 'Deuda de equipo de ' + str(self.user)
 
 class Transaction(models.Model):
     REASON_OPTIONS = [
@@ -126,6 +153,10 @@ class Transaction(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     transaction = models.DecimalField(max_digits=7, decimal_places=2)
     reason = models.CharField(max_length=1,choices=REASON_OPTIONS)
-    
+    date = models.DateField(auto_now_add=True)
+
     def __str__(self):
         return 'Transaccion de ' + str(self.user) + ', ' + str(self.transaction) + ', ' + str(self.reason) 
+
+class Quarterly(models.Model):
+    amount = models.DecimalField(max_digits=7, decimal_places=2)

@@ -28,7 +28,7 @@ def login_user(request):
         return redirect("Users:login")
     else:
         form = UserLoginForm()
-        return render(request, "Users/login.html", {"form" : form, 'title': 'Iniciar Sesión'})
+        return render(request, "Users/login.html", {"form" : form, 'title': 'Iniciar Sesiรณn'})
 
 @login_required
 def logout_user(request):
@@ -40,7 +40,7 @@ def logout_user(request):
 @is_gestor_usuario
 def create_user(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = UserCreationForm(request.POST,request.FILES)
         if form.is_valid():
             user = form.save()
             try:
@@ -71,7 +71,7 @@ def create_user(request):
 def modify_user(request, pk, *args, **kwargs):
     if request.method == "POST":
         instance = User.objects.get(pk=pk)
-        form = UserChangeForm(request.POST, instance=instance)
+        form = UserChangeForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             user = form.save()
             if request.user.groups.filter(Q(name='admin') | Q(name='gestor_usuarios')).exists():
@@ -87,9 +87,15 @@ def modify_user(request, pk, *args, **kwargs):
                     user.save()
             messages.success(request, "Usuario Modificado")
         else:
-            messages.error(request,"Datos Inalidos")
+            messages.error(request,"Datos Inválidos")
         return redirect("Inventory:home_inventory")
     
+    if((request.user.groups.first().name != 'admin' or
+        request.user.groups.first().name != 'gestor_usuarios') and 
+        request.user.pk != pk):
+        messages.error(request,"Operaci?n no permitida.")
+        return redirect("Inventory:home_inventory") 
+        
     user = User.objects.get(pk = pk)
     form = UserChangeForm(instance=user)
     context = {

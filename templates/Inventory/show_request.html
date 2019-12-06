@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load tags %}
+{% block page-title %}
+    Solicitud de Equipo
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="offset-lg-2 col-lg-8 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3>Solicitud de {{req.user1}}</h3>
+                <h4>Fecha: {{ req.date}}</h4>
+                <div class="col text-center">
+                    <h4>Estado: </h4>
+                    {% if req.user2 is not None %}
+                        {% if req.status %}
+                            <h4 class="text-success" style="font-weight:bold">Aprobado</h4>
+                        {% else %}
+                            <h4 class="text-danger" style="font-weight:bold">Rechazado</h4>
+                        {% endif %}
+                    {% else %}
+                        <h4 class="text-secondary"style="font-weight:bold">Sin procesar</h4>
+                    {% endif %}
+                </div>
+                    
+                
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for r in requestCat %}
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row text-center">
+                                <div class="col">
+                                    <p style="font-size:140%; font-weight:bold">Categoría: {{r.category}}</p>
+                                </div>
+                                <div class="col">
+                                    <p style="font-size:140%; font-weight:bold">Cantidad: {{r.quantity}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    <li class="list-group-item">
+                        <h4 class="text-center">Especificaciones del solicitante:</h4>
+                        {% if req.specs != '' %}
+                            <p class="card-text font-size:140%; text-center">{{req.specs}}</p>
+                        {% else %}
+                            <p class="card-text font-size:140%; text-center">Ninguna</p>
+                        {% endif %}
+                    </li>
+                    {% if req.user2 is not None %}
+                    <li class="list-group-item">
+                        <h4 class="text-center">Comentarios de Cuarto de Equipo:</h4>
+                        {% if req.comments != '' %}
+                            <p class="card-text font-size:140%; text-center">{{req.comments}}</p>
+                        {% else %}
+                            <p class="card-text font-size:140%; text-center">Ninguna</p>
+                        {% endif %}
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="card-footer">
+                <div class="row text-center">
+                    {% if req.user2 is None and user|is_cuarto_equipo %}
+                    <div class="col">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal1">
+                            Aceptar Solicitud
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal2">
+                            Rechazar Solicitud
+                        </button>
+                    </div>
+                    {% endif %}
+                    <div class="col"> 
+                        <form>
+                            <input type="button" class="btn btn-secondary" value="Volver atrás" onclick="history.back()">
+                        </form>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="confirmModal1" tabindex="-1" role="dialog" aria-labelledby="confirmModal1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModal1">Confirmación: Aceptar solicitud</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Al hacer click en aceptar, usted estará aceptando 
+                    la solicitud {{req.id}} de {{req.user1}}.
+                </p>
+                <form action="" method="POST" id="accept-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="value" value=True>
+                    <label for="comments">Comentarios:</label>
+                    <textarea name="comments" class="form-control"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" form="accept-form" value="Submit">Aceptar solicitud</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="confirmModal2" tabindex="-1" role="dialog" aria-labelledby="confirmModal2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModal2">Confirmación: Rechazar solicitud</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Al hacer click en rechazar solicitud, usted estará rechazando
+                    la solicitud {{req.id}} de {{req.user1}}.
+                </p>
+                <form action="" method="POST" id="deny-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="value" value=False>
+                    <label for="comments">Comentarios:</label>
+                    <textarea name="comments" class="form-control"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-danger" form="deny-form" value="Submit">Rechazar solicitud</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

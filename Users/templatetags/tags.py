@@ -46,3 +46,25 @@ def is_pasivo(user):
 @register.filter
 def get_status(status):
 	return STATUS_DICT.get(status)
+
+@register.filter
+def clean(grupo):
+    if grupo == "admin":
+        return 'Administrador'
+    elif grupo == 'cuarto_equipo':
+        return 'Cuarto de Equipo'
+    elif grupo == 'tesorero':
+        return 'Tesorero'
+    elif grupo == 'gestor_usuarios':
+        return 'Gestor de Usuarios'
+    elif grupo == 'activo':
+        return 'Miembro Activo'
+    return 'Inactivo'
+
+@register.filter
+def getReason(c):
+    if c == 'P':
+        return 'Pago'
+    elif c == 'M':
+        return 'Multa'
+    return 'Trimestralidad'
