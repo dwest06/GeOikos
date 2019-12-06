@@ -596,12 +596,16 @@ def show_equipment(request,category):
     catname = Category.objects.get(id=category).name
     borrowedEq = [ x['equipment'] for x in Loan.borrowedEq() ]
     discontinuedEq = [ x['id'] for x in Equipment.discontinuedEq() ]
+    loans = Loan.objects.filter(delivery_date__isnull=True)
     rows = []
     for eq in equip:
 
+        user = None
+
         available = 'Disponible'
-        if(eq.id in borrowedEq):
+        if eq.id in borrowedEq:
             available = 'Prestado'
+            user = loans.get(equipment=eq).user
         elif(eq.id in discontinuedEq):
             available = 'Descontinuado'
         
@@ -625,14 +629,25 @@ def show_equipment(request,category):
             elif att_type == 'CHO':
                 vals.append(val.value_cho)
 
-        info = [ 
-            {'name':'Fecha de elaboración','value':eq.elaboration_date}, 
+        date = eq.elaboration_date
+
+        info = [  
             {'name':'Fecha de llegada a Oikos', 'value':eq.entry_date},
             {'name':'Fecha de descontinuación', 'value':eq.discontinued_date}, 
             {'name':'Notas sobre el equipo', 'value':eq.notes}
             ]
+
         groups = [group for group in eq.group.all()]
-        rows.append({'name':name, 'vals':vals, 'av':available, 'info':info, 'groups':groups})
+
+        rows.append({
+            'name':name, 
+            'vals':vals, 
+            'av':available, 
+            'info':info, 
+            'groups':groups, 
+            'user':user,
+            'date':date
+            })
 
     return render(request, "Inventory/equipment_table.html", {'attributes': atts, 
                                                               'rows' : rows,
@@ -661,39 +676,27 @@ def load_transaction(request):
 @is_cuarto_equipo
 def devolution_deadline_global(request):
     if request.method == "POST":
-        form = DateForm(request.POST)
-        if form.is_valid():
-            date= form.cleaned_data.get("date")
-            activeloans = Loan.objects.filter(delivery_date__isnull=True).filter(deadline__isnull=True, deadline__gte=date)
-            activeloans.deadline=date
-            activeloans.save()
-            messages.success(request, "Fecha de entrega cargada")
-        else:
-            messages.success(request, "Fecha inválida")
-        return redirect("Inventory:cuarto_equipo")
-    else:
-        form = DateForm()
-        ###### CREAR TEMMPLATE
-        return redirect("Inventory:cuarto_equipo")
+
+        date = request.POST['date']
+        activeloans = Loan.objects.filter(delivery_date__isnull=True).exclude(deadline__isnull = False, deadline__lte=date)
+
+        for loan in activeloans:
+            loan.deadline = date
+            loan.save()
+
+        messages.success(request, "Fecha de entrega cargada")
+    return redirect("Inventory:cuarto_equipo")
 
 @login_required
 @is_cuarto_equipo
-def devolution_deadline_single(request,pk):
+def devolution_deadline_single(request,loan):
     if request.method == "POST":
-        form = DateForm(request.POST)
-        if form.is_valid():
-            date= form.cleaned_data.get("date")
-            loan = Loan.objects.get(pk=pk)
-            loan.deadline=date
-            loan.save()
-            messages.success(request, "Fecha de entrega cargada")
-        else:
-            messages.error(request, "Fecha inválida")
-        return redirect("Inventory:cuarto_equipo")
-    else:
-        form = DateForm()
-        ###### CREAR TEMMPLATE
-        return redirect("Inventory:cuarto_equipo")
+        date = request.POST['date']
+        loan = Loan.objects.get(pk=loan)
+        loan.deadline = date
+        loan.save()
+        messages.success(request, "Fecha de entrega cargada")
+    return redirect("Inventory:cuarto_equipo")
 
 @login_required
 @is_tesorero

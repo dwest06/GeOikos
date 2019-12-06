@@ -23,6 +23,7 @@
                             {% for att in attributes %}
                                 <th scope="col" class="text-center">{{att.name}}</th>
                             {% endfor %}
+                            <th scope="col" class="text-center">Fecha de Elaboración</th>
                             <th scope="col" class="text-center">Información Adicional</th>
                             <th scope="col" class="text-center">Disponibilidad</th>
                         </thead>
@@ -36,6 +37,11 @@
                                         <td class="text-center"> </td>
                                     {% endif %}
                                 {% endfor %}
+                                {% if r.date is None %}
+                                    <td class="text-center text-secondary" style="font-weight:bold">Desconocido</td>
+                                {% else %}
+                                    <td class="text-center">{{r.date}}</td>
+                                {% endif %}
                                 <div class="modal fade" id="info{{forloop.counter}}" tabindex="-1">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -82,7 +88,7 @@
                                 {% if r.av == "Disponible" %}
                                     <td class="text-center text-success" style="font-weight:bold">Disponible</td>
                                 {% elif r.av == "Prestado" %}
-                                    <td class="text-center text-secondary" style="font-weight:bold">Prestado</td>
+                                    <td class="text-center text-secondary" style="font-weight:bold">Prestado a {{r.user}}</td>
                                 {% else %}
                                     <td class="text-center text-danger" style="font-weight:bold">Descontinuado</td>                                      
                                 {% endif %}
@@ -95,7 +101,7 @@
         </div>
     </div>
     <br/>
-    <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Seleccionar otra CategorÃ­a</a>
+    <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Seleccionar otra Categorí­a</a>
 {% endblock  %}
 
 {% block custom_js %}

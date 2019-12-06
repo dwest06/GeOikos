@@ -131,7 +131,7 @@
                 </p>
                 <form action="" method="POST" id="deny-form">
                     {% csrf_token %}
-                    <input type="hidden" name="value" value=True>
+                    <input type="hidden" name="value" value=False>
                     <label for="comments">Comentarios:</label>
                     <textarea name="comments" class="form-control"></textarea>
                 </form>
