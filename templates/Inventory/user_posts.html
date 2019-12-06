@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block page-title %}
+    Buscar Equipo
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+  <!-- HISTORIAL DE SOLICITUDES Y PRESTAMOS -->
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3>Resumen de Solicitudes y Prestamos</h3>
+      </div>
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full tabledat">
+          <caption>Tabla de resumen de solicitudes y prestamos</caption>
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Equipo</th>
+              <th scope="col">Detalles</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for t in solicitudes %}
+            <tr>
+              <td>{{t.pk}}</td>
+              <td>{{t.date}}</td>
+              <td><div class="btn btn-info">Equipos Sol.</div></td>
+              <td><a href="#" class="btn btn-info">Detalle</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock  %}

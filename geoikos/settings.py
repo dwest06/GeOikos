@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'oikos',                # Pagina principal y cursos 
     'Users',                # Sistema de usuarios, auth y session
     'Inventory',            # Sistema de prestamos de equipos
-    'widget_tweaks'
+    'widget_tweaks',
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -140,11 +141,11 @@ AUTH_USER_MODEL = 'Users.User'
 
 LOGIN_URL = reverse_lazy('Users:login')
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
-
 MEDIA_ROOT = (
     BASE_DIR
 )
 
 MEDIA_URL = '/img/'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())

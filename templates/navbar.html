@@ -38,23 +38,23 @@
           <li>
             <span>Nosotros</span>
             <ul class="no-bullet">
-              <li><a href="{{ site.baseurl }}/noikos">Oikos</a></li>
-              <li><a href="{{ site.baseurl }}/nmiembros">Miembros</a></li>
-              <li><a href="{{ site.baseurl }}/njd">Junta Directiva</a></li>
-              <li><a href="{{ site.baseurl }}/nhonorarios">Miembros Honorarios</a></li>
+              <li><a href="{% url 'oikos:noikos' %}">Oikos</a></li>
+              <li><a href="{% url 'oikos:nmiembros' %}">Miembros</a></li>
+              <li><a href="{% url 'oikos:njd' %}">Junta Directiva</a></li>
+              <li><a href="{% url 'oikos:nhonorarios' %}">Miembros Honorarios</a></li>
             </ul>
           </li>
           <li>
-            <a href="{{ site.baseurl }}/cursos">Cursos</a>
+            <a href="{% url 'oikos:cursos' %}">Cursos</a>
             <ul class="no-bullet">
-              <li><a href="{{ site.baseurl }}/cbaja">Baja y media montaña</a></li>
-              <li><a href="{{ site.baseurl }}/croca">Escalada en roca</a></li>
-              <li><a href="{{ site.baseurl }}/calta">Alta montaña</a></li>
+              <li><a href="{% url 'oikos:cbaja' %}">Baja y media montaña</a></li>
+              <li><a href="{% url 'oikos:croca' %}">Escalada en roca</a></li>
+              <li><a href="{% url 'oikos:calta' %}">Alta montaña</a></li>
             </ul>
           </li>
-          <li><a href="{{ site.baseurl }}/contacto">Contacto</a></li>
-          <li><a href="{{ site.baseurl }}/expediciones">Expediciones</a></li>
-          <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
+          <li><a href="{% url 'oikos:contacto' %}">Contacto</a></li>
+          <li><a href="{% url 'oikos:expediciones' %}">Expediciones</a></li>
+          <li><a href="{% url 'blog:blog' %}">Blog</a></li>
 
           {% if user.is_authenticated %}
           <li><a class="nav-link" href="{% url 'Inventory:home_inventory' %}">Inventario</a></li>
