@@ -5,26 +5,22 @@
         <a class="nav-link" href="{% url 'oikos:home' %}" style="font-weight:bold">GeOikos</a>
       </li>
     {% if user.is_authenticated %}
-
       <li class="nav-item">
         <a class="nav-link" href="{% url 'Inventory:home_inventory' %}" style="font-weight:bold">Inicio</a>
       </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'Inventory:select-cat' %}" style="font-weight:bold">Consultar Equipo</a>
+      </li>
+      <!-- USUARIOS CON PERMISO DE MIEMBRO ACTIVO -->
+      {% if user|is_activo %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Inventory:create_request' %}" style="font-weight:bold">Solicitar Equipo</a>
+      </li>
+      {% endif %}
       <!-- USUARIOS CON PERMISO DE CUARTO DE EQUIPO -->
       {% if user|is_cuarto_equipo %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'Inventory:cuarto_equipo' %}" style="font-weight:bold">Cuarto de Equipo</a>
-      </li>
-      {% endif %}
-      <!-- USUARIOS CON PERMISO DE GESTOR DE USUARIOS -->
-      {% if user|is_gestor_usuario %}
-      <li class="nav-item"> 
-        <a class="nav-link" href="{% url 'Inventory:manage_users' %}" style="font-weight:bold">Gestionar Usuarios</a>
-      </li>
-      {% endif %}
-      <!-- USUARIOS CON PERMISO DE ADMINISTRADOR -->
-      {% if user|is_admin %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'Inventory:create_group' %}" style="font-weight:bold">Crear Grupos</a>
       </li>
       {% endif %}
       <!-- USUARIOS CON PERMISO DE TESORERO -->
@@ -33,17 +29,12 @@
         <a class="nav-link" href="{% url 'Inventory:tesorero' %}" style="font-weight:bold">Tesoreria</a>
       </li>
       {% endif %}
-
-      <!-- USUARIOS CON PERMISO DE MIEMBRO ACTIVO -->
-      {% if user|is_activo %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'Inventory:create_request' %}" style="font-weight:bold">Solicitar Equipo</a>
+      <!-- USUARIOS CON PERMISO DE GESTOR DE USUARIOS -->
+      {% if user|is_gestor_usuario %}
+      <li class="nav-item"> 
+        <a class="nav-link" href="{% url 'Inventory:manage_users' %}" style="font-weight:bold">Gestionar Usuarios</a>
       </li>
       {% endif %}
-
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'Inventory:select-cat' %}" style="font-weight:bold">Consultar Equipo</a>
-      </li>
       <li class="nav-item">
         <a class="nav-link" href="#" style="font-weight:bold">Blog</a>
       </li>

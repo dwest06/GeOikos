@@ -6,7 +6,7 @@ from .models import *
 from .forms import *
 from Users.models import User
 from Users.permission import is_admin, is_gestor_usuario, is_cuarto_equipo, is_tesorero, is_activo, is_pasivo
-
+import datetime
 ######################
 ## VISTAS PRINCIPALES
 ######################
@@ -46,11 +46,21 @@ def home_tesorero_view(request):
 @is_cuarto_equipo
 def home_cuarto_equipo_view(request):
     if request.method == "GET":
+        borrowedEq = [ x['equipment'] for x in Loan.borrowedEq() ]
+        discontinuedEq = [ x['id'] for x in Equipment.discontinuedEq() ]
+        equipment = []
+        for eq in Equipment.objects.all():
+            available = 'Disponible'
+            if(eq.id in borrowedEq):
+                available = 'Prestado'
+            elif(eq.id in discontinuedEq):
+                available = 'Descontinuado'
+            equipment.append((eq,available))
         context = {
             "prestamos" : Loan.objects.all(),
             "solicitudes" : Request.objects.all(),
             "categorias" : Category.objects.all(),
-            "equipos" : Equipment.objects.all(),
+            "equipos" : equipment
         }
     return render(request, "Inventory/cuarto_equipo.html", context)
 
@@ -177,6 +187,7 @@ def filterAndFill(lists, attributes):
 @is_cuarto_equipo
 def create_equipment(request, cat):    
     if request.method == "POST":
+        print(request.POST)
         equip_form = EquipmentForm(request.POST)
         if equip_form.is_valid():
             
@@ -491,11 +502,13 @@ def manage_users(request, *args, **kwargs):
 
 @login_required
 @is_cuarto_equipo
-def loan_creation(request):
+def loan_creation(request,eq_id):
     if request.method == "POST":
         lc_form = LoanCreationForm(request.POST)
         if lc_form.is_valid():
             loan= lc_form.save(commit=False)
+            equipment = Equipment.objects.get(pk=eq_id)
+            loan.equipment = equipment
             loan.creator = request.user
             loan.save()
             messages.success(request, "Prestamo cargado")
@@ -503,10 +516,12 @@ def loan_creation(request):
             messages.error(request, "Fallo al cargar prestamo")
         return redirect("Inventory:home_inventory")
     else:
-        LoanCreationForm.base_fields['equipment'] = forms.ModelChoiceField(queryset=Equipment.avEquipment())
-        LoanCreationForm.base_fields['user'] = forms.ModelChoiceField(queryset=User.objects.filter(status="AC"))
+        if not Equipment.objects.filter(pk=eq_id).exists():
+            messages.error(request, "Fallo al cargar prestamo: No existe tal equipo.")
+            return redirect("Inventory:home_inventory")
+        name = Equipment.objects.get(pk=eq_id).name
         lc_form = LoanCreationForm()
-        return render(request, "Inventory/create_loan.html", {"form" : lc_form})
+        return render(request, "Inventory/create_loan.html", {"form" : lc_form, 'eq':name})
 
 @login_required
 @is_cuarto_equipo
@@ -564,6 +579,9 @@ def show_request(request,request_id):
 
         req.user2 = request.user
         req.status = request.POST['value']
+        req.comments = request.POST['comments']
+        print(request.POST)
+        print(req.comments)
         req.save()
         messages.success(request,"Solicitud procesada con éxito.")
         return redirect("Inventory:cuarto_equipo")
@@ -585,7 +603,7 @@ def show_equipment(request,category):
         if(eq.id in borrowedEq):
             available = 'Prestado'
         elif(eq.id in discontinuedEq):
-            available = 'Discontinuado'
+            available = 'Descontinuado'
         
         vals = [eq.serial, eq.name]
         name = eq.name
@@ -670,7 +688,7 @@ def devolution_deadline_single(request,pk):
             loan.save()
             messages.success(request, "Fecha de entrega cargada")
         else:
-            messages.success(request, "Fecha inválida")
+            messages.error(request, "Fecha inválida")
         return redirect("Inventory:cuarto_equipo")
     else:
         form = DateForm()
@@ -688,3 +706,15 @@ def load_all_trim(request):
             t.save()
         messages.success(request, "Trimestralidades cargadas")
     return redirect("Inventory:tesorero")
+
+@login_required
+@is_cuarto_equipo
+def discontinue_eq(request, eq):
+    if request.method == "POST":
+        equipment = Equipment.objects.get(id=eq)
+        equipment.discontinued = True
+        equipment.discontinued_date = datetime.date.today()
+        equipment.save()
+        messages.success(request, "Solicitud procesada con éxito")
+    return redirect("Inventory:cuarto_equipo")
+        

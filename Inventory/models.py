@@ -93,6 +93,7 @@ class AttributeEquipmet(models.Model):
 class Request(models.Model):
     date = models.DateField(auto_now_add=True)
     specs = models.TextField(blank=True,default="")
+    comments = models.TextField(blank=True, default="")
     user1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='requesting_user')
     user2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='equipment_user',null=True)
     category = models.ManyToManyField(Category,through='RequestCategory')

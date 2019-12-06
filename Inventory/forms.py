@@ -208,17 +208,13 @@ class GroupForm(forms.ModelForm):
 class LoanCreationForm(forms.ModelForm):
     class Meta:
         model = Loan 
-        fields = ['equipment', 'user', 'hand_over_date']
+        fields = ['user', 'hand_over_date']
         labels = {
-            'equipment' : 'Equipo',
             'user' : 'Usuario',
             'hand_over_date' : 'Fecha'
         }
 
         error_messages = {
-            'equipment' : {
-                'required' : 'Campo obligatorio',
-            },
             'user' : {
                 'required' : 'Campo obligatorio',
             },
@@ -227,6 +223,10 @@ class LoanCreationForm(forms.ModelForm):
                 'invalid' : 'Fecha inválida'
             }
         }
+
+        def __init__(self, *a, **kw):
+            super(LoanCreationForm,self).__init__(*a, **kw)
+            self.fields['user'].queryset =  User.objects.filter(status="AC")
 
 class LoanDevolutionForm(forms.ModelForm):
     class Meta:

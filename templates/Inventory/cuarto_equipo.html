@@ -19,14 +19,14 @@ Cuarto de Equipo
     </div>
   </div>
 
-  <!-- CARGAR EQUIPO -->
+  <!-- CREAR GRUPOS -->
   <div class="col-md-4 col-sm-12 mb-20">
     <div class="card text-center">
       <div class="card-header">
-        <h3>Añadir Equipo</h3>
+        <h3>Crear Grupos</h3>
       </div>
       <div class="card-body">
-        <a href="{% url 'Inventory:create_equipment' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+        <a href="{% url 'Inventory:create_group' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
       </div>
     </div>
   </div>
@@ -35,10 +35,10 @@ Cuarto de Equipo
   <div class="col-md-4 col-sm-12 mb-20">
     <div class="card text-center">
       <div class="card-header">
-        <h3>Cargar préstamos</h3>
+        <h3>Añadir Equipo</h3>
       </div>
       <div class="card-body">
-        <a href="{% url 'Inventory:create_loan' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+        <a href="{% url 'Inventory:create_equipment' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
       </div>
     </div>
   </div>
@@ -232,23 +232,78 @@ Cuarto de Equipo
         <caption>Para manejo de equipos</caption>
         <thead>
           <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Serial</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Modificar</th>
+            <th class="text-center" scope="col">Id</th>
+            <th class="text-center" scope="col">Serial</th>
+            <th class="text-center" scope="col">Nombre</th>
+            <th class="text-center" scope="col">Modificar</th>
+            <th class="text-center" scope="col">Asignar Préstamo</th>            
+            <th class="text-center" scope="col">Descontinuar</th>
           </tr>
         </thead>
         <tbody>
-        {% for t in equipos %}
+        {% for t,av in equipos %}
           <tr>
-            <td>{{t.pk}}</td>
-            <td>{{t.serial}}</td>
-            <td>{{t.name}}</td>
-            <td>
-              <a href="/inventory/modify-equipment-value/{{t.pk}}" class="btn btn-info">
+            <td class="text-center">{{t.pk}}</td>
+            <td class="text-center">{{t.serial}}</td>
+            <td class="text-center">{{t.name}}</td>
+            {% if av != "Descontinuado" %}
+            <td class="text-center">
+              <a href="{% url 'Inventory:modify_equipment_value' t.pk %}" class="btn btn-info">
                 <i class="fas fa-pencil-alt"></i>
               </a>
             </td>
+            {% else %}
+            <td class="text-center text-danger" style="font-weight:bold">Descontinuado</td>
+            {% endif %}
+            {% if av == "Disponible" %}
+            <td class="text-center">
+                <a href="{% url 'Inventory:create_loan' t.pk %}" class="btn btn-info">
+                  <i class="fas fa-pencil-alt"></i>
+                </a>
+            </td>
+            {% elif av == "Prestado" %}
+            <td class="text-center text-secondary" style="font-weight:bold">Prestado</td>
+            {% else %}
+            <td class="text-center text-danger" style="font-weight:bold">Descontinuado</td>
+            {% endif %}
+            {% if av != "Descontinuado" %}
+            <div class="modal fade" id="desc{{forloop.counter}}" tabindex="-1">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="Title">Descontinuar {{t.name}}</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body ">
+                              <p>
+                                Usted ha seleccionado la opción de descontinuar equipo.
+                                Si presiona aceptar se procederá a marcar como
+                                descontinuado el equipo: {{t.name}}
+                              </p>
+                              <p type="text-danger" style="font-weight:bold">
+                                  Esta acción no se puede deshacer.
+                              </p>
+                          </div>
+                          <div class="modal-footer">
+                              <form action="{% url 'Inventory:discontinue_eq' t.pk %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="Aceptar"/>
+                              </form>
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Volver</button>
+                          </div>
+                          <td class="text-center">
+                              <button class="btn btn-danger" data-toggle="modal" data-target="#desc{{forloop.counter}}">
+                                  <i class="fas fa-exclamation-triangle"></i>
+                              </button>
+                          </td>
+                      </div>
+                  </div>
+              </div>
+            {% else %}
+            <td class="text-center text-danger" style="font-weight:bold">Descontinuado</td>
+            {% endif %}
           </tr>
         {% endfor %}
         </tbody>
