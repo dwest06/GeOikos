@@ -14,7 +14,7 @@
                 <p>Herramienta para agregar valores a los atributos de equipo.</p>
             </div>
             <div class="card-body">
-                <form class="form-horizontal needs-validation form-group" id="create-form" method="POST" action="" novalidate>
+                <form class="form-horizontal needs-validation form-group" id="create-form" method="POST" action="" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
                     <div class="form-row mb-20"> 
                         <div class="form-group col required">
@@ -26,6 +26,13 @@
                         <div class="col">
                             <label>{{equipform.serial.label}}</label>
                             {% render_field equipform.serial class="form-control" min=0 %}
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-20"> 
+                        <div class="col">
+                            <label>{{equipform.pic.label}}</label>
+                            {% render_field equipform.pic class="form-control-file" min=0 type="file"%}
                         </div>
                     </div>
 

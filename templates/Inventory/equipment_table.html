@@ -5,6 +5,17 @@
     Equipo Disponible
 {% endblock %}
 
+{% block cutom_css %}
+    <style>
+
+        .object-fit-cover {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+    </style>
+{% endblock  %}
+
 {% block content %}
 
     <div class="row" >
@@ -47,7 +58,7 @@
                                             </div>
                                             <div class="modal-body ">
                                                 <div class="card">
-                                                    <p class="text-center">Aqui deberia haber una foto jejeps</p>
+                                                    <img class="object-fit-cover" src="{{ r.pic.url }}" width="400px">
                                                     <ul class="list-group list-group-flush">
                                                         {% for d in r.info %}
                                                             {% if d.value != None %}

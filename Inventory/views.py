@@ -115,6 +115,7 @@ def filterAndFill(lists, attributes):
     idxs = [0,0,0,0,0,0]
     for att in attributes:
         att_val = AttributeEquipmet()
+        print(lists)
         if att.attribute_type=='INT': #0
             if att.nullity and lists[0][idxs[0]] == '':
                 att_val.value_int = None
@@ -177,7 +178,8 @@ def filterAndFill(lists, attributes):
 @is_cuarto_equipo
 def create_equipment(request, cat):    
     if request.method == "POST":
-        equip_form = EquipmentForm(request.POST)
+        equip_form = EquipmentForm(request.POST,request.FILES)
+        print("FILES",request.FILES)
         if equip_form.is_valid():
             
             equipment = equip_form.save(commit=False)
@@ -196,6 +198,7 @@ def create_equipment(request, cat):
                 request.POST.getlist('value_date'),
                 request.POST.getlist('value_float')
             ]
+            print("reakn",request.POST)
             att_val = filterAndFill(lists,cat_attributes)
             equipment.save()
             for group in request.POST.getlist('group'):
@@ -614,7 +617,7 @@ def show_equipment(request,category):
             {'name':'Notas sobre el equipo', 'value':eq.notes}
             ]
         groups = [group for group in eq.group.all()]
-        rows.append({'name':name, 'vals':vals, 'av':available, 'info':info, 'groups':groups})
+        rows.append({'name':name, 'vals':vals, 'av':available, 'info':info, 'groups':groups, 'pic':eq.pic})
 
     return render(request, "Inventory/equipment_table.html", {'attributes': atts, 
                                                               'rows' : rows,

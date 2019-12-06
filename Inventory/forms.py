@@ -24,7 +24,7 @@ class EquipmentForm(forms.ModelForm):
         model = Equipment
         fields = [
                 'serial', 'name', 'entry_date', 
-                'elaboration_date', 'notes'
+                'elaboration_date', 'notes', 'pic'
             ]
         labels = {
             'serial' : 'Serial',
@@ -32,6 +32,7 @@ class EquipmentForm(forms.ModelForm):
             'entry_date' : 'Fecha de entrada a Oikos',
             'elaboration_date' : 'Fecha de Elaboracion',
             'notes' : 'Notas',
+            'pic' : 'Foto del equipo'
         }
         error_messages = {
             'serial' : {
