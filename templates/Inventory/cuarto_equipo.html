@@ -1,0 +1,402 @@
+{% extends "base.html" %}
+{% load tags %}
+
+{% block page-title %}
+Cuarto de Equipo
+{% endblock  %}
+
+{% block content %}
+<div class="row mb-20">
+  <!-- CREAR CATEGORIA -->
+  <div class="col-md-3 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Crear Categorí­as</h3>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'Inventory:create_category' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREAR GRUPOS -->
+  <div class="col-md-3 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Crear Grupos</h3>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'Inventory:create_group' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARGAR EQUIPO -->
+  <div class="col-md-3 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Añadir Equipo</h3>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'Inventory:create_equipment' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEADLINES -->
+  <div class="col-md-3 col-sm-12 mb-20">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3>Agregar Fecha de Entrega</h3>
+        </div>
+        <div class="card-body">
+          <div class="modal fade" id="datem" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title text-center" id="Title">Asignar fecha de entrega global</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                  <form class="needs-validation" id="dateform" action="{% url 'Inventory:global_deadline' %}" method="POST" novalidate>
+                    {% csrf_token %}
+                    <label class="control-label required">Fecha de Entrega</label>
+                    <input type="date" name="date" placeholder="MM/DD/YYYY" class="form-control" id="id_entry_date" required/>
+                    <div class="valid-feedback">Correcto</div>
+                    <div class="invalid-feedback">Incorrecto</div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success" form="dateform" value="Submit">Aceptar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button data-toggle="modal" data-target="#datem" class="btn btn-success"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+</div> 
+
+<div class="row mb-20">
+  <!-- PRESTAMOS -->
+  <div class="col-sm-12 mb-20">
+    <div class="card text-center">
+
+      <div class="card-header">
+        <h3>Pestamos</h3>
+      </div>
+
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full tabledat">
+          <caption>Para manejo de prestamos de equipos</caption>
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">Id</th>
+              <th class="text-center" scope="col">Equipo</th>
+              <th class="text-center" scope="col">Usuario</th>
+              <th class="text-center" scope="col">Fecha de Recepción</th>
+              <th class="text-center" scope="col">Fecha de Entrega</th>
+              <th class="text-center" scope="col">Fecha de Devolución</th>
+              <th class="text-center" scope="col">Estado</th>
+              <th class="text-center" scope="col">Detalles</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for t in prestamos %}
+            <tr>
+              <td class="text-center">{{t.pk}}</td>
+              <td class="text-center">{{t.equipment.name}}</td>
+              <td class="text-center">{{t.user}}</td>
+              <td class="text-center">{{t.hand_over_date}}</td>
+              {% if t.deadline is None %}
+              <div class="modal fade" id="date{{forloop.counter}}" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title text-center" id="Title">Asignar fecha de entrega a préstamo {{t.pk}}</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body ">
+                      <form id="dateform{{t.pk}}" action="{% url 'Inventory:deadline' t.pk %}" method="POST" class="form-group needs-validation" novalidate>
+                        {% csrf_token %}
+                        <label class="control-label required">Fecha de Entrega</label>
+                        <input type="date" name="date" placeholder="MM/DD/YYYY" class="form-control" id="id_entry_date" required>
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Incorrecto</div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary" form="dateform{{t.pk}}" value="Submit">Aceptar</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <td>
+                  <button class="btn btn-secondary" data-toggle="modal" data-target="#date{{forloop.counter}}"><i class="fas fa-calendar-check"></i></button>
+              </td>
+              {% else %}
+              <td class="text-center">{{t.deadline}}</td>
+              {% endif %}
+              {% if t.delivery_date is None %}
+              <td class="text-center"><span class="text-danger" style="font-weight:bold">Prestamo activo</span></td>
+              {% else %}
+              <td class="text-center">{{t.delivery_date}}</td>
+              {% endif %}
+              {% if t.delivery_date is None %}
+                <td><a href="{% url 'Inventory:loan_devolution' t.pk %}" class="btn btn-success">Cargar devolución</a></td>
+              {% else %}
+              <td class="text-center"><span class="text-success" style="font-weight:bold">Equipo devuelto</span></td>
+              {% endif %}
+                <div class="modal fade" id="info{{forloop.counter}}" tabindex="-1">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="Title">Prestamo {{t.pk}}</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body ">
+                              <div class="card">
+                                  <ul class="list-group list-group-flush">
+                                      <li class="list-group-item text-center">
+                                        <span style="font-weight:bold">Recibe: {{t.user}}</span>
+                                      </li>
+                                      <li class="list-group-item text-center">
+                                          <span style="font-weight:bold">Entrega: {{t.creator}}</span>
+                                      </li>
+                                      <li class="list-group-item text-center">
+                                          <span style="font-weight:bold">Equipo: {{t.equipment.name}}</span>
+                                      </li>
+                                      {% if t.delivery_date is not None %}
+                                        <li class="list-group-item text-center">
+                                            <span style="font-weight:bold">Puntuación: {{t.score}}/5</span>
+                                        </li>
+                                        {% if t.notes %}
+                                        <li class="list-group-item text-center">
+                                            <label>Notas:</label>
+                                              {{t.notes}}
+                                        </li>
+                                        {% endif %}
+                                      {% endif %}
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Volver</button>
+                          </div>
+                          <td class="text-center">
+                              <button class="btn btn-primary" data-toggle="modal" data-target="#info{{forloop.counter}}">
+                                  Ver Detalles
+                              </button>
+                          </td>
+                      </div>
+                  </div>
+              </div>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-20"> 
+  <!-- SOLICITUDES -->
+  <div class="col-sm-12 mb-20">
+    <div class="card text-center">
+    
+      <div class="card-header">
+        <h3>Solicitudes</h3>
+      </div>
+
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full tabledat">
+          <caption>Para manejo de solicitudes de equipos</caption>
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Solicitante</th>
+              <th scope="col">Fecha de solicitud</th>
+              <th scope="col">Detalles</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for t in solicitudes %}
+            <tr>
+              <td>{{t.pk}}</td>
+              <td>{{t.user1}}</td>
+              <td>{{t.date}}</td>
+              <td>
+                <form action="{% url 'Inventory:show_request' t.pk %}" method="GET">
+                  <input type="submit" class="btn btn-primary" value="Ver detalles"/>
+                </form>
+              </td> 
+              {% if t.user2 == None %}
+              <td class="text-center text-secondary" style="font-weight:bold">Sin responder</td>
+              {% elif t.status %}
+              <td class="text-center text-success" style="font-weight:bold">Aprobado por {{ t.user2 }}</td>
+              {% else %}
+              <td class="text-center text-danger" style="font-weight:bold">Rechazado por {{ t.user2 }}</td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row mb-20">
+    <!-- CATEGORIAS -->
+  <div class="col-md-6 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Categorias</h3>
+      </div>
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full tabledat">
+        <caption>Para manejo de categorias</caption>
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for t in categorias %}
+          <tr>
+            <td>{{t.pk}}</td>
+            <td>{{t.name}}</td>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPOS -->
+  <div class="col-md-6 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Equipos</h3>
+      </div>
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full tabledat">
+        <caption>Para manejo de equipos</caption>
+        <thead>
+          <tr>
+            <th class="text-center" scope="col">Id</th>
+            <th class="text-center" scope="col">Serial</th>
+            <th class="text-center" scope="col">Nombre</th>
+            <th class="text-center" scope="col">Modificar</th>
+            <th class="text-center" scope="col">Asignar Préstamo</th>            
+            <th class="text-center" scope="col">Descontinuar</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for t,av in equipos %}
+          <tr>
+            <td class="text-center">{{t.pk}}</td>
+            <td class="text-center">{{t.serial}}</td>
+            <td class="text-center">{{t.name}}</td>
+            {% if av != "Descontinuado" %}
+            <td class="text-center">
+              <a href="{% url 'Inventory:modify_equipment_value' t.pk %}" class="btn btn-info">
+                <i class="fas fa-pencil-alt"></i>
+              </a>
+            </td>
+            {% else %}
+            <td class="text-center text-danger" style="font-weight:bold">Descontinuado</td>
+            {% endif %}
+            {% if av == "Disponible" %}
+            <td class="text-center">
+                <a href="{% url 'Inventory:create_loan' t.pk %}" class="btn btn-info">
+                  <i class="fas fa-pencil-alt"></i>
+                </a>
+            </td>
+            {% elif av == "Prestado" %}
+            <td class="text-center text-secondary" style="font-weight:bold">Prestado</td>
+            {% else %}
+            <td class="text-center text-danger" style="font-weight:bold">Descontinuado</td>
+            {% endif %}
+            {% if av != "Descontinuado" %}
+            <div class="modal fade" id="desc{{forloop.counter}}" tabindex="-1">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="Title">Descontinuar {{t.name}}</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body ">
+                              <p>
+                                Usted ha seleccionado la opción de descontinuar equipo.
+                                Si presiona aceptar se procederá a marcar como
+                                descontinuado el equipo: {{t.name}}
+                              </p>
+                              <p type="text-danger" style="font-weight:bold">
+                                  Esta acción no se puede deshacer.
+                              </p>
+                          </div>
+                          <div class="modal-footer">
+                              <form action="{% url 'Inventory:discontinue_eq' t.pk %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="Aceptar"/>
+                              </form>
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Volver</button>
+                          </div>
+                          <td class="text-center">
+                              <button class="btn btn-danger" data-toggle="modal" data-target="#desc{{forloop.counter}}">
+                                  <i class="fas fa-exclamation-triangle"></i>
+                              </button>
+                          </td>
+                      </div>
+                  </div>
+              </div>
+            {% else %}
+            <td class="text-center text-danger" style="font-weight:bold">Descontinuado</td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock  %}
+
+{% block custom_js %}
+<script>
+  $('.tabledat').DataTable({
+			"order" : [[0,"desc"]],
+      "language": {
+        "search": "Buscar:",
+        "emptyTable":     "No hay entradas para esta tabla",
+        "info":           "Mostrando _START_ hasta _END_ de _TOTAL_ entradas",
+        "infoEmpty":      "Mostrando 0 de 0 entradas",
+        "lengthMenu":     "Mostrar _MENU_ entradas",
+        "paginate": {
+          "first":      "Primera",
+          "last":       "Ultima",
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },
+      }
+		});
+</script>
+{% endblock  %}

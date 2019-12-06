@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+{% load tags %}
+
+{% block page-title %}
+Tesorero
+{% endblock  %}
+
+{% block content %}
+<div class="row mb-20">
+  <!-- CARGAR TRANSACCION -->
+  <div class="col-md-3 col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Cargar Transaccion</h3>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'Inventory:load_transaction' %}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+  
+    <!-- SETEAR TRIMESTRALIDAD -->
+    <div class="col-md-3 col-sm-12 mb-20">
+      <div class="card text-center">
+        <div class="card-header">
+          <h5>Establecer precio de Trimestralidad</h5>
+        </div>
+        <div class="card-body">
+          <div class="modal fade" id="pricem" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title text-center" id="Title">Establecer precio de la Trimestralidad</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                  <form class="needs-validation" id="priceform" action="{% url 'Inventory:set_trim' %}" method="POST" novalidate>
+                    {% csrf_token %}
+                    <label class="control-label required">Precio de la Trimestralidad</label>
+                    <input type="number" name="price" placeholder="0.00" class="form-control" id="number" min="0" step=".01" required/>
+                    <div class="valid-feedback">Correcto</div>
+                    <div class="invalid-feedback">Incorrecto</div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success" form="priceform" value="Submit">Aceptar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button data-toggle="modal" data-target="#pricem" class="btn btn-success"><i class="fas fa-plus"></i></button>
+        </div>
+    </div>
+  </div>
+      
+  <!-- TRIMESTRALIDAD GLOBAL -->
+  <div class="col-md-3 col-sm-12 mb-20">
+      <div class="card text-center">
+        <div class="card-header">
+          <h4>Cargar Pago de Trimestralidad</h4>
+        </div>
+        <div class="card-body">
+          <div class="modal fade" id="pricem2" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center" id="Title">Aumento global de la trimestralidad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                  <p>
+                    Está apunto de ejecutar un recargo de la trimestralidad a todos los usuarios activos.
+                    Seleccione Aceptar si desea continuar.
+                  </p>
+                </div>
+                <div class="modal-footer">
+                      <form action="{% url 'Inventory:load_all_trim' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary" value="Aceptar"/>
+                      </form>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button data-toggle="modal" data-target="#pricem2" class="btn btn-success"><i class="fas fa-plus"></i></button>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12 mb-20">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3>Trimestralidad</h3>
+        </div>
+        <div class="card-body">
+          <h5>{{trim}}</h5>
+        </div>
+      </div>
+    </div>
+</div>
+
+  
+
+<div class="row mb-20">
+
+  <!-- BALANCE -->
+  <div class="col-sm-12 mb-20">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3>Balance</h3>
+        </div>
+        <div class="card-body" style="overflow-x: scroll">
+          <table class="table table-hover w-full tabledat">
+            <caption>Para revisar el balance de los usuarios</caption>
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Usuario</th>
+                <th class="text-center" scope="col">Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <td class="text-center">{{user.pk}}</td>
+                <td class="text-center">{{user}}</td>
+                <td class="text-center">{{user.balance}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+   
+
+  <!-- PAGOS -->
+  <div class="col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Pagos</h3>
+      </div>
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full tabledat">
+          <caption>Para manejo de pagos efectuados por los usuarios</caption>
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">Id</th>
+              <th class="text-center" scope="col">Usuario</th>
+              <th class="text-center" scope="col">Fecha</th>
+              <th class="text-center" scope="col">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for t in pagos %}
+            <tr>
+              <td class="text-center">{{t.pk}}</td>
+              <td class="text-center">{{t.user}}</td>
+              <td class="text-center">{{t.date}}</td>
+              <td class="text-center">{{t.transaction}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+ </div> 
+    
+<div class="row mb-20">
+  <!-- Multas -->
+  <div class="col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Multas</h3>
+      </div>
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full tabledat">
+          <caption>Multas aplicadas a los usuarios</caption>
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">Id</th>
+              <th class="text-center" scope="col">Usuario</th>
+              <th class="text-center" scope="col">Fecha</th>
+              <th class="text-center" scope="col">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for t in multas %}
+            <tr>
+              <td class="text-center">{{t.pk}}</td>
+              <td class="text-center">{{t.user}}</td>
+              <td class="text-center">{{t.date}}</td>
+              <td class="text-center">{{t.transaction}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-20">
+  <!-- TRIMESTRALIDADES -->
+  <div class="col-sm-12 mb-20">
+    <div class="card text-center">
+      <div class="card-header">
+        <h3>Descuentos Por Trimestralidades</h3>
+      </div>
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full tabledat">
+          <caption>Trimestralidades</caption>
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Usuario</th>
+                <th class="text-center" scope="col">Fecha</th>
+                <th class="text-center" scope="col">Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for t in trimestral %}
+              <tr>
+              <td class="text-center">{{t.pk}}</td>
+              <td class="text-center">{{t.user}}</td>
+              <td class="text-center">{{t.date}}</td>
+              <td class="text-center">{{t.transaction}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock  %}
+
+{% block custom_js %}
+<script>
+  $('.tabledat').DataTable({
+			"order" : [[0,"desc"]],
+      "language": {
+        "search": "Buscar:",
+        "emptyTable":     "No hay entradas para esta tabla",
+        "info":           "Mostrando _START_ hasta _END_ de _TOTAL_ entradas",
+        "infoEmpty":      "Mostrando 0 de 0 entradas",
+        "lengthMenu":     "Mostrar _MENU_ entradas",
+        "paginate": {
+          "first":      "Primera",
+          "last":       "Ultima",
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },
+      }
+		});
+</script>
+{% endblock  %}

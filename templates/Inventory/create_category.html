@@ -2,70 +2,34 @@
 {% load widget_tweaks %}
 
 {% block page-title %}
-    {% if heading %}
-        <h3>Categoría </h3>
-    {% endif %}
+    Categoría
 {% endblock %}
 
 {% block content %}
 <div class="row">
-    <div class="offset-md-3 col-md-6">
+    <div class="offset-lg-2 col-lg-8 col-md-12">
         <div class="card">
             <div class="card-header">
-                <h1 style="text-align: center;
-                color: rgb(0, 0, 0);
-                font-family: Consolas, monaco, monospace;
-                font-size: 50px;"> Crear Categoría</h1>
-                <p style="font-family: Consolas, monaco, monospace; text-align:center;
-                font-size: 20px;">Herramienta de creación de categorías. Para crear una categoría debe crear sus atributos.</p>
+                <h1>Crear Categoría</h1>
+                <p>Herramienta de creación de categorías. Para crear una categoría debe crear sus atributos.</p>
             </div>
-
             <div class="card-body">
                 <form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
                     {% csrf_token %}
-                    {{ formset.management_form }}
                     <div class="form-group required">
                         <label class="control-label">{{categoryform.name.label}}</label>
                         {% render_field categoryform.name class="form-control" placeholder="Inserte el nombre de la categoría" %}
                         <div class="valid-feedback">Correcto</div>
-                        <div class="invalid-feedback">Requerido</div>
+                        <div class="invalid-feedback">Incorrecto</div>
                     </div>
-                    {% for form in formset %}
-                        <div class="form-col">
-                            <div class="form-row"> 
-                                <div class="form-group">
-                                    <label>{{form.name.label}}</label>
-                                    {% render_field form.name class="form-control" placeholder=form.name.label %}
-                                </div>
-                                <div class="form-group">
-                                    <label>{{form.attribute_type.label}}</label>
-                                    {% render_field form.attribute_type class="form-control" placeholder=form.attribute_type.label %}
-                                </div>
-                            </div>
-                            <div class="form-row"> 
-                                <div class="form-group">
-                                    <label>{{form.unit.label}}</label>
-                                    {% render_field form.unit class="form-control" placeholder=form.unit.label %}
-                                </div>
-                                <div class="form-group col-md-3 text-center">
-                                    <label>{{form.nullity.label}}</label>
-                                    {% render_field form.nullity class="form-control align-items-center" %}
-                                    <small class="form-text text-muted">
-                                        Indica si la unidad será considerada necesaria.
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="input-group-append">
-                                <button class="btn btn-success add-form-col">Añadir otro atributo</button>
-                            </div>
-                            <p></p>  
-                        </div>
-                    {% endfor %}
-                    <p></p>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
-                        Añadir Categoría
-                    </button>
+                    <div id="form_zone"></div>
                 </form>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary add_form">Añadir atributo a la categoría</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">
+                    Añadir Categoría
+                </button>
             </div>
         </div>
     </div>
@@ -92,69 +56,75 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
 <script type="text/javascript">
-    function updateElementIndex(el, prefix, ndx) {
-        var id_regex = new RegExp('(' + prefix + '-\\d+)');
-        var replacement = prefix + '-' + ndx;
-        if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
-        if (el.id) el.id = el.id.replace(id_regex, replacement);
-        if (el.name) el.name = el.name.replace(id_regex, replacement);
-    }
-    function cloneMore(selector, prefix) {
-        var newElement = $(selector).clone(true);
-        var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
-        newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function () {
-            var name = $(this).attr('name')
-            if (name) {
-                name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
-                var id = 'id_' + name;
-                $(this).attr({ 'name': name, 'id': id }).val('').removeAttr('checked');
-            }
-        });
-        newElement.find('label').each(function () {
-            var forValue = $(this).attr('for');
-            if (forValue) {
-                forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
-                $(this).attr({ 'for': forValue });
-            }
-        });
-        total++;
-        $('#id_' + prefix + '-TOTAL_FORMS').val(total);
-        $(selector).after(newElement);
-        var conditionRow = $('.form-col:not(:last)');
-        conditionRow.find('.btn.add-form-col')
-            .removeClass('btn-success').addClass('btn-danger')
-            .removeClass('add-form-col').addClass('remove-form-col')
-            .html('Eliminar este atributo');
-        return false;
-    }
-    function deleteForm(prefix, btn) {
-        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
-        if (total > 1) {
-            btn.closest('.form-col').remove();
-            var forms = $('.form-col');
-            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
-            for (var i = 0, formCount = forms.length; i < formCount; i++) {
-                $(forms.get(i)).find(':input').each(function () {
-                    updateElementIndex(this, prefix, i);
-                });
-            }
+
+        function cloneMore(selector) {
+
+            $('#form_zone').append(`
+                <div class="form-col att_form">
+                    <div class="form-row"> 
+                        <div class="form-group required">
+                            <label class="control-label">Nombre del Atributo</label>
+                            <input name="att_name" class="form-control" placeholder="Ingrese el nombre del atributo" required>
+                            <div class="valid-feedback">Correcto</div>
+                            <div class="invalid-feedback">Incorrecto</div>
+                        </div>
+                        <div class="form-group required" >
+                            <label class="control-label" for="tipos">Tipo de dato</label>
+                                <select name="att_type" class="form-control" id="tipos" required>
+                                    <option value="INT">Entero</option>
+                                    <option value="STR">String (Cadena de caracteres)</option>
+                                    <option value="TXT">Texto</option>
+                                    <option value="BOO">Booleano (Verdadero y Falso)</option>
+                                    <option value="FLT">Entero con decimales</option>
+                                    <option value="DAT">Fecha</option>
+                                </select>
+                            <div class="valid-feedback">Correcto</div>
+                            <div class="invalid-feedback">Incorrecto</div>
+                        </div>
+                    </div>
+                    <div class="form-row"> 
+                        <div class="form-group">
+                            <label>Unidad</label>
+                            <input name="unit" class="form-control" placeholder="Ingrese la unidad">
+                            <div class="valid-feedback">Correcto</div>
+                        </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="null">Indique si el atributo es opcional</label>
+                                <select name="nullity" class="form-control" id="null" required>
+                                    <option>Necesario</option>
+                                    <option>Opcional</option>
+                                </select>
+                            <div class="valid-feedback">Correcto</div>
+                            <div class="invalid-feedback">Incorrecto</div>
+                        </div>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-danger remove_form">Eliminar</button>  
+                    </div>
+                    <br>   
+                </div>`
+            );
+        
+            return false;
         }
-        return false;
-    }
-    $(document).on('click', '.add-form-col', function (e) {
-        e.preventDefault();
-        cloneMore('.form-col:last', 'form');
-        return false;
-    });
-    $(document).on('click', '.remove-form-col', function (e) {
-        e.preventDefault();
-        deleteForm('form', $(this));
-        return false;
-    });
+
+        function deleteFormCat(btn) {
+            btn.closest('.att_form').remove();
+            return false;
+        }
+
+        $(document).on('click', '.add_form', function (e) {
+            e.preventDefault();
+            cloneMore('.att_form:last');
+            return false;
+        });
+
+        $(document).on('click', '.remove_form', function (e) {
+            e.preventDefault();
+            deleteFormCat( $(this));
+            return false;
+        });
 </script>
 
 {% endblock %}

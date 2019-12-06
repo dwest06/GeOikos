@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import home, noikos, nmiembros, njd, nhonorarios, cursos, calta, cbaja, croca, contacto, expediciones, blog
+from .views import (home, noikos, nmiembros, njd,
+    nhonorarios, cursos, calta, cbaja, croca, contacto, expediciones, blog)
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -17,6 +18,6 @@ urlpatterns = [
     path('croca/',croca,name="croca"),
     path('contacto/',contacto,name="contacto"),
     path('expediciones/',expediciones,name="expediciones"),
-    path('blog/',blog,name="blog")
+    #path('blog/',blog,name="blog")
 
 ]

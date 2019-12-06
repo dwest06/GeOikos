@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="../../static/css/contacto.css">
     <link rel="stylesheet" href="../../static/css/expediciones.css">
     <link rel="stylesheet" href="../../static/css/cursos.css">
-    <link rel="icon" href="../../static/img/favicon.png"></link>
+    <link rel="icon" href="../../static/img/favicon.png">
       
     <!-- Scripts de Oikos -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -37,23 +38,23 @@
           <li>
             <span>Nosotros</span>
             <ul class="no-bullet">
-              <li><a href="{{ site.baseurl }}/noikos">Oikos</a></li>
-              <li><a href="{{ site.baseurl }}/nmiembros">Miembros</a></li>
-              <li><a href="{{ site.baseurl }}/njd">Junta Directiva</a></li>
-              <li><a href="{{ site.baseurl }}/nhonorarios">Miembros Honorarios</a></li>
+              <li><a href="{% url 'oikos:noikos' %}">Oikos</a></li>
+              <li><a href="{% url 'oikos:nmiembros' %}">Miembros</a></li>
+              <li><a href="{% url 'oikos:njd' %}">Junta Directiva</a></li>
+              <li><a href="{% url 'oikos:nhonorarios' %}">Miembros Honorarios</a></li>
             </ul>
           </li>
           <li>
-            <a href="{{ site.baseurl }}/cursos">Cursos</a>
+            <a href="{% url 'oikos:cursos' %}">Cursos</a>
             <ul class="no-bullet">
-              <li><a href="{{ site.baseurl }}/cbaja">Baja y media montaña</a></li>
-              <li><a href="{{ site.baseurl }}/croca">Escalada en roca</a></li>
-              <li><a href="{{ site.baseurl }}/calta">Alta montaña</a></li>
+              <li><a href="{% url 'oikos:cbaja' %}">Baja y media montaña</a></li>
+              <li><a href="{% url 'oikos:croca' %}">Escalada en roca</a></li>
+              <li><a href="{% url 'oikos:calta' %}">Alta montaña</a></li>
             </ul>
           </li>
-          <li><a href="{{ site.baseurl }}/contacto">Contacto</a></li>
-          <li><a href="{{ site.baseurl }}/expediciones">Expediciones</a></li>
-          <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
+          <li><a href="{% url 'oikos:contacto' %}">Contacto</a></li>
+          <li><a href="{% url 'oikos:expediciones' %}">Expediciones</a></li>
+          <li><a href="{% url 'blog:blog' %}">Blog</a></li>
 
           {% if user.is_authenticated %}
           <li><a class="nav-link" href="{% url 'Inventory:home_inventory' %}">Inventario</a></li>
@@ -69,64 +70,8 @@
 {% block content %}
 {% endblock %}
 
+{% include "footer.html" %}
 
-<footer class="blue" style="position:relative; z-index:1;">
-    <div class="wrap">
-      <div class="foo-logo">
-        <div>
-          <a href="/#"><img src="../../static/img/logo-footer.png"alt=""></a>
-        </div>
-      </div>
-      <div class="foo-links">
-        <div class="foo-links-oikos">
-          <h3>Oikos</h3>
-          <ul class="no-bullet">
-            <li><a href="/#">Principal</a></li>
-            <li><a href="/noikos">Oikos</a></li>
-            <li><a href="/njd">Junta Directiva</a></li>
-            <li><a href="/nhonorarios">Miembros Honorarios</a></li>
-            <li><a href="/contacto">Contacto</a></li>
-            <li><a href="/expediciones">Expediciones</a></li>
-            <li><a href="/blog">Blog</a></li>
-          </ul>
-        </div>
-        <div class="foo-links-síguenos">
-          <h3>síguenos</h3>
-          <ul class="no-bullet">
-            <li><a href="https://twitter.com/OikosUSB">Twitter</a></li>
-            <li><a href="https://facebook.com/OikosUSB">Facebook</a></li>
-            <li><a href="https://youtube.com/user/GEOIKOS">YouTube</a></li>
-            <li><a href="https://instagram.com/OikosUSB">Instagram</a></li>
-          </ul>
-        </div>
-        <div class="foo-links-cursos">
-          <h3>cursos</h3>
-          <ul class="no-bullet">
-            <li><a href="{{ site.baseurl }}/cbaja">Baja y media montaña</a></li>
-            <li><a href="{{ site.baseurl }}/croca">Escalada en roca</a></li>
-            <li><a href="{{ site.baseurl }}/calta">Alta montaña</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="foo-enter">
-        <label for="">Buscar</label>
-        <div class="enter search">
-          <form method="get" action="https://www.google.com/search">
-            <input type="text" name="q" placeholder="Busco..." class="in corners">
-            <div class="mask">
-              <input type="submit" value="Google Search" />
-            </div>
-            <input type="checkbox"  name="sitesearch" value="geoikos.com.ve" class="hide" checked />
-          </form>
-          <span class="icon-search"></span>
-        </div>
-      </div>
-    </div>
-    <div class="toe">
-      Grupo Excursionista Oikos - Universidad Simón Bolívar, Casa del Estudiante, PB<br>
-      <span>Diseño y desarrollo por <a href="https://lual.com.ve">Lual</a></span>
-    </div>
-  </footer>
   </body>
   </html>
   

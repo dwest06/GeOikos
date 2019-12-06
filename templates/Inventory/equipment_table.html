@@ -2,56 +2,136 @@
 {% load widget_tweaks %}
 
 {% block page-title %}
-    {% if heading %}
-        <h3>{{heading}}</h3>
-    {% endif %}
+    Equipo Disponible
 {% endblock %}
+
+{% block cutom_css %}
+    <style>
+
+        .object-fit-cover {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+    </style>
+{% endblock  %}
 
 {% block content %}
 
-<div class="container-fluid">
-    <br>
     <div class="row" >
-        <div>
-            <br>
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Equipos</h3>
-                    </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Categorí­a: {{name}}</h3>
+                </div>
 
-                    <div class="card-body">
-                        <table class="table table-hover w-full"> 
-                            <thead style="color:black;" >
-                                <th>Nombre</th>
-                                <th>Serial</th>
-                                <th>Fecha de Ingreso</th>
-                                <th>Fecha de Elaboracion</th>
-                                <th>Descontinuado</th>
-                                <th>Fecha de Descontinuado</th>
-                                <th>Notas</th>
-                                <th>Categoria</th>
-                                {% for att in attributes %}
-                                    <th>{{att.name}}</th>
+                <div class="card-body" style="overflow-x: scroll">
+                    <table class="table table-hover w-full" id="table">
+                        <caption>Tabla para Equipos</caption>
+                        <thead style="color:black;" >
+                            <th scope="col" class="text-center">Serial</th>
+                            <th scope="col" class="text-center">Nombre</th>
+                            {% for att in attributes %}
+                                <th scope="col" class="text-center">{{att.name}}</th>
+                            {% endfor %}
+                            <th scope="col" class="text-center">Fecha de Elaboración</th>
+                            <th scope="col" class="text-center">Información Adicional</th>
+                            <th scope="col" class="text-center">Disponibilidad</th>
+                        </thead>
+                        <tbody>
+                            {% for r in rows %}
+                            <tr> 
+                                {% for val,unit in r.vals %}
+                                    {% if val != None %}
+                                        <td class="text-center">{{val}} {{unit}}</td>
+                                    {% else %}
+                                        <td class="text-center">-</td>
+                                    {% endif %}
                                 {% endfor %}
-                            </thead>
-                            <tbody>
-                                {% for t in values %}
-                                <tr>
-                                    {% for val in t %}
-                                    <td>{{val}}</td>
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>         
-                    </div>
+                                {% if r.date is None %}
+                                    <td class="text-center text-secondary" style="font-weight:bold">Desconocido</td>
+                                {% else %}
+                                    <td class="text-center">{{r.date}}</td>
+                                {% endif %}
+                                <div class="modal fade" id="info{{forloop.counter}}" tabindex="-1">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="Title">{{r.name}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body ">
+                                                <div class="card">
+                                                    <img class="img-fluid rounded mx-auto d-block" src="{{ r.pic.url }}" alt="Responsive image">
+                                                    <ul class="list-group list-group-flush">
+                                                        {% for d in r.info %}
+                                                            {% if d.value != None %}
+                                                                <li class="list-group-item">
+                                                                    {{d.name}}: {{d.value}}
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="list-group-item">
+                                                                    {{d.name}}: Desconocido
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {% for group in r.groups %}
+                                                            <li class="list-group-item">
+                                                                Grupo: {{group.name}}
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <td class="text-center">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#info{{forloop.counter}}">
+                                        Ver
+                                    </button>
+                                </td>
+                                {% if r.av == "Disponible" %}
+                                    <td class="text-center text-success" style="font-weight:bold">Disponible</td>
+                                {% elif r.av == "Prestado" %}
+                                    <td class="text-center text-secondary" style="font-weight:bold">Prestado a {{r.user}}</td>
+                                {% else %}
+                                    <td class="text-center text-danger" style="font-weight:bold">Descontinuado</td>                                      
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>         
                 </div>
             </div>
         </div>
     </div>
-    <p></p>
-    <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Volver a la Busqueda</a>
-    <!--<a class="btn btn-success" href="{% url 'Inventory:home_inventory' %}">Volver al home</a>-->
-</div>
+    <br/>
+    <a class="btn btn-success" href="{% url 'Inventory:select-cat' %}">Seleccionar otra Categorí­a</a>
+{% endblock  %}
+
+{% block custom_js %}
+<script>
+  $('#table').DataTable({
+        "order" : [[0,"desc"]],
+        "language": {
+        "search": "Buscar:",
+        "emptyTable":     "No hay entradas para esta tabla",
+        "info":           "Mostrando _START_ hasta _END_ de _TOTAL_ entradas",
+        "infoEmpty":      "Mostrando 0 de 0 entradas",
+        "lengthMenu":     "Mostrar _MENU_ entradas",
+        "paginate": {
+          "first":      "Primera",
+          "last":       "Ultima",
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },
+      }
+    });
+</script>
 {% endblock  %}

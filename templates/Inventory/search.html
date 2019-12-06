@@ -2,29 +2,36 @@
 {% load widget_tweaks %}
 
 {% block page-title %}
-    {% if heading %}
-        <h3>{{heading}}</h3>
-    {% endif %}
+    Buscar Equipo
 {% endblock %}
 
 {% block content %}
+<div class="row" >
+    <div class="offset-xl-4 col-xl-4 offset-md-2 col-md-8 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h1>Búsqueda</h1>
+                <p>Herramienta para cargar pagos y deudas de los miembros.</p>
+            </div>
 
-<h1 style="text-align: left;
-    color: rgb(0, 0, 0);
-    font-family: Consolas, monaco, monospace;
-    font-size: 50px;"> Búsqueda</h1>
-<p style="font-family: Consolas, monaco, monospace;
-    font-size: 20px;">Herramienta para cargar pagos y deudas de los miembros.</p>
+            <div class="card-body">
+                <form id="search-equip" action="" method="POST" class="form-group needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="form-group required">
+                        <label class="control-label">{{form.category.label}}</label>
+                        {% render_field form.category class="form-control" %}
+                        <div class="valid-feedback">Correcto</div>
+                        <div class="invalid-feedback">Requerido</div>
+                    </div>
+                </form>    
+            </div>
 
-<form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
-    {% csrf_token %}
-    <div class="form-group required">
-        <label class="control-label">{{form.category.label}}</label>
-        {% render_field form.category class="form-control col-md-6" %}
-        <div class="valid-feedback">Correcto</div>
-        <div class="invalid-feedback">Requerido</div>
+            <div class="card-footer">
+                <button type="submit" form="search-equip" class="btn btn-success">Buscar</button>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-success">Buscar</button>
-</form>
+</div>
+
 
 {% endblock  %}

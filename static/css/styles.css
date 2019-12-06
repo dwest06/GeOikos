@@ -265,9 +265,6 @@ header .header-bar .header-logo {
   padding: 0.2em 1em;
   max-width: 111px;
 }
-header .header-bar {
-  background: transparent;
-}
 header .header-bar .menu-trigger {
   cursor: pointer;
   padding: 1em;
@@ -282,7 +279,6 @@ header .header-bar .menu-trigger {
 
 header nav {
   text-align: center;
-  font-family: 'Static';
   text-transform: uppercase;
   font-size: 1.3em;
   vertical-align: top;
@@ -684,7 +680,7 @@ footer .toe span a:hover {
   }
 }
 
-events {
+.events {
   width: 90%;
   margin: auto;
   padding: 1.5em;

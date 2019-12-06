@@ -18,7 +18,7 @@ $(document).ready(function() {
 				$('nav').css('display','');
 			} else {
 				$('nav').removeClass('open');
-			};
-		};
+			}
+		}
 	});
 });	

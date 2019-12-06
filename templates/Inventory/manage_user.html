@@ -25,27 +25,26 @@ Gestion de Usuarios
       <div class="card-header text-center">
         <h3>Gestion de Usuarios</h3>
       </div>
-      <div class="card-body">
-        <table class="table table-hover w-full">
+      <div class="card-body" style="overflow-x: scroll">
+        <table class="table table-hover w-full" id="table">
+          <caption>Tabla para manejo de gestion de usuarios</caption>
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Nombre</th>
-              <th>Modificar</th>
-              <th>Eliminar</th>
+              <th class="text-center" scope="col">Id</th>
+              <th class="text-center" scope="col">Username</th>
+              <th class="text-center" scope="col">Email</th>
+              <th class="text-center" scope="col">Nombre</th>
+              <th class="text-center" scope="col">Modificar</th>
             </tr>
           </thead>
           <tbody>
           {% for user in users %}
             <tr>
-              <td>{{user.pk}}</td>
-              <td>{{user.username}}</td>
-              <td>{{user.email}} </td>
-              <td>{{user.first_name}}</td>
-              <td><a href="{% url 'Users:modify_user' user.pk %}" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
-              <td><div data-toggle="modal" data-target="#modalEliminar" data-pk="{{user.pk}}" class="btn btn-danger delete-user"><i class="fas fa-times"></i></div></td>
+              <td class="text-center">{{user.pk}}</td>
+              <td class="text-center">{{user.username}}</td>
+              <td class="text-center">{{user.email}} </td>
+              <td class="text-center">{{user.first_name}}</td>
+              <td class="text-center"><a href="{% url 'Users:modify_user' user.pk %}" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
             </tr>
           {% endfor %}
           </tbody>
@@ -84,6 +83,22 @@ Gestion de Usuarios
 {% block custom_js %}
 <script>
   let main = () => {
+    $('#table').DataTable({
+			"order" : [[0,"desc"]],
+      "language": {
+        "search": "Buscar:",
+        "emptyTable":     "No hay entradas para esta tabla",
+        "info":           "Mostrando _START_ hasta _END_ de _TOTAL_ entradas",
+        "infoEmpty":      "Mostrando 0 de 0 entradas",
+        "lengthMenu":     "Mostrar _MENU_ entradas",
+        "paginate": {
+          "first":      "Primera",
+          "last":       "Ultima",
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },
+      }
+		});
     // Para eliminar un producto
     $('.delete-user').on('click', function(){
       let pk = $(this).attr('data-pk');

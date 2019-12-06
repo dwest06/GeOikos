@@ -395,7 +395,7 @@ function dean_addEvent(element, type, handler) {
 		// assign a global event handler to do all the work
 		element["on" + type] = handleEvent;
 	}
-};
+}
 // a counter used to create unique IDs
 dean_addEvent.guid = 1;
 
@@ -408,7 +408,7 @@ function removeEvent(element, type, handler) {
 			delete element.events[type][handler.$$guid];
 		}
 	}
-};
+}
 
 function handleEvent(event) {
 	var returnValue = true;
@@ -424,14 +424,14 @@ function handleEvent(event) {
 		}
 	}
 	return returnValue;
-};
+}
 
 function fixEvent(event) {
 	// add W3C standard event methods
 	event.preventDefault = fixEvent.preventDefault;
 	event.stopPropagation = fixEvent.stopPropagation;
 	return event;
-};
+}
 fixEvent.preventDefault = function() {
 	this.returnValue = false;
 };

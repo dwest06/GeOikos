@@ -1,0 +1,7294 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "Users",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "attribute"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "attributeequipmet"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "choices"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "equipment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "equipmentdebt"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "loan"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "quarterly"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "repair"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "request"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "requestcategory"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "Inventory",
+    "model": "transaction"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "blog",
+    "model": "post"
+  }
+},
+{
+  "model": "Inventory.category",
+  "pk": 1,
+  "fields": {
+    "name": "ATC"
+  }
+},
+{
+  "model": "Inventory.category",
+  "pk": 2,
+  "fields": {
+    "name": "Arnes"
+  }
+},
+{
+  "model": "Inventory.category",
+  "pk": 3,
+  "fields": {
+    "name": "Mosquetones Simples"
+  }
+},
+{
+  "model": "Inventory.category",
+  "pk": 4,
+  "fields": {
+    "name": "Mosquetones Seguridad"
+  }
+},
+{
+  "model": "Inventory.category",
+  "pk": 5,
+  "fields": {
+    "name": "Cuerdas"
+  }
+},
+{
+  "model": "Inventory.category",
+  "pk": 6,
+  "fields": {
+    "name": "Casco"
+  }
+},
+{
+  "model": "Inventory.category",
+  "pk": 7,
+  "fields": {
+    "name": "Carpa"
+  }
+},
+{
+  "model": "Inventory.category",
+  "pk": 8,
+  "fields": {
+    "name": "Cramp\u00f3n"
+  }
+},
+{
+  "model": "Inventory.category",
+  "pk": 9,
+  "fields": {
+    "name": "Concina MSR"
+  }
+},
+{
+  "model": "Inventory.group",
+  "pk": 1,
+  "fields": {
+    "name": "Alta Monta\u00f1a"
+  }
+},
+{
+  "model": "Inventory.group",
+  "pk": 2,
+  "fields": {
+    "name": "Baja y Media Mota\u00f1a"
+  }
+},
+{
+  "model": "Inventory.group",
+  "pk": 3,
+  "fields": {
+    "name": "Escalada en Roca"
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 1,
+  "fields": {
+    "serial": 1,
+    "name": "Metolius Negro",
+    "entry_date": "2019-03-05",
+    "elaboration_date": "2019-01-08",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "Pintura rayada",
+    "category": 1,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 2,
+  "fields": {
+    "serial": 2,
+    "name": "Black Diamond Plateado",
+    "entry_date": "2019-12-06",
+    "elaboration_date": "2019-12-01",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 1,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 3,
+  "fields": {
+    "serial": 3,
+    "name": "Black Diamond Azul",
+    "entry_date": "2019-09-03",
+    "elaboration_date": "2019-06-11",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 1,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 4,
+  "fields": {
+    "serial": 4,
+    "name": "Epic Peak",
+    "entry_date": "2019-10-15",
+    "elaboration_date": "2019-06-03",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 1,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 5,
+  "fields": {
+    "serial": 5,
+    "name": "Singing Rock",
+    "entry_date": "2019-08-13",
+    "elaboration_date": "2019-04-16",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 1,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 6,
+  "fields": {
+    "serial": 6,
+    "name": "Altus Naranja",
+    "entry_date": "2019-10-08",
+    "elaboration_date": "2019-02-20",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 1,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 7,
+  "fields": {
+    "serial": 1,
+    "name": "Petzl Corax",
+    "entry_date": "2019-07-02",
+    "elaboration_date": "2019-02-12",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 2,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 8,
+  "fields": {
+    "serial": 2,
+    "name": "Mad Rock Venus",
+    "entry_date": "2019-09-18",
+    "elaboration_date": "2019-07-23",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 2,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 9,
+  "fields": {
+    "serial": 3,
+    "name": "Black Diamond Momentum R",
+    "entry_date": "2019-08-26",
+    "elaboration_date": "2019-04-22",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 2,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 10,
+  "fields": {
+    "serial": 4,
+    "name": "Black Diamond Momentum NR",
+    "entry_date": "2019-09-11",
+    "elaboration_date": "2019-05-14",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 2,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 11,
+  "fields": {
+    "serial": 7,
+    "name": "Black Diamond Focus",
+    "entry_date": "2019-10-15",
+    "elaboration_date": "2019-02-13",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "Falta un porta-equipos",
+    "category": 2,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 12,
+  "fields": {
+    "serial": 8,
+    "name": "Edelrid Jay NV",
+    "entry_date": "2019-05-14",
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 2,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 13,
+  "fields": {
+    "serial": 1,
+    "name": "Fixe Montgont SR-PM",
+    "entry_date": "2019-06-04",
+    "elaboration_date": "2018-07-09",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 14,
+  "fields": {
+    "serial": 2,
+    "name": "Fixe Montgont SR-PM",
+    "entry_date": "2019-06-12",
+    "elaboration_date": "2019-02-11",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 15,
+  "fields": {
+    "serial": 3,
+    "name": "Fixe Montgont SR-PM",
+    "entry_date": "2019-09-10",
+    "elaboration_date": "2019-05-15",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 16,
+  "fields": {
+    "serial": 4,
+    "name": "Black DIamond SR-PA",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 17,
+  "fields": {
+    "serial": 5,
+    "name": "Black DIamond SR-PA",
+    "entry_date": "2019-11-05",
+    "elaboration_date": "2019-10-14",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 18,
+  "fields": {
+    "serial": 6,
+    "name": "Black DIamond SR-PA",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 19,
+  "fields": {
+    "serial": 7,
+    "name": "Salewa Hot SR-PP",
+    "entry_date": "2019-10-08",
+    "elaboration_date": "2019-08-21",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "Desecho",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 20,
+  "fields": {
+    "serial": 8,
+    "name": "Salewa Hot SR-PP",
+    "entry_date": "2019-08-07",
+    "elaboration_date": "2019-06-12",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 21,
+  "fields": {
+    "serial": 9,
+    "name": "Salewa Hot SR-PP",
+    "entry_date": "2019-08-21",
+    "elaboration_date": "2019-08-14",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 22,
+  "fields": {
+    "serial": 10,
+    "name": "Escamp SR-RP",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 23,
+  "fields": {
+    "serial": 11,
+    "name": "Petzl SC-PD",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 24,
+  "fields": {
+    "serial": 12,
+    "name": "Petzl SC-PD",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 25,
+  "fields": {
+    "serial": 13,
+    "name": "Petzl SC-PD",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 26,
+  "fields": {
+    "serial": 14,
+    "name": "Vaude SC-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 27,
+  "fields": {
+    "serial": 15,
+    "name": "Vaude SC-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 28,
+  "fields": {
+    "serial": 16,
+    "name": "Omega SC-PM",
+    "entry_date": "2019-12-06",
+    "elaboration_date": "2019-12-02",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 29,
+  "fields": {
+    "serial": 17,
+    "name": "Omega SC-PM",
+    "entry_date": "2019-12-06",
+    "elaboration_date": "2019-12-02",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 30,
+  "fields": {
+    "serial": 19,
+    "name": "Omega SC-PM",
+    "entry_date": "2019-12-06",
+    "elaboration_date": "2019-12-02",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 31,
+  "fields": {
+    "serial": 20,
+    "name": "Quechua SC-PP",
+    "entry_date": "2019-12-06",
+    "elaboration_date": "2019-12-02",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "Expr\u00e9s desechado",
+    "category": 3,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 32,
+  "fields": {
+    "serial": 1,
+    "name": "Petzl MSD-NN",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 33,
+  "fields": {
+    "serial": 2,
+    "name": "Petzl MSD-NN",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 34,
+  "fields": {
+    "serial": 3,
+    "name": "Petzl MSD-NN",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 35,
+  "fields": {
+    "serial": 4,
+    "name": "Elderid MSDP-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 36,
+  "fields": {
+    "serial": 5,
+    "name": "Elderid MSDP-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 37,
+  "fields": {
+    "serial": 6,
+    "name": "Elderid MSDP-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 38,
+  "fields": {
+    "serial": 7,
+    "name": "Elderid MSP-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 39,
+  "fields": {
+    "serial": 8,
+    "name": "Elderid MSP-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 40,
+  "fields": {
+    "serial": 9,
+    "name": "Elderid MSP-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 41,
+  "fields": {
+    "serial": 10,
+    "name": "Elderid MSPG-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 42,
+  "fields": {
+    "serial": 11,
+    "name": "Elderid MSPG-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 43,
+  "fields": {
+    "serial": 12,
+    "name": "Elderid MSPG-PV",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 4,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 44,
+  "fields": {
+    "serial": 1,
+    "name": "Cuerda Petzl 70-10 V",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "Peque\u00f1o detalle en la mitad",
+    "category": 5,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 45,
+  "fields": {
+    "serial": 2,
+    "name": "Cuerda Petzl 60-9.8 V",
+    "entry_date": "2019-10-09",
+    "elaboration_date": "2019-06-11",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 5,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 46,
+  "fields": {
+    "serial": 3,
+    "name": "Cuerda Petzl 60-9.8 VN",
+    "entry_date": "2019-08-14",
+    "elaboration_date": "2019-05-14",
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 5,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 47,
+  "fields": {
+    "serial": 4,
+    "name": "Cuerda Petzl 70-10.1 A",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 5,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 48,
+  "fields": {
+    "serial": 5,
+    "name": "Cuerda Petzl 60-10.2 RG",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 5,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 49,
+  "fields": {
+    "serial": 6,
+    "name": "Cuerda Petzl 60-10.3 RG",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 5,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 50,
+  "fields": {
+    "serial": 9,
+    "name": "Cuerda Petzl 48-10.2 RN",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 5,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 51,
+  "fields": {
+    "serial": 1,
+    "name": "Casco Petzl R",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 6,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 52,
+  "fields": {
+    "serial": 2,
+    "name": "Casco Petzl B",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 6,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 53,
+  "fields": {
+    "serial": 3,
+    "name": "Casco Petzl Elios A",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 6,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 54,
+  "fields": {
+    "serial": 5,
+    "name": "Casco Salewa Duncan A",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 6,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 55,
+  "fields": {
+    "serial": 1,
+    "name": "Eureka K2 XT",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 7,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 56,
+  "fields": {
+    "serial": 2,
+    "name": "Marmot Limelight 2P",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 7,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 57,
+  "fields": {
+    "serial": 3,
+    "name": "Marmot Earlylight NG",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "Reparada",
+    "category": 7,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 58,
+  "fields": {
+    "serial": 4,
+    "name": "Acadia Kasos 2P",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 7,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 59,
+  "fields": {
+    "serial": 5,
+    "name": "Mountain Hardwear V",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 7,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 60,
+  "fields": {
+    "serial": 7,
+    "name": "Alps Lynx 4P",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 7,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 61,
+  "fields": {
+    "serial": 1,
+    "name": "Grivel Auto",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 8,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 62,
+  "fields": {
+    "serial": 2,
+    "name": "Camp Auto",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 8,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 63,
+  "fields": {
+    "serial": 3,
+    "name": "Salewa Auto",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 8,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 64,
+  "fields": {
+    "serial": 4,
+    "name": "Hill Sound Cinta",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 8,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 65,
+  "fields": {
+    "serial": 5,
+    "name": "Cramp\u00f3n Sin Marca Cinta Amarilla",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 8,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 66,
+  "fields": {
+    "serial": 1,
+    "name": "Cocina 1",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 9,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 67,
+  "fields": {
+    "serial": 2,
+    "name": "Cocina 2",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 9,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 68,
+  "fields": {
+    "serial": 3,
+    "name": "Cocina 3",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 9,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 69,
+  "fields": {
+    "serial": 4,
+    "name": "Cocina 4",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 9,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 70,
+  "fields": {
+    "serial": 5,
+    "name": "Cocina 5",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 9,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": []
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 71,
+  "fields": {
+    "serial": 6,
+    "name": "Cocina 6",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 9,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.equipment",
+  "pk": 72,
+  "fields": {
+    "serial": 7,
+    "name": "Cocina 7",
+    "entry_date": null,
+    "elaboration_date": null,
+    "discontinued": false,
+    "discontinued_date": null,
+    "notes": "",
+    "category": 9,
+    "pic": "img/Inventory/None/default.jpeg",
+    "group": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 1,
+  "fields": {
+    "name": "Marca",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 1
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 2,
+  "fields": {
+    "name": "Color",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 1
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 3,
+  "fields": {
+    "name": "Marca",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 2
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 4,
+  "fields": {
+    "name": "Modelo",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 2
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 5,
+  "fields": {
+    "name": "Color",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 2
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 6,
+  "fields": {
+    "name": "Marca",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 3
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 7,
+  "fields": {
+    "name": "Forma",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 3
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 8,
+  "fields": {
+    "name": "Color-Cuerpo",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 3
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 9,
+  "fields": {
+    "name": "Color-Puerta",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 3
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 10,
+  "fields": {
+    "name": "Marca",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 4
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 11,
+  "fields": {
+    "name": "Forma",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 4
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 12,
+  "fields": {
+    "name": "Color-Cuerpo",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 4
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 13,
+  "fields": {
+    "name": "Color-Puerta",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 4
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 14,
+  "fields": {
+    "name": "Marca",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 5
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 15,
+  "fields": {
+    "name": "Color",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 5
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 16,
+  "fields": {
+    "name": "Longitud",
+    "attribute_type": "INT",
+    "unit": "m",
+    "nullity": false,
+    "category": 5
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 17,
+  "fields": {
+    "name": "Di\u00e1metro",
+    "attribute_type": "FLT",
+    "unit": "mm",
+    "nullity": true,
+    "category": 5
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 18,
+  "fields": {
+    "name": "Marca",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 6
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 19,
+  "fields": {
+    "name": "Modelo",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 6
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 20,
+  "fields": {
+    "name": "Color",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 6
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 21,
+  "fields": {
+    "name": "Marca",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 7
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 22,
+  "fields": {
+    "name": "Modelo",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 7
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 23,
+  "fields": {
+    "name": "Capacidad",
+    "attribute_type": "INT",
+    "unit": "personas",
+    "nullity": false,
+    "category": 7
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 24,
+  "fields": {
+    "name": "Color",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 7
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 25,
+  "fields": {
+    "name": "No. Estacas",
+    "attribute_type": "INT",
+    "unit": "",
+    "nullity": false,
+    "category": 7
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 26,
+  "fields": {
+    "name": "No. Parales",
+    "attribute_type": "INT",
+    "unit": "",
+    "nullity": false,
+    "category": 7
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 27,
+  "fields": {
+    "name": "Marca",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": true,
+    "category": 8
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 28,
+  "fields": {
+    "name": "Tipo",
+    "attribute_type": "STR",
+    "unit": "",
+    "nullity": false,
+    "category": 8
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 29,
+  "fields": {
+    "name": "Bomba",
+    "attribute_type": "BOO",
+    "unit": "",
+    "nullity": false,
+    "category": 9
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 30,
+  "fields": {
+    "name": "Herramientas",
+    "attribute_type": "BOO",
+    "unit": "",
+    "nullity": false,
+    "category": 9
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 31,
+  "fields": {
+    "name": "Aluminio Ext",
+    "attribute_type": "BOO",
+    "unit": "",
+    "nullity": false,
+    "category": 9
+  }
+},
+{
+  "model": "Inventory.attribute",
+  "pk": 32,
+  "fields": {
+    "name": "Aluminio Piso",
+    "attribute_type": "BOO",
+    "unit": "",
+    "nullity": false,
+    "category": 9
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 1,
+  "fields": {
+    "equipment": 1,
+    "attribute": 1,
+    "value_str": "Metolius",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 2,
+  "fields": {
+    "equipment": 1,
+    "attribute": 2,
+    "value_str": "Negro",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 3,
+  "fields": {
+    "equipment": 2,
+    "attribute": 1,
+    "value_str": "Black Diamond",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 4,
+  "fields": {
+    "equipment": 2,
+    "attribute": 2,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 5,
+  "fields": {
+    "equipment": 3,
+    "attribute": 1,
+    "value_str": "Black Diamond",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 6,
+  "fields": {
+    "equipment": 3,
+    "attribute": 2,
+    "value_str": "Azul",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 7,
+  "fields": {
+    "equipment": 4,
+    "attribute": 1,
+    "value_str": "Epic Peak",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 8,
+  "fields": {
+    "equipment": 4,
+    "attribute": 2,
+    "value_str": "Naranja",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 9,
+  "fields": {
+    "equipment": 5,
+    "attribute": 1,
+    "value_str": "Singing Rock",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 10,
+  "fields": {
+    "equipment": 5,
+    "attribute": 2,
+    "value_str": "Amarillo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 11,
+  "fields": {
+    "equipment": 6,
+    "attribute": 1,
+    "value_str": "Altus",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 12,
+  "fields": {
+    "equipment": 6,
+    "attribute": 2,
+    "value_str": "Naranja",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 13,
+  "fields": {
+    "equipment": 7,
+    "attribute": 3,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 14,
+  "fields": {
+    "equipment": 7,
+    "attribute": 4,
+    "value_str": "Corax",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 15,
+  "fields": {
+    "equipment": 7,
+    "attribute": 5,
+    "value_str": "Azul/Negro",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 16,
+  "fields": {
+    "equipment": 8,
+    "attribute": 3,
+    "value_str": "Mad Rock",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 17,
+  "fields": {
+    "equipment": 8,
+    "attribute": 4,
+    "value_str": "Venus",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 18,
+  "fields": {
+    "equipment": 8,
+    "attribute": 5,
+    "value_str": "Negro/Rojo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 19,
+  "fields": {
+    "equipment": 9,
+    "attribute": 3,
+    "value_str": "Black Diamond",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 20,
+  "fields": {
+    "equipment": 9,
+    "attribute": 4,
+    "value_str": "Momentum",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 21,
+  "fields": {
+    "equipment": 9,
+    "attribute": 5,
+    "value_str": "Rojo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 22,
+  "fields": {
+    "equipment": 10,
+    "attribute": 3,
+    "value_str": "Black Diamond",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 23,
+  "fields": {
+    "equipment": 10,
+    "attribute": 4,
+    "value_str": "Momentum",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 24,
+  "fields": {
+    "equipment": 10,
+    "attribute": 5,
+    "value_str": "Negro/Rojo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 25,
+  "fields": {
+    "equipment": 11,
+    "attribute": 3,
+    "value_str": "Black Diamond",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 26,
+  "fields": {
+    "equipment": 11,
+    "attribute": 4,
+    "value_str": "Focus",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 27,
+  "fields": {
+    "equipment": 11,
+    "attribute": 5,
+    "value_str": "Verde/Beige",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 28,
+  "fields": {
+    "equipment": 12,
+    "attribute": 3,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 29,
+  "fields": {
+    "equipment": 12,
+    "attribute": 4,
+    "value_str": "Jay",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 30,
+  "fields": {
+    "equipment": 12,
+    "attribute": 5,
+    "value_str": "Negro/Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 31,
+  "fields": {
+    "equipment": 13,
+    "attribute": 6,
+    "value_str": "Fixe Montgont",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 32,
+  "fields": {
+    "equipment": 13,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 33,
+  "fields": {
+    "equipment": 13,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 34,
+  "fields": {
+    "equipment": 13,
+    "attribute": 9,
+    "value_str": "Morado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 35,
+  "fields": {
+    "equipment": 14,
+    "attribute": 6,
+    "value_str": "Fixe Montgont",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 36,
+  "fields": {
+    "equipment": 14,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 37,
+  "fields": {
+    "equipment": 14,
+    "attribute": 8,
+    "value_str": "Platedo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 38,
+  "fields": {
+    "equipment": 14,
+    "attribute": 9,
+    "value_str": "Morado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 39,
+  "fields": {
+    "equipment": 15,
+    "attribute": 6,
+    "value_str": "Fixe Montgont",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 40,
+  "fields": {
+    "equipment": 15,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 41,
+  "fields": {
+    "equipment": 15,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 42,
+  "fields": {
+    "equipment": 15,
+    "attribute": 9,
+    "value_str": "Morado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 43,
+  "fields": {
+    "equipment": 16,
+    "attribute": 6,
+    "value_str": "Black Diamond",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 44,
+  "fields": {
+    "equipment": 16,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 45,
+  "fields": {
+    "equipment": 16,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 46,
+  "fields": {
+    "equipment": 16,
+    "attribute": 9,
+    "value_str": "Azul",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 47,
+  "fields": {
+    "equipment": 17,
+    "attribute": 6,
+    "value_str": "Black Diamond",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 48,
+  "fields": {
+    "equipment": 17,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 49,
+  "fields": {
+    "equipment": 17,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 50,
+  "fields": {
+    "equipment": 17,
+    "attribute": 9,
+    "value_str": "Azul",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 51,
+  "fields": {
+    "equipment": 18,
+    "attribute": 6,
+    "value_str": "Black Diamond",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 52,
+  "fields": {
+    "equipment": 18,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 53,
+  "fields": {
+    "equipment": 18,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 54,
+  "fields": {
+    "equipment": 18,
+    "attribute": 9,
+    "value_str": "Azul",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 55,
+  "fields": {
+    "equipment": 19,
+    "attribute": 6,
+    "value_str": "Salewa Hot",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 56,
+  "fields": {
+    "equipment": 19,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 57,
+  "fields": {
+    "equipment": 19,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 58,
+  "fields": {
+    "equipment": 19,
+    "attribute": 9,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 59,
+  "fields": {
+    "equipment": 20,
+    "attribute": 6,
+    "value_str": "Salewa Hot",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 60,
+  "fields": {
+    "equipment": 20,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 61,
+  "fields": {
+    "equipment": 20,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 62,
+  "fields": {
+    "equipment": 20,
+    "attribute": 9,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 63,
+  "fields": {
+    "equipment": 21,
+    "attribute": 6,
+    "value_str": "Salewa Hot",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 64,
+  "fields": {
+    "equipment": 21,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 65,
+  "fields": {
+    "equipment": 21,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 66,
+  "fields": {
+    "equipment": 21,
+    "attribute": 9,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 67,
+  "fields": {
+    "equipment": 22,
+    "attribute": 6,
+    "value_str": "Escamp",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 68,
+  "fields": {
+    "equipment": 22,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 69,
+  "fields": {
+    "equipment": 22,
+    "attribute": 8,
+    "value_str": "Rosado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 70,
+  "fields": {
+    "equipment": 22,
+    "attribute": 9,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 71,
+  "fields": {
+    "equipment": 23,
+    "attribute": 6,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 72,
+  "fields": {
+    "equipment": 23,
+    "attribute": 7,
+    "value_str": "Curvo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 73,
+  "fields": {
+    "equipment": 23,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 74,
+  "fields": {
+    "equipment": 23,
+    "attribute": 9,
+    "value_str": "Dorado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 75,
+  "fields": {
+    "equipment": 24,
+    "attribute": 6,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 76,
+  "fields": {
+    "equipment": 24,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 77,
+  "fields": {
+    "equipment": 24,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 78,
+  "fields": {
+    "equipment": 24,
+    "attribute": 9,
+    "value_str": "Dorado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 79,
+  "fields": {
+    "equipment": 25,
+    "attribute": 6,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 80,
+  "fields": {
+    "equipment": 25,
+    "attribute": 7,
+    "value_str": "Recto",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 81,
+  "fields": {
+    "equipment": 25,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 82,
+  "fields": {
+    "equipment": 25,
+    "attribute": 9,
+    "value_str": "Dorado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 83,
+  "fields": {
+    "equipment": 26,
+    "attribute": 6,
+    "value_str": "Vaude",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 84,
+  "fields": {
+    "equipment": 26,
+    "attribute": 7,
+    "value_str": "Curvo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 85,
+  "fields": {
+    "equipment": 26,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 86,
+  "fields": {
+    "equipment": 26,
+    "attribute": 9,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 87,
+  "fields": {
+    "equipment": 27,
+    "attribute": 6,
+    "value_str": "Vaude",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 88,
+  "fields": {
+    "equipment": 27,
+    "attribute": 7,
+    "value_str": "Curvo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 89,
+  "fields": {
+    "equipment": 27,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 90,
+  "fields": {
+    "equipment": 27,
+    "attribute": 9,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 91,
+  "fields": {
+    "equipment": 28,
+    "attribute": 6,
+    "value_str": "Omega",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 92,
+  "fields": {
+    "equipment": 28,
+    "attribute": 7,
+    "value_str": "Curvo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 93,
+  "fields": {
+    "equipment": 28,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 94,
+  "fields": {
+    "equipment": 28,
+    "attribute": 9,
+    "value_str": "Morado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 95,
+  "fields": {
+    "equipment": 29,
+    "attribute": 6,
+    "value_str": "Omega",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 96,
+  "fields": {
+    "equipment": 29,
+    "attribute": 7,
+    "value_str": "Curvo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 97,
+  "fields": {
+    "equipment": 29,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 98,
+  "fields": {
+    "equipment": 29,
+    "attribute": 9,
+    "value_str": "Morado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 99,
+  "fields": {
+    "equipment": 30,
+    "attribute": 6,
+    "value_str": "Omega",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 100,
+  "fields": {
+    "equipment": 30,
+    "attribute": 7,
+    "value_str": "Curvo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 101,
+  "fields": {
+    "equipment": 30,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 102,
+  "fields": {
+    "equipment": 30,
+    "attribute": 9,
+    "value_str": "Morado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 103,
+  "fields": {
+    "equipment": 31,
+    "attribute": 6,
+    "value_str": "Quechua",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 104,
+  "fields": {
+    "equipment": 31,
+    "attribute": 7,
+    "value_str": "Curvo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 105,
+  "fields": {
+    "equipment": 31,
+    "attribute": 8,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 106,
+  "fields": {
+    "equipment": 31,
+    "attribute": 9,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 107,
+  "fields": {
+    "equipment": 32,
+    "attribute": 10,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 108,
+  "fields": {
+    "equipment": 32,
+    "attribute": 11,
+    "value_str": "D",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 109,
+  "fields": {
+    "equipment": 32,
+    "attribute": 12,
+    "value_str": "Negro",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 110,
+  "fields": {
+    "equipment": 32,
+    "attribute": 13,
+    "value_str": "Negro",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 111,
+  "fields": {
+    "equipment": 33,
+    "attribute": 10,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 112,
+  "fields": {
+    "equipment": 33,
+    "attribute": 11,
+    "value_str": "D",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 113,
+  "fields": {
+    "equipment": 33,
+    "attribute": 12,
+    "value_str": "Negro",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 114,
+  "fields": {
+    "equipment": 33,
+    "attribute": 13,
+    "value_str": "Negro",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 115,
+  "fields": {
+    "equipment": 34,
+    "attribute": 10,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 116,
+  "fields": {
+    "equipment": 34,
+    "attribute": 11,
+    "value_str": "D",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 117,
+  "fields": {
+    "equipment": 34,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 118,
+  "fields": {
+    "equipment": 34,
+    "attribute": 13,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 119,
+  "fields": {
+    "equipment": 35,
+    "attribute": 10,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 120,
+  "fields": {
+    "equipment": 35,
+    "attribute": 11,
+    "value_str": "D",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 121,
+  "fields": {
+    "equipment": 35,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 122,
+  "fields": {
+    "equipment": 35,
+    "attribute": 13,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 123,
+  "fields": {
+    "equipment": 36,
+    "attribute": 10,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 124,
+  "fields": {
+    "equipment": 36,
+    "attribute": 11,
+    "value_str": "D",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 125,
+  "fields": {
+    "equipment": 36,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 126,
+  "fields": {
+    "equipment": 36,
+    "attribute": 13,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 127,
+  "fields": {
+    "equipment": 37,
+    "attribute": 10,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 128,
+  "fields": {
+    "equipment": 37,
+    "attribute": 11,
+    "value_str": "D",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 129,
+  "fields": {
+    "equipment": 37,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 130,
+  "fields": {
+    "equipment": 37,
+    "attribute": 13,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 131,
+  "fields": {
+    "equipment": 38,
+    "attribute": 10,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 132,
+  "fields": {
+    "equipment": 38,
+    "attribute": 11,
+    "value_str": "Pera",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 133,
+  "fields": {
+    "equipment": 38,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 134,
+  "fields": {
+    "equipment": 38,
+    "attribute": 13,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 135,
+  "fields": {
+    "equipment": 39,
+    "attribute": 10,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 136,
+  "fields": {
+    "equipment": 39,
+    "attribute": 11,
+    "value_str": "Pera",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 137,
+  "fields": {
+    "equipment": 39,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 138,
+  "fields": {
+    "equipment": 39,
+    "attribute": 13,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 139,
+  "fields": {
+    "equipment": 40,
+    "attribute": 10,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 140,
+  "fields": {
+    "equipment": 40,
+    "attribute": 11,
+    "value_str": "Pera",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 141,
+  "fields": {
+    "equipment": 40,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 142,
+  "fields": {
+    "equipment": 40,
+    "attribute": 13,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 143,
+  "fields": {
+    "equipment": 41,
+    "attribute": 10,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 144,
+  "fields": {
+    "equipment": 41,
+    "attribute": 11,
+    "value_str": "Pera-Gancho",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 145,
+  "fields": {
+    "equipment": 41,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 146,
+  "fields": {
+    "equipment": 41,
+    "attribute": 13,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 147,
+  "fields": {
+    "equipment": 42,
+    "attribute": 10,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 148,
+  "fields": {
+    "equipment": 42,
+    "attribute": 11,
+    "value_str": "Pera",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 149,
+  "fields": {
+    "equipment": 42,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 150,
+  "fields": {
+    "equipment": 42,
+    "attribute": 13,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 151,
+  "fields": {
+    "equipment": 43,
+    "attribute": 10,
+    "value_str": "Edelrid",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 152,
+  "fields": {
+    "equipment": 43,
+    "attribute": 11,
+    "value_str": "Pera-Gancho",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 153,
+  "fields": {
+    "equipment": 43,
+    "attribute": 12,
+    "value_str": "Plateado",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 154,
+  "fields": {
+    "equipment": 43,
+    "attribute": 13,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 155,
+  "fields": {
+    "equipment": 44,
+    "attribute": 14,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 156,
+  "fields": {
+    "equipment": 44,
+    "attribute": 15,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 157,
+  "fields": {
+    "equipment": 44,
+    "attribute": 16,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 70,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 158,
+  "fields": {
+    "equipment": 44,
+    "attribute": 17,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": "10.10",
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 159,
+  "fields": {
+    "equipment": 45,
+    "attribute": 14,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 160,
+  "fields": {
+    "equipment": 45,
+    "attribute": 15,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 161,
+  "fields": {
+    "equipment": 45,
+    "attribute": 16,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 60,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 162,
+  "fields": {
+    "equipment": 45,
+    "attribute": 17,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": "9.80",
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 163,
+  "fields": {
+    "equipment": 46,
+    "attribute": 14,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 164,
+  "fields": {
+    "equipment": 46,
+    "attribute": 15,
+    "value_str": "Verde/Negro",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 165,
+  "fields": {
+    "equipment": 46,
+    "attribute": 16,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 60,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 166,
+  "fields": {
+    "equipment": 46,
+    "attribute": 17,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": "9.80",
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 167,
+  "fields": {
+    "equipment": 47,
+    "attribute": 14,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 168,
+  "fields": {
+    "equipment": 47,
+    "attribute": 15,
+    "value_str": "Azul",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 169,
+  "fields": {
+    "equipment": 47,
+    "attribute": 16,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 70,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 170,
+  "fields": {
+    "equipment": 47,
+    "attribute": 17,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": "10.10",
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 171,
+  "fields": {
+    "equipment": 48,
+    "attribute": 14,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 172,
+  "fields": {
+    "equipment": 48,
+    "attribute": 15,
+    "value_str": "Rosado/Gris",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 173,
+  "fields": {
+    "equipment": 48,
+    "attribute": 16,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 60,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 174,
+  "fields": {
+    "equipment": 48,
+    "attribute": 17,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": "10.20",
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 175,
+  "fields": {
+    "equipment": 49,
+    "attribute": 14,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 176,
+  "fields": {
+    "equipment": 49,
+    "attribute": 15,
+    "value_str": "Rosado/Gris",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 177,
+  "fields": {
+    "equipment": 49,
+    "attribute": 16,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 60,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 178,
+  "fields": {
+    "equipment": 49,
+    "attribute": 17,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": "10.30",
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 179,
+  "fields": {
+    "equipment": 50,
+    "attribute": 14,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 180,
+  "fields": {
+    "equipment": 50,
+    "attribute": 15,
+    "value_str": "Rojo/Negro",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 181,
+  "fields": {
+    "equipment": 50,
+    "attribute": 16,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 48,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 182,
+  "fields": {
+    "equipment": 50,
+    "attribute": 17,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": "10.20",
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 183,
+  "fields": {
+    "equipment": 51,
+    "attribute": 18,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 184,
+  "fields": {
+    "equipment": 51,
+    "attribute": 19,
+    "value_str": "Ecrin-Roc",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 185,
+  "fields": {
+    "equipment": 51,
+    "attribute": 20,
+    "value_str": "Rojo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 186,
+  "fields": {
+    "equipment": 52,
+    "attribute": 18,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 187,
+  "fields": {
+    "equipment": 52,
+    "attribute": 19,
+    "value_str": "Ecrin-Roc",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 188,
+  "fields": {
+    "equipment": 52,
+    "attribute": 20,
+    "value_str": "Blanco",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 189,
+  "fields": {
+    "equipment": 53,
+    "attribute": 18,
+    "value_str": "Petzl",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 190,
+  "fields": {
+    "equipment": 53,
+    "attribute": 19,
+    "value_str": "Elios",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 191,
+  "fields": {
+    "equipment": 53,
+    "attribute": 20,
+    "value_str": "Azul",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 192,
+  "fields": {
+    "equipment": 54,
+    "attribute": 18,
+    "value_str": "Salewa",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 193,
+  "fields": {
+    "equipment": 54,
+    "attribute": 19,
+    "value_str": "Duncan",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 194,
+  "fields": {
+    "equipment": 54,
+    "attribute": 20,
+    "value_str": "Azul",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 195,
+  "fields": {
+    "equipment": 55,
+    "attribute": 21,
+    "value_str": "Eureka",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 196,
+  "fields": {
+    "equipment": 55,
+    "attribute": 22,
+    "value_str": "K2 XT",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 197,
+  "fields": {
+    "equipment": 55,
+    "attribute": 23,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 5,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 198,
+  "fields": {
+    "equipment": 55,
+    "attribute": 24,
+    "value_str": "Amarillo",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 199,
+  "fields": {
+    "equipment": 55,
+    "attribute": 25,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 13,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 200,
+  "fields": {
+    "equipment": 55,
+    "attribute": 26,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 5,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 201,
+  "fields": {
+    "equipment": 56,
+    "attribute": 21,
+    "value_str": "Marmot",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 202,
+  "fields": {
+    "equipment": 56,
+    "attribute": 22,
+    "value_str": "Limelight",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 203,
+  "fields": {
+    "equipment": 56,
+    "attribute": 23,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 2,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 204,
+  "fields": {
+    "equipment": 56,
+    "attribute": 24,
+    "value_str": "Gris/Naranja",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 205,
+  "fields": {
+    "equipment": 56,
+    "attribute": 25,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 9,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 206,
+  "fields": {
+    "equipment": 56,
+    "attribute": 26,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 3,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 207,
+  "fields": {
+    "equipment": 57,
+    "attribute": 21,
+    "value_str": "Marmot",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 208,
+  "fields": {
+    "equipment": 57,
+    "attribute": 22,
+    "value_str": "Earlylight",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 209,
+  "fields": {
+    "equipment": 57,
+    "attribute": 23,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 2,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 210,
+  "fields": {
+    "equipment": 57,
+    "attribute": 24,
+    "value_str": "Gris/Naranja",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 211,
+  "fields": {
+    "equipment": 57,
+    "attribute": 25,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 9,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 212,
+  "fields": {
+    "equipment": 57,
+    "attribute": 26,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 2,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 213,
+  "fields": {
+    "equipment": 58,
+    "attribute": 21,
+    "value_str": "Acadia",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 214,
+  "fields": {
+    "equipment": 58,
+    "attribute": 22,
+    "value_str": "Kasos",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 215,
+  "fields": {
+    "equipment": 58,
+    "attribute": 23,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 2,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 216,
+  "fields": {
+    "equipment": 58,
+    "attribute": 24,
+    "value_str": "Amarillo/Negro",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 217,
+  "fields": {
+    "equipment": 58,
+    "attribute": 25,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 14,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 218,
+  "fields": {
+    "equipment": 58,
+    "attribute": 26,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 2,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 219,
+  "fields": {
+    "equipment": 59,
+    "attribute": 21,
+    "value_str": "Mountain Hardwear",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 220,
+  "fields": {
+    "equipment": 59,
+    "attribute": 22,
+    "value_str": "Great Camp",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 221,
+  "fields": {
+    "equipment": 59,
+    "attribute": 23,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 3,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 222,
+  "fields": {
+    "equipment": 59,
+    "attribute": 24,
+    "value_str": "Verde",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 223,
+  "fields": {
+    "equipment": 59,
+    "attribute": 25,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 13,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 224,
+  "fields": {
+    "equipment": 59,
+    "attribute": 26,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 3,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 225,
+  "fields": {
+    "equipment": 60,
+    "attribute": 21,
+    "value_str": "Alps",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 226,
+  "fields": {
+    "equipment": 60,
+    "attribute": 22,
+    "value_str": "Lynx",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 227,
+  "fields": {
+    "equipment": 60,
+    "attribute": 23,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 4,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 228,
+  "fields": {
+    "equipment": 60,
+    "attribute": 24,
+    "value_str": "Gris/Naranja",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 229,
+  "fields": {
+    "equipment": 60,
+    "attribute": 25,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 10,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 230,
+  "fields": {
+    "equipment": 60,
+    "attribute": 26,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": 2,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 231,
+  "fields": {
+    "equipment": 61,
+    "attribute": 27,
+    "value_str": "Grivel",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 232,
+  "fields": {
+    "equipment": 61,
+    "attribute": 28,
+    "value_str": "Autom\u00e1tico",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 233,
+  "fields": {
+    "equipment": 62,
+    "attribute": 27,
+    "value_str": "Camp",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 234,
+  "fields": {
+    "equipment": 62,
+    "attribute": 28,
+    "value_str": "Autom\u00e1tico",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 235,
+  "fields": {
+    "equipment": 63,
+    "attribute": 27,
+    "value_str": "Salewa",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 236,
+  "fields": {
+    "equipment": 63,
+    "attribute": 28,
+    "value_str": "Autom\u00e1tico",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 237,
+  "fields": {
+    "equipment": 64,
+    "attribute": 27,
+    "value_str": "Hill Sound",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 238,
+  "fields": {
+    "equipment": 64,
+    "attribute": 28,
+    "value_str": "Cinta",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 239,
+  "fields": {
+    "equipment": 65,
+    "attribute": 27,
+    "value_str": "Sin Marca",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 240,
+  "fields": {
+    "equipment": 65,
+    "attribute": 28,
+    "value_str": "Cinta",
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": null,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 241,
+  "fields": {
+    "equipment": 66,
+    "attribute": 29,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 242,
+  "fields": {
+    "equipment": 66,
+    "attribute": 30,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 243,
+  "fields": {
+    "equipment": 66,
+    "attribute": 31,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 244,
+  "fields": {
+    "equipment": 66,
+    "attribute": 32,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 245,
+  "fields": {
+    "equipment": 67,
+    "attribute": 29,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": false,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 246,
+  "fields": {
+    "equipment": 67,
+    "attribute": 30,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 247,
+  "fields": {
+    "equipment": 67,
+    "attribute": 31,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 248,
+  "fields": {
+    "equipment": 67,
+    "attribute": 32,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 249,
+  "fields": {
+    "equipment": 68,
+    "attribute": 29,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 250,
+  "fields": {
+    "equipment": 68,
+    "attribute": 30,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": false,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 251,
+  "fields": {
+    "equipment": 68,
+    "attribute": 31,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 252,
+  "fields": {
+    "equipment": 68,
+    "attribute": 32,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 253,
+  "fields": {
+    "equipment": 69,
+    "attribute": 29,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 254,
+  "fields": {
+    "equipment": 69,
+    "attribute": 30,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 255,
+  "fields": {
+    "equipment": 69,
+    "attribute": 31,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 256,
+  "fields": {
+    "equipment": 69,
+    "attribute": 32,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 257,
+  "fields": {
+    "equipment": 70,
+    "attribute": 29,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 258,
+  "fields": {
+    "equipment": 70,
+    "attribute": 30,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 259,
+  "fields": {
+    "equipment": 70,
+    "attribute": 31,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 260,
+  "fields": {
+    "equipment": 70,
+    "attribute": 32,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 261,
+  "fields": {
+    "equipment": 71,
+    "attribute": 29,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 262,
+  "fields": {
+    "equipment": 71,
+    "attribute": 30,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 263,
+  "fields": {
+    "equipment": 71,
+    "attribute": 31,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 264,
+  "fields": {
+    "equipment": 71,
+    "attribute": 32,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 265,
+  "fields": {
+    "equipment": 72,
+    "attribute": 29,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 266,
+  "fields": {
+    "equipment": 72,
+    "attribute": 30,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 267,
+  "fields": {
+    "equipment": 72,
+    "attribute": 31,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": true,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.attributeequipmet",
+  "pk": 268,
+  "fields": {
+    "equipment": 72,
+    "attribute": 32,
+    "value_str": null,
+    "value_txt": null,
+    "value_int": null,
+    "value_date": null,
+    "value_float": null,
+    "value_bool": false,
+    "value_cho": null
+  }
+},
+{
+  "model": "Inventory.requestcategory",
+  "pk": 1,
+  "fields": {
+    "request": 1,
+    "category": 4,
+    "quantity": 5
+  }
+},
+{
+  "model": "Inventory.requestcategory",
+  "pk": 2,
+  "fields": {
+    "request": 1,
+    "category": 6,
+    "quantity": 1
+  }
+},
+{
+  "model": "Inventory.requestcategory",
+  "pk": 3,
+  "fields": {
+    "request": 1,
+    "category": 9,
+    "quantity": 1
+  }
+},
+{
+  "model": "Inventory.requestcategory",
+  "pk": 4,
+  "fields": {
+    "request": 2,
+    "category": 1,
+    "quantity": 2
+  }
+},
+{
+  "model": "Inventory.requestcategory",
+  "pk": 5,
+  "fields": {
+    "request": 3,
+    "category": 5,
+    "quantity": 1
+  }
+},
+{
+  "model": "Inventory.requestcategory",
+  "pk": 6,
+  "fields": {
+    "request": 4,
+    "category": 7,
+    "quantity": 1
+  }
+},
+{
+  "model": "Inventory.quarterly",
+  "pk": 1,
+  "fields": {
+    "amount": "2.00"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 6,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 6,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 6,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 6,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add attribute",
+    "content_type": 7,
+    "codename": "add_attribute"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change attribute",
+    "content_type": 7,
+    "codename": "change_attribute"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete attribute",
+    "content_type": 7,
+    "codename": "delete_attribute"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view attribute",
+    "content_type": 7,
+    "codename": "view_attribute"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add attribute equipmet",
+    "content_type": 8,
+    "codename": "add_attributeequipmet"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change attribute equipmet",
+    "content_type": 8,
+    "codename": "change_attributeequipmet"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete attribute equipmet",
+    "content_type": 8,
+    "codename": "delete_attributeequipmet"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view attribute equipmet",
+    "content_type": 8,
+    "codename": "view_attributeequipmet"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add category",
+    "content_type": 9,
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change category",
+    "content_type": 9,
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete category",
+    "content_type": 9,
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view category",
+    "content_type": 9,
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add choices",
+    "content_type": 10,
+    "codename": "add_choices"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change choices",
+    "content_type": 10,
+    "codename": "change_choices"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete choices",
+    "content_type": 10,
+    "codename": "delete_choices"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view choices",
+    "content_type": 10,
+    "codename": "view_choices"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add equipment",
+    "content_type": 11,
+    "codename": "add_equipment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change equipment",
+    "content_type": 11,
+    "codename": "change_equipment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete equipment",
+    "content_type": 11,
+    "codename": "delete_equipment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view equipment",
+    "content_type": 11,
+    "codename": "view_equipment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add equipment debt",
+    "content_type": 12,
+    "codename": "add_equipmentdebt"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change equipment debt",
+    "content_type": 12,
+    "codename": "change_equipmentdebt"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete equipment debt",
+    "content_type": 12,
+    "codename": "delete_equipmentdebt"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view equipment debt",
+    "content_type": 12,
+    "codename": "view_equipmentdebt"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 13,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 13,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 13,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 13,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add loan",
+    "content_type": 14,
+    "codename": "add_loan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change loan",
+    "content_type": 14,
+    "codename": "change_loan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete loan",
+    "content_type": 14,
+    "codename": "delete_loan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view loan",
+    "content_type": 14,
+    "codename": "view_loan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add quarterly",
+    "content_type": 15,
+    "codename": "add_quarterly"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change quarterly",
+    "content_type": 15,
+    "codename": "change_quarterly"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete quarterly",
+    "content_type": 15,
+    "codename": "delete_quarterly"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view quarterly",
+    "content_type": 15,
+    "codename": "view_quarterly"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add repair",
+    "content_type": 16,
+    "codename": "add_repair"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change repair",
+    "content_type": 16,
+    "codename": "change_repair"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete repair",
+    "content_type": 16,
+    "codename": "delete_repair"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view repair",
+    "content_type": 16,
+    "codename": "view_repair"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add request",
+    "content_type": 17,
+    "codename": "add_request"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change request",
+    "content_type": 17,
+    "codename": "change_request"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete request",
+    "content_type": 17,
+    "codename": "delete_request"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view request",
+    "content_type": 17,
+    "codename": "view_request"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add request category",
+    "content_type": 18,
+    "codename": "add_requestcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change request category",
+    "content_type": 18,
+    "codename": "change_requestcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete request category",
+    "content_type": 18,
+    "codename": "delete_requestcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view request category",
+    "content_type": 18,
+    "codename": "view_requestcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add transaction",
+    "content_type": 19,
+    "codename": "add_transaction"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change transaction",
+    "content_type": 19,
+    "codename": "change_transaction"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete transaction",
+    "content_type": 19,
+    "codename": "delete_transaction"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view transaction",
+    "content_type": 19,
+    "codename": "view_transaction"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add post",
+    "content_type": 20,
+    "codename": "add_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change post",
+    "content_type": 20,
+    "codename": "change_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete post",
+    "content_type": 20,
+    "codename": "delete_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view post",
+    "content_type": 20,
+    "codename": "view_post"
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "admin",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 2,
+  "fields": {
+    "name": "gestor_usuarios",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 3,
+  "fields": {
+    "name": "tesorero",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 4,
+  "fields": {
+    "name": "cuarto_equipo",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 5,
+  "fields": {
+    "name": "activo",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 6,
+  "fields": {
+    "name": "pasivo",
+    "permissions": []
+  }
+},
+{
+  "model": "Users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$gPoR9GZw1EfJ$ndtc4z9iodOVyNEYO6st85CLiHjGo7NIOox+8CMKix4=",
+    "last_login": "2019-12-06T09:12:52.268Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Admin",
+    "last_name": "Admin",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-12-06T06:40:51Z",
+    "email": "admin@admin.com",
+    "usb_id": null,
+    "balance": "0.00",
+    "status": "IN",
+    "pic": "img/Users/None/default.png",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "Users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$cXYodCmTDtFK$fwpmweRFqchXjmNCdpRNmutC9xEf7yhhZKTSw3DQkIM=",
+    "last_login": "2019-12-06T09:06:13.331Z",
+    "is_superuser": false,
+    "username": "MarcosJLR",
+    "first_name": "Marcos",
+    "last_name": "Lerones",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-12-06T06:43:25.148Z",
+    "email": "socram.693@gmail.com",
+    "usb_id": null,
+    "balance": "0.00",
+    "status": "AC",
+    "pic": "img/Users/default.png",
+    "groups": [
+      3
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "Users.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$V1o7SCxIRyZf$xTGQPJ+/p9uvn/oJKWJF6sL9Uor/fNjyiSqFW2bxTUU=",
+    "last_login": "2019-12-06T09:10:07.849Z",
+    "is_superuser": false,
+    "username": "Kathy",
+    "first_name": "Katherine",
+    "last_name": "Palacios",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-12-06T06:44:44.244Z",
+    "email": "katherynpalacios@gmail.com",
+    "usb_id": null,
+    "balance": "0.00",
+    "status": "AC",
+    "pic": "img/Users/None/default.png",
+    "groups": [
+      4
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "Users.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$qSc7TskCOFUK$KWvedYh8bixa81os/I7nD4oDmzI7stbDMGx49ej7b1o=",
+    "last_login": "2019-12-06T09:09:09.203Z",
+    "is_superuser": false,
+    "username": "DMachado",
+    "first_name": "Daniel",
+    "last_name": "Machado",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-12-06T06:45:52.229Z",
+    "email": "danielmachado@gmail.com",
+    "usb_id": null,
+    "balance": "0.00",
+    "status": "AC",
+    "pic": "img/Users/None/default.png",
+    "groups": [
+      2
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "Users.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$t3j3RDeJlI9o$kJ97rxYEPMSsoV/O44z78M69qxax7QQ9QbkwgBr/Bdk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "AnaLR",
+    "first_name": "Ana Elena",
+    "last_name": "Lerones",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-12-06T06:46:58.219Z",
+    "email": "analerones@gmail.com",
+    "usb_id": null,
+    "balance": "0.00",
+    "status": "AC",
+    "pic": "img/Users/None/default.png",
+    "groups": [
+      5
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "Users.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$NStrBwlHnMnN$YYOLvZAYqHHnkmMrt+lTyoyH9s9yRZgP63hQtilSvhE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "JesusRDA",
+    "first_name": "Jesus",
+    "last_name": "De Aguiar",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-12-06T06:47:53.582Z",
+    "email": "jesusrda@gmail.com",
+    "usb_id": null,
+    "balance": "0.00",
+    "status": "AS",
+    "pic": "img/Users/None/default.png",
+    "groups": [
+      6
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "Users.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$z3ML1T4Wa5VI$J3V7CsFK1kBl0haPlVNFzUW/e64IL+mvomR2yZ7fhvs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "JorgeO",
+    "first_name": "Jorge",
+    "last_name": "Olivares",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-12-06T06:49:15.751Z",
+    "email": "jorgeolivares@gmail.com",
+    "usb_id": null,
+    "balance": "0.00",
+    "status": "EX",
+    "pic": "img/Users/None/default.png",
+    "groups": [
+      6
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "Users.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Ljq4dLHEH6sM$8yWItk14DFYRVAyVtRJqSXocC9OzsBnSjE2bdyM3JI8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Merri",
+    "first_name": "Alejandro",
+    "last_name": "Esteves",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-12-06T06:50:22.795Z",
+    "email": "merriesteves@gmail.com",
+    "usb_id": null,
+    "balance": "0.00",
+    "status": "AC",
+    "pic": "img/Users/None/default.png",
+    "groups": [
+      5
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "Users.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$JBWJpJz45l6E$xh4tK/Wcyp85pvFekjpk3PB2DloCiOfyyD3bQmBjSXQ=",
+    "last_login": "2019-12-06T09:04:21.378Z",
+    "is_superuser": false,
+    "username": "Wrancisco",
+    "first_name": "Francisco",
+    "last_name": "Marcos",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-12-06T06:51:20.282Z",
+    "email": "franciscomarcos@gmail.com",
+    "usb_id": null,
+    "balance": "0.00",
+    "status": "AC",
+    "pic": "img/Users/None/default.png",
+    "groups": [
+      5
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "Inventory.request",
+  "pk": 1,
+  "fields": {
+    "date": "2019-12-06",
+    "specs": "Me gustar\u00edan los mosquetones Edelrid",
+    "comments": "Nos vemos el viernes 6",
+    "user1": 9,
+    "user2": 3,
+    "status": true
+  }
+},
+{
+  "model": "Inventory.request",
+  "pk": 2,
+  "fields": {
+    "date": "2019-12-06",
+    "specs": "",
+    "comments": "Nos vemos el viernes 6",
+    "user1": 2,
+    "user2": 3,
+    "status": true
+  }
+},
+{
+  "model": "Inventory.request",
+  "pk": 3,
+  "fields": {
+    "date": "2019-12-06",
+    "specs": "70 m",
+    "comments": "No quedan cuerdas de 70",
+    "user1": 4,
+    "user2": 3,
+    "status": false
+  }
+},
+{
+  "model": "Inventory.request",
+  "pk": 4,
+  "fields": {
+    "date": "2019-12-06",
+    "specs": "Alps",
+    "comments": "",
+    "user1": 4,
+    "user2": null,
+    "status": false
+  }
+},
+{
+  "model": "Inventory.loan",
+  "pk": 1,
+  "fields": {
+    "equipment": 66,
+    "user": 9,
+    "creator": 1,
+    "hand_over_date": "2019-12-02",
+    "deadline": null,
+    "delivery_date": null,
+    "score": null,
+    "notes": ""
+  }
+},
+{
+  "model": "Inventory.loan",
+  "pk": 2,
+  "fields": {
+    "equipment": 52,
+    "user": 9,
+    "creator": 1,
+    "hand_over_date": "2019-12-02",
+    "deadline": null,
+    "delivery_date": null,
+    "score": null,
+    "notes": ""
+  }
+},
+{
+  "model": "Inventory.loan",
+  "pk": 3,
+  "fields": {
+    "equipment": 42,
+    "user": 9,
+    "creator": 1,
+    "hand_over_date": "2019-12-02",
+    "deadline": null,
+    "delivery_date": null,
+    "score": null,
+    "notes": ""
+  }
+},
+{
+  "model": "Inventory.loan",
+  "pk": 4,
+  "fields": {
+    "equipment": 41,
+    "user": 9,
+    "creator": 1,
+    "hand_over_date": "2019-12-02",
+    "deadline": null,
+    "delivery_date": null,
+    "score": null,
+    "notes": ""
+  }
+},
+{
+  "model": "Inventory.loan",
+  "pk": 5,
+  "fields": {
+    "equipment": 40,
+    "user": 9,
+    "creator": 1,
+    "hand_over_date": "2019-12-02",
+    "deadline": null,
+    "delivery_date": null,
+    "score": null,
+    "notes": ""
+  }
+},
+{
+  "model": "Inventory.loan",
+  "pk": 6,
+  "fields": {
+    "equipment": 39,
+    "user": 9,
+    "creator": 1,
+    "hand_over_date": "2019-12-02",
+    "deadline": null,
+    "delivery_date": null,
+    "score": null,
+    "notes": ""
+  }
+},
+{
+  "model": "Inventory.loan",
+  "pk": 7,
+  "fields": {
+    "equipment": 38,
+    "user": 9,
+    "creator": 1,
+    "hand_over_date": "2019-12-02",
+    "deadline": null,
+    "delivery_date": null,
+    "score": null,
+    "notes": ""
+  }
+},
+{
+  "model": "Inventory.loan",
+  "pk": 8,
+  "fields": {
+    "equipment": 1,
+    "user": 2,
+    "creator": 1,
+    "hand_over_date": "2019-10-08",
+    "deadline": null,
+    "delivery_date": "2019-12-06",
+    "score": 3,
+    "notes": "Pintura desprendida"
+  }
+},
+{
+  "model": "Inventory.loan",
+  "pk": 9,
+  "fields": {
+    "equipment": 2,
+    "user": 2,
+    "creator": 1,
+    "hand_over_date": "2019-10-01",
+    "deadline": null,
+    "delivery_date": "2019-12-06",
+    "score": 5,
+    "notes": ""
+  }
+},
+{
+  "model": "Inventory.transaction",
+  "pk": 1,
+  "fields": {
+    "user": 5,
+    "transaction": "-2.00",
+    "reason": "T",
+    "date": "2019-12-06"
+  }
+},
+{
+  "model": "Inventory.transaction",
+  "pk": 2,
+  "fields": {
+    "user": 8,
+    "transaction": "-2.00",
+    "reason": "T",
+    "date": "2019-12-06"
+  }
+},
+{
+  "model": "Inventory.transaction",
+  "pk": 3,
+  "fields": {
+    "user": 9,
+    "transaction": "-2.00",
+    "reason": "T",
+    "date": "2019-12-06"
+  }
+},
+{
+  "model": "Inventory.transaction",
+  "pk": 4,
+  "fields": {
+    "user": 2,
+    "transaction": "-2.00",
+    "reason": "T",
+    "date": "2019-12-06"
+  }
+},
+{
+  "model": "Inventory.transaction",
+  "pk": 5,
+  "fields": {
+    "user": 4,
+    "transaction": "-2.00",
+    "reason": "T",
+    "date": "2019-12-06"
+  }
+},
+{
+  "model": "Inventory.transaction",
+  "pk": 6,
+  "fields": {
+    "user": 3,
+    "transaction": "-2.00",
+    "reason": "T",
+    "date": "2019-12-06"
+  }
+},
+{
+  "model": "Inventory.transaction",
+  "pk": 7,
+  "fields": {
+    "user": 2,
+    "transaction": "2.00",
+    "reason": "P",
+    "date": "2019-12-06"
+  }
+},
+{
+  "model": "Inventory.transaction",
+  "pk": 8,
+  "fields": {
+    "user": 3,
+    "transaction": "2.00",
+    "reason": "P",
+    "date": "2019-12-06"
+  }
+},
+{
+  "model": "Inventory.transaction",
+  "pk": 9,
+  "fields": {
+    "user": 9,
+    "transaction": "-5.00",
+    "reason": "M",
+    "date": "2019-12-06"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2019-12-06T06:51:46.255Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "1",
+    "object_repr": "Admin Admin (admin)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"first_name\", \"last_name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2019-12-06T09:14:52.607Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Quarterly object (1)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"amount\"]}}]"
+  }
+}
+]

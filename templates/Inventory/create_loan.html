@@ -2,51 +2,38 @@
 {% load widget_tweaks %}
 
 {% block page-title %}
-    {% if heading %}
-        {{heading}}
-    {% endif %}
+    Cargar Prestamo
 {% endblock %}
 
 {% block content %}
 
 <div class="row">
-    <div class="offset-md-3 col-md-6">
+    <div class="offset-xl-4 col-xl-4 offset-md-2 col-md-8 col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h1 style="text-align: left;
-                    color: rgb(0, 0, 0);
-                    font-family: Consolas, monaco, monospace;
-                    font-size: 50px;"> Cargar Préstamos</h1>
-                <p style="font-family: Consolas, monaco, monospace;
-                    font-size: 20px;">Herramienta registrar préstamos de equipo.</p>
+                <h1> Cargar Préstamos</h1>
+                <p>Herramienta registrar préstamos de equipo.</p>
             </div>
 
             <div class="card-body">
-                <form class="form-horizontal needs-validation" id="create-form" method="POST" action="" novalidate>
+                <h4 class="text-center">Equipo a prestar:</h4> 
+                <h3 class="text-center">{{eq}}</h3>   
+                <form class="form-horizontal needs-validation form-group" id="create-form" method="POST" action="" novalidate>
                     {% csrf_token %}
-                    <div class="form-group required">
-                        <label class="control-label">{{form.equipment.label}}</label>
-                        {% render_field form.equipment class="form-control col-md-6" %}
-                        <small class="form-text text-muted">
-                            Equipo que está siendo prestado
-                        </small>
-                        <div class="valid-feedback">Correcto</div>
-                        <div class="invalid-feedback">Requerido</div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="control-label">{{form.user.label}}</label>
-                        {% render_field form.user class="form-control col-md-6" %}
+                    <div class="form-group required mb-20">
+                        <label class="control-label">Usuario</label>
+                        {% render_field form.user class="form-control" %}
                         <small class="form-text text-muted">
                             Usuario que recibe el equipo.
                         </small>
                         <div class="valid-feedback">Correcto</div>
                         <div class="invalid-feedback">Requerido</div>
                     </div>
-                    <div class="form-group required">
-                        <label class="control-label">{{form.hand_over_date.label}}</label>
-                        {% render_field form.hand_over_date class="form-control col-md-6" placeholder="mm/dd/yyyy" %}
+                    <div class="form-group required mb-20">
+                        <label class="control-label">Fecha de recepción</label>
+                        {% render_field form.hand_over_date type="date" class="form-control" placeholder="mm/dd/yyyy" %}
                         <small class="form-text text-muted">
-                            Fecha de entrega del equipo.
+                            Fecha en la que el equipo es recibido por el Oikeano.
                         </small>
                         <div class="valid-feedback">Correcto</div>
                         <div class="invalid-feedback">Requerido</div>
@@ -57,6 +44,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock  %}
